@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'admin'], function(){
+    Auth::routes();
+    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+    Route::resource('/courses', 'Admin\CourseController');
+    Route::resource('/categories', 'Admin\CategoryController');
+});
+
+
