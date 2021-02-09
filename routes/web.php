@@ -15,5 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/educator/account', function () { return view('educator.account'); })->name('account');
-Route::get('/educator/report-card', function () { return view('educator.report_card'); })->name('report.card');
+Route::group(['namespace' => 'Educator', 'prefix' => 'educator'], function() {
+    Route::get('/account/{id?}', 'EducatorController@show_account')->name('account');
+    Route::post('/account/{id?}', 'EducatorController@edit_account')->name('account');
+    Route::get('/report-card/{group?}',  'ReportCardController@groups')->name('report.card');
+    Route::post('/report-card/{group?}',  'ReportCardController@update_marks')->name('report.card');
+});

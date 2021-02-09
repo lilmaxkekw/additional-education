@@ -40,4 +40,8 @@ class User extends Authenticatable
     public function applications(){
         return $this->hasMany('App\Models\Application');
     }
+
+    public function listeners(){
+        return $this->belongsTo('App\Models\Listener', 'user_id');
+    }
 }

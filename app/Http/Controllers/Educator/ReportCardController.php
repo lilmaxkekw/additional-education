@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Http\Controllers\Educator;
+
+use App\Models\Group;
+use App\Models\Listener;
+use App\Models\Performance;
+use App\Models\Section;
+use Illuminate\Http\Request;
+
+class ReportCardController extends BaseController
+{
+    public function groups($group_id = 1)
+    {
+        $groups = Group::select('id', 'number_group')->get(); //Все группы
+
+        $fields = ['id_listener', 'last_name', 'first_name', 'patronymic'];
+        $listeners = Listener::select($fields)->where('group_id', $group_id)->get(); //Слушатели выбранной группы
+
+        $selected_course = Group::where('id', $group_id)->value('course_id'); //Выбранный курс привязанный к группе
+
+        $fields = ['id_section', 'name_section'];
+        $sections = Section::select($fields)->where('courses_id', $selected_course)->get(); //Разделы курса привязанные к курсу
+
+        $marks = Performance::
+        join('listeners', 'performances.listener_id', '=', 'listeners.id_listener')
+            ->join('sections', 'performances.section_id', '=', 'sections.id_section')
+            ->select('performances.id', 'performances.mark', 'listeners.id_listener', 'sections.id_section')
+            ->where('listeners.group_id', $group_id)
+            ->get();
+
+        $possible_marks = [
+            '5' => 5,
+            '4' => 4,
+            '3' => 3,
+            '2' => 2,
+            '1' => 1,
+            'Пропуск' => 'Пропуск',
+            NULL => 'Оценка отсутствует'
+        ];
+
+        return view('educator.report_card',
+            compact('groups', 'group_id', 'listeners', 'sections', 'marks', 'possible_marks'));
+
+    }
+
+    public function update_marks($group_id = null, Request $request)
+    {
+        $items = $_POST['items'];
+        $items = (array($items));
+
+        foreach ($items as $item)
+        {
+            if (is_numeric($item)) {
+
+                $mark_id = $item[0];
+                $mark = $item[1];
+
+                if ($mark == 0)
+                    $mark = NULL;
+
+                $result = Performance::where('id', $mark_id)->update(['mark' => $mark]);
+            } else {
+
+                $mark_id = $item[0];
+                $string = substr($item, 1);
+
+                $result = Performance::where('id', $mark_id)->update(['mark' => $string]);
+            }
+        }
+
+        /* if ($result) {
+            $response = [
+                'status' => true
+            ];
+            echo json_encode($response);
+        }
+        else {
+            $response = [
+                'status' => false
+            ];
+            echo json_encode($response);
+        } */
+    }
+}

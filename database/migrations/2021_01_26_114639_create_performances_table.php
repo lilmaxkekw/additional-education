@@ -16,7 +16,7 @@ class CreatePerformancesTable extends Migration
         Schema::create('performances', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->integer('mark');
+            $table->string('mark')->nullable();
 
             $table->unsignedBigInteger('listener_id');
             $table->unsignedBigInteger('section_id');
