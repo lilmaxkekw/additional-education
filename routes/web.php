@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::group(['namespace' => 'Educator', 'prefix' => 'educator'], function() {
     Route::get('/account/{id?}', 'EducatorController@show_account')->name('account');
     Route::post('/account/{id?}', 'EducatorController@edit_account')->name('account');
+
     Route::get('/report-card/{group?}',  'ReportCardController@groups')->name('report.card');
-    Route::post('/report-card/{group?}',  'ReportCardController@update_marks')->name('report.card');
+    Route::post('/report-card/{group?}',  'ReportCardController@update_data')->name('report.card');
 });

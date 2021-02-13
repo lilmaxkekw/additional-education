@@ -7,6 +7,7 @@
 @push('scripts')
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/datatable.js') }}"></script>
+    <script src="{{ asset('js/dates.js') }}"></script>
     <script src="{{ asset('js/excel.js') }}"></script>
     <script src="{{ asset('js/search.js') }}"></script>
 @endpush
@@ -62,27 +63,32 @@
                     @endforeach
                 </nav>
             </div>
-
-            <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative" style="height: 405px;">
-                <form action="{{ route('report.card', $group_id) }}" method="POST">
-                    @csrf
+            <form>
+                <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative" style="height: 405px;">
 
                     <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative" id="datatable-example">
                         <thead>
-                        <tr class="text-left">
+                        <tr class="text-center">
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">#</span></th>
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Фамилия</span></th>
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Имя</span></th>
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Отчество</span></th>
+
                             @foreach($sections as $section)
-                                <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">{{ $section->name_section }}</th>
+                                <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">
+                                    <span class="text-gray-700 px-6 flex justify-center">{{ $section->name_section }}</span>
+                                    <input type="text" class="id-section hidden" value="{{ $section->id_section }}">
+                                    <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 160px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}">
+                                </th>
                             @endforeach
+
                         </tr>
                         </thead>
 
                         <tbody>
+
                         @foreach($listeners as $listener)
-                            <tr>
+                            <tr class="text-center">
                                 <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->id_listener }}</span></td>
                                 <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->last_name }}</span></td>
                                 <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->first_name }}</span></td>
@@ -107,10 +113,14 @@
                                 @endforeach
                             </tr>
                         @endforeach
+
                         </tbody>
+
                     </table>
-                </form>
-            </div>
+
+                </div>
+            </form>
+
         </div>
     </div>
 

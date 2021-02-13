@@ -17,6 +17,7 @@ class CreateSectionsTable extends Migration
             $table->bigIncrements('id_section');
             $table->string('name_section');
             $table->string('description_section');
+            $table->date('date_section');
             $table->unsignedBigInteger('courses_id');
 
             $table->foreign('courses_id')->references('id')->on('courses');

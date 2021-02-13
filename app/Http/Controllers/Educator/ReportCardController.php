@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Models\Listener;
 use App\Models\Performance;
 use App\Models\Section;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReportCardController extends BaseController
@@ -19,7 +20,7 @@ class ReportCardController extends BaseController
 
         $selected_course = Group::where('id', $group_id)->value('course_id'); //Выбранный курс привязанный к группе
 
-        $fields = ['id_section', 'name_section'];
+        $fields = ['id_section', 'name_section', 'date_section'];
         $sections = Section::select($fields)->where('courses_id', $selected_course)->get(); //Разделы курса привязанные к курсу
 
         $marks = Performance::
@@ -44,42 +45,48 @@ class ReportCardController extends BaseController
 
     }
 
-    public function update_marks($group_id = null, Request $request)
+    public function update_data($group_id = null, Request $request)
     {
-        $items = $_POST['items'];
-        $items = (array($items));
+        $data = $request->input();
+        if ($data['status'] == 'dates') {
+            if (($data['date'])) {
+                if (!empty($data['date'])) {
+                    $id_section = $data['idSection'];
+                    $date = $data['date'];
 
-        foreach ($items as $item)
-        {
-            if (is_numeric($item)) {
+                    Section::where('id_section', $id_section)->update(['date_section' => $date]);
+                }
+                else {
+                    $id_section = $data['idSection'];
+                    $date = Carbon::now();
 
-                $mark_id = $item[0];
-                $mark = $item[1];
-
-                if ($mark == 0)
-                    $mark = NULL;
-
-                $result = Performance::where('id', $mark_id)->update(['mark' => $mark]);
-            } else {
-
-                $mark_id = $item[0];
-                $string = substr($item, 1);
-
-                $result = Performance::where('id', $mark_id)->update(['mark' => $string]);
+                    Section::where('id_section', $id_section)->update(['date_section' => $date]);
+                }
             }
         }
+        if ($data['status'] == 'marks') {
+            $items = $_POST['items'];
+            $items = (array($items));
 
-        /* if ($result) {
-            $response = [
-                'status' => true
-            ];
-            echo json_encode($response);
+            foreach ($items as $item)
+            {
+                if (is_numeric($item)) {
+
+                    $mark_id = $item[0];
+                    $mark = $item[1];
+
+                    if ($mark == 0)
+                        $mark = NULL;
+
+                    Performance::where('id', $mark_id)->update(['mark' => $mark]);
+                } else {
+
+                    $mark_id = $item[0];
+                    $string = substr($item, 1);
+
+                    Performance::where('id', $mark_id)->update(['mark' => $string]);
+                }
+            }
         }
-        else {
-            $response = [
-                'status' => false
-            ];
-            echo json_encode($response);
-        } */
     }
 }

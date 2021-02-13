@@ -1,17 +1,20 @@
 $(document).ready( function () {
-    $('.select').change(function (e) {
+    $('.edit-date').change(function (e) {
         e.preventDefault();
 
-        let select = $(this);
+        let input = $(this);
+        let idSection = $('.id-section').val();
 
         $.post({
             url: '/educator/report-card',
             dataType: 'text',
             data: {
                 '_token': $('meta[name="csrf-token"]').attr('content'),
-                'items': select.val(),
-                'status': 'marks'
+                'date': input.val(),
+                'status': 'dates',
+                'idSection': idSection
             }
         })
     });
+
 });
