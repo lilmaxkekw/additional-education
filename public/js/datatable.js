@@ -3,13 +3,15 @@ $(document).ready( function () {
         e.preventDefault();
 
         let select = $(this);
+        let input = $('.mark-id');
 
         $.post({
             url: '/educator/report-card',
             dataType: 'text',
             data: {
                 '_token': $('meta[name="csrf-token"]').attr('content'),
-                'items': select.val(),
+                'mark': select.val(),
+                'input': input.val(),
                 'status': 'marks'
             }
         })

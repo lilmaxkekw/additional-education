@@ -99,9 +99,10 @@
                                         @if ($section->id_section == $mark->id_section)
                                             @if($mark->id_listener == $listener->id_listener)
                                                 <td class="border-dashed border-t border-gray-200">
+                                                    <input type="text" class="hidden mark-id" value="{{ $mark->id }}">
                                                     <select name="marks[]" style="width: 100px;" class="select">
                                                         @foreach($possible_marks as $possible_mark => $value)
-                                                            <option value="{{ $mark->id.$possible_mark }}"
+                                                            <option value="{{ $possible_mark }}"
                                                                     @if($possible_mark == $mark->mark) selected @endif>{{ $value }}
                                                             </option>
                                                         @endforeach

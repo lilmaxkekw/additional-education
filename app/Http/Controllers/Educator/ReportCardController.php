@@ -48,6 +48,7 @@ class ReportCardController extends BaseController
     public function update_data($group_id = null, Request $request)
     {
         $data = $request->input();
+
         if ($data['status'] == 'dates') {
             if (($data['date'])) {
                 if (!empty($data['date'])) {
@@ -64,29 +65,12 @@ class ReportCardController extends BaseController
                 }
             }
         }
+
         if ($data['status'] == 'marks') {
-            $items = $_POST['items'];
-            $items = (array($items));
+            $mark = $data['mark'];
+            $id_mark = $data['input'];
 
-            foreach ($items as $item)
-            {
-                if (is_numeric($item)) {
-
-                    $mark_id = $item[0];
-                    $mark = $item[1];
-
-                    if ($mark == 0)
-                        $mark = NULL;
-
-                    Performance::where('id', $mark_id)->update(['mark' => $mark]);
-                } else {
-
-                    $mark_id = $item[0];
-                    $string = substr($item, 1);
-
-                    Performance::where('id', $mark_id)->update(['mark' => $string]);
-                }
-            }
+            Performance::where('id', $id_mark)->update(['mark' => $mark]);
         }
     }
 }
