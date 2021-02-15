@@ -13,7 +13,7 @@ class CourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class CourseRequest extends FormRequest
         return [
             'name_of_course' => 'required',
             'description_of_course' => 'required',
-            'number_of_course' => 'required'
+            'number_of_course' => 'required',
         ];
     }
 

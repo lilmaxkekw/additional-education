@@ -8,14 +8,25 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        return view('admin.categories.index');
+        //
+        $categories = Category::paginate(10);
+        //
+        $count = count($categories);
+        //
+        $all = Category::all()->count();
+
+        return view('admin.categories.index',
+            [
+                'categories' => $categories,
+                'count' => $count,
+                'all' => $all
+            ]);
     }
 
     /**
@@ -35,17 +46,6 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
     {
         //
     }
@@ -74,13 +74,14 @@ class CategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        Category::destroy($id);
+
+        return redirect()->route('categories.index')->with('success', 'Категория ' . $category->name_of_category . ' успешно удалена');
     }
 }

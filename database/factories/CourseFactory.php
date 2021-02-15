@@ -10,6 +10,9 @@ $factory->define(Course::class, function (Faker $faker) {
         'name_of_course' => $faker->realText(30),
         'description_of_course'=> $faker->realText(),
         'number_of_course' => $faker->numberBetween(10),
+        'category_id' => function(){
+            return factory(App\Models\Category::class)->create()->id;
+        },
         'image_of_course' => $faker->imageUrl()
     ];
 });

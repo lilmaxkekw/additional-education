@@ -3,12 +3,17 @@
 @section('title', 'Курс ' . $course->name_of_course)
 
 @section('content')
-    <!-- This example requires Tailwind CSS v2.0+ -->
+
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
                 {{ $course->name_of_course }}
             </h3>
+
+            <div class="container flex justify-end">
+                <a href="{{ route('courses.edit', $course->id) }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-full ripple hover:bg-yellow-100 focus:outline-none mr-2">Редактировать</a>
+                <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+            </div>
         </div>
         <div class="border-t border-gray-200">
             <dl>
@@ -36,73 +41,84 @@
                         {{ $course->number_of_course }}
                     </dd>
                 </div>
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Категория
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        @if(!empty($category->name_of_category))
+                            {{ $category->name_of_category }}
+                            @else
+                                <span>-</span>
+                        @endif
+                    </dd>
+                </div>
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Изображение
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <img src="{{ $course->image_of_course }}" alt="">
+{{--                        <img src="{{ url('storage/app/public/'.$course->image_of_course)}}" alt="{{ $course->image_of_course }}">--}}
+                        @if(!empty($course->image_of_course))
+                            <img src="{{ $course->image_of_course }}" alt="">
+                            @else
+                                <span>-</span>
+                        @endif
                     </dd>
                 </div>
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
-                        About
+                        Видео
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat.
-                        Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia
-                        proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
-                    </dd>
-                </div>
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">
-                        Attachments
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
-                            <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                                <div class="w-0 flex-1 flex items-center">
-                                    <!-- Heroicon name: paper-clip -->
-                                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                              d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                                              clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="ml-2 flex-1 w-0 truncate">
-                  resume_back_end_developer.pdf
-                </span>
-                                </div>
-                                <div class="ml-4 flex-shrink-0">
-                                    <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Download
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                                <div class="w-0 flex-1 flex items-center">
-                                    <!-- Heroicon name: paper-clip -->
-                                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                              d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                                              clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="ml-2 flex-1 w-0 truncate">
-                  coverletter_back_end_developer.pdf
-                </span>
-                                </div>
-                                <div class="ml-4 flex-shrink-0">
-                                    <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Download
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
+                        <video src=""></video>
                     </dd>
                 </div>
             </dl>
         </div>
     </div>
+
+    <div id="modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+        <!-- modal -->
+        <div class="bg-white rounded shadow-lg w-1/3">
+            <!-- modal header -->
+            <div class="px-4 py-2 flex justify-between items-center">
+                <h2 class="">Подтверждение удаления</h2>
+                <button class="text-black close-modal">
+                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                        <path
+                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                        ></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- modal body -->
+            <div class="p-4">
+                Вы действительно хотите удалить?
+            </div>
+            <div class="flex justify-center items-center w-100 p-3">
+                <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button class="bg-red-600 font-semibold text-white p-2 w-32 rounded-full hover:bg-red-700 focus:outline-none focus:ring shadow-lg hover:shadow-none transition-all duration-300">Удалить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $('a[name=modal]').click(function(e){
+                e.preventDefault()
+                $('#modal').removeClass('hidden')
+            })
+
+            $('.close-modal').click(function(){
+                $('.modal').addClass('hidden')
+            })
+        })
+    </script>
 
 @endsection

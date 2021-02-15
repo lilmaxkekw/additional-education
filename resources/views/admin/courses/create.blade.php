@@ -3,41 +3,78 @@
 @section('title', 'Добавить')
 
 @section('content')
-    <div>
+    <div class="grid justify-center">
+
+        @if($errors->any())
+            <div class="alert flex flex-row items-center bg-red-200 p-5 rounded border-b-2 border-red-300 mb-5">
+                <div class="alert-icon flex items-center bg-red-100 border-2 border-red-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
+				<span class="text-red-500">
+					<svg fill="currentColor"
+                         viewBox="0 0 20 20"
+                         class="h-6 w-6">
+						<path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+					</svg>
+				</span>
+                </div>
+                <div class="alert-content ml-4">
+                    <div class="alert-title font-semibold text-lg text-red-800">
+                        Ошибка
+                    </div>
+                        @foreach($errors->all() as $error)
+                            <div class="alert-description text-sm text-red-600">
+                                {{ $error }}
+                            </div>
+                        @endforeach
+                </div>
+            </div>
+        @endif
+
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form action="{{ route('courses.store') }}" method="POST">
+                <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="shadow sm:rounded-md sm:overflow-hidden">
                         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                             <div class="grid grid-cols-3 gap-6">
                                 <div class="col-span-3 sm:col-span-2">
-                                    <label for="company_website" class="block text-sm font-medium text-gray-700">
+                                    <label for="name_of_course" class="block text-sm font-medium text-gray-700">
                                         Название курса
                                     </label>
                                     <div class="mt-1 flex rounded-md shadow-sm">
-                                        <input type="text" name="company_website" id="company_website"
+                                        <input type="text" name="name_of_course" id="name_of_course"
                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                                     </div>
                                 </div>
                             </div>
 
                             <div>
-                                <label for="about" class="block text-sm font-medium text-gray-700">
+                                <label for="description_of_course" class="block text-sm font-medium text-gray-700">
                                     Описание курса
                                 </label>
                                 <div class="mt-1">
-                                    <textarea id="about" name="about" rows="3"
+                                    <textarea id="description_of_course" name="description_of_course" rows="3"
                                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
                                 </div>
                             </div>
 
+                            <div>
+                                <label for="number_of_course" class="block text-sm font-medium text-gray-700">
+                                    Номер курса
+                                </label>
+                                <div class="mt-1 flex rounded-md shadow-sm">
+                                    <input type="text" name="number_of_course" id="number_of_course"
+                                           class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                            </div>
+
                             <div class="col-span-4 sm:col-span-3">
-                                <label for="country" class="block text-sm font-medium text-gray-700">Категория курса</label>
-                                <select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <option>вароав</option>
-                                    <option>вава</option>
-                                    <option>ваа</option>
+                                <label for="categories" class="block text-sm font-medium text-gray-700">Категория курса</label>
+                                <select id="categories" name="categories" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name_of_category }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

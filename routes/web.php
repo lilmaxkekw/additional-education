@@ -15,11 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function(){
-    Auth::routes();
-    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
-    Route::resource('/courses', 'Admin\CourseController');
-    Route::resource('/categories', 'Admin\CategoryController');
+Auth::routes();
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
+    Route::get('/', 'AdminController@index')->name('admin.index');
+
+    Route::resource('/courses', 'CourseController');
+    Route::resource('/categories', 'CategoryController')->except('show');
+    Route::resource('/applications', 'ApplicationController');
+    Route::resource('/groups', 'GroupController');
 });
 
+Route::get('/educator/account', function () { return view('educator.account'); })->name('account');
+Route::get('/educator/report-card', function () { return view('educator.report_card'); })->name('report.card');
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
-use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Models\Course;
 
 /**
@@ -19,7 +19,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::paginate(10);
+        $courses = Course::paginate(8);
 
         return view('admin.courses.index', ['courses' => $courses]);
     }
@@ -30,7 +30,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('admin.courses.create');
+        return view('admin.courses.create', ['categories' => Category::all()]);
     }
 
 
@@ -40,8 +40,17 @@ class CourseController extends Controller
      */
     public function store(CourseRequest $request)
     {
-        Course::create($request->all());
-        return redirect('/admin/courses');
+        $path_image = $request->file('file-upload')->store('images');
+
+        $course = Course::create([
+            'name_of_course' => $request->input('name_of_course'),
+            'description_of_course' => $request->input('description_of_course'),
+            'number_of_course' => $request->input('number_of_course'),
+            'category_id' => $request->input('categories'),
+            'image_of_course' => $path_image
+        ]);
+
+        return redirect()->route('courses.index')->with('success', 'Курс ' . $course->name_of_course . ' успешно добавлен');
     }
 
 
@@ -52,8 +61,11 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::where('id', $id)->first();
+        $category = Category::where('id', $course->category_id)->first();
 
-        return view('admin.courses.show', ['course' => $course]);
+        return view('admin.courses.show', [
+            'course' => $course,
+            'category' => $category]);
     }
 
 
@@ -63,9 +75,10 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all();
         $course = Course::where('id', $id)->first();
 
-        return view('admin.courses.edit', ['course' => $course]);
+        return view('admin.courses.edit', ['course' => $course, 'categories' => $categories]);
     }
 
 
@@ -75,9 +88,14 @@ class CourseController extends Controller
      */
     public function update(CourseRequest $request, $id)
     {
-        Course::where('id', $id)->update($request->all());
+        Course::where('id', $id)->update([
+            'name_of_course' => $request->input('name_of_course'),
+            'description_of_course' => $request->input('description_of_course'),
+            'number_of_course' => $request->input('number_of_course'),
+            'category_id' => $request->input('categories')
+        ]);
 
-        return redirect('/admin/courses');
+        return redirect()->route('courses.show', ['course' => $id]);
     }
 
 
@@ -86,6 +104,9 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $course = Course::find($id);
+        Course::destroy($id);
+
+        return redirect()->route('courses.index')->with('success', 'Курс ' . $course->name_of_course . ' успешно удален');
     }
 }
