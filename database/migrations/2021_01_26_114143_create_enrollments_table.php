@@ -19,7 +19,7 @@ class CreateEnrollmentsTable extends Migration
             $table->unsignedBigInteger('listener_id');
             $table->unsignedBigInteger('group_id');
 
-            $table->foreign('listener_id')->references('id')->on('listeners');
+            $table->foreign('listener_id')->references('id_listener')->on('listeners');
             $table->foreign('group_id')->references('id')->on('groups');
 
             $table->timestamps();

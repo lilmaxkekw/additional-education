@@ -17,10 +17,6 @@
     <div class="antialiased sans-serif bg-gray-200 h-screen">
 
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-        {{--<script src="public/js/excel.js"></script>
-        <script src="{{ asset('js/excel.js.js') }}" defer></script>--}}
-
-
 
         <div class="container mx-auto py-6 px-4">
             <h1 class="text-3xl py-4 border-b mb-10">Журнал успеваемости</h1>

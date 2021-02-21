@@ -44,4 +44,8 @@ class User extends Authenticatable
     public function listeners(){
         return $this->belongsTo('App\Models\Listener', 'user_id');
     }
+
+    public function role(){
+        return $this->belongsTo('App\Models\Role');
+    }
 }
