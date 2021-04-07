@@ -10,6 +10,10 @@ class Group extends Model
         return $this->belongsTo('App\Models\Course');
     }
 
+    public function listener(){
+        return $this->belongsTo('App\Models\Listener');
+    }
+
     public function enrollments(){
         return $this->hasMany('App\Models\Enrollment');
     }

@@ -10,7 +10,15 @@ class Listener extends Model
         return $this->hasMany('App\Models\Enrollment');
     }
 
+    public function groups(){
+        return $this->hasMany('App\Models\Group');
+    }
+
     public function performances(){
         return $this->hasMany('App\Models\Performance');
+    }
+
+    public function users(){
+        return $this->hasOne('App\Models\Users');
     }
 }

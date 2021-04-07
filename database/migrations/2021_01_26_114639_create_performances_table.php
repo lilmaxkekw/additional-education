@@ -16,13 +16,13 @@ class CreatePerformancesTable extends Migration
         Schema::create('performances', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->integer('mark');
+            $table->string('mark')->nullable();
 
             $table->unsignedBigInteger('listener_id');
             $table->unsignedBigInteger('section_id');
 
-            $table->foreign('listener_id')->references('id')->on('listeners');
-            $table->foreign('section_id')->references('id')->on('sections');
+            $table->foreign('listener_id')->references('id_listener')->on('listeners');
+            $table->foreign('section_id')->references('id_section')->on('sections');
 
             $table->timestamps();
             $table->softDeletes();

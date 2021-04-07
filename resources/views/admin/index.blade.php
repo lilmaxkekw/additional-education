@@ -3,6 +3,7 @@
 @section('title', 'Главная')
 
 @section('content')
+
     <!-- component -->
         <div class="p-4 w-full">
             <div class="grid grid-cols-12 gap-4">
@@ -14,7 +15,7 @@
                             </div>
                             <div class="flex flex-col flex-grow ml-4">
                                 <div class="text-sm text-gray-500">Новые заявки</div>
-                                <div class="font-bold text-lg">1259</div>
+                                <div class="font-bold text-lg">{{ $count_applications }}</div>
                             </div>
                         </div>
                     </a>

@@ -5,12 +5,13 @@
 @section('content')
 
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-        <div class="px-4 py-5 sm:px-6">
+        <div class="px-4 py-5 sm:px-6 flex items-center">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
                 {{ $course->name_of_course }}
             </h3>
 
             <div class="container flex justify-end">
+                <a href="{{ route('course.show', $course->id) }}" target="_blank" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none mr-2">Перейти на страницу курса</a>
                 <a href="{{ route('courses.edit', $course->id) }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-full ripple hover:bg-yellow-100 focus:outline-none mr-2">Редактировать</a>
                 <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</a>
             </div>
@@ -41,7 +42,7 @@
                         {{ $course->number_of_course }}
                     </dd>
                 </div>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Категория
                     </dt>
@@ -53,32 +54,31 @@
                         @endif
                     </dd>
                 </div>
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Изображение
                     </dt>
+                    <!-- TODO -->
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-{{--                        <img src="{{ url('storage/app/public/'.$course->image_of_course)}}" alt="{{ $course->image_of_course }}">--}}
-                        @if(!empty($course->image_of_course))
-                            <img src="{{ $course->image_of_course }}" alt="">
-                            @else
-                                <span>-</span>
-                        @endif
+                        <img src="{{ Storage::url('1ZjGhg6kVPsNOYpjrcgpRlrJJUFB9bfUfiGl4i2G.jpg') }}" alt="Фотография">
                     </dd>
                 </div>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Видео
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <video src=""></video>
+                        @isset($course->video)
+                            <video src=""></video>
+                        @endisset
+                        <span>-</span>
                     </dd>
                 </div>
             </dl>
         </div>
     </div>
 
-    <div id="modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+    <div id="modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
         <!-- modal -->
         <div class="bg-white rounded shadow-lg w-1/3">
             <!-- modal header -->
@@ -100,7 +100,7 @@
                 <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
                     @method('DELETE')
                     @csrf
-                    <button class="bg-red-600 font-semibold text-white p-2 w-32 rounded-full hover:bg-red-700 focus:outline-none focus:ring shadow-lg hover:shadow-none transition-all duration-300">Удалить</button>
+                    <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</button>
                 </form>
             </div>
         </div>

@@ -14,7 +14,7 @@ class CreateListenersTable extends Migration
     public function up()
     {
         Schema::create('listeners', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_listener');
             $table->string('last_name');
             $table->string('first_name');
             $table->string('patronymic');
@@ -26,8 +26,10 @@ class CreateListenersTable extends Migration
             $table->integer('insurance_number');
 
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('group_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('group_id')->references('id')->on('groups');
 
             $table->timestamps();
             $table->softDeletes();

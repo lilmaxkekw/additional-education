@@ -41,21 +41,28 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-//        $input = $request->all();
-//
-//        $this->validate($request, [
-//            'name' => 'required|min:3',
-//            'password' => 'required'
-//        ]);
-//
-//        if(auth()->attempt(array('name' => $input['name'], 'password' => $input['password'])))
-//        {
-//            return redirect()->route('admin.index');
-//        }
-//        return redirect()->route('login');
+        $input = $request->all();
+
+        $this->validate($request, [
+            'name' => 'required',
+            'password' => 'required'
+        ],
+        [
+            'name.required' => 'Имя обязательно для заполнения',
+            'password.required' => 'Пароль обязателен для заполнения',
+        ]);
+
+        if(auth()->attempt(array('name' => $input['name'], 'password' => $input['password'])))
+        {
+            return redirect()->route('admin.index');
+        }
+
+        return redirect()->route('login')->with('error', $input);
     }
 
     public function logout(){
+        auth()->logout();
 
+        return redirect()->route('home');
     }
 }

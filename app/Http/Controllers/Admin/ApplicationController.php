@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Application;
 
 class ApplicationController extends Controller
 {
@@ -14,7 +15,9 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        return view('admin.applications.index');
+        $applications = Application::all();
+
+        return view('admin.applications.index', ['applications' => $applications]);
     }
 
     /**

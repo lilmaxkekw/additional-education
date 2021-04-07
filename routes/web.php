@@ -11,21 +11,34 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MainController@index')->name('home');
+Route::get('/course/{id}', 'MainController@showCourse')->name('course.show');
+Route::get('/course-selection', 'CourseSelectionController@index');
 
-Auth::routes();
+// Маршруты авторизации и регистрации
+Auth::routes([
+    'verify' => true
+]);
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
+// Маршруты админки
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'verified']], function(){
+
+//    auth()->login(App\Models\User::first());
+
     Route::get('/', 'AdminController@index')->name('admin.index');
 
-    Route::resource('/courses', 'CourseController');
-    Route::resource('/categories', 'CategoryController')->except('show');
+    Route::resource('/courses', 'CourseController')->except('create');
+    Route::resource('/categories', 'CategoryController')->except(['show', 'create']);
     Route::resource('/applications', 'ApplicationController');
     Route::resource('/groups', 'GroupController');
+    Route::resource('/users', 'UserController')->except('create');
 });
 
-Route::get('/educator/account', function () { return view('educator.account'); })->name('account');
-Route::get('/educator/report-card', function () { return view('educator.report_card'); })->name('report.card');
+// Маршруты личного кабинета преподавателя
+Route::group(['namespace' => 'Educator', 'prefix' => 'educator', 'middleware' => 'auth'], function() {
+    Route::get('/account/{id?}', 'EducatorController@show_account')->name('account');
+    Route::post('/account/{id?}', 'EducatorController@edit_account')->name('account');
 
+    Route::get('/report-card/{group?}',  'ReportCardController@groups')->name('report.card');
+    Route::post('/report-card/{group?}',  'ReportCardController@update_data')->name('report.card');
+});

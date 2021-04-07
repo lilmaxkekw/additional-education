@@ -20,10 +20,10 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::paginate(8);
+        $categories = Category::all();
 
-        return view('admin.courses.index', ['courses' => $courses]);
+        return view('admin.courses.index', ['courses' => $courses, 'categories' => $categories]);
     }
-
 
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -33,26 +33,29 @@ class CourseController extends Controller
         return view('admin.courses.create', ['categories' => Category::all()]);
     }
 
-
     /**
      * @param CourseRequest $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CourseRequest $request)
     {
-        $path_image = $request->file('file-upload')->store('images');
+//        $path_image = $request->file('file-upload')->store('images');
+//        #TODO
+//        $params = $request->all();
+//        $params['image_of_course'] = $path_image;
+//        dd($params);
+        $course = Course::create($request->all());
+//        $course = Course::create([
+//            'name_of_course' => $request->input('name_of_course'),
+//            'description_of_course' => $request->input('description_of_course'),
+//            'number_of_course' => $request->input('number_of_course'),
+//            'category_id' => $request->input('categories'),
+//            'image_of_course' => $path_image,
+//        ]);
 
-        $course = Course::create([
-            'name_of_course' => $request->input('name_of_course'),
-            'description_of_course' => $request->input('description_of_course'),
-            'number_of_course' => $request->input('number_of_course'),
-            'category_id' => $request->input('categories'),
-            'image_of_course' => $path_image
-        ]);
-
-        return redirect()->route('courses.index')->with('success', 'Курс ' . $course->name_of_course . ' успешно добавлен');
+//        return redirect()->route('courses.index')->with('success', 'Курс ' . $course->name_of_course . ' успешно добавлен');
+        return json_encode(['status_code' => 200]);
     }
-
 
     /**
      * @param $id
@@ -65,9 +68,9 @@ class CourseController extends Controller
 
         return view('admin.courses.show', [
             'course' => $course,
-            'category' => $category]);
+            'category' => $category
+        ]);
     }
-
 
     /**
      * @param $id
@@ -80,7 +83,6 @@ class CourseController extends Controller
 
         return view('admin.courses.edit', ['course' => $course, 'categories' => $categories]);
     }
-
 
     /**
      * @param CourseRequest $request
@@ -98,7 +100,6 @@ class CourseController extends Controller
         return redirect()->route('courses.show', ['course' => $id]);
     }
 
-
     /**
      * @param $id
      */
@@ -109,4 +110,5 @@ class CourseController extends Controller
 
         return redirect()->route('courses.index')->with('success', 'Курс ' . $course->name_of_course . ' успешно удален');
     }
+
 }

@@ -3,7 +3,7 @@
 @section('title', 'Редактирование')
 
 @section('content')
-    <div class="">
+    <div class="grid justify-center">
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="mt-5 md:mt-0 md:col-span-2">
                 <form action="{{ route('courses.update', $course->id) }}" method="POST" enctype="multipart/form-data">
@@ -82,7 +82,7 @@
                         </div>
                         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                             <button type="submit"
-                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">
                                 Сохранить
                             </button>
                         </div>

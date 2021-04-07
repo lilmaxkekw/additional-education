@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
+/**
+ * Class CategoryController
+ * @package App\Http\Controllers\Admin
+ */
 class CategoryController extends Controller
 {
 
@@ -36,7 +40,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -47,7 +51,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = Category::create($request->all());
+
+//        return redirect()->route('categories.index')->with('success', 'Категория ' . $category->name_of_category .' успешно добавлена');
+        return json_encode(['status_code' => 200, 'name_of_category' => $category->name_of_category]);
     }
 
     /**
@@ -56,21 +63,25 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        return view('admin.categories.edit', ['category' => Category::find($id)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Category $category)
+    public function update($id, Request $request)
     {
-        //
+        Category::where('id', $id)->update([
+            'name_of_category' => $request->input('name_of_category')
+        ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -79,9 +90,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+//        $category = Category::find($id);
         Category::destroy($id);
 
-        return redirect()->route('categories.index')->with('success', 'Категория ' . $category->name_of_category . ' успешно удалена');
+//        return redirect()->route('categories.index')->with('success', 'Категория ' . $category->name_of_category . ' успешно удалена');
+        return json_encode(['status_code' => 200]);
     }
 }
