@@ -32,8 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-//    protected $redirectTo = RouteServiceProvider::HOME;
-    protected $redirectTo = '/course-selection';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -57,13 +56,15 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'], // confirmed
+            'approval' => 'accepted'
         ],
         [
             'name.required' => 'Имя обязательно для заполнения',
             'email.required' => 'Email обязателен для заполнения',
             'password.required' => 'Пароль обязателен для заполнения',
             'password.min' => 'Пароль должен быть не менее 8 символов',
-            'email.unique' => 'Такой email уже существует'
+            'email.unique' => 'Такой email уже существует',
+            'approval.accepted' => 'Подтвердите согласие на обработку персональных данных'
         ]);
     }
 
@@ -82,7 +83,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        Mail::to($user->email)->send(new VerifyEmail());
+        Mail::to($user->email)->send(new VerifyEmail($user));
 
         return $user;
     }

@@ -31,6 +31,7 @@
                 <tr>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">ФИО</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Email</th>
+                    <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Статус email</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Роль пользователя</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider"></th>
                 </tr>
@@ -43,6 +44,17 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                                 <div class="text-sm leading-5 text-blue-900">{{ $user->email }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                                @if($user->email_verified_at === NULL)
+                                    <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                    <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                    <span class="relative text-xs align-middle">не подтвержден</span>
+                                    @else
+                                        <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative text-xs align-middle">подтвержден</span>
+                                @endif
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                                 <div class="text-sm leading-5 text-blue-900">{{ $user->role->name_role }}</div>
@@ -83,7 +95,7 @@
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
                                 <input type="text" name="name" id="name"
-                                       class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                             </div>
                         </div>
                     </div>
@@ -94,13 +106,13 @@
                         </label>
                         <div class="mt-1">
                             <input type="email" name="email" id="email"
-                                   class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                         </div>
                     </div>
 
                     <div class="col-span-4 sm:col-span-3">
                         <label for="roles" class="block text-sm font-medium text-gray-700">Роль пользователя</label>
-                        <select id="roles" name="roles" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <select id="roles" name="roles" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             @foreach($roles as $role)
                                 <option value="{{ $role->id }}">{{ $role->name_role }}</option>
                             @endforeach
@@ -114,7 +126,7 @@
                     </label>
                     <div class="mt-1">
                         <input type="password" name="password" id="password"
-                               class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                               class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                     </div>
                 </div>
             </div>

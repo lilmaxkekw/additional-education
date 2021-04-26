@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckTeacher
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,14 @@ class CheckTeacher
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->check() && auth()->user()->role_id === 2){
+        if(auth()->check() && auth()->user()->role_id === 3){
             return $next($request);
         }
 
-        return redirect()->route('account', auth()->user()->id);
+        if(auth()->check() && auth()->user()->role_id === 2){
+            return redirect()->route('account');
+        }
+
+        return redirect('/');
     }
 }

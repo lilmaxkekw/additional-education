@@ -44,15 +44,15 @@ class LoginController extends Controller
         $input = $request->all();
 
         $this->validate($request, [
-            'name' => 'required',
+            'email' => 'required',
             'password' => 'required'
         ],
         [
-            'name.required' => 'Имя обязательно для заполнения',
+            'email.required' => 'Email обязателен для заполнения',
             'password.required' => 'Пароль обязателен для заполнения',
         ]);
 
-        if(auth()->attempt(array('name' => $input['name'], 'password' => $input['password'])))
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
             return redirect()->route('admin.index');
         }

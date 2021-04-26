@@ -11,9 +11,9 @@
 |
 */
 
+
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/course/{id}', 'MainController@showCourse')->name('course.show');
-Route::get('/course-selection', 'CourseSelectionController@index');
 
 // Маршруты авторизации и регистрации
 Auth::routes([
@@ -21,24 +21,27 @@ Auth::routes([
 ]);
 
 // Маршруты админки
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'verified']], function(){
-
-//    auth()->login(App\Models\User::first());
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'role']], function(){
 
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::resource('/courses', 'CourseController')->except('create');
     Route::resource('/categories', 'CategoryController')->except(['show', 'create']);
     Route::resource('/applications', 'ApplicationController');
-    Route::resource('/groups', 'GroupController');
+    Route::resource('/groups', 'GroupController')->except(['create', 'edit']);
     Route::resource('/users', 'UserController')->except('create');
+    Route::resource('/sendmail', 'SendMailController')->except('create');
+
 });
 
 // Маршруты личного кабинета преподавателя
-Route::group(['namespace' => 'Educator', 'prefix' => 'educator', 'middleware' => 'auth'], function() {
-    Route::get('/account/{id?}', 'EducatorController@show_account')->name('account');
+Route::group(['namespace' => 'Educator', 'prefix' => 'educator', 'middleware' => ['auth']], function(){
+
+//    Route::get('/account/{id?}', 'EducatorController@show_account')->name('account');
+    Route::get('/account', 'EducatorController@show_account')->name('account');
     Route::post('/account/{id?}', 'EducatorController@edit_account')->name('account');
 
-    Route::get('/report-card/{group?}',  'ReportCardController@groups')->name('report.card');
-    Route::post('/report-card/{group?}',  'ReportCardController@update_data')->name('report.card');
+    Route::get('/report-card/{group?}', 'ReportCardController@groups')->name('report.card');
+    Route::post('/report-card/{group?}', 'ReportCardController@update_data')->name('report.card');
+
 });

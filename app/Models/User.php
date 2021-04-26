@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+//use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -41,11 +41,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Application');
     }
 
-    public function role(){
-        return $this->belongsTo('App\Models\Role');
-    }
-
     public function listeners(){
         return $this->belongsTo('App\Models\Listener', 'user_id');
+    }
+
+    public function role(){
+        return $this->belongsTo('App\Models\Role');
     }
 }

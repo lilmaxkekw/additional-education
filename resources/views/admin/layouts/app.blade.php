@@ -11,6 +11,10 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css"
           integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    {{-- Lottie --}}
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@0.3.0/dist/lottie-player.js"></script>
+
+    <script src="{{ asset('js/search.js') }}"></script>
     <style>
         html,
         body {
@@ -135,6 +139,16 @@
                     </span>
                     <a href="{{ route('users.index') }}">
                         <span class="ml-2">Пользователи</span>
+                    </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-100 hover:font-bold rounded rounded-lg">
+                    <span>
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19.07 13.88L13 19.94V22H15.06L21.12 15.93M22.7 13.58L21.42 12.3C21.32 12.19 21.18 12.13 21.04 12.13C20.89 12.14 20.75 12.19 20.65 12.3L19.65 13.3L21.7 15.3L22.7 14.3C22.89 14.1 22.89 13.78 22.7 13.58M11 18H4V8L12 13L20 8V10H22V6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H11V18M20 6L12 11L4 6H20Z" />
+                        </svg>
+                    </span>
+                    <a href="{{ route('sendmail.index') }}">
+                        <span class="ml-2">Рассылка писем</span>
                     </a>
                 </li>
             </ul>

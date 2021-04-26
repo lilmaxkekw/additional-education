@@ -39,22 +39,9 @@ class CourseController extends Controller
      */
     public function store(CourseRequest $request)
     {
-//        $path_image = $request->file('file-upload')->store('images');
-//        #TODO
-//        $params = $request->all();
-//        $params['image_of_course'] = $path_image;
-//        dd($params);
+        #TODO
         $course = Course::create($request->all());
-//        $course = Course::create([
-//            'name_of_course' => $request->input('name_of_course'),
-//            'description_of_course' => $request->input('description_of_course'),
-//            'number_of_course' => $request->input('number_of_course'),
-//            'category_id' => $request->input('categories'),
-//            'image_of_course' => $path_image,
-//        ]);
-
-//        return redirect()->route('courses.index')->with('success', 'Курс ' . $course->name_of_course . ' успешно добавлен');
-        return json_encode(['status_code' => 200]);
+        return response()->json($course);
     }
 
     /**
@@ -64,11 +51,11 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::where('id', $id)->first();
-        $category = Category::where('id', $course->category_id)->first();
+        $categories = Category::all();
 
         return view('admin.courses.show', [
             'course' => $course,
-            'category' => $category
+            'categories' => $categories
         ]);
     }
 
@@ -90,14 +77,8 @@ class CourseController extends Controller
      */
     public function update(CourseRequest $request, $id)
     {
-        Course::where('id', $id)->update([
-            'name_of_course' => $request->input('name_of_course'),
-            'description_of_course' => $request->input('description_of_course'),
-            'number_of_course' => $request->input('number_of_course'),
-            'category_id' => $request->input('categories')
-        ]);
-
-        return redirect()->route('courses.show', ['course' => $id]);
+        Course::where('id', $id)->update($request->except(['_token']));
+        return json_encode(['status_code' => 200]);
     }
 
     /**

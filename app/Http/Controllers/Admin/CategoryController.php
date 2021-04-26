@@ -53,8 +53,7 @@ class CategoryController extends Controller
     {
         $category = Category::create($request->all());
 
-//        return redirect()->route('categories.index')->with('success', 'Категория ' . $category->name_of_category .' успешно добавлена');
-        return json_encode(['status_code' => 200, 'name_of_category' => $category->name_of_category]);
+        return response()->json($category);
     }
 
     /**
@@ -90,10 +89,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-//        $category = Category::find($id);
-        Category::destroy($id);
+        $category = Category::destroy($id);
 
-//        return redirect()->route('categories.index')->with('success', 'Категория ' . $category->name_of_category . ' успешно удалена');
-        return json_encode(['status_code' => 200]);
+        return response()->json('success');
     }
 }

@@ -49,7 +49,6 @@
     </div>
 
     <div class="container ml-4">
-{{--        <a href="{{ route('courses.create') }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded-full ripple hover:bg-green-100 focus:outline-none">Добавить</a>--}}
         <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded-full ripple hover:bg-green-100 focus:outline-none">Добавить</a>
     </div>
 
@@ -125,7 +124,7 @@
 
                         <div class="col-span-4 sm:col-span-3">
                             <label for="categories" class="block text-sm font-medium text-gray-700">Категория курса</label>
-                            <select id="categories" name="categories" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <select id="categories" name="categories" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name_of_category }}</option>
                                 @endforeach
@@ -148,10 +147,9 @@
                                     <div class="flex text-sm text-gray-600">
                                         <label for="file-upload"
                                                class="relative cursor-pointer bg-white rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                                            <span>Upload a file</span>
+                                            <span class="justify-center">Загрузить файл</span>
                                             <input id="file-upload" name="file-upload" type="file" class="sr-only">
                                         </label>
-                                        <p class="pl-1">or drag and drop</p>
                                     </div>
                                     <p class="text-xs text-gray-500">
                                         PNG, JPG, GIF up to 10MB
@@ -168,29 +166,8 @@
     </div>
 
     <!-- Modal success -->
-    <div id="modalSuccess" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-1/3">
-            <!-- modal header -->
-            <div class="px-4 py-2 flex justify-center items-center">
-                <div id="success" style="width: 200px; height: 200px"></div>
-            </div>
-            <!-- modal body -->
-            <div class="p-4">
-                <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                    <div class="grid grid-cols-3 gap-6">
-                        <div class="col-span-3 sm:col-span-2">
-                            <label class="block text-sm font-medium text-gray-700 addText">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-center items-center w-100 p-3">
-                <button name="ok" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded-full ripple hover:bg-green-100 focus:outline-none">ОК</button>
-            </div>
-        </div>
-    </div>
+    @component('components.modal_success')
+    @endcomponent
 
     <div class="flex flex-row ml-4">
         {{ $courses->links('vendor.pagination.custom') }}
@@ -199,14 +176,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
             integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
-    {{--        --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.7/lottie.min.js" integrity="sha512-HDCfX3BneBQMfloBfluMQe6yio+OfXnbKAbI0SnfcZ4YfZL670nc52Aue1bBhgXa+QdWsBdhMVR2hYROljf+Fg==" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
             $('.alert').delay(5000).fadeOut(200)
 
-            $('a[name=modal]').click(function(e){
-                e.preventDefault()
+            $('a[name=modal]').click(function(){
                 $('#addCourseModal').removeClass('hidden')
             })
 
@@ -217,17 +191,6 @@
             $('button[name=ok]').click(function(e){
                 e.preventDefault()
                 $('#modalSuccess').addClass('hidden')
-            })
-
-
-            // bodymovin animation
-            var animation = bodymovin.loadAnimation({
-                container: document.getElementById('success'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'https://assets8.lottiefiles.com/packages/lf20_68kgfqsn.json'
-
             })
 
             $('#btnSave').click(function(){
@@ -247,12 +210,12 @@
                         category_id: category
                     },
                     cache: false,
-                    success: function(dataResult){
-                        var dataResult = JSON.parse(dataResult)
-                        if(dataResult.status_code === 200){
+                    success: function(course){
+                        var data = JSON.stringify(course)
+                        if(data){
                             $('#addCourseModal').addClass('hidden')
                             $('#modalSuccess').removeClass('hidden')
-                            $('.addText').text(`Курс ${name_of_course} добавлен`)
+                            $('.addText').text(`Курс "${name_of_course}" успешно добавлен!`)
                         }
                     }
                 })

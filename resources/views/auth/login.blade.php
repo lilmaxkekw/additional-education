@@ -12,7 +12,7 @@
           integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-blue-300">
 
 @if($errors->any())
     <div class="alert flex flex-row items-center bg-red-200 p-5 rounded border-b-2 border-red-300 mb-5 absolute items-center m-0">
@@ -45,8 +45,7 @@
     <div class="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
         <div class="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style="max-width:1000px">
             <div class="md:flex w-full">
-                <!-- TODO -->
-                <div class="hidden md:block w-1/2 bg-white py-10 px-10"> <!-- bg-indigo-500 -->
+                <div class="hidden md:block w-1/2 bg-white py-10 px-10">
                     <img src="login.svg" alt="">
                 </div>
                 <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
@@ -55,11 +54,11 @@
                     </div>
                     <div>
                         <div class="flex -mx-3">
-                            <div class="w-1/2 px-3 mb-5">
-                                <label for="" class="text-xs font-semibold px-1">Имя</label>
+                            <div class="w-full px-3 mb-5">
+                                <label for="" class="text-xs font-semibold px-1">Введите email</label>
                                 <div class="flex">
                                     <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
-                                    <input type="text" name="name" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-blue-500" placeholder="John" value="{{ old('name') }}">
+                                    <input type="email" name="email" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-blue-500" placeholder="ivan@yandex.ru" value="{{ old('email') }}">
                                 </div>
                             </div>
                         </div>

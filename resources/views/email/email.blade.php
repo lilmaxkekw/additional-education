@@ -1,12 +1,14 @@
 @component('mail::message')
 # Introduction
 
-The body of your message.
+Привет, {{ $user->name }}!
 
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/login'])
+Пожалуйста, подтвердите Ваш адрес электронной почты
+
+@component('mail::button', ['url' => route('verification.verify')])
 ПОДТВЕРДИТЬ EMAIL
 @endcomponent
 
-Thanks,<br>
+Спасибо,<br>
 {{ config('app.name') }}
 @endcomponent
