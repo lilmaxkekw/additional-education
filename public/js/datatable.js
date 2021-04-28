@@ -3,7 +3,7 @@ $(document).ready( function () {
         e.preventDefault();
 
         let select = $(this);
-        let input = $('.mark-id');
+        let input = $('.mark-id').val();
 
         $.post({
             url: '/educator/report-card',
@@ -11,7 +11,7 @@ $(document).ready( function () {
             data: {
                 '_token': $('meta[name="csrf-token"]').attr('content'),
                 'mark': select.val(),
-                'input': input.val(),
+                'input': input,
                 'status': 'marks'
             }
         })

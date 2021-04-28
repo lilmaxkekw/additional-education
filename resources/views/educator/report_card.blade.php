@@ -6,6 +6,7 @@
 
 @push('scripts')
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/report-card.js') }}"></script>
     <script src="{{ asset('js/datatable.js') }}"></script>
     <script src="{{ asset('js/dates.js') }}"></script>
     <script src="{{ asset('js/excel.js') }}"></script>
@@ -19,7 +20,8 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 
         <div class="container mx-auto py-6 px-4">
-            <h1 class="text-3xl py-4 border-b mb-10">Журнал успеваемости</h1>
+            <h1 class="text-3xl py-4 border-b">Журнал успеваемости</h1>
+            <h1 class="text-2xl py-4 border-b mb-10">Курс группы: </h1>
 
             <div class="flex justify-between">
                 <div class="flex-1">
@@ -48,11 +50,11 @@
             </div>
 
             {{--Список групп--}}
-            <div class="bg-white mt-3">
+            <div class="bg-white mt-3 overflow-x-scroll">
                 <nav class="flex flex-col sm:flex-row">
                     @foreach($groups as $group)
                         <a href="{{ route('report.card', $group->id) }}">
-                            <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none @if($group->id == $group_id) text-blue-500 border-b-2 font-medium border-blue-500 @endif">
+                            <button data-group="{{ $group->id }}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none btn-group @if($group->id == $group_id) text-blue-500 border-b-2 font-medium border-blue-500 @endif">
                                 {{ $group->number_group }}
                             </button>
                         </a>
@@ -62,7 +64,7 @@
             <form>
                 <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative" style="height: 405px;">
 
-                    <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative" id="datatable-example">
+                    <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative overflow-x-auto" id="datatable-example">
                         <thead>
                         <tr class="text-center">
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">#</span></th>
@@ -73,11 +75,11 @@
                             @foreach($sections as $section)
                                 <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">
                                     <span class="text-gray-700 px-6 flex justify-center">{{ $section->name_section }}</span>
-                                    <input type="text" class="id-section hidden" value="{{ $section->id_section }}">
-                                    <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 160px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}">
+                                    <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 160px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}" id-section="{{ $section->id_section }}">
                                 </th>
                             @endforeach
 
+                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">ИТОГО</span></th>
                         </tr>
                         </thead>
 
@@ -95,10 +97,9 @@
                                         @if ($section->id_section == $mark->id_section)
                                             @if($mark->id_listener == $listener->id_listener)
                                                 <td class="border-dashed border-t border-gray-200">
-                                                    <input type="text" class="hidden mark-id" value="{{ $mark->id }}">
                                                     <select name="marks[]" style="width: 100px;" class="select">
                                                         @foreach($possible_marks as $possible_mark => $value)
-                                                            <option value="{{ $possible_mark }}"
+                                                            <option value="{{ $possible_mark . '|' . $mark->id }}"
                                                                     @if($possible_mark == $mark->mark) selected @endif>{{ $value }}
                                                             </option>
                                                         @endforeach
@@ -116,6 +117,32 @@
                     </table>
 
                 </div>
+
+                <div class="second-part mt-14">
+                    <h2 class="text-center text-3xl py-4 border-b mb-10">Вторая часть журнала</h2>
+                </div>
+
+                <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative mt-14" style="height: 405px;">
+
+                    <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
+                        <thead>
+                        <tr class="text-center">
+                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">#</span></th>
+                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Дата</span></th>
+                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Кол-во часов</span></th>
+                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Тема</span></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
             </form>
 
         </div>

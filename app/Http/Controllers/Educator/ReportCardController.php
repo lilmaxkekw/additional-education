@@ -13,7 +13,7 @@ class ReportCardController extends BaseController
 {
     public function groups($group_id = 1)
     {
-        $groups = Group::select('id', 'number_group')->get(); //Все группы
+        $groups = Group::select('id', 'number_group')->orderBy('number_group')->get(); //Все группы
 
         $fields = ['id_listener', 'last_name', 'first_name', 'patronymic'];
         $listeners = Listener::select($fields)->where('group_id', $group_id)->get(); //Слушатели выбранной группы
@@ -47,6 +47,7 @@ class ReportCardController extends BaseController
 
     public function update_data($group_id = null, Request $request)
     {
+        //dd($request->input());
         $data = $request->input();
 
         if ($data['status'] == 'dates') {
@@ -67,8 +68,10 @@ class ReportCardController extends BaseController
         }
 
         if ($data['status'] == 'marks') {
-            $mark = $data['mark'];
-            $id_mark = $data['input'];
+
+            $mark_idMark = explode('|', $data['mark']);
+            $mark = $mark_idMark[0];
+            $id_mark = $mark_idMark[1];
 
             Performance::where('id', $id_mark)->update(['mark' => $mark]);
         }

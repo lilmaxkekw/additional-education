@@ -34,13 +34,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
 });
 
-// Маршруты личного кабинета преподавателя
-Route::group(['namespace' => 'Educator', 'prefix' => 'educator', 'middleware' => ['auth']], function(){
+// Маршруты преподавателя
+Route::group(['namespace' => 'Educator', 'prefix' => 'educator'], function(){
 
-//    Route::get('/account/{id?}', 'EducatorController@show_account')->name('account');
     Route::get('/account', 'EducatorController@show_account')->name('account');
     Route::post('/account/{id?}', 'EducatorController@edit_account')->name('account');
-
     Route::get('/report-card/{group?}', 'ReportCardController@groups')->name('report.card');
     Route::post('/report-card/{group?}', 'ReportCardController@update_data')->name('report.card');
 

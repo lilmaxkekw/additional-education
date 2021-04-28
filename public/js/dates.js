@@ -3,7 +3,8 @@ $(document).ready( function () {
         e.preventDefault();
 
         let input = $(this);
-        let idSection = $('.id-section').val();
+        //let idSection = ;
+        //console.log('idSection = ' + idSection);
 
         $.post({
             url: '/educator/report-card',
@@ -12,7 +13,7 @@ $(document).ready( function () {
                 '_token': $('meta[name="csrf-token"]').attr('content'),
                 'date': input.val(),
                 'status': 'dates',
-                'idSection': idSection
+                'idSection': input.attr('id-section'),
             }
         })
     });

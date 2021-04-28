@@ -21,6 +21,7 @@
     {{--SCRIPTS--}}
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/datatable.js') }}"></script>
+    <script src="{{ asset('js/report-card.js') }}"></script>
     <script src="{{ asset('js/dates.js') }}"></script>
     <script src="{{ asset('js/excel.js') }}"></script>
     <script src="{{ asset('js/search.js') }}"></script>
