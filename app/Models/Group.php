@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Group extends Model
 {
     use SoftDeletes;
+
     protected $fillable = ['number_group', 'start_date', 'end_date', 'course_id'];
 
     public function course(){

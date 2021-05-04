@@ -72,11 +72,11 @@
                             </div>
                         </div>
                         <div class="flex -mx-3">
-                            <div class="w-full px-3 mb-5">
+                            <div class="w-full px-3 mb-5 flex justify-center">
                                 <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Войти</button>
                             </div>
                         </div>
-                        <a href="{{ route('register') }}" class="flex justify-end">У меня нет аккаунта</a>
+                        <a href="{{ route('register') }}" class="flex justify-end">Зарегистрироваться</a>
                     </div>
                 </div>
             </div>

@@ -4,8 +4,12 @@
 
 @section('content')
 
+    <h1 class="text-4xl font-normal text-grey-900">Группы</h1>
+
     <div class="container mb-2">
-        <a href="#addGroupModal" name="addGroupModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded-full ripple hover:bg-green-100 focus:outline-none">Добавить</a>
+        <div class="flex justify-end">
+            <a href="#addGroupModal" name="addGroupModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Добавить группу</a>
+        </div>
     </div>
 
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
@@ -45,10 +49,10 @@
                             <div class="text-sm leading-5 text-blue-900">{{ $group->number_group }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                            <div class="text-sm leading-5 text-blue-900">{{ \Carbon\Carbon::parse($group->start_date)->format('d/m/Y') }}</div>
+                            <div class="text-sm leading-5 text-blue-900">{{ \Carbon\Carbon::parse($group->start_date)->format('d.m.Y') }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                            <div class="text-sm leading-5 text-blue-900">{{ \Carbon\Carbon::parse($group->end_date)->format('d/m/Y') }}</div>
+                            <div class="text-sm leading-5 text-blue-900">{{ \Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                             <div class="text-sm leading-5 text-blue-900">{{ $group->course->name_of_course }}</div>
@@ -58,7 +62,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
                             <a href="" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-full ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
-                            <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+                            <a href="#deleteModal" data-id="{{ $group->id }}" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</a>
                         </td>
                     </tr>
                 @endforeach
@@ -68,15 +72,9 @@
             @if(! $groups->isEmpty())
                 <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
                     <div>
-                        <p class="text-sm leading-5 text-blue-700">
-                            Showing
-                            <span class="font-medium">1</span>
-                            to
-                            <span class="font-medium">200</span>
-                            of
-                            <span class="font-medium">2000</span>
-                            results
-                        </p>
+                        <p class="text-sm leading-5 text-blue-500">
+                            Всего записей
+                            <span class="font-medium">{{ $count }}</span>
                     </div>
                 </div>
 
@@ -90,7 +88,9 @@
         {{ $groups->links('vendor.pagination.custom') }}
     </div>
 
-    <div id="modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+    <!-- Delete group modal -->
+    <div id="deleteModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+        <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
         <!-- modal -->
         <div class="bg-white rounded shadow-lg w-1/3">
             <!-- modal header -->
@@ -108,16 +108,9 @@
             <div class="p-4">
                 Вы действительно хотите удалить?
             </div>
-            @if(empty($group->id))
-            @else
-                <div class="flex justify-center items-center w-100 p-3">
-                    <form action="{{ route('groups.destroy', $group->id) }}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <button class="bg-red-600 font-semibold text-white p-2 w-32 rounded-full hover:bg-red-700 focus:outline-none focus:ring shadow-lg hover:shadow-none transition-all duration-300">Удалить</button>
-                    </form>
-                </div>
-            @endif
+            <div class="flex justify-center items-center w-100 p-3">
+                <button class="del inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none"">Удалить</button>
+            </div>
         </div>
     </div>
 
@@ -148,8 +141,9 @@
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
                                 <input type="text" name="number_group" id="number_group"
-                                       class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                             </div>
+                            <span class="text-sm font-medium text-red-500" id="number_group_error"></span>
                         </div>
                     </div>
 
@@ -157,20 +151,22 @@
                         <label for="start_date" class="block text-sm font-medium text-gray-700">Дата начала обучения</label>
                         <div class="mt-1">
                             <input type="date" name="start_date" id="start_date"
-                                   class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                         </div>
+                        <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
                     </div>
 
                     <div>
                         <label for="end_date" class="block text-sm font-medium text-gray-700">Дата окончания обучения</label>
                         <div class="mt-1">
                             <input type="date" name="end_date" id="end_date"
-                                   class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                         </div>
+                        <span class="text-sm font-medium text-red-500" id="end_date_error"></span>
                     </div>
 
                     <div class="col-span-4 sm:col-span-3">
-                        <label for="courses" class="block text-sm font-medium text-gray-700">Категория курса</label>
+                        <label for="courses" class="block text-sm font-medium text-gray-700">Курс</label>
                         <select id="courses" name="courses" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             @foreach($courses as $id => $name_of_course)
                                 <option value="{{ $id }}">{{ $name_of_course }}</option>
@@ -180,7 +176,7 @@
                 </div>
             </div>
             <div class="flex justify-center items-center w-100 p-3">
-                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded-full ripple hover:bg-green-100 focus:outline-none">Сохранить</button>
+                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
             </div>
         </div>
     </div>
@@ -210,6 +206,7 @@
             $('button[name=ok]').click(function(e){
                 e.preventDefault()
                 $('#modalSuccess').addClass('hidden')
+                location.reload()
             })
 
             $('#btnSave').click(function(e){
@@ -234,13 +231,61 @@
                     success: function(res){
                         let data = JSON.stringify(res)
 
+                        console.log(course)
+
                         if(data){
                             $('#addGroupModal').addClass('hidden')
                             $('#modalSuccess').removeClass('hidden')
                             $('.addText').text(`Группа "${number_group}" успешно добавлена!`)
                         }
+                    },
+                    // TODO
+                    error: function(data){
+                        $('#number_group_error').addClass('hidden')
+                        $('#start_date_error').addClass('hidden')
+                        $('#end_date_error').addClass('hidden')
+                        $('#number_group').removeClass('border border-red-400')
+                        $('#start_date').removeClass('border border-red-400')
+                        $('#end_date').removeClass('border border-red-400')
+
+                        var errors = data.responseJSON
+
+                        if($.isEmptyObject(errors) === false){
+                            $.each(errors.errors, function(key, value){
+                                var error_id = '#' + key + '_error'
+                                var error_id2 = '#' + key
+                                $(error_id).removeClass('hidden')
+                                $(error_id2).addClass('border border-red-400')
+                                $(error_id).text(value)
+                            })
+                        }
                     }
                 })
+            })
+
+            $('a[name=deleteModal]').click(function(){
+                var id = $(this).data('id')
+
+                $('#deleteModal').removeClass('hidden')
+
+                $('.del').click(function(){
+                    $.ajax({
+                        url: '/admin/groups/' + id,
+                        type: 'DELETE',
+                        data: {
+                            _token: $('#csrf').val()
+                        },
+                        success: function(res){
+                            let data = JSON.stringify(res)
+                            if(data){
+                                $('#deleteModal').addClass('hidden')
+                                $(this).closest("tr").remove();
+                                location.reload()
+                            }
+                        }
+                    })
+                })
+
             })
         })
     </script>

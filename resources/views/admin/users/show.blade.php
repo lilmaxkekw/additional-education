@@ -9,60 +9,99 @@
                 Пользователь {{ $user->name }}
             </h3>
 
-{{--            <div class="container flex justify-end">--}}
-{{--                <a href="{{ route('courses.edit', $course->id) }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-full ripple hover:bg-yellow-100 focus:outline-none mr-2">Редактировать</a>--}}
-{{--                <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</a>--}}
-{{--            </div>--}}
         </div>
         <div class="border-t border-gray-200">
             <dl>
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
-                        Название курса
+                        ИНН
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        @if(empty($user->listener->insurance_number))
+                            <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                            <span class="relative text-xs align-middle">не указан</span>
 
+                            @else
+                                {{ $user->listener->insurance_number }}
+                        @endif
                     </dd>
                 </div>
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
-                        Описание курса
+                        Номер телефона
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        @if(empty($user->listener->phone_number))
+                            <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                            <span class="relative text-xs align-middle">не указан</span>
 
+                            @else
+                                {{ $user->listener->phone_number }}
+                        @endif
                     </dd>
                 </div>
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
-                        Номер курса
+                        Дата рождения
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        @if(empty($user->listener->birthday))
+                            <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                            <span class="relative text-xs align-middle">не указана</span>
 
+                            @else
+                                {{ $user->listener->birthday }}
+                        @endif
                     </dd>
                 </div>
-{{--                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">--}}
-{{--                    <dt class="text-sm font-medium text-gray-500">--}}
-{{--                        Категория--}}
-{{--                    </dt>--}}
-{{--                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">--}}
-{{--                        @if(!empty($category->name_of_category))--}}
-{{--                            {{ $category->name_of_category }}--}}
-{{--                        @else--}}
-{{--                            <span>-</span>--}}
-{{--                        @endif--}}
-{{--                    </dd>--}}
-{{--                </div>--}}
-{{--                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">--}}
-{{--                    <dt class="text-sm font-medium text-gray-500">--}}
-{{--                        Видео--}}
-{{--                    </dt>--}}
-{{--                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">--}}
-{{--                        @isset($course->video)--}}
-{{--                            <video src=""></video>--}}
-{{--                        @endisset--}}
-{{--                        <span>-</span>--}}
-{{--                    </dd>--}}
-{{--                </div>--}}
+                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Место жительства
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        @if(empty($user->listener->place_of_residence))
+                            <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                            <span class="relative text-xs align-middle">не указано</span>
+
+                        @else
+                            {{ $user->listener->place_of_residence }}
+                        @endif
+                    </dd>
+                </div>
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Номер группы
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        @if(empty($user->listener->group))
+                            <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                            <span class="relative text-xs align-middle">не указан</span>
+
+                            @else
+                                {{-- TODO --}}
+                        @endif
+                    </dd>
+                </div>
+                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Курс
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        @if(empty($user->listener->group))
+                            <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                            <span class="relative text-xs align-middle">не записан</span>
+
+                        @else
+                            {{-- TODO --}}
+                        @endif
+                    </dd>
+                </div>
             </dl>
         </div>
     </div>

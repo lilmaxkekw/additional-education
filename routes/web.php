@@ -11,9 +11,10 @@
 |
 */
 
-
+// Маршруты незарегистрированного пользователя
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/course/{id}', 'MainController@showCourse')->name('course.show');
+Route::get('/enrollment', 'MainController@enrollmentCourse')->name('user.enrollment');
 
 // Маршруты авторизации и регистрации
 Auth::routes([
@@ -26,16 +27,24 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::resource('/courses', 'CourseController')->except('create');
-    Route::resource('/categories', 'CategoryController')->except(['show', 'create']);
-    Route::resource('/applications', 'ApplicationController');
+    Route::resource('/categories', 'CategoryController')->except(['show', 'create', 'edit']);
+    Route::resource('/applications', 'ApplicationController')->except(['show', 'create', 'edit']);
     Route::resource('/groups', 'GroupController')->except(['create', 'edit']);
     Route::resource('/users', 'UserController')->except('create');
     Route::resource('/sendmail', 'SendMailController')->except('create');
+    Route::resource('/sections', 'SectionController');
+
+});
+
+// Маршруты зарегистрированного пользователя
+Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth']], function(){
+
+    Route::get('/', 'UserController@index')->name('user.index');
 
 });
 
 // Маршруты преподавателя
-Route::group(['namespace' => 'Educator', 'prefix' => 'educator'], function(){
+Route::group(['namespace' => 'Educator', 'prefix' => 'educator', 'middleware' => ['auth']], function(){
 
     Route::get('/account', 'EducatorController@show_account')->name('account');
     Route::post('/account/{id?}', 'EducatorController@edit_account')->name('account');

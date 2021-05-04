@@ -10,6 +10,8 @@
 <body>
     <h1>{{ $course->name_of_course }}</h1>
 
-    <a href="{{ route('register') }}">Записаться на курс</a>
+    <form action="{{ route('user.enrollment') }}" method="GET">
+        <button>Записаться на курс</button>
+    </form>
 </body>
 </html>

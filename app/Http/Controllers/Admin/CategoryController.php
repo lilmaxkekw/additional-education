@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
@@ -19,28 +20,15 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::paginate(10);
+        $categories = Category::paginate(5);
         //
-        $count = count($categories);
-        //
-        $all = Category::all()->count();
+        $count = Category::count();
 
         return view('admin.categories.index',
             [
                 'categories' => $categories,
                 'count' => $count,
-                'all' => $all
             ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.categories.create');
     }
 
     /**
@@ -49,7 +37,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $category = Category::create($request->all());
 
@@ -74,13 +62,16 @@ class CategoryController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id, Request $request)
+    public function update($id, CategoryRequest $request)
     {
-        Category::where('id', $id)->update([
-            'name_of_category' => $request->input('name_of_category')
+//        dd($request->id);
+        $data = Category::where('id', $request->id)->update([
+            'name_of_category' => $request->name_of_category
         ]);
-
-        return redirect()->route('categories.index');
+        dd($data);
+//
+//        return redirect()->route('categories.index');
+        return response()->json($data);
     }
 
     /**

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GroupCreateRequest;
-use App\Http\Requests\GroupUpdateRequest;
+use App\Http\Requests\GroupRequest;
 use App\Models\Course;
 use App\Models\Group;
 use App\Models\Listener;
@@ -15,13 +14,13 @@ class GroupController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index()
     {
         $fields = ['id', 'number_group', 'start_date', 'end_date', 'course_id'];
-        $groups = Group::select($fields)->paginate(2);
-        $count = Group::count('id');
+        $groups = Group::select($fields)->paginate(5);
+        $count = Group::count();
         $courses = Course::pluck('name_of_course', 'id');
 
         return view('admin.groups.index', ['groups' => $groups, 'count' => $count, 'courses' => $courses]);
@@ -42,30 +41,29 @@ class GroupController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(GroupCreateRequest $request)
+    public function store(GroupRequest $request)
     {;
-        $items = $request->validated();
-        $result = Group::create($items);
+        $result = Group::create($request->all());
 
-        return response()->json('success');
+        return response()->json($result);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show($id)
     {
-        $fields = ['id_listener', 'last_name', 'first_name', 'patronymic', 'birthday'];
-        $listeners = Listener::select($fields)->where('group_id', $id)->get();
-        $new_listeners = Listener::select($fields)->where('group_id', '!=', $id)->get();
+        $listeners = Listener::where('group_id', $id)->get();
+//        $listeners = Listener::with('users')->where('group_id', $id)->get();
         $group = Group::select('number_group')->where('id', $id)->first();
+        $count = Listener::where('group_id', $id)->count();
 
-        return view('admin.groups.show', compact('listeners', 'group', 'new_listeners'));
+        return view('admin.groups.show', ['listeners' => $listeners, 'group' => $group, 'count' => $count]);
     }
 
     /**
@@ -87,17 +85,13 @@ class GroupController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(GroupUpdateRequest $request, $id)
+    public function update(GroupRequest $request, $id)
     {
-        $data = $request->validated();
-        $result = Group::find($id)->update($data);
+        $result = Group::find($id)->update($request->all());
 
-        if ($result)
-            return redirect()->route('groups.index');
-        else
-            return redirect()->route('groups.index');
+        return response()->json($result);
     }
 
     /**
@@ -110,9 +104,6 @@ class GroupController extends Controller
     {
         $result = Group::find($id)->delete();
 
-        if (!empty($result))
-            return redirect()->route('groups.index')->with('success', 'Удаление данных произошло успешно.');
-        else
-            return redirect()->route('groups.index')->with('error', 'При удалении данных произошла ошибка.');
+        return response()->json('success');
     }
 }

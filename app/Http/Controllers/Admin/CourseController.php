@@ -19,18 +19,10 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::paginate(8);
+        $courses = Course::paginate(7);
         $categories = Category::all();
 
         return view('admin.courses.index', ['courses' => $courses, 'categories' => $categories]);
-    }
-
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin.courses.create', ['categories' => Category::all()]);
     }
 
     /**
@@ -40,8 +32,12 @@ class CourseController extends Controller
     public function store(CourseRequest $request)
     {
         #TODO
-        $course = Course::create($request->all());
-        return response()->json($course);
+        $validator = $request->validated();
+
+
+
+        Course::create($request->all());
+        return response()->json(['success' => 'Курс успешно добавлен']);
     }
 
     /**

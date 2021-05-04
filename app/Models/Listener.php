@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Listener extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'group_id'
+    ];
+
     public function enrollments(){
         return $this->hasMany('App\Models\Enrollment');
     }
@@ -18,7 +23,7 @@ class Listener extends Model
         return $this->hasMany('App\Models\Performance');
     }
 
-    public function users(){
-        return $this->hasOne('App\Models\Users');
+    public function user(){
+        return $this->belongsTo('App\Models\Users');
     }
 }

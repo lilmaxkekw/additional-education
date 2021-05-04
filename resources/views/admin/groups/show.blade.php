@@ -28,9 +28,7 @@
                 <thead>
                 <tr class="text-center">
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">#</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Фамилия</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Имя</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Отчество</th>
+                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">ФИО</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Дата рождения</th>
                 </tr>
                 </thead>
@@ -38,38 +36,35 @@
                     @foreach($listeners as $listener)
                         <tr class="text-center">
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                <div class="text-sm leading-5 text-blue-900">{{ $listener->id_listener }}</div>
+                                @if(empty($listener->id_listener))
+                                    <span>-</span>
+
+                                    @else
+                                        <div class="text-sm leading-5 text-blue-900">{{ $listener->id_listener }}</div>
+                                @endif
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                <div class="text-sm leading-5 text-blue-900">{{ $listener->last_name }}</div>
+                                <div class="text-sm leading-5 text-blue-900">{{ $listener->user }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                <div class="text-sm leading-5 text-blue-900">{{ $listener->first_name }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                <div class="text-sm leading-5 text-blue-900">{{ $listener->patronymic }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                <div class="text-sm leading-5 text-blue-900">{{ \Carbon\Carbon::parse($listener->birthday)->format('d/m/Y') }}</div>
+                                <div class="text-sm leading-5 text-blue-900"></div>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
-                <div>
-                    <p class="text-sm leading-5 text-blue-700">
-                        Показано
-                        {{--
-                                                <span class="font-medium">{{ $count }}</span>
-                        --}}
-                        записей из
-                        {{--
-                                                <span class="font-medium">{{ $all }}</span>
-                        --}}
-                    </p>
+            @if(! $listeners->isEmpty())
+                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
+                    <div>
+                        <p class="text-sm leading-5 text-blue-500">
+                            Всего записей
+                            <span class="font-medium">{{ $count }}</span>
+                    </div>
                 </div>
-            </div>
+
+            @else
+                @component('components.no_data_message') @endcomponent
+            @endif
         </div>
     </div>
 

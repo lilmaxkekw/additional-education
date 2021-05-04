@@ -15,9 +15,18 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->bigIncrements('id');
+            //
+            $table->string('phone_number', 12);
+            $table->date('birthday');
+            $table->string('place_of_residence');
+            $table->string('platform_address');
+            $table->integer('insurance_number');
+//           $table->string('name_of_competence');
+
+            //
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('status_application')->nullable();
+            $table->boolean('status_application')->default(0);
 
             $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('user_id')->references('id')->on('users');

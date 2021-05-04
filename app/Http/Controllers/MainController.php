@@ -15,4 +15,12 @@ class MainController extends Controller
         session()->put('course_id', $id);
         return view('course_show', ['course' => Course::find($id)]);
     }
+
+    public function enrollmentCourse(){
+        if(auth()->check()){
+            return redirect()->route('user.index');
+        }
+
+        return redirect()->route('register');
+    }
 }

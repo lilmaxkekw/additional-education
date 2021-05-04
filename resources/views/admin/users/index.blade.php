@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mb-2">
-        <a href="#addUserModal" name="addUserModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded-full ripple hover:bg-green-100 focus:outline-none">Добавить</a>
+        <a href="#addUserModal" name="addUserModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Добавить</a>
     </div>
 
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
@@ -66,7 +66,24 @@
                     @endforeach
                 </tbody>
             </table>
+            @if(! $users->isEmpty())
+                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
+                    <div>
+                        <p class="text-sm leading-5 text-blue-500">
+                            Всего записей
+                            <span class="font-medium">{{ $count }}</span>
+                        </p>
+                    </div>
+                </div>
+
+            @else
+                @component('components.no_data_message') @endcomponent
+            @endif
         </div>
+    </div>
+
+    <div class="flex flex-row mt-4">
+        {{ $users->links('vendor.pagination.custom') }}
     </div>
 
     <!-- Add user modal -->
@@ -131,7 +148,7 @@
                 </div>
             </div>
             <div class="flex justify-center items-center w-100 p-3">
-                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded-full ripple hover:bg-green-100 focus:outline-none">Сохранить</button>
+                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
             </div>
         </div>
     </div>

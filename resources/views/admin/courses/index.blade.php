@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="px-4">Список курсов</h1>
+    <h1 class="text-4xl font-normal text-grey-900">Список курсов</h1>
 
     @if(session('success'))
         <div class="alert flex flex-row items-center bg-green-200 p-5 rounded border-b-2 border-green-300 mb-5 ml-4">
@@ -49,7 +49,7 @@
     </div>
 
     <div class="container ml-4">
-        <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded-full ripple hover:bg-green-100 focus:outline-none">Добавить</a>
+        <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Добавить курс</a>
     </div>
 
     <div class="container mb-2 flex w-full items-center">
@@ -97,8 +97,9 @@
                                 </label>
                                 <div class="mt-1 flex rounded-md shadow-sm">
                                     <input type="text" name="name_of_course" id="name_of_course"
-                                           class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                           class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                                 </div>
+                                <span class="text-sm font-medium text-red-500" id="name_of_course_error"></span>
                             </div>
                         </div>
 
@@ -108,8 +109,9 @@
                             </label>
                             <div class="mt-1">
                                     <textarea id="description_of_course" name="description_of_course" rows="3"
-                                              class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                                              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
                             </div>
+                            <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
                         </div>
 
                         <div>
@@ -118,8 +120,9 @@
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
                                 <input type="text" name="number_of_course" id="number_of_course"
-                                       class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                             </div>
+                            <span class="text-sm font-medium text-red-500" id="number_of_course_error"></span>
                         </div>
 
                         <div class="col-span-4 sm:col-span-3">
@@ -160,7 +163,7 @@
                     </div>
             </div>
             <div class="flex justify-center items-center w-100 p-3">
-                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded-full ripple hover:bg-green-100 focus:outline-none">Сохранить</button>
+                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
             </div>
         </div>
     </div>
@@ -191,6 +194,7 @@
             $('button[name=ok]').click(function(e){
                 e.preventDefault()
                 $('#modalSuccess').addClass('hidden')
+                location.reload()
             })
 
             $('#btnSave').click(function(){
@@ -216,6 +220,26 @@
                             $('#addCourseModal').addClass('hidden')
                             $('#modalSuccess').removeClass('hidden')
                             $('.addText').text(`Курс "${name_of_course}" успешно добавлен!`)
+                        }
+                    },
+                    error: function(data){
+                        $('#name_of_course_error').addClass('hidden')
+                        $('#description_of_course_error').addClass('hidden')
+                        $('#number_of_course_error').addClass('hidden')
+                        $('#name_of_course').removeClass('border border-red-400')
+                        $('#description_of_course').removeClass('border border-red-400')
+                        $('#number_of_course').removeClass('border border-red-400')
+
+                        var errors = data.responseJSON
+
+                        if($.isEmptyObject(errors) === false){
+                            $.each(errors.errors, function(key, value){
+                                var error_id = '#' + key + '_error'
+                                var error_id2 = '#' + key
+                                $(error_id).removeClass('hidden')
+                                $(error_id2).addClass('border border-red-400')
+                                $(error_id).text(value)
+                            })
                         }
                     }
                 })

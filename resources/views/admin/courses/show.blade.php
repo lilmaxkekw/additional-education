@@ -101,7 +101,7 @@
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
                                 <input type="text" name="name_of_course" id="name_of_course"
-                                       class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" value="{{ $course->name_of_course }}">
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" value="{{ $course->name_of_course }}">
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                         </label>
                         <div class="mt-1">
                                     <textarea id="description_of_course" name="description_of_course" rows="3"
-                                              class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">{{ $course->description_of_course }}</textarea>
+                                              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">{{ $course->description_of_course }}</textarea>
                         </div>
                     </div>
 
@@ -122,7 +122,7 @@
                         </label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="text" name="number_of_course" id="number_of_course"
-                                   class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" value="{{ $course->number_of_course }}">
+                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" value="{{ $course->number_of_course }}">
                         </div>
                     </div>
                     <div class="col-span-4 sm:col-span-3">
@@ -149,7 +149,7 @@
                                 </svg>
                                 <div class="flex text-sm text-gray-600">
                                     <label for="file-upload"
-                                           class="relative cursor-pointer bg-white rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                           class="relative cursor-pointer bg-white rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
                                         <span class="justify-center">Загрузить файл</span>
                                         <input id="file-upload" name="file-upload" type="file" class="sr-only">
                                     </label>
@@ -163,7 +163,7 @@
                 </div>
             </div>
             <div class="flex justify-center items-center w-100 p-3">
-                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-green-500 uppercase transition bg-transparent border-2 border-green-500 rounded-full ripple hover:bg-green-100 focus:outline-none">Сохранить</button>
+                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
             </div>
         </div>
     </div>

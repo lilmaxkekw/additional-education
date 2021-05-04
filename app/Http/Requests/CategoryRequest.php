@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GroupUpdateRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,13 @@ class GroupUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'number_group' => 'required|numeric|unique:groups',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'course_id' => 'required'
+            'name_of_category' => 'required'
+        ];
+    }
+
+    public function messages(){
+        return [
+            'name_of_category.required' => 'Название категории обязательно для заполнения'
         ];
     }
 }

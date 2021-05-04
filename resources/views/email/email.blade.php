@@ -1,14 +1,18 @@
 @component('mail::message')
 # Introduction
 
-Привет, {{ $user->name }}!
+Здравствуйте, {{ $user->name }}!
 
-Пожалуйста, подтвердите Ваш адрес электронной почты
+Пожалуйста, подтвердите Ваш адрес электронной почты ({{ $user->email }}).
+Благодарим Вас и желаем успехов в учебе!
 
-@component('mail::button', ['url' => route('verification.verify')])
+@component('mail::button', ['url' => 'localhost'])
 ПОДТВЕРДИТЬ EMAIL
 @endcomponent
 
-Спасибо,<br>
-{{ config('app.name') }}
+С наилучшими пожеланиями.<br>
+Команда Политехнического колледжа
+
+{{--Спасибо,<br>--}}
+{{--{{ config('app.name') }}--}}
 @endcomponent

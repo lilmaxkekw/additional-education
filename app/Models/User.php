@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-//use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -41,8 +41,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Application');
     }
 
-    public function listeners(){
-        return $this->belongsTo('App\Models\Listener', 'user_id');
+    public function listener(){
+        return $this->hasOne('App\Models\Listener');
     }
 
     public function role(){
