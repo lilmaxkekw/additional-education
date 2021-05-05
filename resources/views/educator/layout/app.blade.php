@@ -16,16 +16,15 @@
 
     {{--TAILWIND--}}
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
 
     {{--SCRIPTS--}}
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/datatable.js') }}"></script>
-    <script src="{{ asset('js/report-card.js') }}"></script>
-    <script src="{{ asset('js/dates.js') }}"></script>
-    <script src="{{ asset('js/excel.js') }}"></script>
-    <script src="{{ asset('js/search.js') }}"></script>
-    <script src="{{ asset('js/account.js') }}"></script>
+{{--    <script src="{{ asset('js/jquery.min.js') }}"></script>--}}
+{{--    <script src="{{ asset('js/datatable.js') }}"></script>--}}
+{{--    <script src="{{ asset('js/editSection.js') }}"></script>--}}
+{{--    <script src="{{ asset('js/dates.js') }}"></script>--}}
+{{--    <script src="{{ asset('js/excel.js') }}"></script>--}}
+{{--    <script src="{{ asset('js/search.js') }}"></script>--}}
+{{--    <script src="{{ asset('js/account.js') }}"></script>--}}
     @stack('scripts')
 
     <title>@yield('title-page')</title>
@@ -37,7 +36,6 @@
         @yield('content')
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine.js"></script>
     @yield('script-side')
 </body>
 </html>

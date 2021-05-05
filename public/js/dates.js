@@ -13,7 +13,7 @@ $(document).ready( function () {
                 '_token': $('meta[name="csrf-token"]').attr('content'),
                 'date': input.val(),
                 'status': 'dates',
-                'idSection': input.attr('id-section'),
+                'idSection': input.attr('data-section'),
             }
         })
     });
