@@ -29,8 +29,6 @@
     @endif
 
     <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-{{--    bg-opacity-5--}}
-    <section class="bg-gray-100 bg-opacity-50 h-screen">
         <div class="bg-gray-300 p-4 border-t-2 border-indigo-400 rounded-t">
             <div class="max-w-sm mx-auto md:w-full md:mx-0">
                 <div class="inline-flex items-center space-x-4">
@@ -148,63 +146,7 @@
                         Сохранить
                     </button>
                 </div>
-                <button class="inline-flex items-center focus:outline-none mr-4">
-                    <svg
-                        fill="none"
-                        class="w-4 mr-2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                        />
-                    </svg>
-                    Удалить профиль
-                </button>
             </div>
         </div>
-    </section>
 
-{{--    <div class="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">--}}
-{{--        <div--}}
-{{--            class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">--}}
-{{--            <div class="modal-content py-4 text-left px-6">--}}
-{{--                <!--Title-->--}}
-{{--                <div class="flex justify-between items-center pb-3">--}}
-{{--                    <p class="text-2xl font-bold">Изменение данных об аккаунте</p>--}}
-{{--                    <div class="modal-close cursor-pointer z-50">--}}
-{{--                        <svg class="fill-current text-black mb-6 ml-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18"--}}
-{{--                             viewBox="0 0 18 18">--}}
-{{--                            <path--}}
-{{--                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">--}}
-{{--                            </path>--}}
-{{--                        </svg>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <!--Body-->--}}
-{{--                <div class="mt-5">--}}
-{{--                    <form method="POST" action="{{ route('user.account') }}">--}}
-{{--                        @csrf--}}
-
-{{--                        <div class="">--}}
-{{--                            <label class=" block text-sm text-gray-600" for="name_user">Ваш логин</label>--}}
-{{--                            <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text" required="" placeholder="Введите ваш логин" value="{{ $user->name }}">--}}
-{{--                        </div>--}}
-{{--                        <div class="mt-2">--}}
-{{--                            <label class=" block text-sm text-gray-600" for="email_user">Ваш email</label>--}}
-{{--                            <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="text" required="" placeholder="Введите ваш email" value="{{ $user->email }}">--}}
-{{--                        </div>--}}
-{{--                        <div class="flex justify-end pt-5">--}}
-{{--                            <button type="button" class="focus:outline-none px-4 bg-green-500 p-3 rounded-lg text-black hover:bg-green-600 text-white mr-5 btnSave">Сохранить</button>--}}
-{{--                            <button type="button" class="focus:outline-none modal-close px-4 bg-gray-800 p-3 rounded-lg text-black hover:bg-gray-600 text-white">Отмена</button>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--                <!--Footer-->--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 @endsection
