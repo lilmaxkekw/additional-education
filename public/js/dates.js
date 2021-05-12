@@ -8,10 +8,8 @@ $(document).ready( function () {
             url: "{{ route('report.card') }}",
             dataType: 'text',
             method: 'POST',
-            headers: {
-                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
-            },
             data: {
+                '_token': $('#csrf').val(),
                 'date': input.val(),
                 'idSection': input.attr('data-section'),
                 'status': 'dates',
