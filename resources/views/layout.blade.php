@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css"
           integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     {{-- Lottie --}}
     <script src="https://unpkg.com/@lottiefiles/lottie-player@0.3.0/dist/lottie-player.js"></script>
-{{--    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>--}}
 
     <script src="{{ asset('js/search.js') }}"></script>
     <style>
@@ -108,6 +108,17 @@
                             <span class="ml-2">Пользователи</span>
                         </a>
                     </li>
+                    <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-100 hover:font-bold rounded rounded-lg">
+                        <span>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3M18.82 9L12 12.72L5.18 9L12 5.28L18.82 9M17 16L12 18.72L7 16V12.27L12 15L17 12.27V16Z"/>
+                            </svg>
+                        </span>
+                        <a href="{{ route('report.card') }}">
+                            <span class="ml-2">Журнал успеваемости</span>
+                        </a>
+                    </li>
 
                     @elseif(auth()->user()->role_id === 1)
                         <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-100 hover:font-bold rounded rounded-lg">
@@ -142,13 +153,36 @@
                                 <span class="ml-2">Моя успеваемость</span>
                             </a>
                         </li>
-                    @else
+                    @elseif(auth()->user()->role_id === 2)
+                        <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-100 hover:font-bold rounded rounded-lg">
+                            <span>
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                          d="M12,3L2,12H5V20H19V12H22L12,3M12,8.75A2.25,2.25 0 0,1 14.25,11A2.25,2.25 0 0,1 12,13.25A2.25,2.25 0 0,1 9.75,11A2.25,2.25 0 0,1 12,8.75M12,15C13.5,15 16.5,15.75 16.5,17.25V18H7.5V17.25C7.5,15.75 10.5,15 12,15Z"/>
+                                </svg>
+                            </span>
+                            <a href="{{ route('educator.account') }}">
+                                <span class="ml-2">Личный кабинет</span>
+                            </a>
+                        </li>
+                        <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-100 hover:font-bold rounded rounded-lg">
+                            <span>
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                          d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3M18.82 9L12 12.72L5.18 9L12 5.28L18.82 9M17 16L12 18.72L7 16V12.27L12 15L17 12.27V16Z"/>
+                                </svg>
+                            </span>
+                            <a href="{{ route('report.card') }}">
+                                <span class="ml-2">Журнал успеваемости</span>
+                            </a>
+                        </li>
                 @endif
             </ul>
         </div>
     </nav>
 
     <div class="flex-1 sm:mx-12 sm:my-12">
+        @include('educator.include.message')
         @yield('content')
     </div>
 </div>

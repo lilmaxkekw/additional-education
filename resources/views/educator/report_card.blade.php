@@ -1,20 +1,14 @@
-@extends('educator.layout.app')
+@extends('layout')
 
-@section('title-page')
-    Страница успеваемости слушателей
-@endsection
-
-
+@section('title', 'Страница успеваемости слушателей')
 
 @section('content')
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <div class="antialiased sans-serif bg-gray-200 h-screen">
-
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <div class="antialiased sans-serif h-screen">
 
         <div class="container mx-auto py-6 px-4">
-            <h1 class="text-3xl py-4 border-b">Журнал успеваемости</h1>
-            <h1 class="text-2xl py-4 border-b mb-10" id="group-course">Курс группы: @if($course) {{ $course->name_of_course }} @else Выберите группу @endif</h1>
+            <h1 class="text-3xl py-4">Журнал успеваемости</h1>
+            <h1 class="text-2xl py-4" id="group-course">Курс группы: @if($course) {{ $course->name_of_course }} @else Выберите группу @endif</h1>
 
             <div class="flex justify-between">
                 <div class="flex-1">
@@ -55,6 +49,8 @@
                 </nav>
             </div>
             <form>
+                <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
+
                 <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative" style="height: 405px;">
 
                     <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative overflow-x-auto" id="datatable-example">
@@ -68,7 +64,7 @@
                             @foreach($sections as $section)
                                 <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">
                                     <span class="text-gray-700 px-6 flex justify-center">{{ $section->name_section }}</span>
-                                    <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 160px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}" data-section="{{ $section->id_section }}">
+                                    <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 170px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}" data-section="{{ $section->id_section }}">
                                 </th>
                             @endforeach
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Средний балл</span></th>
@@ -138,18 +134,26 @@
                         </thead>
 
                         <tbody>
-                            @foreach($sections as $section)
-                                <tr>
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->id_section }}</span></td>
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</span></td>
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->number_hours }}</span></td>
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->name_section }}</span></td>
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->description_section }}</span></td>
-                                    <td class="border-dashed border-t border-gray-200">
-                                        {{--<a href="{{ route('edit.report.card', $section->id_section) }}">--}}<button type="button" class="border rounded-full py-2 px-4 text-sm font-semibold text-gray-700 hover:bg-gray-50 edit-modal" onclick="openModal();" data-section="{{ $section->id_section }}">Изменить</button>{{--</a>--}}
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @foreach($sections as $section)
+                            <tr>
+                                <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->id_section }}</span></td>
+                                <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</span></td>
+                                <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->number_hours }}</span></td>
+                                <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->name_section }}</span></td>
+                                <td class="border-dashed border-t border-gray-200">
+                                        <span class="text-gray-700 px-6 py-3 flex items-center">
+                                            <textarea cols="40" rows="3">{{ $section->description_section }}</textarea>
+                                        </span>
+                                </td>
+                                <td class="border-dashed border-t border-gray-200">
+                                    {{--<a href="{{ route('edit.report.card', $section->id_section) }}">--}}
+                                    <button type="button" class="border rounded-full py-2 px-4 text-sm font-semibold text-gray-700 hover:bg-gray-50 edit-modal" onclick="openModal();"
+                                            data-id="{{ $section->id_section }}" data-hours="{{ $section->number_hours }}"
+                                            data-name="{{ $section->name_section }}" data-description="{{ $section->description_section }}"
+                                            data-date="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}">Изменить</button>{{--</a>--}}
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
 
                     </table>
@@ -165,91 +169,13 @@
         </div>
     </div>
 
-    <div class="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
-        <div
-            class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-            <div class="modal-content py-4 text-left px-6">
-                <!--Title-->
-                <div class="flex justify-between items-center pb-3">
-                    <p class="text-2xl font-bold">Изменение данных об аккаунте</p>
-                    <div class="modal-close cursor-pointer z-50">
-                        <svg class="fill-current text-black mb-6 ml-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                             viewBox="0 0 18 18">
-                            <path
-                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-                            </path>
-                        </svg>
-                    </div>
-                </div>
-                <!--Body-->
-                <div class="mt-5">
-                    <form>
-                        <div class="">
-                            <label for="date_section" class="block text-xs font-semibold text-gray-600 uppercase">Дата занятия</label>
-                            <input type="date" name="date_section" placeholder="Выберите дату" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-                        </div>
-                        <div class="mt-2">
-                            <label for="number_hours" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Количество часов</label>
-                            <input type="text" name="number_hours" placeholder="Количество часов на данную тему" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-                        </div>
-                        <div class="mt-2">
-                            <label for="name_section" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Название занятия</label>
-                            <input type="text" name="name_section" placeholder="Введите название занятия" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-                        </div>
-                        <div class="mt-2">
-                            <label for="description_section" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Описание занятия</label>
-                            <input type="text" name="description_section" placeholder="Введите описание занятия" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-                        </div>
-                        <div class="flex justify-end pt-5">
-                            <button type="submit" class="focus:outline-none px-4 bg-green-500 p-3 rounded-lg text-black hover:bg-green-600 text-white mr-5">Сохранить</button>
-                            <button type="button" class="focus:outline-none modal-close px-4 bg-gray-800 p-3 rounded-lg text-black hover:bg-gray-600 text-white">Отмена</button>
-                        </div>
-                    </form>
-                </div>
-                <!--Footer-->
-            </div>
-        </div>
-    </div>
+    @include('educator.include.modal')
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/datatable.js') }}"></script>
-
-    <script>
-
-        $(document).ready(function() {
-            $('.select').mouseup();
-        });
-
-        const modal = document.querySelector('.main-modal');
-        const closeButton = document.querySelectorAll('.modal-close');
-
-        const modalClose = () => {
-            modal.classList.remove('fadeIn');
-            modal.classList.add('fadeOut');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 500);
-        }
-
-        const openModal = () => {
-            modal.classList.remove('fadeOut');
-            modal.classList.add('fadeIn');
-            modal.style.display = 'flex';
-        }
-
-        for (let i = 0; i < closeButton.length; i++) {
-
-            const elements = closeButton[i];
-
-            elements.onclick = (e) => modalClose();
-
-            modal.style.display = 'none';
-
-            window.onclick = function (event) {
-                if (event.target == modal) modalClose();
-            }
-        }
-
-    </script>
+    <script src="{{ asset('js/editReportCard.js') }}"></script>
+    <script src="{{ asset('js/reportCardModal.js') }}"></script>
+    <script src="{{ asset('js/dates.js') }}"></script>
+    <script src="{{ asset('js/excel.js') }}"></script>
 
 @endsection

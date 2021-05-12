@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('layout')
 
 @section('title', 'Пользователи')
 
@@ -116,7 +116,7 @@
                             <label for="name" class="block text-sm font-medium text-gray-700">
                                 ФИО
                             </label>
-                            <div class="mt-1 flex rounded-md shadow-sm">
+                            <div class="mt-1 border-2 border-black flex rounded-md shadow-sm">
                                 <input type="text" name="name" id="name"
                                        class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                             </div>

@@ -15,14 +15,9 @@ class CreateListenersTable extends Migration
     {
         Schema::create('listeners', function (Blueprint $table) {
             $table->bigIncrements('id_listener');
-//            $table->string('last_name');
-//            $table->string('first_name');
-//            $table->string('patronymic');
-//            $table->string('phone_number', 12);
-//            $table->date('birthday');
 //            $table->string('place_of_residence');
-//            $table->string('name_of_competence');
             //$table->string('status_application');
+//            $table->string('name_of_competence');
 //            $table->string('platform_address');
 //            $table->integer('insurance_number');
 

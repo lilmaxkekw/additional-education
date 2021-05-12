@@ -9,20 +9,15 @@ $(document).ready( function () {
             url: "{{ route('report.card') }}",
             dataType: 'json',
             method: 'POST',
-            headers: {
-                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
-            },
             data: {
+                '_token': $('#csrf').val(),
                 'mark': select.val(),
                 'input': input,
-                'status': 'marks'
+                'status': 'marks',
             },
             success: function (response) {
                 $('#average-marks' + response.id_listener).attr('value', response.average_marks.toFixed(2));
             },
-            error: function (response) {
-                console.log(response);
-            }
         })
     });
 });

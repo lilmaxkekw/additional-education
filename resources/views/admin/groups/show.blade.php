@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('layout')
 
 @section('title', 'Слушатели группы ' . $group->number_group)
 

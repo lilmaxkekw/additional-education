@@ -3,17 +3,21 @@ $(document).ready( function () {
         e.preventDefault();
 
         let input = $(this);
-        //let idSection = ;
-        //console.log('idSection = ' + idSection);
 
-        $.post({
-            url: '/educator/report-card',
+        $.ajax({
+            url: "{{ route('report.card') }}",
             dataType: 'text',
+            method: 'POST',
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+            },
             data: {
-                '_token': $('meta[name="csrf-token"]').attr('content'),
                 'date': input.val(),
-                'status': 'dates',
                 'idSection': input.attr('data-section'),
+                'status': 'dates',
+            },
+            success: function () {
+                location.reload();
             }
         })
     });

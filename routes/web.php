@@ -49,13 +49,9 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth'
 // Маршруты преподавателя
 Route::group(['namespace' => 'Educator', 'prefix' => 'educator', 'middleware' => ['auth']], function(){
 
-    Route::get('/account', 'EducatorController@show_account')->name('account');
-    //Route::post('/account/{id?}', 'EducatorController@edit_account')->name('account');
+    Route::get('/account', 'EducatorController@show_account')->name('educator.account');
+    Route::post('/account', 'EducatorController@edit_account')->name('educator.account');
     Route::get('/report-card/{group?}', 'ReportCardController@groups')->name('report.card');
     Route::post('/report-card/{group?}', 'ReportCardController@update_data')->name('report.card');
-    //Route::patch('/report-card/{id}', 'ReportCardController@edit_modal')->name('edit.report.card.modal');
-
-    //Route::get('/report-card/second-card/{id}', 'ReportCardController@edit_section')->name('edit.report.card');
-    //Route::patch('/report-card/second-card/{id}', 'ReportCardController@update_section')->name('edit.report.card');
-
+    Route::patch('/report-card/{group?}', 'ReportCardController@edit_modal')->name('edit.report.card.modal');
 });
