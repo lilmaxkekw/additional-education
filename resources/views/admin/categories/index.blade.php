@@ -27,6 +27,7 @@
 
 
     <h1 class="text-4xl font-normal text-grey-900">Категории</h1>
+    <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все категории, а также добавить новую категорию.</h3>
 
     <div class="container mb-2">
         <div class="flex justify-end">
@@ -99,27 +100,28 @@
         {{ $categories->links('vendor.pagination.custom') }}
     </div>
 
-    <!-- Delete category modal -->
+    <!-- Delete course modal -->
     <div id="deleteModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
-        <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-1/3">
-            <!-- modal header -->
-            <div class="px-4 py-2 flex justify-between items-center">
-                <h2 class="">Подтверждение удаления</h2>
-                <button class="text-black close-modal">
-                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <path
-                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
-                        ></path>
-                    </svg>
-                </button>
+        <div class="md:w-1/3 sm:w-full rounded-lg shadow-lg bg-white my-3">
+            <div class="flex justify-between border-b border-gray-100 px-5 py-4">
+                <div>
+                    <i class="fa fa-exclamation-triangle text-red-500"></i>
+                    <span class="font-bold text-gray-700 text-lg">Подтверждение удаления</span>
+                </div>
+                <div>
+                    <button class="text-black close-modal">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path
+                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                            ></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <!-- modal body -->
-            <div class="p-4">
+            <div class="px-10 py-5 text-gray-600">
                 Вы действительно хотите удалить?
             </div>
-            <div class="flex justify-center items-center w-100 p-3">
+            <div class="px-5 py-4 flex justify-center">
                 <button class="del inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</button>
             </div>
         </div>
@@ -309,14 +311,14 @@
                             }
                         },
                         error: function(data){
-                            $('#name_of_category_error').addClass('hidden')
+                            // $('#name_of_category_error').addClass('hidden')
                             var errors = data.responseJSON
                             if($.isEmptyObject(errors) === false){
                                 $.each(errors.errors, function(key, value){
                                     var error_id = '#' + key + '_error'
-                                    var error_id2 = '#' + key
+                                    // var error_id2 = '#' + key
                                     $(error_id).removeClass('hidden')
-                                    $(error_id2).addClass('border border-red-400')
+                                    // $(error_id2).addClass('border border-red-400')
                                     $(error_id).text(value)
                                 })
                             }

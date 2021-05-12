@@ -5,6 +5,7 @@
 @section('content')
 
     <h1 class="text-4xl font-normal text-grey-900">Заявки</h1>
+    <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть всех пользователей, подавших заявку на участие в курсах. С помощью чекбоксов Вы можете выбрать заявки и добавить в группу.</h3>
 
     <div class="container mb-2">
         <div class="flex justify-end">
@@ -50,7 +51,7 @@
                         <tr>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                                 <div class="flex items-center">
-                                    <input type="checkbox" name="" data-id="{{ $application->user->id }}" class="form-checkbox h-5 w-5 text-red-600">
+                                    <input type="checkbox" name="" data-id="{{ $application->user->id }}" class="form-checkbox h-5 w-5 text-red-600" @if($application->status_application === 1) disabled  @endif>
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
@@ -127,7 +128,7 @@
                     <label for="groups" class="block text-sm font-medium text-gray-700">Категория курса</label>
                     <select id="groups" name="groups" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                         @foreach($groups as $group)
-                            <option value="{{ $group->id }}">{{ $group->number_group }}</option>
+                            <option value="{{ $group->id }}">{{ $group->number_group }} ({{ $group->course->name_of_course }})</option>
                         @endforeach
                     </select>
                 </div>
@@ -191,7 +192,11 @@
                             $('#modalSuccess').removeClass('hidden')
                             $('.addText').text(`успешно добавлена!`)
                         }
-                    }
+                    },
+                    // error: function(res){
+                    //     let data = JSON.stringify(res)
+                    //     console.log(res)
+                    // }
                 })
             })
         })

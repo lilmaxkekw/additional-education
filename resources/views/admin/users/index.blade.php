@@ -3,8 +3,14 @@
 @section('title', 'Пользователи')
 
 @section('content')
+
+    <h1 class="text-4xl font-normal text-grey-900">Пользователи</h1>
+    <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть всех пользователей зарегистрированных на сайте.</h3>
+
     <div class="container mb-2">
-        <a href="#addUserModal" name="addUserModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Добавить</a>
+        <div class="flex justify-end">
+            <a href="#addUserModal" name="addUserModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Добавить</a>
+        </div>
     </div>
 
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">

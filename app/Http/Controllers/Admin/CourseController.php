@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Section;
 
 /**
  * Class CourseController
@@ -22,21 +23,20 @@ class CourseController extends Controller
         $courses = Course::paginate(7);
         $categories = Category::all();
 
-        return view('admin.courses.index', ['courses' => $courses, 'categories' => $categories]);
+        return view('admin.courses.index', [
+            'courses' => $courses,
+            'categories' => $categories
+        ]);
     }
 
     /**
      * @param CourseRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(CourseRequest $request)
     {
-        #TODO
-        $validator = $request->validated();
-
-
-
         Course::create($request->all());
+
         return response()->json(['success' => 'Курс успешно добавлен']);
     }
 
@@ -48,37 +48,32 @@ class CourseController extends Controller
     {
         $course = Course::where('id', $id)->first();
         $categories = Category::all();
+//        $sections = Section::where('course_id', $id)->get();
+        $count = Section::count();
 
         return view('admin.courses.show', [
             'course' => $course,
-            'categories' => $categories
+            'categories' => $categories,
+//            'sections' => $sections,
+            'count' => $count
         ]);
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $categories = Category::all();
-        $course = Course::where('id', $id)->first();
-
-        return view('admin.courses.edit', ['course' => $course, 'categories' => $categories]);
     }
 
     /**
      * @param CourseRequest $request
      * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(CourseRequest $request, $id)
     {
-        Course::where('id', $id)->update($request->except(['_token']));
-        return json_encode(['status_code' => 200]);
+        $data = Course::where('id', $id)->update($request->except(['_token']));
+
+        return response()->json($data);
     }
 
     /**
      * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {

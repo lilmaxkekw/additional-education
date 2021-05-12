@@ -23,18 +23,11 @@ class GroupController extends Controller
         $count = Group::count();
         $courses = Course::pluck('name_of_course', 'id');
 
-        return view('admin.groups.index', ['groups' => $groups, 'count' => $count, 'courses' => $courses]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $courses = Course::select('id', 'name_of_course')->get();
-        return view('admin.groups.create', compact('courses'));
+        return view('admin.groups.index', [
+            'groups' => $groups,
+            'count' => $count,
+            'courses' => $courses
+        ]);
     }
 
     /**
@@ -44,10 +37,10 @@ class GroupController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(GroupRequest $request)
-    {;
-        $result = Group::create($request->all());
+    {
+        $data = Group::create($request->all());
 
-        return response()->json($result);
+        return response()->json($data);
     }
 
     /**
@@ -58,26 +51,20 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        $listeners = Listener::where('group_id', $id)->get();
-//        $listeners = Listener::with('users')->where('group_id', $id)->get();
+        // TODO
+//        $listeners = Listener::where('group_id', $id)->get();
+        $listeners = Listener::with('user')->where('group_id', $id)->get();
+//        $listeners = Listener::with('user')->get();
+//        dd($listeners);
+
         $group = Group::select('number_group')->where('id', $id)->first();
         $count = Listener::where('group_id', $id)->count();
 
-        return view('admin.groups.show', ['listeners' => $listeners, 'group' => $group, 'count' => $count]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $group = Group::find($id);
-        $courses = Course::select('id', 'name_of_course')->get();
-
-        return view('admin.groups.edit', compact('group', 'courses'));
+        return view('admin.groups.show', [
+            'listeners' => $listeners,
+            'group' => $group,
+            'count' => $count
+        ]);
     }
 
     /**
@@ -98,11 +85,11 @@ class GroupController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        $result = Group::find($id)->delete();
+         Group::find($id)->delete();
 
         return response()->json('success');
     }

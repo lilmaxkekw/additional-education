@@ -5,6 +5,7 @@
 @section('content')
 
     <h1 class="text-4xl font-normal text-grey-900">Группы</h1>
+    <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все группы дополнительного образования, а также всех слушателей данных групп.</h3>
 
     <div class="container mb-2">
         <div class="flex justify-end">
@@ -35,9 +36,9 @@
                 <thead>
                 <tr class="text-center">
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Номер группы</th>
+                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Курс группы</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Начало обучение</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Конец обучение</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Курс группы</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Подробнее</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Действия</th>
                 </tr>
@@ -49,19 +50,19 @@
                             <div class="text-sm leading-5 text-blue-900">{{ $group->number_group }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                            <div class="text-sm leading-5 text-blue-900">{{ $group->course->name_of_course }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                             <div class="text-sm leading-5 text-blue-900">{{ \Carbon\Carbon::parse($group->start_date)->format('d.m.Y') }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                             <div class="text-sm leading-5 text-blue-900">{{ \Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                            <div class="text-sm leading-5 text-blue-900">{{ $group->course->name_of_course }}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                             <div class="text-sm leading-5 text-blue-900"><a href="{{ route('groups.show', $group->id) }}"><button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Слушатели группы</button></a></div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
-                            <a href="" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-full ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
+{{--                            <a href="#editGroupModal" name="editModal" data-id="{{ $group->id }}" data-num="{{ $group->number_group }}" data-start-date="{{ Carbon\Carbon::parse($group->start_date)->format('d.m.Y') }}" data-end-date="{{ Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-full ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>--}}
                             <a href="#deleteModal" data-id="{{ $group->id }}" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</a>
                         </td>
                     </tr>
@@ -88,33 +89,34 @@
         {{ $groups->links('vendor.pagination.custom') }}
     </div>
 
-    <!-- Delete group modal -->
+    <!-- Delete course modal -->
     <div id="deleteModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
-        <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-1/3">
-            <!-- modal header -->
-            <div class="px-4 py-2 flex justify-between items-center">
-                <h2 class="">Подтверждение удаления</h2>
-                <button class="text-black close-modal">
-                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <path
-                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
-                        ></path>
-                    </svg>
-                </button>
+        <div class="md:w-1/3 sm:w-full rounded-lg shadow-lg bg-white my-3">
+            <div class="flex justify-between border-b border-gray-100 px-5 py-4">
+                <div>
+                    <i class="fa fa-exclamation-triangle text-red-500"></i>
+                    <span class="font-bold text-gray-700 text-lg">Подтверждение удаления</span>
+                </div>
+                <div>
+                    <button class="text-black close-modal">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path
+                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                            ></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <!-- modal body -->
-            <div class="p-4">
+            <div class="px-10 py-5 text-gray-600">
                 Вы действительно хотите удалить?
             </div>
-            <div class="flex justify-center items-center w-100 p-3">
-                <button class="del inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none"">Удалить</button>
+            <div class="px-5 py-4 flex justify-center">
+                <button class="del inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</button>
             </div>
         </div>
     </div>
 
-
+    <!-- Add group modal -->
     <div id="addGroupModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
         <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
         <!-- modal -->

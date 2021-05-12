@@ -14,7 +14,7 @@ class ApplicationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index()
     {
@@ -22,7 +22,11 @@ class ApplicationController extends Controller
         $count = Application::count();
         $groups = Group::all();
 
-        return view('admin.applications.index', ['applications' => $applications, 'count' => $count, 'groups' => $groups]);
+        return view('admin.applications.index', [
+            'applications' => $applications,
+            'count' => $count,
+            'groups' => $groups
+        ]);
     }
 
     /**
@@ -36,25 +40,34 @@ class ApplicationController extends Controller
 //        TODO
         $users = $request->insert;
         $group = $request->group_id;
+
+
         $data = [];
 
+        // Массив ошибок
+        $error_data = [];
+
         foreach($users as $user){
-            $data[] = [
-                'user_id' => $user,
-                'group_id' => $group,
-                'created_at' => Carbon::now()
-            ];
-            Application::where('user_id', $user)->update([
-                'status_application' => 1
-            ]);
+            if(! Listener::where('user_id', $user)->exists()){
+                $data[] = [
+                    'user_id' => $user,
+                    'group_id' => $group,
+                    'created_at' => Carbon::now()
+                ];
+
+                Application::where('user_id', $user)->update([
+                    'status_application' => 1
+                ]);
+            }else{
+                $error_data = ["пользователь ${user} уже записан на курс"];
+            }
         }
-
-        \DB::enableQueryLog();
-        Application::where('user_id', 1)->update(['status_application' => 1]);
-        dd(\DB::getQueryLog());
-
         $listener = \DB::table('listeners')->insert($data);
 
+        // Проверка на ошибки
+        if(! empty($error_data)){
+            return response()->json('fail');
+        }
         return response()->json($listener);
     }
 

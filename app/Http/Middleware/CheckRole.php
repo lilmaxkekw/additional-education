@@ -19,9 +19,9 @@ class CheckRole
             return $next($request);
         }
 
-        if(auth()->check() && auth()->user()->role_id === 2){
-            return redirect()->route('account');
-        }
+//        if(auth()->check() && auth()->user()->role_id === 2){
+//            return redirect()->route('account');
+//        }
 
         if(auth()->check() && auth()->user()->role_id === 1){
             return redirect()->route('user.index');

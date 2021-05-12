@@ -6,7 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    protected $fillable = ['course_id', 'user_id', 'status'];
+    protected $fillable = [
+        'phone_number',
+        'birthday',
+        'place_of_residence',
+        'platform_address',
+        'insurance_number',
+        'course_id',
+        'user_id',
+        'status_application'
+        ];
 
     public function course(){
         return $this->belongsTo('App\Models\Course');

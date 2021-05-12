@@ -1,10 +1,11 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Список групп')
+@section('title', 'Слушатели группы ' . $group->number_group)
 
 @section('content')
 
-    <h3>Слушатели группы: {{ $group->number_group }}</h3>
+    <h1 class="text-4xl font-normal text-grey-900 mb-5">Слушатели группы {{ $group->number_group }}</h1>
+
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
         <div class="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white shadow-lg px-12">
             <div class="flex justify-between">
@@ -40,11 +41,13 @@
                                     <span>-</span>
 
                                     @else
+                                        <!-- TODO -->
+                                        <img class="inline-block h-12 w-12 rounded-full" @if(empty(auth()->user()->photo)) src="/user.svg" @else src="1" @endif alt="">
                                         <div class="text-sm leading-5 text-blue-900">{{ $listener->id_listener }}</div>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                <div class="text-sm leading-5 text-blue-900">{{ $listener->user }}</div>
+                                <div class="text-sm leading-5 text-blue-900">{{ $listener->user->name }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                                 <div class="text-sm leading-5 text-blue-900"></div>

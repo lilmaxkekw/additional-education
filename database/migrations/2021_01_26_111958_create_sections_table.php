@@ -18,9 +18,9 @@ class CreateSectionsTable extends Migration
             $table->string('name_section');
             $table->string('description_section');
             $table->date('date_section');
-            $table->unsignedBigInteger('courses_id');
+            $table->unsignedBigInteger('course_id');
 
-            $table->foreign('courses_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses');
 
             $table->timestamps();
             $table->softDeletes();

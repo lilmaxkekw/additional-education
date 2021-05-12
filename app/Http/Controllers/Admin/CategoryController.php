@@ -19,13 +19,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
         $categories = Category::paginate(5);
-        //
+        // Кол-вл категорий
         $count = Category::count();
 
-        return view('admin.categories.index',
-            [
+        return view('admin.categories.index', [
                 'categories' => $categories,
                 'count' => $count,
             ]);
@@ -35,24 +33,13 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(CategoryRequest $request)
     {
-        $category = Category::create($request->all());
+        $data = Category::create($request->all());
 
-        return response()->json($category);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return view('admin.categories.edit', ['category' => Category::find($id)]);
+        return response()->json($data);
     }
 
     /**
@@ -60,27 +47,25 @@ class CategoryController extends Controller
      *
      * @param $id
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update($id, CategoryRequest $request)
+//    public function update($id, CategoryRequest $request)
+    public function update(CategoryRequest $request)
     {
-//        dd($request->id);
         $data = Category::where('id', $request->id)->update([
             'name_of_category' => $request->name_of_category
         ]);
-        dd($data);
-//
-//        return redirect()->route('categories.index');
+
         return response()->json($data);
     }
 
     /**
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        $category = Category::destroy($id);
+        Category::destroy($id);
 
         return response()->json('success');
     }

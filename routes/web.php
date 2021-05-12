@@ -32,7 +32,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('/groups', 'GroupController')->except(['create', 'edit']);
     Route::resource('/users', 'UserController')->except('create');
     Route::resource('/sendmail', 'SendMailController')->except('create');
-    Route::resource('/sections', 'SectionController');
+    Route::resource('/sections', 'SectionController')->except(['create', 'edit']);
 
 });
 
@@ -40,6 +40,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth']], function(){
 
     Route::get('/', 'UserController@index')->name('user.index');
+    Route::post('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
+    Route::get('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
+    Route::get('/account', 'UserController@account')->name('user.account');
 
 });
 
