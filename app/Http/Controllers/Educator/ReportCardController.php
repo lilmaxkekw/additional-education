@@ -27,9 +27,9 @@ class ReportCardController extends BaseController
 
         $groups = Group::select('id', 'number_group')->orderBy('number_group')->get(); //Все группы
 
-        $fields = ['id_listener', 'last_name', 'first_name', 'patronymic'];
-        $listeners = Listener::select($fields)->where('group_id', $group_id)->get(); //Слушатели выбранной группы
-
+        $fields = ['id_listener'];
+        $listeners = Listener::with('user')->where('group_id', $group_id)->get(); //Слушатели выбранной группы
+        //dd($listeners);
         $selected_course = Group::where('id', $group_id)->value('course_id'); //Выбранный курс привязанный к группе
         $request->session()->put('course_id', $selected_course);
 

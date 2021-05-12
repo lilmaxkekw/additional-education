@@ -57,9 +57,7 @@
                         <thead class="text-center">
                         <tr>
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">#</span></th>
-                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Фамилия</span></th>
-                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Имя</span></th>
-                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Отчество</span></th>
+                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">ФИО</span></th>
 
                             @foreach($sections as $section)
                                 <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">
@@ -76,9 +74,7 @@
                             @foreach($listeners as $listener)
                                 <tr class="text-center">
                                     <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->id_listener }}</span></td>
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->last_name }}</span></td>
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->first_name }}</span></td>
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->patronymic }}</span></td>
+                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->user->name }}</span></td>
 
                                     @foreach($sections as $section)
                                         @foreach($marks as $mark)
@@ -142,7 +138,7 @@
                                 <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->name_section }}</span></td>
                                 <td class="border-dashed border-t border-gray-200">
                                         <span class="text-gray-700 px-6 py-3 flex items-center">
-                                            <textarea cols="40" rows="3">{{ $section->description_section }}</textarea>
+                                            <textarea cols="40" rows="3" readonly>{{ $section->description_section }}</textarea>
                                         </span>
                                 </td>
                                 <td class="border-dashed border-t border-gray-200">

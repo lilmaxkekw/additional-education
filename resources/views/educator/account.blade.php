@@ -44,6 +44,7 @@
                             </div>
                             <input
                                 type="email"
+                                id="email"
                                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                                 placeholder="email@example.com"
                                 value="{{ $item->email }}"
@@ -76,6 +77,7 @@
                                 </div>
                                 <input
                                     type="text"
+                                    id="name"
                                     class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                                     placeholder="Иванов Иван Иванович"
                                     value="{{ $item->name }}"
@@ -102,8 +104,10 @@
                                 </div>
                                 <input
                                     type="text"
+                                    id="number_phone"
                                     class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                                     placeholder="+7(999) 999-99-99"
+                                    value="{{ $item->number_phone }}"
                                 />
                             </div>
                         </div>
@@ -113,7 +117,7 @@
                 <hr />
                 <div class="w-full p-4 text-right text-gray-500">
                     <div class="md:w-3/12 text-center md:pl-6">
-                        <button class="text-white w-full mx-auto max-w-sm rounded-md text-center bg-indigo-400 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
+                        <button class="btnSaveAccount text-white w-full mx-auto max-w-sm rounded-md text-center bg-indigo-400 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
                             <svg
                                 fill="none"
                                 class="w-4 text-white mr-2"
@@ -151,89 +155,9 @@
         </div>
     </section>
 
-    <div class="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
-        <div
-            class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-            <div class="modal-content py-4 text-left px-6">
-                <!--Title-->
-                <div class="flex justify-between items-center pb-3">
-                    <p class="text-2xl font-bold">Изменение данных об аккаунте</p>
-                    <div class="modal-close cursor-pointer z-50">
-                        <svg class="fill-current text-black mb-6 ml-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                             viewBox="0 0 18 18">
-                            <path
-                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-                            </path>
-                        </svg>
-                    </div>
-                </div>
-                <!--Body-->
-                <div class="mt-5">
-                    <form method="POST" action="{{ route('educator.account', $item->id) }}">
-                        @csrf
-
-                        <div class="">
-                            <label class=" block text-sm text-gray-600" for="name_user">Ваш логин</label>
-                            <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text" required="" placeholder="Введите ваш логин" value="{{ $item->name }}">
-                        </div>
-                        <div class="mt-2">
-                            <label class=" block text-sm text-gray-600" for="email_user">Ваш email</label>
-                            <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="text" required="" placeholder="Введите ваш email" value="{{ $item->email }}">
-                        </div>
-                        <div class="flex justify-end pt-5">
-                            <button type="button" class="focus:outline-none px-4 bg-green-500 p-3 rounded-lg text-black hover:bg-green-600 text-white mr-5 btnSave">Сохранить</button>
-                            <button type="button" class="focus:outline-none modal-close px-4 bg-gray-800 p-3 rounded-lg text-black hover:bg-gray-600 text-white">Отмена</button>
-                        </div>
-                    </form>
-                </div>
-                <!--Footer-->
-            </div>
-        </div>
-    </div>
-
-    <div class="failed">
-        @component('components.modal_success', ['status' => 'failed', 'gif' => asset('gifs/warning.json')])
-        @endcomponent
-    </div>
-
-    <div class="success">
-        @component('components.modal_success', ['status' => 'success', 'gif' => asset('gifs/success.json')])
-        @endcomponent
-    </div>
+    @component('components.modal_success', ['gif' => 'https://assets8.lottiefiles.com/packages/lf20_94HTw9.json'])
+    @endcomponent
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/educatorAccount.js') }}"></script>
-
-    <script>
-
-        const modal = document.querySelector('.main-modal');
-        const closeButton = document.querySelectorAll('.modal-close');
-
-        const modalClose = () => {
-            modal.classList.remove('fadeIn');
-            modal.classList.add('fadeOut');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 500);
-        }
-
-        const openModal = () => {
-            modal.classList.remove('fadeOut');
-            modal.classList.add('fadeIn');
-            modal.style.display = 'flex';
-        }
-
-        for (let i = 0; i < closeButton.length; i++) {
-
-            const elements = closeButton[i];
-
-            elements.onclick = (e) => modalClose();
-
-            modal.style.display = 'none';
-
-            window.onclick = function (event) {
-                if (event.target == modal) modalClose();
-            }
-        }
-    </script>
 @endsection

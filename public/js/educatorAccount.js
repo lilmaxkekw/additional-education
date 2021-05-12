@@ -1,5 +1,5 @@
 $(document).ready( function () {
-    $('.btnSave').click(function (e) {
+    $('.btnSaveAccount').click(function (e) {
         e.preventDefault();
 
         $.ajax({
@@ -9,31 +9,15 @@ $(document).ready( function () {
             data: {
                 '_token': $('#csrf').val(),
                 'name': $('#name').val(),
+                'number_phone': $('#number_phone').val(),
                 'email': $('#email').val(),
             },
             success: function (response) {
                 let tmp = JSON.stringify(response);
 
-                modal.classList.remove('fadeIn');
-                modal.classList.add('fadeOut');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 500);
-
-                $('[data-status=success]').removeClass('hidden')
+                $('#modalSuccess').removeClass('hidden')
                 $('.addText').text(`Аккаунт успешно сохранен!`)
-
-            },
-            error: function (response) {
-                modal.classList.remove('fadeIn');
-                modal.classList.add('fadeOut');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 500);
-
-                $('[data-status=failed]').removeClass('hidden')
-                $('.addText').text(`При сохранении произошла ошибка!`)
-            },
+            }
         })
     });
 

@@ -5,7 +5,7 @@
         <!-- modal header -->
         <div class="px-4 py-2 flex justify-center items-center">
             <lottie-player
-                src="{{ $gif }}"
+                src="https://assets8.lottiefiles.com/packages/lf20_94HTw9.json"
                 style="width: 400px;"
                 autoplay
                 loop
