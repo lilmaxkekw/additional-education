@@ -4,6 +4,11 @@
 
 @section('content')
 
+        @if(session()->has('success'))
+            @component('components.modal', ['gif' => 'https://assets9.lottiefiles.com/packages/lf20_folnmvzi.json'])
+            @endcomponent
+        @endif
+
 {{--    style="background-color: rgba(231,238,239, .9); h-screen--}}
 {{--    <div id="addCourseModal" class="modal  w-full fixed left-0 top-0 flex justify-center items-center">--}}
         <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
@@ -86,4 +91,13 @@
         </div>
     </div>
 
+    <script>
+
+        $(document).ready(function(){
+            $('button[name=ok]').click(function(){
+                $('#modalSuccess').addClass('hidden')
+            })
+        })
+
+    </script>
 @endsection

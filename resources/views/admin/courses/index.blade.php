@@ -165,7 +165,7 @@
     </div>
 
     <!-- Modal success -->
-    @component('components.modal_success', ['img' => 'https://assets8.lottiefiles.com/packages/lf20_94HTw9.json'])
+    @component('components.modal', ['gif' => asset('gifs/success.json')])
     @endcomponent
 
     <div class="flex flex-row ml-4">

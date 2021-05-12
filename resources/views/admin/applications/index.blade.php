@@ -140,7 +140,7 @@
     </div>
 
     <!-- Modal success -->
-    @component('components.modal_success')
+    @component('components.modal', ['gif' => asset('gifs/success.json')])
     @endcomponent
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"

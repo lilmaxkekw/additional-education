@@ -41,7 +41,6 @@ class ApplicationController extends Controller
         $users = $request->insert;
         $group = $request->group_id;
 
-
         $data = [];
 
         // Массив ошибок

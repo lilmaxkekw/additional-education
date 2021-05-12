@@ -207,7 +207,7 @@
     </div>
 
     <!-- Modal success -->
-    @component('components.modal_success')
+    @component('components.modal', ['gif' => asset('gifs/success.json')])
     @endcomponent
 
 

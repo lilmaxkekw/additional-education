@@ -51,11 +51,7 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        // TODO
-//        $listeners = Listener::where('group_id', $id)->get();
         $listeners = Listener::with('user')->where('group_id', $id)->get();
-//        $listeners = Listener::with('user')->get();
-//        dd($listeners);
 
         $group = Group::select('number_group')->where('id', $id)->first();
         $count = Listener::where('group_id', $id)->count();

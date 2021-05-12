@@ -25,10 +25,15 @@ class UserController extends Controller
             'status_application' => 0
         ]);
 
-        return response()->json();
+//        return response()->json($data);
+
+        // TODO
+        return redirect()->back()->with('success');
     }
 
     public function account(){
-        return view('user.account');
+        return view('user.account', [
+            'user' => auth()->user()
+        ]);
     }
 }

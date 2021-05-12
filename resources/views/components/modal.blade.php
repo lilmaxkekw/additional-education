@@ -1,4 +1,4 @@
-<div id="modalSuccess" data-status="{{ $status }}" class="modalSuccess modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+<div id="modalSuccess" class="modalSuccess modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
     <!-- modal -->
 {{--    <div class="bg-white rounded shadow-lg w-1/3">--}}
     <div class="bg-white rounded shadow-lg sm:w-screen sm:h-screen">
