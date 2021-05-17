@@ -235,7 +235,7 @@
 
             $('button[name=ok]').click(function (e) {
                 e.preventDefault()
-                $('#modalSuccess').addClass('hidden')
+                $('#modal').addClass('hidden')
                 location.reload()
             })
 
@@ -258,7 +258,7 @@
 
                         if(data){
                             $('#addCategoryModal').addClass('hidden')
-                            $('#modalSuccess').removeClass('hidden')
+                            $('#modal').removeClass('hidden')
                             $('.addText').text(`Категория "${name_of_category}" успешно добавлена!`)
                         }
                     },
@@ -306,7 +306,7 @@
                             let data = JSON.stringify(res)
                             if(data){
                                 $('#editCategoryModal').addClass('hidden')
-                                $('#modalSuccess').removeClass('hidden')
+                                $('#modal').removeClass('hidden')
                                 $('.addText').text(`Категория "${name}" успешно добавлена!`)
                             }
                         },

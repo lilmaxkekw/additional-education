@@ -4,11 +4,6 @@
 
 @section('content')
 
-        @if(session()->has('success'))
-            @component('components.modal', ['gif' => 'https://assets9.lottiefiles.com/packages/lf20_folnmvzi.json'])
-            @endcomponent
-        @endif
-
 {{--    style="background-color: rgba(231,238,239, .9); h-screen--}}
 {{--    <div id="addCourseModal" class="modal  w-full fixed left-0 top-0 flex justify-center items-center">--}}
         <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
@@ -33,14 +28,14 @@
                         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                             <div class="grid grid-cols-3 gap-6">
                                 <div class="col-span-3 sm:col-span-2">
-                                    <label for="phone_number" class="block text-sm font-medium text-gray-700">
+                                    <label for="number_phone" class="block text-sm font-medium text-gray-700">
                                         Номер телефона
                                     </label>
                                     <div class="mt-1 flex rounded-md shadow-sm">
-                                        <input type="text" name="phone_number" id="phone_number"
+                                        <input type="text" name="number_phone" id="number_phone"
                                                class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                                     </div>
-                                    <span class="text-sm font-medium text-red-500" id="phone_number_error"></span>
+                                    <span class="text-sm font-medium text-red-500" id="number_phone_error"></span>
                                 </div>
                             </div>
                             <div>
@@ -91,12 +86,37 @@
         </div>
     </div>
 
+    @component('components.modal', ['gif' => asset('gifs/send.json')])
+    @endcomponent
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+
     <script>
 
         $(document).ready(function(){
-            $('button[name=ok]').click(function(){
-                $('#modalSuccess').addClass('hidden')
+
+            $('#btnSave').click(function(){
+                $.ajax({
+                    url: '{{ route('user.enrollment') }}',
+                    type: 'POST',
+                    data: {
+                        _token: $('#csrf').val(),
+                        birthday: $('#birthday').val(),
+                        place_of_residence: $('#place_of_residence').val(),
+                        platform_address: $('#platform_address').val(),
+                        insurance_number: $('#insurance_number').val()
+                    },
+                    success: function(data){
+                        let res = JSON.stringify(data)
+
+                        if(res){
+                            $('#modal').removeClass('hidden')
+                        }
+                    }
+                })
             })
+
         })
 
     </script>

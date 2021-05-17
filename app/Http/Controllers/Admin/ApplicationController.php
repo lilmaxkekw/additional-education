@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Listener;
+use App\Models\Performance;
+use App\Models\Section;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Application;
 use App\Models\Group;
+use Illuminate\Support\Facades\DB;
 
 class ApplicationController extends Controller
 {
@@ -42,6 +45,7 @@ class ApplicationController extends Controller
         $group = $request->group_id;
 
         $data = [];
+        $success = [];
 
         // Массив ошибок
         $error_data = [];
@@ -57,11 +61,29 @@ class ApplicationController extends Controller
                 Application::where('user_id', $user)->update([
                     'status_application' => 1
                 ]);
+                $success[] = $user;
             }else{
                 $error_data = ["пользователь ${user} уже записан на курс"];
+
             }
         }
         $listener = \DB::table('listeners')->insert($data);
+
+
+        $selected_course = Group::where('id', $group)->value('course_id');
+        $sections = Section::where('course_id', $selected_course)->get();
+
+        $l = DB::table('listeners')->whereIn('user_id', $success)->get();
+//        dd($l);
+        foreach ($l as $item){
+            foreach ($sections as $section){
+                Performance::create([
+                    'listener_id' => $item->id_listener,
+                    'section_id' => $section->id_section
+                ]);
+            }
+        }
+
 
         // Проверка на ошибки
         if(! empty($error_data)){

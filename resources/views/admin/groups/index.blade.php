@@ -207,7 +207,7 @@
 
             $('button[name=ok]').click(function(e){
                 e.preventDefault()
-                $('#modalSuccess').addClass('hidden')
+                $('#modal').addClass('hidden')
                 location.reload()
             })
 
@@ -237,7 +237,7 @@
 
                         if(data){
                             $('#addGroupModal').addClass('hidden')
-                            $('#modalSuccess').removeClass('hidden')
+                            $('#modal').removeClass('hidden')
                             $('.addText').text(`Группа "${number_group}" успешно добавлена!`)
                         }
                     },

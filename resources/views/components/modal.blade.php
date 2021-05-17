@@ -1,11 +1,11 @@
-<div id="modalSuccess" class="modalSuccess modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+<div id="modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
     <!-- modal -->
-{{--    <div class="bg-white rounded shadow-lg w-1/3">--}}
-    <div class="bg-white rounded shadow-lg sm:w-screen sm:h-screen">
+    <div class="bg-white rounded shadow-lg w-1/3">
+{{--    <div class="bg-white rounded shadow-lg sm:w-screen sm:h-screen">--}}
         <!-- modal header -->
         <div class="px-4 py-2 flex justify-center items-center">
             <lottie-player
-                src="https://assets8.lottiefiles.com/packages/lf20_94HTw9.json"
+                src="{{ $gif }}"
                 style="width: 400px;"
                 autoplay
                 loop

@@ -149,8 +149,19 @@
                                     <path fill="currentColor" d="M19.07 14.88L21.12 16.93L15.06 23H13V20.94L19.07 14.88M21.04 13.13C21.18 13.13 21.31 13.19 21.42 13.3L22.7 14.58C22.92 14.79 22.92 15.14 22.7 15.35L21.7 16.35L19.65 14.3L20.65 13.3C20.76 13.19 20.9 13.13 21.04 13.13M17 4V10L15 8L13 10V4H9V20H11V22H7C5.95 22 5 21.05 5 20V19H3V17H5V13H3V11H5V7H3V5H5V4C5 2.89 5.9 2 7 2H19C20.05 2 21 2.95 21 4V10L19 12V4H17M5 5V7H7V5H5M5 11V13H7V11H5M5 17V19H7V17H5Z" />
                                 </svg>
                             </span>
-                            <a href="{{ route('admin.index') }}">
+                            <a href="{{ route('user.performance') }}">
                                 <span class="ml-2">Моя успеваемость</span>
+                            </a>
+                        </li>
+                        <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-100 hover:font-bold rounded rounded-lg">
+                            <span>
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M1,12H10.76L8.26,9.5L9.67,8.08L14.59,13L9.67,17.92L8.26,16.5L10.76,14H1V12M19,3C20.11,3 21,3.9 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V16H5V19H19V7H5V10H3V5A2,2 0 0,1 5,3H19Z"/>
+                                </svg>
+                            </span>
+                            <a href="{{ route('user.applications') }}">
+                                <span class="ml-2">Мои заявки</span>
                             </a>
                         </li>
                     @elseif(auth()->user()->role_id === 2)
@@ -187,10 +198,12 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+
 <script>
     $(document).ready(function () {
+
+
 
         $(".nav-toggler").each(function (_, navToggler) {
             let target = $(navToggler).data("target");

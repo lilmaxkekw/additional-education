@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Информация')
+@section('title', 'Личный кабинет')
 
 @section('content')
 
@@ -29,7 +29,7 @@
     @endif
 
     <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-        <div class="bg-gray-300 p-4 border-t-2 border-indigo-400 rounded-t">
+        <div class="bg-gray-300 p-4 border-t-2 border-blue-500 rounded-t">
             <div class="max-w-sm mx-auto md:w-full md:mx-0">
                 <div class="inline-flex items-center space-x-4">
                     <img class="inline-block h-56 w-56 rounded-full" @if(empty(auth()->user()->photo)) src="/user.svg" @else src="12121" @endif alt="">
@@ -59,6 +59,7 @@
                             </svg>
                         </div>
                         <input
+                            id="email"
                             type="email"
                             class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                             placeholder="email@example.com"
@@ -91,6 +92,7 @@
                                 </svg>
                             </div>
                             <input
+                                id="name"
                                 type="text"
                                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                                 placeholder="Иванов Иван Иванович"
@@ -117,9 +119,11 @@
                                 </svg>
                             </div>
                             <input
+                                id="number_phone"
                                 type="text"
                                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                                 placeholder="+7(999) 999-99-99"
+                                value="{{ $user->number_phone }}"
                             />
                         </div>
                     </div>
@@ -129,7 +133,7 @@
             <hr />
             <div class="w-full p-4 text-right text-gray-500">
                 <div class="md:w-3/12 text-center md:pl-6">
-                    <button class="text-white w-full mx-auto max-w-sm rounded-md text-center bg-indigo-400 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
+                    <button class="btnSaveAccount text-white w-full mx-auto max-w-sm rounded-md text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
                         <svg
                             fill="none"
                             class="w-4 text-white mr-2"
@@ -149,4 +153,48 @@
             </div>
         </div>
 
+    @component('components.modal', ['gif' => asset('gifs/success.json')])
+    @endcomponent
+
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="https://unpkg.com/imask"></script>
+
+    <script>
+        $(document).ready( function () {
+
+            var element = $('#number_phone').get(0)
+            var maskOptions = {
+                mask: '+{7}(000)000-00-00'
+            }
+            var mask = IMask(element, maskOptions)
+
+            $('.btnSaveAccount').click(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: '{{ route('user.account') }}',
+                    dataType: 'json',
+                    method: 'POST',
+                    data: {
+                        '_token': $('#csrf').val(),
+                        'name': $('#name').val(),
+                        'number_phone': $('#number_phone').val(),
+                        'email': $('#email').val(),
+                    },
+                    success: function (response) {
+                        let tmp = JSON.stringify(response);
+
+                        $('#modal').removeClass('hidden')
+                        $('.addText').text(`Аккаунт успешно сохранен!`)
+                    }
+                })
+            });
+
+            $('button[name=ok]').click(function () {
+                $('#modal').fadeOut(300)
+                location.reload();
+            });
+
+        });
+    </script>
 @endsection

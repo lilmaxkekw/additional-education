@@ -9,6 +9,7 @@ class Section extends Model
     protected $dates = ['date_section'];
     protected $dateFormat = 'Y-m-d';
     protected $fillable = [
+        'number_hours',
         'name_section',
         'description_section',
         'date_section',

@@ -107,6 +107,7 @@
                 <tr>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Название раздела</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Описание раздела</th>
+                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Кол-во часов</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Дата проведения</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Действие</th>
                 </tr>
@@ -119,6 +120,9 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
                                 <div class="text-sm leading-5 text-blue-900">{{ $section->description_section }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
+                                <div class="text-sm leading-5 text-blue-900">{{ $section->number_hours }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
                                 <div class="text-sm leading-5 text-blue-900">{{ Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</div>
@@ -316,6 +320,14 @@
                         <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
                     </div>
                     <div>
+                        <label for="number_hours" class="block text-sm font-medium text-gray-700">Кол-во часов</label>
+                        <div class="mt-1">
+                            <input type="text" name="number_hours" id="number_hours"
+                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                        </div>
+                        <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
+                    </div>
+                    <div>
                         <label for="date_section" class="block text-sm font-medium text-gray-700">Дата проведения</label>
                         <div class="mt-1">
                             <input type="date" name="date_section" id="date_section"
@@ -356,7 +368,7 @@
             })
 
             $('button[name=ok]').click(function(){
-                $('#modalSuccess').addClass('hidden')
+                $('#modal').addClass('hidden')
                 location.reload()
             })
 
@@ -413,15 +425,17 @@
                         type: 'POST',
                         data: {
                             _token: $('#csrf').val(),
+                            number_hours: $('#number_hours').val(),
                             name_section: $('#name_section').val(),
                             description_section: $('#description_section').val(),
-                            date_section: $('#date_section').val()
+                            date_section: $('#date_section').val(),
+                            course_id: '{{ $course->id }}'
                         },
                         success: function(data){
                             let res = JSON.stringify(data)
 
                             if(res){
-                                $('#modalSuccess').removeClass('hidden')
+                                $('#modal').removeClass('hidden')
                                 $('.addText').text(`Раздел "${name}" успешно добавлена!`)
                             }
                         },

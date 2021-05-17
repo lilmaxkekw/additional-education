@@ -189,7 +189,7 @@
 
             $('button[name=ok]').click(function(e){
                 e.preventDefault()
-                $('#modalSuccess').addClass('hidden')
+                $('#modal').addClass('hidden')
                 location.reload()
             })
 
@@ -214,7 +214,7 @@
                         var data = JSON.stringify(course)
                         if(data){
                             $('#addCourseModal').addClass('hidden')
-                            $('#modalSuccess').removeClass('hidden')
+                            $('#modal').removeClass('hidden')
                             $('.addText').text(`Курс "${name_of_course}" успешно добавлен!`)
                         }
                     },

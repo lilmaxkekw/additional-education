@@ -3,20 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SectionRequest;
 use Illuminate\Http\Request;
 use App\Models\Section;
 
 class SectionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('admin.sections.index');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -24,13 +16,14 @@ class SectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(SectionRequest $request)
     {
         $data = Section::create([
+            'number_hours' => $request->number_hours,
             'name_section' => $request->name_section,
             'description_section' => $request->description_section,
             'date_section' => $request->date_section,
-            'course_id' => 1
+            'course_id' => $request->course_id
         ]);
 
         return response()->json($data);

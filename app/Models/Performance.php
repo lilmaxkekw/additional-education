@@ -10,7 +10,9 @@ class Performance extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'mark'
+        'listener_id',
+        'mark',
+        'section_id'
     ];
 
     public function listener(){
