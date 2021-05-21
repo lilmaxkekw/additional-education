@@ -3,7 +3,7 @@
 @section('title', 'Страница успеваемости слушателей')
 
 @section('content')
-    <!-- This example requires Tailwind CSS v2.0+ -->
+
     <div class="antialiased sans-serif h-screen">
 
         <div class="container mx-auto py-6 px-4">
@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="second-part mt-14">
-                    <h2 class="text-center text-3xl py-4 border-b mb-10">Вторая часть журнала</h2>
+                    <h2 class="text-center text-3xl py-4 mb-10">Вторая часть журнала</h2>
                 </div>
 
                 <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative mt-14" style="height: 405px;">
@@ -142,11 +142,10 @@
                                         </span>
                                 </td>
                                 <td class="border-dashed border-t border-gray-200">
-                                    {{--<a href="{{ route('edit.report.card', $section->id_section) }}">--}}
                                     <button type="button" class="border rounded-full py-2 px-4 text-sm font-semibold text-gray-700 hover:bg-gray-50 edit-modal" onclick="openModal();"
                                             data-id="{{ $section->id_section }}" data-hours="{{ $section->number_hours }}"
                                             data-name="{{ $section->name_section }}" data-description="{{ $section->description_section }}"
-                                            data-date="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}">Изменить</button>{{--</a>--}}
+                                            data-date="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}">Изменить</button>
                                 </td>
                             </tr>
                         @endforeach

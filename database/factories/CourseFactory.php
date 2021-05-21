@@ -7,12 +7,12 @@ use Faker\Generator as Faker;
 
 $factory->define(Course::class, function (Faker $faker) {
     return [
-        'name_of_course' => $faker->realText(30),
-        'description_of_course'=> $faker->realText(),
-        'number_of_course' => $faker->numberBetween(10),
-        'category_id' => function(){
+        'name_of_course'        => $faker->realText(30),
+        'description_of_course' => $faker->realText(),
+        'number_of_course'      => $faker->numberBetween(10),
+        'category_id'           => function(){
             return factory(App\Models\Category::class)->create()->id;
         },
-        'image_of_course' => $faker->imageUrl()
+        'image_of_course'       => $faker->imageUrl()
     ];
 });

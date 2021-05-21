@@ -15,6 +15,10 @@ class UserController extends Controller
         return view('user.index');
     }
 
+    public function dashboard(){
+        return view('user.dashboard');
+    }
+
     /**
      * Подача заявки на курс
      *
