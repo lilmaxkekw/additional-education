@@ -29,10 +29,10 @@
     @endif
 
     <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-        <div class="bg-gray-300 p-4 border-t-2 border-blue-500 rounded-t-lg">
+        <div class="bg-gray-100 p-4 border-t-2 border-blue-500 rounded-t-lg">
             <div class="max-w-sm mx-auto md:w-full md:mx-0">
                 <div class="inline-flex items-center space-x-4">
-                    <img class="inline-block h-56 w-56 rounded-full" @if(empty(auth()->user()->photo)) src="/user.svg" @else src="12121" @endif alt="">
+                    <img class="inline-block h-56 w-56 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.jpg') }}" @else src="12121" @endif alt="">
                     <h1 class="text-gray-600 text-xl">{{ $user->name }}</h1>
                 </div>
             </div>

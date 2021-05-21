@@ -4,10 +4,15 @@
 
 @section('content')
 
+    @component('components.tabs')
+    @endcomponent
+
     <h1 class="text-4xl font-normal text-grey-900">Мои заявки</h1>
     <h3 class="text font-normal text-grey-900 my-5">В данном разделе выводятся отправленные Вами заявки.</h3>
 
-    @if($applications)
+{{--    @dd($applications)--}}
+
+    @if(empty($applications))
         @component('components.no_data_message')
         @endcomponent
 
@@ -79,7 +84,7 @@
                                         <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
                                         <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
                                         <span class="relative text-xs align-middle">в ожидании</span>
-    
+
                                         @else
                                             <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                             <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>

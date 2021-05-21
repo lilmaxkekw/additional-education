@@ -81,8 +81,11 @@
 {{--                             alt=""--}}
 {{--                             class="h-full w-full">--}}
 {{--                    </div>--}}
-
-                    <h2 class="mt-4 font-bold text-xl">{{ $course->name_of_course }}</h2>
+                    <img src="{{ asset('test.png') }}" alt="" class="inline-block w-24">
+                    <h2 class="mt-4 font-normal text-xl">{{ $course->name_of_course }}</h2>
+                    <p class="text-xs text-gray-500 text-center mt-3">
+                        {{ $course->description_of_course }}
+                    </p>
 {{--                    <h6 class="mt-2 text-sm font-medium">Founder</h6>--}}
 
 {{--                    <p class="text-xs text-gray-500 text-center mt-3">--}}
