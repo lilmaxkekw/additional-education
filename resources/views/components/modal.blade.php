@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="flex justify-center items-center w-100 p-3">
-            <button name="ok" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">ОК</button>
+            <button name="ok" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">ОК</button>
         </div>
     </div>
 </div>

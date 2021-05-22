@@ -9,7 +9,7 @@
 
     <div class="container mb-2">
         <div class="flex justify-end">
-            <a href="#addGroupModal" name="addGroupModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Добавить группу</a>
+            <a href="#addGroupModal" name="addGroupModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Добавить группу</a>
         </div>
     </div>
 
@@ -59,11 +59,11 @@
                             <div class="text-sm leading-5 text-blue-900">{{ \Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                            <div class="text-sm leading-5 text-blue-900"><a href="{{ route('groups.show', $group->id) }}"><button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Слушатели группы</button></a></div>
+                            <div class="text-sm leading-5 text-blue-900"><a href="{{ route('groups.show', $group->id) }}"><button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Слушатели группы</button></a></div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
 {{--                            <a href="#editGroupModal" name="editModal" data-id="{{ $group->id }}" data-num="{{ $group->number_group }}" data-start-date="{{ Carbon\Carbon::parse($group->start_date)->format('d.m.Y') }}" data-end-date="{{ Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-full ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>--}}
-                            <a href="#deleteModal" data-id="{{ $group->id }}" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+                            <a href="#deleteModal" data-id="{{ $group->id }}" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
                         </td>
                     </tr>
                 @endforeach
@@ -120,7 +120,7 @@
     <div id="addGroupModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
         <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
         <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-1/3">
+        <div class="bg-white rounded-lg shadow-lg w-1/3">
             <!-- modal header -->
             <div class="px-4 py-2 flex justify-between items-center">
                 <h2 class="">Добавление группы</h2>
@@ -178,7 +178,7 @@
                 </div>
             </div>
             <div class="flex justify-center items-center w-100 p-3">
-                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
+                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
             </div>
         </div>
     </div>
