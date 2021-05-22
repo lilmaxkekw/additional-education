@@ -12,7 +12,7 @@
           integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
-<body class="bg-blue-300">
+<body class="bg-blue-50">
 
 @if($errors->any())
     <div class="flex justify-center">
@@ -54,7 +54,7 @@
                 </div>
                 <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
                     <div class="text-center mb-10">
-                        <h1 class="font-bold text-3xl text-gray-900">Регистрация</h1>
+                        <h1 class="font-bold text-3xl text-blue-500">Регистрация</h1>
                     </div>
                     <div>
                         <div class="flex -mx-3">
@@ -83,26 +83,6 @@
                                 </div>
                             </div>
                         </div>
-{{--                        <div class="flex -mx-3">--}}
-{{--                            <div class="w-full px-3 mb-5">--}}
-{{--                                <label for="" class="text-xs font-semibold px-1">Курс</label>--}}
-{{--                                <div class="flex">--}}
-{{--                                    <div--}}
-{{--                                        class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">--}}
-{{--                                        <i class="mdi mdi-email-outline text-gray-400 text-lg"></i></div>--}}
-{{--                                    <select name="courses" id="courses" class="w-full -ml-10 pl-10 pr-3">--}}
-{{--                                        <option value="">Пока не выбрал(а)</option>--}}
-{{--                                        @php--}}
-{{--                                            $courses = App\Models\Course::all()--}}
-{{--                                        @endphp--}}
-{{--                                        @foreach($courses as $course)--}}
-{{--                                            <option value="{{ $course->id }}"--}}
-{{--                                                    @if($course->id == session('course_id')) selected @endif>{{ $course->name_of_course }}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                         <div class="flex -mx-3">
                             <div class="w-full px-3 mb-3">
                                 <label for="password" class="text-xs font-semibold px-1">Пароль</label>
@@ -131,7 +111,7 @@
                         <div class="flex -mx-3">
                             <div class="w-full px-3 mb-5 flex justify-center">
                                 <button
-                                    class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">
+                                    class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">
                                     Зарегистрироваться
                                 </button>
                             </div>
@@ -145,7 +125,7 @@
 </form>
 
 <div id="personalData" class="modal md:w-full fixed left-0 top-0 flex justify-center items-center hidden"
-     style="background-color: rgba(231,238,239, .9);">
+     style="background-color: rgba(240,248,255, 0.9);">
     <!-- modal -->
     <div class="bg-white rounded shadow-lg w-1/3">
         <!-- modal header -->

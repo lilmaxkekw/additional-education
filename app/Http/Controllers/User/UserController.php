@@ -15,6 +15,10 @@ class UserController extends Controller
         return view('user.index');
     }
 
+    public function dashboard(){
+        return view('user.dashboard');
+    }
+
     /**
      * Подача заявки на курс
      *
@@ -71,7 +75,7 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show_performance(){
-        $performanace = Performance::whereNotNull('listener_id', auth()->user()->id);
+        $performanace = Performance::where('listener_id', auth()->user()->id)->get();
 
         return view('user.performance', ['performance' => $performanace]);
     }
@@ -82,8 +86,9 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show_applications(){
-        $applications = Application::whereNotNull('user_id', auth()->user()->id);
-
+//        \DB::enableQueryLog();
+        $applications = Application::where('user_id', auth()->user()->id)->get();
+//        dd(\DB::getQueryLog());
         return view('user.applications', ['applications' => $applications]);
     }
 }

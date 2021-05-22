@@ -13,7 +13,7 @@ class SectionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param SectionRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(SectionRequest $request)
@@ -43,11 +43,11 @@ class SectionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param SectionRequest $request
+     * @param int $id
+     * @return void
      */
-    public function update(Request $request, $id)
+    public function update(SectionRequest $request, $id)
     {
         //
     }

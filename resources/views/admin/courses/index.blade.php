@@ -4,8 +4,8 @@
 
 @section('content')
 
-    <h1 class="text-4xl font-normal text-grey-900">Список курсов</h1>
-    <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все курсы, а также при нажатии на курс посмотреть более подробную информацию как о курсе, так и о его разделах.</h3>
+    <h1 class="text-4xl font-normal text-blue-600">Список курсов</h1>
+    <h3 class="text font-normal text-grey-900 mt-5">В данном разделе Вы можете видеть все курсы, а также при нажатии на курс посмотреть более подробную информацию как о курсе, так и о его разделах.</h3>
 
     @if(session('success'))
         <div class="alert flex flex-row items-center bg-green-200 p-5 rounded border-b-2 border-green-300 mb-5 ml-4">
@@ -28,7 +28,7 @@
         </div>
     @endif
 
-    <div class="flex justify-between py-6 px-4">
+    <div class="flex justify-between py-5">
         <div class="flex-1">
             <div class="flex-1 pr-4">
                 <div class="relative md:w-1/3">
@@ -49,30 +49,55 @@
         </div>
     </div>
 
-    <div class="container ml-4">
-        <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Добавить курс</a>
+    <div class="container">
+        <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Добавить курс</a>
     </div>
 
-    <div class="container mb-2 flex w-full items-center">
-        <ul class="flex flex-col p-4">
-            @foreach($courses as $course)
-                <a href="{{ route('courses.show', $course->id) }}">
-                    <li class="border-gray-400 flex flex-row mb-3">
-                        <div class="select-none flex flex-1 items-center p-4 transition duration-500 ease-in-out transform hover:-translate-y-2 rounded-sm border-2 p-6 hover:shadow-2xl border-blue-500">
-                            <div class="flex-1 pl-1 mr-16">
-                                <div class="font-medium">
-                                    {{ $course->name_of_course }}
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </a>
-            @endforeach
-        </ul>
+{{--    <div class="container mb-2 flex w-full items-center">--}}
+{{--        <ul class="flex flex-col p-4">--}}
+{{--            @foreach($courses as $course)--}}
+{{--                <a href="{{ route('courses.show', $course->id) }}">--}}
+{{--                    <li class="border-gray-400 flex flex-row mb-3">--}}
+{{--                        <div class="select-none flex flex-1 items-center p-4 transition duration-500 ease-in-out transform hover:-translate-y-2 rounded-sm border-2 p-6 hover:shadow-2xl border-blue-500">--}}
+{{--                            <div class="flex-1 pl-1 mr-16">--}}
+{{--                                <div class="font-medium">--}}
+{{--                                    {{ $course->name_of_course }}--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
+{{--                </a>--}}
+{{--            @endforeach--}}
+{{--        </ul>--}}
+{{--    </div>--}}
+
+    <!-- component -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-5">
+        @foreach($courses as $course)
+            <a href="{{ route('courses.show', $course->id) }}">
+                <div class="flex flex-col items-center justify-center bg-white p-4 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-2">
+{{--                    <div class="inline-flex shadow-lg border border-gray-200 rounded-full overflow-hidden h-40 w-40">--}}
+{{--                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&w=128&h=128&q=60&facepad=2"--}}
+{{--                             alt=""--}}
+{{--                             class="h-full w-full">--}}
+{{--                    </div>--}}
+                    <img src="{{ asset('test.png') }}" alt="" class="inline-block w-24">
+                    <h2 class="mt-4 font-normal text-xl">{{ $course->name_of_course }}</h2>
+                    <p class="text-xs text-gray-500 text-center mt-3">
+                        {{ $course->description_of_course }}
+                    </p>
+{{--                    <h6 class="mt-2 text-sm font-medium">Founder</h6>--}}
+
+{{--                    <p class="text-xs text-gray-500 text-center mt-3">--}}
+{{--                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab enim molestiae nulla.--}}
+{{--                    </p>--}}
+                </div>
+            </a>
+        @endforeach
     </div>
 
     <!-- Add course modal -->
-    <div id="addCourseModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+    <div id="addCourseModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
         <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
         <!-- modal -->
         <div class="bg-white rounded shadow-lg w-1/3">
@@ -168,7 +193,7 @@
     @component('components.modal', ['gif' => asset('gifs/success.json')])
     @endcomponent
 
-    <div class="flex flex-row ml-4">
+    <div class="flex flex-row">
         {{ $courses->links('vendor.pagination.custom') }}
     </div>
 

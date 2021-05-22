@@ -12,7 +12,7 @@
           integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
-<body class="bg-blue-300">
+<body class="bg-blue-50">
 
 @if($errors->any())
     <div class="alert flex flex-row items-center bg-red-200 p-5 rounded border-b-2 border-red-300 mb-5 absolute items-center m-0">
@@ -50,7 +50,8 @@
                 </div>
                 <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
                     <div class="text-center mb-10">
-                        <h1 class="font-bold text-3xl text-gray-900">Авторизация</h1>
+{{--                     text-gray-900   --}}
+                        <h1 class="font-bold text-3xl text-blue-500">Авторизация</h1>
                     </div>
                     <div>
                         <div class="flex -mx-3">
@@ -73,7 +74,7 @@
                         </div>
                         <div class="flex -mx-3">
                             <div class="w-full px-3 mb-5 flex justify-center">
-                                <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Войти</button>
+                                <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Войти</button>
                             </div>
                         </div>
                         <a href="{{ route('register') }}" class="flex justify-end">Зарегистрироваться</a>

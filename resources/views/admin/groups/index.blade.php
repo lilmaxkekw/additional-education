@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="text-4xl font-normal text-grey-900">Группы</h1>
+    <h1 class="text-4xl font-normal text-blue-600">Группы</h1>
     <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все группы дополнительного образования, а также всех слушателей данных групп.</h3>
 
     <div class="container mb-2">
@@ -71,7 +71,7 @@
             </table>
 
             @if(! $groups->isEmpty())
-                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
+                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans mb-5">
                     <div>
                         <p class="text-sm leading-5 text-blue-500">
                             Всего записей

@@ -6,13 +6,13 @@
                     <svg class="fill-current text-white h-10 w-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"/></svg>
                 </div>
                 <div class="w-1/2 md:w-auto text-center text-blue-500 text-2xl font-medium">
-                    <img src="{{ asset('logo.jpg') }}" alt="" class="inline-block w-16 h-16 my-1">
+                    <img src="{{ asset('logo.jpg') }}" alt="" class="inline-block w-16 h-16 my-2 ml-5">
                 </div>
                 <div class="w-1/4 md:w-auto md:flex text-right">
-                    <a href="#dropdown" name="dropdown" class="hidden md:flex items-center cursor-pointer hover:bg-blue-100 p-2">
+                    <a href="#dropdown" name="dropdown" class="hidden md:flex items-center cursor-pointer hover:bg-blue-50 p-2 rounded-lg">
                         <div>
                             <!-- TODO -->
-                            <img class="inline-block h-12 w-12 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.svg') }}" @else src="1" @endif alt="">
+                            <img class="inline-block h-12 w-12 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.jpg') }}" @else src="1" @endif alt="">
                         </div>
                         <div class="hidden md:block md:flex md:items-center ml-2">
                             <span class="text-grey-900 text-sm mr-1">@auth {{ auth()->user()->name }} @endauth</span>
@@ -26,11 +26,11 @@
         </div>
     </div>
 
-    <div id="dropdown" class="absolute hidden right-14 w-44 py-2 bg-white shadow-xl mt-2">
+    <div id="dropdown" class="absolute hidden right-14 w-44 py-2 bg-white shadow-xl mt-2 rounded-lg">
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button
-                class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-blue-100 hover:text-grey-900">
+                class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-blue-50 hover:text-grey-900">
                 Выйти
             </button>
         </form>

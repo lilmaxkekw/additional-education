@@ -30,4 +30,14 @@ class SectionRequest extends FormRequest
             'date_section' => 'required|date'
         ];
     }
+
+    public function messages(){
+        return [
+            'number_hours.required' => 'Кол-во часов обязательно для заполнения',
+            'number_hours.numeric' => 'Кол-во должно быть числом',
+            'name_section.required' => 'Название раздела обязательно для заполнения',
+            'description_section.required' => 'Описание раздела обязательно для заполнения',
+            'date_section.required' => 'Дата проведения обязательно для заполнения'
+        ];
+    }
 }

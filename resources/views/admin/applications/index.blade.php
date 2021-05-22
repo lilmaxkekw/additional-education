@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="text-4xl font-normal text-grey-900">Заявки</h1>
+    <h1 class="text-4xl font-normal text-blue-600">Заявки</h1>
     <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть всех пользователей, подавших заявку на участие в курсах. С помощью чекбоксов Вы можете выбрать заявки и добавить в группу.</h3>
 
     <div class="container mb-2">
@@ -64,7 +64,7 @@
                                 {{ $application->user->email }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                                {{ $application->phone_number }}
+                                {{ $application->user->number_phone }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                                 {{ \Carbon\Carbon::parse($application->birthday)->format('d.m.Y') }}
@@ -92,7 +92,7 @@
                 </tbody>
             </table>
             @if(! $applications->isEmpty())
-                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
+                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans mb-5">
                     <div>
                         <p class="text-sm leading-5 text-blue-500">
                             Всего записей

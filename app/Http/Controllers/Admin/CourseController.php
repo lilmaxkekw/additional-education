@@ -20,7 +20,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::paginate(7);
+        $courses = Course::paginate(8);
         $categories = Category::all();
 
         return view('admin.courses.index', [

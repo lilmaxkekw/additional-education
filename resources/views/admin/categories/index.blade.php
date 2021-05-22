@@ -26,12 +26,12 @@
 {{--    @endif--}}
 
 
-    <h1 class="text-4xl font-normal text-grey-900">Категории</h1>
+    <h1 class="text-4xl font-normal text-blue-600">Категории</h1>
     <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все категории, а также добавить новую категорию.</h3>
 
     <div class="container mb-2">
         <div class="flex justify-end">
-            <a href="#addCategoryModal" name="addCategory" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Добавить категорию</a>
+            <a href="#addCategoryModal" name="addCategory" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Добавить категорию</a>
         </div>
     </div>
 
@@ -72,16 +72,15 @@
                                 <div class="text-sm leading-5 text-blue-900">{{ \Carbon\Carbon::parse($category->created_at)->format('d.m.Y') }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
-                                <a href="#editModal" name="editModal" data-name="{{ $category->name_of_category }}" data-id="{{ $category->id }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-full ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
-{{--                                <button type="button"  data-name="{{ $category->name_of_category }}" data-id="{{ $category->id }}" class="edit-btn inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-full ripple hover:bg-yellow-100 focus:outline-none">Редактировать</button>--}}
-                                <a href="#deleteModal" data-id="{{ $category->id }}" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-full ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+                                <a href="#editModal" name="editModal" data-name="{{ $category->name_of_category }}" data-id="{{ $category->id }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
+                                <a href="#deleteModal" data-id="{{ $category->id }}" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
             @if(! $categories->isEmpty())
-                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
+                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans mb-5">
                     <div>
                         <p class="text-sm leading-5 text-blue-500">
                             Всего записей

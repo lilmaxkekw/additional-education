@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('/users', 'UserController')->except('create');
     Route::resource('/sendmail', 'SendMailController')->except('create');
     Route::resource('/sections', 'SectionController')->except(['create', 'edit']);
+    Route::get('/news', 'NewsController@show_news')->name('news.index');
 
 });
 
@@ -46,6 +47,8 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth'
     Route::post('/account', 'UserController@edit_account')->name('user.account');
     Route::get('/performance', 'UserController@show_performance')->name('user.performance');
     Route::get('/applications', 'UserController@show_applications')->name('user.applications');
+
+    Route::get('/dashboard', 'UserController@dashboard')->name('user.dashboard');
 
 });
 
