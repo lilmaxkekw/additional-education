@@ -28,25 +28,147 @@
         </div>
     @endif
 
-    <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-    <div class="bg-gray-300 p-4 border-t-2 border-blue-500 rounded-t">
-        <div class="max-w-sm mx-auto md:w-full md:mx-0">
-            <div class="inline-flex items-center space-x-4">
-                <img class="inline-block h-56 w-56 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.svg') }}" @else src="12121" @endif alt="">
-                <h1 class="text-gray-600 text-xl">{{ $item->name }}</h1>
+    <form enctype="multipart/form-data" method="POST">
+        <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
+        <div class="bg-gray-300 p-4 border-t-2 border-blue-500 rounded-t">
+            <div class="max-w-sm mx-auto md:w-full md:mx-0">
+                <div class="inline-flex items-center space-x-4">
+                    <img class="inline-block h-56 w-56 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.svg') }}" @else src="12121" @endif alt="">
+                    <h1 class="text-gray-600 text-xl">{{ $item->name }}</h1>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="bg-white space-y-6">
-        <div class="md:inline-flex space-y-4 md:space-y-0 w-full p-4 text-gray-500 items-center">
-            <h2 class="md:w-1/3 max-w-xl mx-auto text-xl">Профиль</h2>
-            <div class="md:w-2/3 max-w-xl mx-auto">
-                <label class="text-sm text-gray-400">Электронная почта</label>
-                <div class="w-full inline-flex border">
-                    <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+        <div class="bg-white space-y-6">
+            <div class="md:inline-flex space-y-4 md:space-y-0 w-full p-4 text-gray-500 items-center">
+                <h2 class="md:w-1/3 max-w-xl mx-auto text-xl">Профиль</h2>
+                <div class="md:w-2/3 max-w-xl mx-auto">
+                    <label class="text-sm text-gray-400">Электронная почта</label>
+                    <div class="w-full inline-flex border">
+                        <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+                            <svg
+                                fill="none"
+                                class="w-6 text-gray-400 mx-auto"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                />
+                            </svg>
+                        </div>
+                        <input
+                            id="email"
+                            type="email"
+                            class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+                            placeholder="email@example.com"
+                            value="{{ $item->email }}"
+                        />
+                    </div>
+                    <span class="text-sm font-medium text-red-500" id="email_error"></span>
+                </div>
+            </div>
+
+            <hr />
+            <div class="md:inline-flex  space-y-4 md:space-y-0  w-full p-4 text-gray-500 items-center">
+                <h2 class="md:w-1/3 mx-auto max-w-xl text-xl">Персональная информация</h2>
+                <div class="md:w-2/3 mx-auto max-w-xl space-y-5">
+                    <div>
+                        <label class="text-sm text-gray-400">Полное имя</label>
+                        <div class="w-full inline-flex border">
+                            <div class="w-1/12 pt-2 bg-gray-100">
+                                <svg
+                                    fill="none"
+                                    class="w-6 text-gray-400 mx-auto"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                id="name"
+                                type="text"
+                                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+                                placeholder="Иванов Иван Иванович"
+                                value="{{ $item->name }}"
+                            />
+                        </div>
+                        <span class="text-sm font-medium text-red-500" id="name_error"></span>
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-400">Номер телефона</label>
+                        <div class="w-full inline-flex border">
+                            <div class="pt-2 w-1/12 bg-gray-100">
+                                <svg
+                                    fill="none"
+                                    class="w-6 text-gray-400 mx-auto"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                id="number_phone"
+                                type="text"
+                                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+                                placeholder="+7(999)999-99-99"
+                                value="{{ $item->number_phone }}"
+                            />
+                        </div>
+                        <span class="text-sm font-medium text-red-500" id="number_phone_error"></span>
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-400">Фотография</label>
+                        <div class="w-full inline-flex border">
+                            <div class="pt-2 w-1/12 bg-gray-100">
+                                <svg
+                                    fill="none"
+                                    class="w-6 text-gray-400 mx-auto"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                id="file"
+                                multiple="multiple"
+                                name="file"
+                                type="file"
+                                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+                            />
+                        </div>
+                        <span class="text-sm font-medium text-red-500" id="number_phone_error"></span>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <div class="w-full p-4 text-right text-gray-500">
+                <div class="md:w-3/12 text-center md:pl-6 mb-10">
+                    <button class="btnSaveAccount text-white w-full mx-auto max-w-sm rounded-md text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
                         <svg
                             fill="none"
-                            class="w-6 text-gray-400 mx-auto"
+                            class="w-4 text-white mr-2"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
                         >
@@ -54,117 +176,32 @@
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="2"
-                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                             />
                         </svg>
-                    </div>
-                    <input
-                        id="email"
-                        type="email"
-                        class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                        placeholder="email@example.com"
-                        value="{{ $item->email }}"
-                    />
+                        Сохранить
+                    </button>
                 </div>
             </div>
         </div>
+    </form>
 
-        <hr />
-        <div class="md:inline-flex  space-y-4 md:space-y-0  w-full p-4 text-gray-500 items-center">
-            <h2 class="md:w-1/3 mx-auto max-w-xl text-xl">Персональная информация</h2>
-            <div class="md:w-2/3 mx-auto max-w-xl space-y-5">
-                <div>
-                    <label class="text-sm text-gray-400">Полное имя</label>
-                    <div class="w-full inline-flex border">
-                        <div class="w-1/12 pt-2 bg-gray-100">
-                            <svg
-                                fill="none"
-                                class="w-6 text-gray-400 mx-auto"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                />
-                            </svg>
-                        </div>
-                        <input
-                            id="name"
-                            type="text"
-                            class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                            placeholder="Иванов Иван Иванович"
-                            value="{{ $item->name }}"
-                        />
-                    </div>
-                </div>
-                <div>
-                    <label class="text-sm text-gray-400">Номер телефона</label>
-                    <div class="w-full inline-flex border">
-                        <div class="pt-2 w-1/12 bg-gray-100">
-                            <svg
-                                fill="none"
-                                class="w-6 text-gray-400 mx-auto"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-                                />
-                            </svg>
-                        </div>
-                        <input
-                            id="number_phone"
-                            type="text"
-                            class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                            placeholder="+7(999) 999-99-99"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
+    @component('components.modal', ['gif' => asset('gifs/success.json')])
+    @endcomponent
 
-        <hr />
-        <div class="w-full p-4 text-right text-gray-500">
-            <div class="md:w-3/12 text-center md:pl-6">
-                <button class="btnSaveAccount text-white w-full mx-auto max-w-sm rounded-md text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
-                    <svg
-                        fill="none"
-                        class="w-4 text-white mr-2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                        />
-                    </svg>
-                    Сохранить
-                </button>
-            </div>
-{{--            <button class="inline-flex items-center focus:outline-none mr-4">--}}
-{{--                <svg--}}
-{{--                    fill="none"--}}
-{{--                    class="w-4 mr-2"--}}
-{{--                    viewBox="0 0 24 24"--}}
-{{--                    stroke="currentColor"--}}
-{{--                >--}}
-{{--                    <path--}}
-{{--                        stroke-linecap="round"--}}
-{{--                        stroke-linejoin="round"--}}
-{{--                        stroke-width="2"--}}
-{{--                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"--}}
-{{--                    />--}}
-{{--                </svg>--}}
-{{--                Удалить профиль--}}
-{{--            </button>--}}
-        </div>
-    </div>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="https://unpkg.com/imask"></script>
+    <script src="{{ asset('js/educatorAccount.js') }}"></script>
+
+    <script>
+        $(document).ready( function () {
+
+            var element = $('#number_phone').get(0)
+            var maskOptions = {
+                mask: '+{7}(000)000-00-00'
+            }
+            var mask = IMask(element, maskOptions)
+        });
+    </script>
+
 @endsection

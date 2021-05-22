@@ -60,7 +60,7 @@
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">ФИО</span></th>
 
                             @foreach($sections as $section)
-                                <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">
+                                <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100 w-80 break-all">
                                     <span class="text-gray-700 px-6 flex justify-center">{{ $section->name_section }}</span>
                                     <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 170px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}" data-section="{{ $section->id_section }}">
                                 </th>
@@ -74,7 +74,7 @@
                             @foreach($listeners as $listener)
                                 <tr class="text-center">
                                     <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->id_listener }}</span></td>
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->user->name }}</span></td>
+                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center w-80">{{ $listener->user->name }}</span></td>
 
                                     @foreach($sections as $section)
                                         @foreach($marks as $mark)

@@ -4,7 +4,7 @@
         <div class="modal-content py-4 text-left px-6">
             <!--Title-->
             <div class="flex justify-between items-center pb-3">
-                <p class="text-2xl font-bold">Изменение данных об аккаунте</p>
+                <p class="text-2xl font-bold">Изменение данных о разделе</p>
                 <div class="modal-close cursor-pointer z-50">
                     <svg class="fill-current text-black mb-6 ml-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                          viewBox="0 0 18 18">
