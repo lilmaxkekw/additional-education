@@ -76,21 +76,11 @@
         @foreach($courses as $course)
             <a href="{{ route('courses.show', $course->id) }}">
                 <div class="flex flex-col items-center justify-center bg-white p-4 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-2">
-{{--                    <div class="inline-flex shadow-lg border border-gray-200 rounded-full overflow-hidden h-40 w-40">--}}
-{{--                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&w=128&h=128&q=60&facepad=2"--}}
-{{--                             alt=""--}}
-{{--                             class="h-full w-full">--}}
-{{--                    </div>--}}
                     <img src="{{ asset('test.png') }}" alt="" class="inline-block w-24">
                     <h2 class="mt-4 font-normal text-xl">{{ $course->name_of_course }}</h2>
-                    <p class="text-xs text-gray-500 text-center mt-3">
+                    <p class="text-xs text-gray-500 text-center mt-3 text-justify">
                         {{ $course->description_of_course }}
                     </p>
-{{--                    <h6 class="mt-2 text-sm font-medium">Founder</h6>--}}
-
-{{--                    <p class="text-xs text-gray-500 text-center mt-3">--}}
-{{--                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab enim molestiae nulla.--}}
-{{--                    </p>--}}
                 </div>
             </a>
         @endforeach
