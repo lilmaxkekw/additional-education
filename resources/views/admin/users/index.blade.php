@@ -9,7 +9,7 @@
 
     <div class="container mb-2">
         <div class="flex justify-end">
-            <a href="#addUserModal" name="addUserModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Добавить</a>
+            <a href="#addUserModal" name="addUserModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Добавить</a>
         </div>
     </div>
 
@@ -66,7 +66,7 @@
                                 <div class="text-sm leading-5 text-blue-900">{{ $user->role->name_role }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
-                                <a href="{{ route('users.show', $user->id) }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Подробнее</a>
+                                <a href="{{ route('users.show', $user->id) }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Подробнее</a>
                             </td>
                         </tr>
                     @endforeach
@@ -96,7 +96,7 @@
     <div id="addUserModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
         <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
         <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-1/3">
+        <div class="bg-white rounded shadow-lg w-1/3 rounded-lg">
             <!-- modal header -->
             <div class="px-4 py-2 flex justify-between items-center">
                 <h2 class="">Добавление пользователя</h2>
@@ -133,6 +133,16 @@
                         </div>
                     </div>
 
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">
+                            Пароль
+                        </label>
+                        <div class="mt-1">
+                            <input type="password" name="password" id="password"
+                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                        </div>
+                    </div>
+
                     <div class="col-span-4 sm:col-span-3">
                         <label for="roles" class="block text-sm font-medium text-gray-700">Роль пользователя</label>
                         <select id="roles" name="roles" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
@@ -143,21 +153,16 @@
                     </div>
                 </div>
 
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">
-                        Пароль
-                    </label>
-                    <div class="mt-1">
-                        <input type="password" name="password" id="password"
-                               class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                    </div>
-                </div>
+
             </div>
             <div class="flex justify-center items-center w-100 p-3">
-                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-full ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
+                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
             </div>
         </div>
     </div>
+
+    @component('components.modal', ['gif' => asset('gifs/success.json')])
+    @endcomponent
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
             integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
@@ -187,14 +192,17 @@
                         _token: '{{ csrf_token() }}',
                         name: name,
                         email: email,
+                        password: password,
                         role_id: role
                     },
                     cache: false,
-                    success: function(response){
-                        var response = JSON.parse(response)
+                    success: function(data){
+                        var response = data.responseJSON
 
-                        if(response.status_code === 200){
-                            location.reload()
+                        if(response){
+                            $('#addUserModal').addClass('hidden')
+                            $('#modal').removeClass('hidden')
+                            // location.reload()
                         }
                     }
                 })

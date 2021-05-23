@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
     public function index(){
-        return view('welcome', ['courses' => Course::all()]);
+        $courses = Course::all();
+        return view('index', ['courses' => $courses]);
     }
 
     public function showCourse($id){
         session()->put('course_id', $id);
-        return view('course_show', ['course' => Course::find($id)]);
+        return view('show_course', ['course' => Course::find($id)]);
     }
 
     public function enrollmentCourse(){

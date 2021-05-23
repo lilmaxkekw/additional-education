@@ -57,7 +57,8 @@ class LoginController extends Controller
             return redirect()->route('admin.index');
         }
 
-        return redirect()->route('login')->with('error', $input);
+        return redirect()->route('login')->with('error', 'Неверный email или пароль');
+//        return redirect()->route('login')->with('error', $input);
     }
 
     public function logout(){
