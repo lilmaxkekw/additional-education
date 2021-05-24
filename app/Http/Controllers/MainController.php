@@ -34,4 +34,8 @@ class MainController extends Controller
         return view('contacts');
     }
 
+    public function gallery() {
+        return view('gallery');
+    }
+
 }
