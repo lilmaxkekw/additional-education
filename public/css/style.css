@@ -1,0 +1,7 @@
+.course-card {
+    transition-duration: 500ms;
+}
+
+.course-card:hover h2, .course-card:hover p {
+    color: #FFF;
+}

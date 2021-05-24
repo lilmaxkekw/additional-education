@@ -15,6 +15,8 @@
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/course/{id}', 'MainController@showCourse')->name('course.show');
 Route::get('/enrollment', 'MainController@enrollmentCourse')->name('user.enrollment');
+Route::get('/courses', 'MainController@courses')->name('courses');
+Route::get('/contacts', 'MainController@contacts')->name('contacts');
 
 // Маршруты авторизации и регистрации
 Auth::routes([
