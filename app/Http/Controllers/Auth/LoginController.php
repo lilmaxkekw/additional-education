@@ -57,7 +57,9 @@ class LoginController extends Controller
             return redirect()->route('admin.index');
         }
 
-        return redirect()->route('login')->with('error', 'Неверный email или пароль');
+        return redirect()->route('login')->withErrors([
+            'approval' => 'Неправильный email и/или пароль'
+        ]);
 //        return redirect()->route('login')->with('error', $input);
     }
 
