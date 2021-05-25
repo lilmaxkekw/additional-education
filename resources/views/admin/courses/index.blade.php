@@ -53,24 +53,6 @@
         <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Добавить курс</a>
     </div>
 
-{{--    <div class="container mb-2 flex w-full items-center">--}}
-{{--        <ul class="flex flex-col p-4">--}}
-{{--            @foreach($courses as $course)--}}
-{{--                <a href="{{ route('courses.show', $course->id) }}">--}}
-{{--                    <li class="border-gray-400 flex flex-row mb-3">--}}
-{{--                        <div class="select-none flex flex-1 items-center p-4 transition duration-500 ease-in-out transform hover:-translate-y-2 rounded-sm border-2 p-6 hover:shadow-2xl border-blue-500">--}}
-{{--                            <div class="flex-1 pl-1 mr-16">--}}
-{{--                                <div class="font-medium">--}}
-{{--                                    {{ $course->name_of_course }}--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-{{--                </a>--}}
-{{--            @endforeach--}}
-{{--        </ul>--}}
-{{--    </div>--}}
-
     <!-- component -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-5">
         @foreach($courses as $course)
@@ -79,7 +61,7 @@
                     <img src="{{ asset('test.png') }}" alt="" class="inline-block w-24">
                     <h2 class="mt-4 font-normal text-xl">{{ $course->name_of_course }}</h2>
                     <p class="text-xs text-gray-500 text-center mt-3 text-justify">
-                        {{ $course->description_of_course }}
+                        {{ $course->short_content }}
                     </p>
                 </div>
             </a>
@@ -126,16 +108,6 @@
                                           class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
                         </div>
                         <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
-                    </div>
-                    <div>
-                        <label for="number_of_course" class="block text-sm font-medium text-gray-700">
-                            Номер курса
-                        </label>
-                        <div class="mt-1 flex rounded-md shadow-sm">
-                            <input type="text" name="number_of_course" id="number_of_course"
-                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                        </div>
-                        <span class="text-sm font-medium text-red-500" id="number_of_course_error"></span>
                     </div>
                     <div class="col-span-4 sm:col-span-3">
                         <label for="categories" class="block text-sm font-medium text-gray-700">Категория курса</label>
@@ -211,7 +183,6 @@
             $('#btnSave').click(function(){
                 let name_of_course = $('#name_of_course').val(),
                     description_of_course = $('#description_of_course').val(),
-                    number_of_course = $('#number_of_course').val(),
                     category = $('#categories option:selected').val()
 
                 $.ajax({
@@ -221,7 +192,6 @@
                         _token: $('#csrf').val(),
                         name_of_course: name_of_course,
                         description_of_course: description_of_course,
-                        number_of_course: number_of_course,
                         category_id: category
                     },
                     cache: false,
@@ -236,10 +206,8 @@
                     error: function(data){
                         $('#name_of_course_error').addClass('hidden')
                         $('#description_of_course_error').addClass('hidden')
-                        $('#number_of_course_error').addClass('hidden')
                         $('#name_of_course').removeClass('border border-red-400')
                         $('#description_of_course').removeClass('border border-red-400')
-                        $('#number_of_course').removeClass('border border-red-400')
 
                         var errors = data.responseJSON
 

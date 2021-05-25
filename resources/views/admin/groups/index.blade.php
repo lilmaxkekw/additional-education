@@ -92,7 +92,7 @@
                 <table class="min-w-full">
                     <thead class="text-left bg-blue-50">
                     <tr>
-                        <th class="py-2 px-3 text-blue-700">Номер группы</th>
+                        <th class="py-2 px-3 text-blue-700">Название группы</th>
                         <th class="py-2 px-3 text-blue-700 text-right">Курс</th>
                         <th class="py-2 px-3 text-blue-700 text-right">Дата начала обучения</th>
                         <th class="py-2 px-3 text-blue-700 text-right">Дата окончания обучения</th>
@@ -182,7 +182,7 @@
                     <div class="grid grid-cols-3 gap-6">
                         <div class="col-span-3 sm:col-span-2">
                             <label for="number_group" class="block text-sm font-medium text-gray-700">
-                                Номер группы
+                                Название группы
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
                                 <input type="text" name="number_group" id="number_group"
