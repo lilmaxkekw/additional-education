@@ -17,7 +17,6 @@ class CreateCoursesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name_of_course');
             $table->text('description_of_course');
-            $table->string('number_of_course');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->string('image_of_course')->nullable();
             $table->text('video_of_course')->nullable();

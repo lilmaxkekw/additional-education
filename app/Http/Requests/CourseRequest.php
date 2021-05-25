@@ -26,7 +26,6 @@ class CourseRequest extends FormRequest
         return [
             'name_of_course' => 'required',
             'description_of_course' => 'required',
-            'number_of_course' => 'required',
         ];
     }
 
@@ -34,7 +33,6 @@ class CourseRequest extends FormRequest
         return [
             'name_of_course.required' => 'Название курса обязательно для заполнения',
             'description_of_course.required' => 'Описание курса обязательно для заполнения',
-            'number_of_course.required' => 'Номер курса обязателен для заполнения',
         ];
     }
 }

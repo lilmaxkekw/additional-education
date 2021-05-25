@@ -107,13 +107,13 @@
                         <div class="xl:w-1/3 md:w-1/2 p-4">
                             <a href="{{ route('course.show', $course->id) }}">
                                 <div
-                                    class="hover:text-white border border-gray-200 p-6 rounded-lg text-center hover:bg-blue-500 hover:text-white course-card transition-colors">
+                                    class="hover:text-white border border-gray-200 p-6 rounded-lg text-center hover:bg-blue-500 hover:text-white course-card transition-colors"
+                                    style="background-image: url(https://www.nesabamedia.com/wp-content/uploads/2018/07/cara-membuat-tabel-di-excel-1280x720.jpg); background-size: cover; background-position: center;">
                                     <h2 class="text-lg text-gray-900 font-medium title-font font-bold mb-2 " >{{ $course->name_of_course }}</h2>
                                     <p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway tile
                                         poke
                                         farm.</p>
-                                </div
-                                    class="hover:text-white border border-gray-200 p-6 rounded-lg text-center hover:bg-blue-500 hover:text-white course-card transition-colors">
+                                </div>
                             </a>
                         </div>
                     @endforeach

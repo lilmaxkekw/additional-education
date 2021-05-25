@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Course extends Model
 {
@@ -22,5 +23,12 @@ class Course extends Model
 
     public function sections(){
         return $this->hasMany('App\Models\Section');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getShortContentAttribute(){
+        return Str::words((string) $this['description_of_course'], 30);
     }
 }

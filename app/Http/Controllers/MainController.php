@@ -24,4 +24,18 @@ class MainController extends Controller
 
         return redirect()->route('register');
     }
+
+    public function courses() {
+        $courses = Course::all();
+        return view('courses', ['courses'=>$courses]);
+    }
+
+    public function contacts() {
+        return view('contacts');
+    }
+
+    public function gallery() {
+        return view('gallery');
+    }
+
 }
