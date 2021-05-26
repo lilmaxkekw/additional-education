@@ -25,13 +25,27 @@
                                 <td class="py-3 px-3">{{ $news_item->news_title }}</td>
                                 <td class="py-3 px-3">{{ $news_item->content }}</td>
                                 <td class="py-3 px-3">
+                                    <div class="flex items-center justify-center w-full mb-12">
+                                        <label
+                                            for="toogleA"
+                                            class="flex items-center cursor-pointer"
+                                        >
+                                            <div class="relative">
+                                                <input id="toogleA" type="checkbox" class="sr-only" />
+                                                <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                                                <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-3">
                                     @if($news_item->news_status === 0)
                                         <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
                                         <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
                                         <span class="relative text-xs align-middle">не опубликовано</span>
 
                                         @else
-                                                <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                            <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                             <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
                                             <span class="relative text-xs align-middle">опубликовано</span>
                                     @endif
