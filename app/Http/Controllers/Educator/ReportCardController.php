@@ -81,11 +81,33 @@ class ReportCardController extends BaseController
         $groups = Group::select('id', 'number_group')->orderBy('number_group')->get();
 
         //Chart
-        $chart = new Attendance();
-        $chart->labels(['One', 'Two', 'Three', 'Four']);
-        $chart->dataset('My dataset', 'line', [1, 2, 3, 4]);
-        $chart->dataset('My dataset 2', 'line', [4, 3, 2, 1]);
+        $tmp_marks = ['Пропуск'];
 
+        $dates = Section::where('partition_id', $selected_partition)->where('status', NULL)->get();
+        $result_dates = [];
+        $id_sections = [];
+        $number_attendees = [];
+        $number_absentees = [];
+
+        foreach ($dates as $date) {
+            $result_dates[] = Carbon::parse($date->date_section)->format('d.m.Y');
+            $id_sections[] = $date->id_section;
+        }
+
+        $chart = new Attendance();
+        $chart->labels($result_dates);
+        foreach ($id_sections as $id_section) {
+            $number_attendees[] = Performance::where('status', NULL)->where('section_id', $id_section)->where('mark', '!=', 'Пропуск')->where('mark', '!=', NULL)->get()->count('id');
+            $number_absentees[] = Performance::where('status', NULL)->where('section_id', $id_section)->whereIn('mark', $tmp_marks)->get()->count('id');
+        }
+
+        $chart->dataset('Количество присутствующих', 'bar', $number_attendees)->options([
+            'backgroundColor' => '#42d674'
+        ]);
+
+        $chart->dataset('Количество отсутствующих', 'bar', $number_absentees)->options([
+            'backgroundColor' => '#d64265',
+        ]);
 
         return view('educator.report_card',
             compact('groups', 'group_id', 'listeners', 'sections', 'marks', 'possible_marks', 'course', 'partitions', 'selected_partition', 'status_page', 'headers_sections', 'total_marks', 'chart'));
