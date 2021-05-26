@@ -6,55 +6,89 @@ use App\Http\Requests\ReportCardRequest;
 use App\Models\Group;
 use App\Models\Course;
 use App\Models\Listener;
+use App\Models\Partition;
 use App\Models\Performance;
 use App\Models\Section;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Charts\Attendance;
 
 class ReportCardController extends BaseController
 {
-    public function groups(Request $request, $group_id = 0)
+    public function groups(Request $request, $group_id = 0, $partition_id = 0)
     {
-
         $request->session()->put('group_id', $group_id);
+        //Для вывода названия курса при выбранной группе, если 0 - нету названия курса
         $course = 0;
+        //Для проверки в журнале успекваемости
+        $partitions = 0;
+        $sections = 0;
+        $listeners = 0;
+        $marks = 0;
+        $possible_marks = 0;
+        $selected_partition = 0;
+        $status_page = Partition::where('id', $partition_id)->value('status');
+        $headers_partitions = 0;
+        $headers_sections = 0;
+        $total_marks = 0;
 
         if ($group_id != 0) {
-            $tmp_group = Group::where('id', $group_id)->first();
-            $course = Course::where('id', $tmp_group->course_id)->first();
+            $group = Group::select('course_id')->where('id', $group_id)->first();
+            $course = Course::where('id', $group->course_id)->first();
+            $partitions = Partition::where('course_id', $group->course_id)->get();
+            //Разделы для вывода итоговых оценок
+            $headers_partitions = Partition::where('course_id', $group->course_id)->where('status', NULL)->get('name');
+
+            if ($partition_id) {
+                //Выбранный раздел
+                $selected_partition = Partition::where('id', $partition_id)->value('id');
+                $request->session()->put('partition_id', $selected_partition);
+
+                //Выбранный курс. Для среднего балла слушателей за раздел //Темы для вывода итоговых оценок
+                $selected_course = Group::where('id', $group_id)->value('course_id');
+                $course_partitions = Partition::where('course_id', $selected_course)->where('status', NULL)->get('id');
+                $headers_sections = Section::where('status', 'Total')->whereIn('partition_id', $course_partitions)->get();
+                $total_marks = Performance::where('status', 'Total')->get();
+
+                $fields = ['id_section', 'name_section', 'description_section', 'date_section', 'status'];
+                //Темы выбранного раздела
+                $sections = Section::select($fields)->where('partition_id', $partition_id)->get();
+                //Слушатели выбранной группы
+                $listeners = Listener::with('user')->where('group_id', $group_id)->get();
+
+                //Оценки слушателей
+                $marks = Performance::
+                    join('listeners', 'performances.listener_id', '=', 'listeners.id_listener')
+                    ->join('sections', 'performances.section_id', '=', 'sections.id_section')
+                    ->select('performances.id', 'performances.mark', 'listeners.id_listener', 'sections.id_section')
+                    ->where('listeners.group_id', $group_id)
+                    ->get();
+
+                //Возможные оценки
+                $possible_marks = [
+                    '5' => 5,
+                    '4' => 4,
+                    '3' => 3,
+                    '2' => 2,
+                    '1' => 1,
+                    'Пропуск' => 'Пропуск',
+                    NULL => 'Оценка отсутствует'
+                ];
+            }
         }
+        //Все группы
+        $groups = Group::select('id', 'number_group')->orderBy('number_group')->get();
 
-        $groups = Group::select('id', 'number_group')->orderBy('number_group')->get(); //Все группы
+        //Chart
+        $chart = new Attendance();
+        $chart->labels(['One', 'Two', 'Three', 'Four']);
+        $chart->dataset('My dataset', 'line', [1, 2, 3, 4]);
+        $chart->dataset('My dataset 2', 'line', [4, 3, 2, 1]);
 
-        $fields = ['id_listener'];
-        $listeners = Listener::with('user')->where('group_id', $group_id)->get(); //Слушатели выбранной группы
-        //dd($listeners);
-        $selected_course = Group::where('id', $group_id)->value('course_id'); //Выбранный курс привязанный к группе
-        $request->session()->put('course_id', $selected_course);
-
-        $fields = ['id_section', 'number_hours', 'name_section', 'description_section', 'date_section'];
-        $sections = Section::select($fields)->where('course_id', $selected_course)->get(); //Разделы курса привязанные к курсу
-
-        $marks = Performance::
-            join('listeners', 'performances.listener_id', '=', 'listeners.id_listener')
-            ->join('sections', 'performances.section_id', '=', 'sections.id_section')
-            ->select('performances.id', 'performances.mark', 'listeners.id_listener', 'sections.id_section')
-            ->where('listeners.group_id', $group_id)
-            ->get();
-
-        $possible_marks = [
-            '5' => 5,
-            '4' => 4,
-            '3' => 3,
-            '2' => 2,
-            '1' => 1,
-            'Пропуск' => 'Пропуск',
-            NULL => 'Оценка отсутствует'
-        ];
 
         return view('educator.report_card',
-            compact('groups', 'group_id', 'listeners', 'sections', 'marks', 'possible_marks', 'course'));
+            compact('groups', 'group_id', 'listeners', 'sections', 'marks', 'possible_marks', 'course', 'partitions', 'selected_partition', 'status_page', 'headers_sections', 'total_marks', 'chart'));
 
     }
 
@@ -67,20 +101,17 @@ class ReportCardController extends BaseController
                 if (!empty($data['date'])) {
                     $id_section = $data['idSection'];
                     $date = $data['date'];
-
                     Section::where('id_section', $id_section)->update(['date_section' => $date]);
                 }
                 else {
                     $id_section = $data['idSection'];
                     $date = Carbon::now();
-
                     Section::where('id_section', $id_section)->update(['date_section' => $date]);
                 }
             }
         }
 
         if ($data['status'] == 'marks') {
-
             $mark_idMark_idListener = explode('|', $data['mark']);
 
             $mark = $mark_idMark_idListener[0];
@@ -88,19 +119,25 @@ class ReportCardController extends BaseController
             $id_listener = $mark_idMark_idListener[2];
 
             Performance::where('id', $id_mark)->update(['mark' => $mark]);
-
-            $count_sections = Section::where('course_id', $request->session()->get('course_id'))->count();
-
-            $array_sections = Section::select('id_section')->where('course_id', $request->session()->get('course_id'))->get();
-
+            $count_sections = Section::where('partition_id', $request->session()->get('partition_id'))->count();
+            $array_sections = Section::select('id_section')->where('status', NULL)->where('partition_id', $request->session()->get('partition_id'))->get();
             $sum_marks = Performance::where('listener_id', $id_listener)->whereIn('section_id', $array_sections)->sum('mark');
-
-            $average_marks = $sum_marks / $count_sections;
+            //Минус 1 из-за того что есть тема ИТОГО для вывода среднего балла, который может менять преподаватель
+            $average_marks = $sum_marks / ($count_sections - 1);
             $request->session()->put('average_marks', $average_marks);
 
             $response = [
-                'average_marks' => $average_marks,
                 'id_listener' => $id_listener,
+                'average_marks' => $average_marks,
+            ];
+
+            return response()->json($response);
+        }
+
+        if ($data['status'] == 'total') {
+            Performance::where('section_id', $data['id_section'])->where('listener_id', $data['id_listener'])->update(['mark' => $data['mark']]);
+            $response = [
+                'id' => $data['id'],
             ];
 
             return response()->json($response);

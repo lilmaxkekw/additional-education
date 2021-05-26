@@ -20,7 +20,8 @@ class Section extends Model
         return $this->hasMany('App\Models\Performance');
     }
 
-    public function course(){
-        return $this->belongsTo('App\Models\Course');
+    public function partition()
+    {
+        return $this->belongsTo('App\Models\Partition');
     }
 }

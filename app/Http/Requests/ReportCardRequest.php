@@ -24,7 +24,6 @@ class ReportCardRequest extends FormRequest
     public function rules()
     {
         return [
-            'number_hours' => 'required|numeric',
             'name_section' => 'required',
             'description_section' => 'required',
             'date_section' => 'required|date|date_format:Y-m-d'
@@ -34,8 +33,6 @@ class ReportCardRequest extends FormRequest
     public function messages()
     {
         return [
-            'number_hours.required' => 'Количество часов обязательно для заполнения.',
-            'number_hours.numeric' => 'Количество часов должно состоять только из цифр.',
             'name_section.required' => 'Название раздела обязательно для заполения.',
             'description_section.required' => 'Описание раздела обязательно для заполнения.',
             'date_section.required' => 'Дата раздела обязательна для заполнения.',

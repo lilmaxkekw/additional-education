@@ -28,46 +28,48 @@
         </div>
     @endif
 
-    <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-    <div class="bg-gray-300 p-4 border-t-2 border-blue-500 rounded-t">
-        <div class="max-w-sm mx-auto md:w-full md:mx-0">
-            <div class="inline-flex items-center space-x-4">
-                <img class="inline-block h-56 w-56 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.jpg') }}" @else src="12121" @endif alt="">
-                <h1 class="text-gray-600 text-xl">{{ $item->name }}</h1>
-            </div>
-        </div>
-    </div>
-    <div class="bg-white space-y-6">
-        <div class="md:inline-flex space-y-4 md:space-y-0 w-full p-4 text-gray-500 items-center">
-            <h2 class="md:w-1/3 max-w-xl mx-auto text-xl">Профиль</h2>
-            <div class="md:w-2/3 max-w-xl mx-auto">
-                <label class="text-sm text-gray-400">Электронная почта</label>
-                <div class="w-full inline-flex border">
-                    <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
-                        <svg
-                            fill="none"
-                            class="w-6 text-gray-400 mx-auto"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                            />
-                        </svg>
-                    </div>
-                    <input
-                        id="email"
-                        type="email"
-                        class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                        placeholder="email@example.com"
-                        value="{{ $item->email }}"
-                    />
+    <form enctype="multipart/form-data" method="POST">
+        <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
+        <div class="bg-gray-300 p-4 border-t-2 border-blue-500 rounded-t">
+            <div class="max-w-sm mx-auto md:w-full md:mx-0">
+                <div class="inline-flex items-center space-x-4">
+                    <img class="inline-block h-56 w-56 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.svg') }}" @else src="12121" @endif alt="">
+                    <h1 class="text-gray-600 text-xl">{{ $item->name }}</h1>
                 </div>
             </div>
         </div>
+        <div class="bg-white space-y-6">
+            <div class="md:inline-flex space-y-4 md:space-y-0 w-full p-4 text-gray-500 items-center">
+                <h2 class="md:w-1/3 max-w-xl mx-auto text-xl">Профиль</h2>
+                <div class="md:w-2/3 max-w-xl mx-auto">
+                    <label class="text-sm text-gray-400">Электронная почта</label>
+                    <div class="w-full inline-flex border">
+                        <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+                            <svg
+                                fill="none"
+                                class="w-6 text-gray-400 mx-auto"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                />
+                            </svg>
+                        </div>
+                        <input
+                            id="email"
+                            type="email"
+                            class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+                            placeholder="email@example.com"
+                            value="{{ $item->email }}"
+                        />
+                    </div>
+                    <span class="text-sm font-medium text-red-500" id="email_error"></span>
+                </div>
+            </div>
 
         <hr />
         <div class="md:inline-flex  space-y-4 md:space-y-0  w-full p-4 text-gray-500 items-center">
@@ -131,7 +133,7 @@
 
         <hr />
         <div class="w-full p-4 text-right text-gray-500">
-            <div class="md:w-3/12 text-center md:pl-6">
+            <div class="md:w-3/12 text-center mb-10 md:pl-6">
                 <button class="btnSaveAccount text-white w-full mx-auto max-w-sm rounded-md text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
                     <svg
                         fill="none"

@@ -4,7 +4,7 @@
         <div class="modal-content py-4 text-left px-6">
             <!--Title-->
             <div class="flex justify-between items-center pb-3">
-                <p class="text-2xl font-bold">Изменение данных об аккаунте</p>
+                <p class="text-2xl font-bold">Изменение данных о разделе</p>
                 <div class="modal-close cursor-pointer z-50">
                     <svg class="fill-current text-black mb-6 ml-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                          viewBox="0 0 18 18">
@@ -21,11 +21,6 @@
                         <label for="date_section" class="block text-xs font-semibold text-gray-600 uppercase">Дата занятия</label>
                         <input id="date_section" type="date" value="" name="date_section" placeholder="Выберите дату" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
                         <span class="text-sm font-medium text-red-500" id="date_section_error"></span>
-                    </div>
-                    <div class="mt-2">
-                        <label for="number_hours" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Количество часов</label>
-                        <input value="" id="number_hours" type="text" name="number_hours" placeholder="Количество часов на данную тему" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-                        <span class="text-sm font-medium text-red-500" id="number_hours_error"></span>
                     </div>
                     <div class="mt-2">
                         <label for="name_section" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Название занятия</label>

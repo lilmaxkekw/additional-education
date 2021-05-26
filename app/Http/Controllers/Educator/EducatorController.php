@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Educator;
 
+use App\Http\Requests\UserRequest;
 use App\Models\Listener;
 use App\Models\Role;
 use App\Models\User;
@@ -15,17 +16,11 @@ class EducatorController extends BaseController
         return view('educator.account', compact('item'));
     }
 
-    public function edit_account(Request $request)
+    public function edit_account(UserRequest $request)
     {
-
         $id = auth()->user()->id;
-        $data = $request->input();
-        $result = User::find($id)->update($data);
+        $result = \DB::table('users')->where('id', $id)->update($request->except('_token'));
 
-        $response = [
-            'result' => $result,
-        ];
-
-        return response()->json($response);
+        return response()->json($result);
     }
 }
