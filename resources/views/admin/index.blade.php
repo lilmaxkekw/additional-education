@@ -61,6 +61,12 @@
             </div>
         </div>
 
+        <div class="w-100 h-100 mx-4">
+            {!! $chart->container() !!}
+        </div>
+
+        {!! $chart->script() !!}
+
         <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8 mx-4">
             <h2 class="text-xl text-blue-700 font-bold mb-4 lg:mb-6">Последние заявки</h2>
             <div class="overflow-x-auto">
@@ -95,5 +101,7 @@
             <a href="{{ route('users.index') }}" class="font-bold text-blue-600 inline-block mt-5 hover:underline">View all orders</a>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
 @endsection

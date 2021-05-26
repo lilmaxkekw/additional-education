@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="bg-white overflow-hidden sm:rounded-lg"> {{--   shadow --}}
         <div class="px-4 py-5 sm:px-6 flex items-center">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
                 Курс {{ $course->name_of_course }}
@@ -75,179 +75,101 @@
         </div>
     </div>
 
-    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
-{{--        <div class="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white shadow-lg px-12">--}}
-{{--            <div class="flex justify-between">--}}
-{{--                <div class="inline-flex border rounded w-7/12 px-2 lg:px-6 h-12 bg-transparent">--}}
-{{--                    <div class="flex flex-wrap items-stretch w-full h-full mb-6 relative">--}}
-{{--                        <div class="flex">--}}
-{{--                            <span class="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-grey-dark text-sm">--}}
-{{--                                <svg width="18" height="18" class="w-4 lg:w-auto" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                    <path d="M8.11086 15.2217C12.0381 15.2217 15.2217 12.0381 15.2217 8.11086C15.2217 4.18364 12.0381 1 8.11086 1C4.18364 1 1 4.18364 1 8.11086C1 12.0381 4.18364 15.2217 8.11086 15.2217Z" stroke="#455A64" stroke-linecap="round" stroke-linejoin="round" />--}}
-{{--                                    <path d="M16.9993 16.9993L13.1328 13.1328" stroke="#455A64" stroke-linecap="round" stroke-linejoin="round" />--}}
-{{--                                </svg>--}}
-{{--                            </span>--}}
-{{--                        </div>--}}
-{{--                        <input type="text" id="search-listener" onkeyup="tableSearch();" class="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs lg:text-base text-gray-500 font-thin" placeholder="Search" onkeyup="tableSearch()">--}}
+{{--    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">--}}
+{{--        <div class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">--}}
+{{--            <table class="min-w-full" id="datatable-example">   <!-- id="table" -->--}}
+{{--                <thead>--}}
+{{--                <tr>--}}
+{{--                    <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Название раздела</th>--}}
+{{--                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Описание раздела</th>--}}
+{{--                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Кол-во часов</th>--}}
+{{--                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Дата проведения</th>--}}
+{{--                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Действие</th>--}}
+{{--                </tr>--}}
+{{--                </thead>--}}
+{{--                <tbody class="bg-white">--}}
+{{--                    @foreach($course->sections as $section)--}}
+{{--                        <tr>--}}
+{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">--}}
+{{--                                <div class="text-sm leading-5 text-blue-900">{{ $section->name_section }}</div>--}}
+{{--                            </td>--}}
+{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">--}}
+{{--                                <div class="text-sm leading-5 text-blue-900">{{ $section->description_section }}</div>--}}
+{{--                            </td>--}}
+{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">--}}
+{{--                                <div class="text-sm leading-5 text-blue-900">{{ $section->number_hours }}</div>--}}
+{{--                            </td>--}}
+{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">--}}
+{{--                                <div class="text-sm leading-5 text-blue-900">{{ Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</div>--}}
+{{--                            </td>--}}
+{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">--}}
+{{--                                <a href="#editSectionModal" name="editSectionModal" data-name="{{ $section->name_section  }}" data-id="{{ $section->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>--}}
+{{--                                <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
+{{--                    @endforeach--}}
+{{--                </tbody>--}}
+{{--            </table>--}}
+{{--            @if(! $course->sections->isEmpty())--}}
+{{--                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">--}}
+{{--                    <div>--}}
+{{--                        <p class="text-sm leading-5 text-blue-500">--}}
+{{--                            Всего записей--}}
+{{--                            <span class="font-medium">{{ $count }}</span>--}}
+{{--                        </p>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
-{{--            </div>--}}
+
+{{--                @else--}}
+{{--                    @component('components.no_data_message') @endcomponent--}}
+{{--            @endif--}}
 {{--        </div>--}}
-        <div class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
-            <table class="min-w-full" id="datatable-example">   <!-- id="table" -->
-                <thead>
-                <tr>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Название раздела</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Описание раздела</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Кол-во часов</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Дата проведения</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Действие</th>
-                </tr>
-                </thead>
-                <tbody class="bg-white">
+{{--    </div>--}}
+
+    <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8">
+        <div class="overflow-x-auto">
+            <div class="align-middle inline-block min-w-full overflow-hidden">
+                <table class="min-w-full">
+                    <thead class="text-left bg-blue-50">
+                    <tr>
+                        <th class="py-2 px-3 text-blue-700">Название раздела</th>
+                        <th class="py-2 px-3 text-blue-700">Описание раздела</th>
+                        <th class="py-2 px-3 text-blue-700">Кол-во часов</th>
+                        <th class="py-2 px-3 text-blue-700">Дата проведения</th>
+                        <th class="py-2 px-3 text-blue-700">Действие</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
                     @foreach($course->sections as $section)
                         <tr>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                <div class="text-sm leading-5 text-blue-900">{{ $section->name_section }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
-                                <div class="text-sm leading-5 text-blue-900">{{ $section->description_section }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
-                                <div class="text-sm leading-5 text-blue-900">{{ $section->number_hours }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
-                                <div class="text-sm leading-5 text-blue-900">{{ Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">
+                            <td class="py-3 px-3">{{ $section->name_section }}</td>
+                            <td class="py-3 px-3">{{ $section->description_section }}</td>
+                            <td class="py-3 px-3">{{ $section->date_section }}</td>
+                            <td class="py-3 px-3">{{ $section->number_hours }}</td>
+                            <td class="py-3 px-3">
                                 <a href="#editSectionModal" name="editSectionModal" data-name="{{ $section->name_section  }}" data-id="{{ $section->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
-                                <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+                                 <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
                             </td>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            @if(! $course->sections->isEmpty())
-                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
-                    <div>
-                        <p class="text-sm leading-5 text-blue-500">
-                            Всего записей
-                            <span class="font-medium">{{ $count }}</span>
-                        </p>
-                    </div>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
-
-                @else
-                    @component('components.no_data_message') @endcomponent
-            @endif
-        </div>
-    </div>
-
-    <!-- Edit course modal -->
-    <div id="editCourseModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
-        <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-1/3">
-            <!-- modal header -->
-            <div class="px-4 py-2 flex justify-between items-center">
-                <h2 class="">Редактирование курса</h2>
-                <button class="text-black close-modal">
-                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <path
-                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
-                        ></path>
-                    </svg>
-                </button>
-            </div>
-            <!-- modal body -->
-            <div class="p-4">
-                <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                    <div class="grid grid-cols-3 gap-6">
-                        <div class="col-span-3 sm:col-span-2">
-                            <label for="name_of_course" class="block text-sm font-medium text-gray-700">
-                                Название курса
-                            </label>
-                            <div class="mt-1 flex rounded-md shadow-sm">
-                                <input type="text" name="name_of_course" id="name_of_course"
-                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" value="{{ $course->name_of_course }}">
-                            </div>
-                            <span class="text-sm font-medium text-red-500" id="name_of_course_error"></span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="description_of_course" class="block text-sm font-medium text-gray-700">
-                            Описание курса
-                        </label>
-                        <div class="mt-1">
-                                    <textarea id="description_of_course" name="description_of_course" rows="3"
-                                              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">{{ $course->description_of_course }}</textarea>
-                        </div>
-                        <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
-                    </div>
-
-                    <div>
-                        <label for="number_of_course" class="block text-sm font-medium text-gray-700">
-                            Номер курса
-                        </label>
-                        <div class="mt-1 flex rounded-md shadow-sm">
-                            <input type="text" name="number_of_course" id="number_of_course"
-                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" value="{{ $course->number_of_course }}">
-                        </div>
-                        <span class="text-sm font-medium text-red-500" id="number_of_course_error"></span>
-                    </div>
-                    <div class="col-span-4 sm:col-span-3">
-                        <label for="categories" class="block text-sm font-medium text-gray-700">Категория курса</label>
-                        <select id="categories" name="categories" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}" @if($course->category->id === $category->id) selected @endif>{{ $category->name_of_category }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">
-                            Изображение
-                        </label>
-                        <div
-                            class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                            <div class="space-y-1 text-center">
-                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none"
-                                     viewBox="0 0 48 48" aria-hidden="true">
-                                    <path
-                                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <div class="flex text-sm text-gray-600">
-                                    <label for="file-upload"
-                                           class="relative cursor-pointer bg-white rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
-                                        <span class="justify-center">Загрузить файл</span>
-                                        <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                                    </label>
-                                </div>
-                                <p class="text-xs text-gray-500">
-                                    PNG, JPG, GIF up to 10MB
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-center items-center w-100 p-3">
-                <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
+                @if($course->sections->isEmpty())
+                    @component('components.no_data_message')
+                    @endcomponent
+                @endif
             </div>
         </div>
-    </div>
 
-    <!-- Delete course modal -->
-     <div id="deleteModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
-        <div class="md:w-1/3 sm:w-full rounded-lg shadow-lg bg-white my-3">
-            <div class="flex justify-between border-b border-gray-100 px-5 py-4">
-                <div>
-                    <i class="fa fa-exclamation-triangle text-red-500"></i>
-                    <span class="font-bold text-gray-700 text-lg">Подтверждение удаления</span>
-                </div>
-                <div>
+        <!-- Edit course modal -->
+        <div id="editCourseModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+            <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
+            <!-- modal -->
+            <div class="bg-white rounded shadow-lg w-1/3">
+                <!-- modal header -->
+                <div class="px-4 py-2 flex justify-between items-center">
+                    <h2 class="">Редактирование курса</h2>
                     <button class="text-black close-modal">
                         <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                             <path
@@ -256,189 +178,286 @@
                         </svg>
                     </button>
                 </div>
-            </div>
-            <div class="px-10 py-5 text-gray-600">
-                Вы действительно хотите удалить?
-            </div>
-            <div class="px-5 py-4 flex justify-center">
-                <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</button>
-                </form>
-            </div>
-        </div>
-     </div>
+                <!-- modal body -->
+                <div class="p-4">
+                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+                        <div class="grid grid-cols-3 gap-6">
+                            <div class="col-span-3 sm:col-span-2">
+                                <label for="name_of_course" class="block text-sm font-medium text-gray-700">
+                                    Название курса
+                                </label>
+                                <div class="mt-1 flex rounded-md shadow-sm">
+                                    <input type="text" name="name_of_course" id="name_of_course"
+                                           class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" value="{{ $course->name_of_course }}">
+                                </div>
+                                <span class="text-sm font-medium text-red-500" id="name_of_course_error"></span>
+                            </div>
+                        </div>
 
-    <!-- Add section modal -->
-    <div id="addSectionModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
-        <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-        <!-- modal -->
-        <div class="bg-white rounded shadow-lg w-1/3">
-            <!-- modal header -->
-            <div class="px-4 py-2 flex justify-between items-center">
-                <h2 class="">Добавление раздела</h2>
-                <button class="text-black close-modal">
-                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <path
-                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
-                        ></path>
-                    </svg>
-                </button>
-            </div>
-            <!-- modal body -->
-            <div class="p-4">
-                <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                    <div class="grid grid-cols-3 gap-6">
-                        <div class="col-span-3 sm:col-span-2">
-                            <label for="name_section" class="block text-sm font-medium text-gray-700">
-                                Название раздела
+                        <div>
+                            <label for="description_of_course" class="block text-sm font-medium text-gray-700">
+                                Описание курса
+                            </label>
+                            <div class="mt-1">
+                                        <textarea id="description_of_course" name="description_of_course" rows="3"
+                                                  class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">{{ $course->description_of_course }}</textarea>
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
+                        </div>
+
+                        <div>
+                            <label for="number_of_course" class="block text-sm font-medium text-gray-700">
+                                Номер курса
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
-                                <input type="text" name="name_section" id="name_section"
-                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                <input type="text" name="number_of_course" id="number_of_course"
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" value="{{ $course->number_of_course }}">
                             </div>
-                            <span class="text-sm font-medium text-red-500" id="name_section_error"></span>
+                            <span class="text-sm font-medium text-red-500" id="number_of_course_error"></span>
                         </div>
-                    </div>
-                    <div>
-                        <label for="description_section" class="block text-sm font-medium text-gray-700">
-                            Описание раздела
-                        </label>
-                        <div class="mt-1">
-                                <textarea id="description_section" name="description_section" rows="3"
-                                          class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                        <div class="col-span-4 sm:col-span-3">
+                            <label for="categories" class="block text-sm font-medium text-gray-700">Категория курса</label>
+                            <select id="categories" name="categories" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" @if($course->category->id === $category->id) selected @endif>{{ $category->name_of_category }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
-                    </div>
-                    <div>
-                        <label for="number_hours" class="block text-sm font-medium text-gray-700">Кол-во часов</label>
-                        <div class="mt-1">
-                            <input type="text" name="number_hours" id="number_hours"
-                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                Изображение
+                            </label>
+                            <div
+                                class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                <div class="space-y-1 text-center">
+                                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none"
+                                         viewBox="0 0 48 48" aria-hidden="true">
+                                        <path
+                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="file-upload"
+                                               class="relative cursor-pointer bg-white rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                            <span class="justify-center">Загрузить файл</span>
+                                            <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                        </label>
+                                    </div>
+                                    <p class="text-xs text-gray-500">
+                                        PNG, JPG, GIF up to 10MB
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
-                    </div>
-                    <div>
-                        <label for="date_section" class="block text-sm font-medium text-gray-700">Дата проведения</label>
-                        <div class="mt-1">
-                            <input type="date" name="date_section" id="date_section"
-                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                        </div>
-                        <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
                     </div>
                 </div>
-            </div>
-            <div class="flex justify-center items-center w-100 p-3">
-                <button type="submit" id="btnSectionSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
+                <div class="flex justify-center items-center w-100 p-3">
+                    <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    @component('components.modal', ['gif' => asset('gifs/success.json')])
-    @endcomponent
+        <!-- Delete course modal -->
+         <div id="deleteModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+            <div class="md:w-1/3 sm:w-full rounded-lg shadow-lg bg-white my-3">
+                <div class="flex justify-between border-b border-gray-100 px-5 py-4">
+                    <div>
+                        <i class="fa fa-exclamation-triangle text-red-500"></i>
+                        <span class="font-bold text-gray-700 text-lg">Подтверждение удаления</span>
+                    </div>
+                    <div>
+                        <button class="text-black close-modal">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                <path
+                                    d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                                ></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="px-10 py-5 text-gray-600">
+                    Вы действительно хотите удалить?
+                </div>
+                <div class="px-5 py-4 flex justify-center">
+                    <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</button>
+                    </form>
+                </div>
+            </div>
+         </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        <!-- Add section modal -->
+        <div id="addSectionModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+            <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
+            <!-- modal -->
+            <div class="bg-white rounded shadow-lg w-1/3">
+                <!-- modal header -->
+                <div class="px-4 py-2 flex justify-between items-center">
+                    <h2 class="">Добавление раздела</h2>
+                    <button class="text-black close-modal">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path
+                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                            ></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- modal body -->
+                <div class="p-4">
+                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+                        <div class="grid grid-cols-3 gap-6">
+                            <div class="col-span-3 sm:col-span-2">
+                                <label for="name_section" class="block text-sm font-medium text-gray-700">
+                                    Название раздела
+                                </label>
+                                <div class="mt-1 flex rounded-md shadow-sm">
+                                    <input type="text" name="name_section" id="name_section"
+                                           class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <span class="text-sm font-medium text-red-500" id="name_section_error"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="description_section" class="block text-sm font-medium text-gray-700">
+                                Описание раздела
+                            </label>
+                            <div class="mt-1">
+                                    <textarea id="description_section" name="description_section" rows="3"
+                                              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
+                        </div>
+                        <div>
+                            <label for="number_hours" class="block text-sm font-medium text-gray-700">Кол-во часов</label>
+                            <div class="mt-1">
+                                <input type="text" name="number_hours" id="number_hours"
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
+                        </div>
+                        <div>
+                            <label for="date_section" class="block text-sm font-medium text-gray-700">Дата проведения</label>
+                            <div class="mt-1">
+                                <input type="date" name="date_section" id="date_section"
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center w-100 p-3">
+                    <button type="submit" id="btnSectionSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
+                </div>
+            </div>
+        </div>
 
-    <script>
-        $(document).ready(function(){
-            $('a[name=deleteModal]').click(function(){
-                $('#deleteModal').removeClass('hidden')
-            })
+        @component('components.modal', ['gif' => asset('gifs/success.json')])
+        @endcomponent
 
-            $('.close-modal').click(function(){
-                $('.modal').addClass('hidden')
-            })
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+                integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
-            $('a[name=editModal]').click(function(){
-                $('#editCourseModal').removeClass('hidden')
-            })
-
-            $('a[name=addSectionModal]').click(function(){
-                $('#addSectionModal').removeClass('hidden')
-            })
-
-            $('button[name=ok]').click(function(){
-                $('#modal').addClass('hidden')
-                location.reload()
-            })
-
-            $('#btnSave').click(function(){
-                let name_of_course = $('#name_of_course').val(),
-                    description_of_course = $('#description_of_course').val(),
-                    number_of_course = $('#number_of_course').val(),
-                    category = $('#categories option:selected').val()
-
-                $.ajax({
-                    url: '{{ URL('/admin/courses', $course->id) }}',
-                    type: 'PATCH',
-                    data: {
-                        _token: $('#csrf').val(),
-                        name_of_course: name_of_course,
-                        description_of_course: description_of_course,
-                        number_of_course: number_of_course,
-                        category_id: category
-                    },
-                    cache: false,
-                    success: function(response){
-                        var response = JSON.parse(response)
-
-                        if(response){
-                            location.reload()
-                        }
-                    },
-                    error: function(data){
-                            $('#name_of_course_error').addClass('hidden')
-                            $('#description_of_course_error').addClass('hidden')
-                            $('#number_of_course_error').addClass('hidden')
-                            $('#name_of_course').removeClass('border border-red-400')
-                            $('#description_of_course').removeClass('border border-red-400')
-                            $('#number_of_course').removeClass('border border-red-400')
-                            var errors = data.responseJSON
-                            if($.isEmptyObject(errors) === false){
-                                $.each(errors.errors, function(key, value){
-                                    var error_id = '#' + key + '_error'
-                                    var error_id2 = '#' + key
-                                    $(error_id).removeClass('hidden')
-                                    $(error_id2).addClass('border border-red-400')
-                                    $(error_id).text(value)
-                                })
-                            }
-                        }
-                    })
+        <script>
+            $(document).ready(function(){
+                $('a[name=deleteModal]').click(function(){
+                    $('#deleteModal').removeClass('hidden')
                 })
 
-                $('#btnSectionSave').click(function(){
+                $('.close-modal').click(function(){
+                    $('.modal').addClass('hidden')
+                })
 
+                $('a[name=editModal]').click(function(){
+                    $('#editCourseModal').removeClass('hidden')
+                })
+
+                $('a[name=addSectionModal]').click(function(){
+                    $('#addSectionModal').removeClass('hidden')
+                })
+
+                $('button[name=ok]').click(function(){
+                    $('#modal').addClass('hidden')
+                    location.reload()
+                })
+
+                $('#btnSave').click(function(){
+                    let name_of_course = $('#name_of_course').val(),
+                        description_of_course = $('#description_of_course').val(),
+                        number_of_course = $('#number_of_course').val(),
+                        category = $('#categories option:selected').val()
 
                     $.ajax({
-                        url: '{{ route('sections.store') }}',
-                        type: 'POST',
+                        url: '{{ URL('/admin/courses', $course->id) }}',
+                        type: 'PATCH',
                         data: {
                             _token: $('#csrf').val(),
-                            number_hours: $('#number_hours').val(),
-                            name_section: $('#name_section').val(),
-                            description_section: $('#description_section').val(),
-                            date_section: $('#date_section').val(),
-                            course_id: '{{ $course->id }}'
+                            name_of_course: name_of_course,
+                            description_of_course: description_of_course,
+                            number_of_course: number_of_course,
+                            category_id: category
                         },
-                        success: function(data){
-                            let res = JSON.stringify(data)
+                        cache: false,
+                        success: function(response){
+                            var response = JSON.parse(response)
 
-                            if(res){
-                                $('#modal').removeClass('hidden')
-                                $('.addText').text(`Раздел "${name}" успешно добавлена!`)
+                            if(response){
+                                location.reload()
                             }
                         },
-                        error: function(){
-
-                        }
+                        error: function(data){
+                                $('#name_of_course_error').addClass('hidden')
+                                $('#description_of_course_error').addClass('hidden')
+                                $('#number_of_course_error').addClass('hidden')
+                                $('#name_of_course').removeClass('border border-red-400')
+                                $('#description_of_course').removeClass('border border-red-400')
+                                $('#number_of_course').removeClass('border border-red-400')
+                                var errors = data.responseJSON
+                                if($.isEmptyObject(errors) === false){
+                                    $.each(errors.errors, function(key, value){
+                                        var error_id = '#' + key + '_error'
+                                        var error_id2 = '#' + key
+                                        $(error_id).removeClass('hidden')
+                                        $(error_id2).addClass('border border-red-400')
+                                        $(error_id).text(value)
+                                    })
+                                }
+                            }
+                        })
                     })
-                })
+
+                    $('#btnSectionSave').click(function(){
 
 
-        })
-    </script>
+                        $.ajax({
+                            url: '{{ route('sections.store') }}',
+                            type: 'POST',
+                            data: {
+                                _token: $('#csrf').val(),
+                                number_hours: $('#number_hours').val(),
+                                name_section: $('#name_section').val(),
+                                description_section: $('#description_section').val(),
+                                date_section: $('#date_section').val(),
+                                course_id: '{{ $course->id }}'
+                            },
+                            success: function(data){
+                                let res = JSON.stringify(data)
 
-@endsection
+                                if(res){
+                                    $('#modal').removeClass('hidden')
+                                    $('.addText').text(`Раздел "${name}" успешно добавлена!`)
+                                }
+                            },
+                            error: function(){
+
+                            }
+                        })
+                    })
+
+
+            })
+        </script>
+
+    @endsection

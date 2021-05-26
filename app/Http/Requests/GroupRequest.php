@@ -24,7 +24,7 @@ class GroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'number_group' => 'required|unique:groups',
+            'number_group' => 'required',
             'start_date' => 'required',
             'end_date' => 'required'
         ];
@@ -32,8 +32,7 @@ class GroupRequest extends FormRequest
 
     public function messages(){
         return [
-            'number_group.required' => 'Номер группы обязателен для заполнения',
-            'number_group.unique' => 'Такая группа уже существует',
+            'number_group.required' => 'Название группы обязательно для заполнения',
             'start_date.required' => 'Обязательно для заполнения',
             'end_date.required' => 'Обязательно для заполнения'
         ];

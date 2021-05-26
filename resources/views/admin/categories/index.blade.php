@@ -26,8 +26,8 @@
 {{--    @endif--}}
 
 
-    <h1 class="text-4xl font-normal text-blue-600">Категории</h1>
-    <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все категории, а также добавить новую категорию.</h3>
+    <h1 class="text-4xl font-normal text-blue-600">Виды курсов</h1>
+    <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все виды курсов.</h3>
 
     <div class="container mb-2">
         <div class="flex justify-end">

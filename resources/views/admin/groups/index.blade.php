@@ -105,8 +105,8 @@
                             <tr>
                                 <td class="py-3 px-3">{{ $group->number_group }}</td>
                                 <td class="py-3 px-3 text-right">{{ $group->course->name_of_course }}</td>
-                                <td class="py-3 px-3 text-right">{{ $group->start_date }}</td>
-                                <td class="py-3 px-3 text-right">{{ $group->end_date }}</td>
+                                <td class="py-3 px-3 text-right">{{ \Carbon\Carbon::parse($group->start_date)->format('d.m.Y')  }}</td>
+                                <td class="py-3 px-3 text-right">{{ \Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}</td>
                                 <td class="py-3 px-3 text-right">
                                     <a href="{{ route('groups.show', $group->id) }}">
                                         <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Слушатели группы</button>
@@ -160,7 +160,7 @@
     </div>
 
     <!-- Add group modal -->
-    <div id="addGroupModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+    <div id="addGroupModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);" x-data="{ name_of_course: '', start_date: '' }">
         <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
         <!-- modal -->
         <div class="bg-white rounded-lg shadow-lg w-1/3">
@@ -186,7 +186,7 @@
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
                                 <input type="text" name="number_group" id="number_group"
-                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" :value="name_of_course[0] + '-' + new Date(start_date).getFullYear().toString().substr(-2)">
                             </div>
                             <span class="text-sm font-medium text-red-500" id="number_group_error"></span>
                         </div>
@@ -196,7 +196,7 @@
                         <label for="start_date" class="block text-sm font-medium text-gray-700">Дата начала обучения</label>
                         <div class="mt-1">
                             <input type="date" name="start_date" id="start_date"
-                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" x-model="start_date">
                         </div>
                         <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
                     </div>
@@ -212,9 +212,10 @@
 
                     <div class="col-span-4 sm:col-span-3">
                         <label for="courses" class="block text-sm font-medium text-gray-700">Курс</label>
-                        <select id="courses" name="courses" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <select id="courses" name="courses" x-model="name_of_course" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             @foreach($courses as $id => $name_of_course)
-                                <option value="{{ $id }}">{{ $name_of_course }}</option>
+{{--                                <option value="{{ $id }}">{{ $name_of_course }}</option>--}}
+                                <option value="{{ $name_of_course }}" data-id="{{ $id }}">{{ $name_of_course }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -260,7 +261,7 @@
                 let number_group = $('#number_group').val(),
                     start_date = $('#start_date').val(),
                     end_date = $('#end_date').val(),
-                    course = $('#courses option:selected').val()
+                    course = $('#courses option:selected').attr('data-id')
 
                 $.ajax({
                     url: '{{ route('groups.index') }}',
