@@ -327,6 +327,71 @@
             </div>
          </div>
 
+        <!-- Add partition modal -->
+        <div id="addPartition" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+            <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
+            <!-- modal -->
+            <div class="bg-white rounded shadow-lg w-1/3">
+                <!-- modal header -->
+                <div class="px-4 py-2 flex justify-between items-center">
+                    <h2 class="">Добавление раздела</h2>
+                    <button class="text-black close-modal">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path
+                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                            ></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- modal body -->
+                <div class="p-4">
+                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+                        <div class="grid grid-cols-3 gap-6">
+                            <div class="col-span-3 sm:col-span-2">
+                                <label for="name_section" class="block text-sm font-medium text-gray-700">
+                                    Название раздела
+                                </label>
+                                <div class="mt-1 flex rounded-md shadow-sm">
+                                    <input type="text" name="name_section" id="name_section"
+                                           class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <span class="text-sm font-medium text-red-500" id="name_section_error"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="description_section" class="block text-sm font-medium text-gray-700">
+                                Описание раздела
+                            </label>
+                            <div class="mt-1">
+                                        <textarea id="description_section" name="description_section" rows="3"
+                                                  class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
+                        </div>
+                        <div>
+                            <label for="number_hours" class="block text-sm font-medium text-gray-700">Кол-во часов</label>
+                            <div class="mt-1">
+                                <input type="text" name="number_hours" id="number_hours"
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
+                        </div>
+                        <div>
+                            <label for="date_section" class="block text-sm font-medium text-gray-700">Дата проведения</label>
+                            <div class="mt-1">
+                                <input type="date" name="date_section" id="date_section"
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center w-100 p-3">
+                    <button type="submit" id="btnSectionSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Add section modal -->
         <div id="addSectionModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
             <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">

@@ -9,6 +9,10 @@ use App\Models\Partition;
 class PartitionController extends Controller
 {
     public function store(){
+        Partition::create([
 
+        ]);
+
+        return response()->json();
     }
 }
