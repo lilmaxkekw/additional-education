@@ -9,6 +9,15 @@ class Partition extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = [
+        'date_start',
+        'date_end',
+        'name',
+        'number_hours',
+        'status',
+        'course_id'
+    ];
+
     public function sections()
     {
         return $this->hasMany('App\Models\Section');

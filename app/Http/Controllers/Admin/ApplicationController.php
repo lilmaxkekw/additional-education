@@ -74,7 +74,6 @@ class ApplicationController extends Controller
         $sections = Section::where('course_id', $selected_course)->get();
 
         $l = DB::table('listeners')->whereIn('user_id', $success)->get();
-//        dd($l);
         foreach ($l as $item){
             foreach ($sections as $section){
                 Performance::create([

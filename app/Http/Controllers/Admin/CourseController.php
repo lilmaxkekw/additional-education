@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Partition;
 use App\Models\Section;
 
 /**
@@ -36,6 +37,12 @@ class CourseController extends Controller
     public function store(CourseRequest $request)
     {
         Course::create($request->all());
+        $course = Course::all()->last();
+
+        Partition::create([
+            'status' => 'Total',
+            'course_id' => $course->id
+        ]);
 
         return response()->json(['success' => 'Курс успешно добавлен']);
     }
@@ -48,7 +55,6 @@ class CourseController extends Controller
     {
         $course = Course::where('id', $id)->first();
         $categories = Category::all();
-//        $sections = Section::where('course_id', $id)->get();
         $count = Section::count();
 
         return view('admin.courses.show', [

@@ -140,22 +140,60 @@
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
-                    @foreach($course->sections as $section)
+                    @foreach($course->partitions as $partition)
                         <tr>
-                            <td class="py-3 px-3">{{ $section->name_section }}</td>
-                            <td class="py-3 px-3">{{ $section->description_section }}</td>
-                            <td class="py-3 px-3">{{ $section->date_section }}</td>
-                            <td class="py-3 px-3">{{ $section->number_hours }}</td>
+                            <td class="py-3 px-3">{{ $partition->name_section }}</td>
+                            <td class="py-3 px-3">{{ $partition->description_section }}</td>
+                            <td class="py-3 px-3">{{ $partition->date_section }}</td>
+                            <td class="py-3 px-3">{{ $partition->number_hours }}</td>
                             <td class="py-3 px-3">
-                                <a href="#editSectionModal" name="editSectionModal" data-name="{{ $section->name_section  }}" data-id="{{ $section->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
-                                 <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+                                <a href="#editSectionModal" name="editSectionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
+                                <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
                             </td>
                         </tr>
                         @endforeach
                         </tbody>
                     </table>
                 </div>
-                @if($course->sections->isEmpty())
+                @if($course->partitions->isEmpty())
+                    @component('components.no_data_message')
+                    @endcomponent
+                @endif
+            </div>
+        </div>
+
+        <h1 class="text-2xl font-normal text-grey-900 mt-5">Темы</h1>
+
+        <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8">
+            <div class="overflow-x-auto">
+                <div class="align-middle inline-block min-w-full overflow-hidden">
+                    <table class="min-w-full">
+                        <thead class="text-left bg-blue-50">
+                        <tr>
+                            <th class="py-2 px-3 text-blue-700">Название раздела</th>
+                            <th class="py-2 px-3 text-blue-700">Описание раздела</th>
+                            <th class="py-2 px-3 text-blue-700">Кол-во часов</th>
+                            <th class="py-2 px-3 text-blue-700">Дата проведения</th>
+                            <th class="py-2 px-3 text-blue-700">Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
+                        @foreach($course->partitions as $partition)
+                            <tr>
+                                <td class="py-3 px-3">{{ $partition->name_section }}</td>
+                                <td class="py-3 px-3">{{ $partition->description_section }}</td>
+                                <td class="py-3 px-3">{{ $partition->date_section }}</td>
+                                <td class="py-3 px-3">{{ $partition->number_hours }}</td>
+                                <td class="py-3 px-3">
+                                    <a href="#editSectionModal" name="editSectionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
+                                    <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @if($course->partitions->isEmpty())
                     @component('components.no_data_message')
                     @endcomponent
                 @endif

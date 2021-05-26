@@ -19,47 +19,12 @@ class SectionController extends Controller
     public function store(SectionRequest $request)
     {
         $data = Section::create([
-            'number_hours' => $request->number_hours,
             'name_section' => $request->name_section,
             'description_section' => $request->description_section,
             'date_section' => $request->date_section,
-            'course_id' => $request->course_id
+            'status' => 'Total'
         ]);
 
         return response()->json($data);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param SectionRequest $request
-     * @param int $id
-     * @return void
-     */
-    public function update(SectionRequest $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
