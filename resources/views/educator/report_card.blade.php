@@ -48,6 +48,21 @@
                     @endforeach
                 </nav>
             </div>
+
+            {{--Список разделов группы--}}
+            @if($partitions)
+                <div class="bg-white overflow-x-scroll">
+                    <nav class="flex flex-col sm:flex-row">
+                        @foreach($partitions as $partition)
+                            <a href="{{ route('report.card.partition', [$group->id, $partition->id]) }}">
+                                <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none btn-group @if($partition->id == $selected_partition && $selected_partition) text-blue-500 border-b-2 font-medium border-blue-500 @endif">
+                                    {{ $partition->name }}
+                                </button>
+                            </a>
+                        @endforeach
+                    </nav>
+                </div>
+            @endif
             <form>
                 <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
 
@@ -59,53 +74,83 @@
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">#</span></th>
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">ФИО</span></th>
 
-                            @foreach($sections as $section)
-                                <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100 w-80 break-all">
-                                    <span class="text-gray-700 px-6 flex justify-center">{{ $section->name_section }}</span>
-                                    <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 170px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}" data-section="{{ $section->id_section }}">
-                                </th>
-                            @endforeach
-                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Средний балл</span></th>
+                            @if($status_page != 'Total' && $total_marks)
+                                @foreach($sections as $section)
+                                    <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100 w-80 break-all">
+                                        <span class="text-gray-700 px-6 flex justify-center">{{ $section->name_section }}</span>
+                                        <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 170px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}" data-section="{{ $section->id_section }}">
+                                    </th>
+                                @endforeach
+                                <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Средний балл</span></th>
+                            @endif
+
+                            @if($status_page == 'Total')
+                                @foreach($partitions as $partition)
+                                    @if($partition->status != 'Total')
+                                        <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100 w-80 break-all">
+                                            <span class="text-gray-700 px-6 flex justify-center">{{ $partition->name }}</span>
+                                        </th>
+                                    @endif
+                                @endforeach
+                            @endif
                         </tr>
                         </thead>
 
                         <tbody>
 
-                            @foreach($listeners as $listener)
-                                <tr class="text-center">
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->id_listener }}</span></td>
-                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center w-80">{{ $listener->user->name }}</span></td>
+                            @if(($listeners && $sections) || ($status_page == 'Total'))
+                                @foreach($listeners as $listener)
+                                    <tr class="text-center">
+                                        <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $listener->id_listener }}</span></td>
+                                        <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center w-80">{{ $listener->user->name }}</span></td>
 
-                                    @foreach($sections as $section)
-                                        @foreach($marks as $mark)
-                                            @if ($section->id_section == $mark->id_section)
-                                                @if($mark->id_listener == $listener->id_listener)
-                                                    <td class="border-dashed border-t border-gray-200">
-                                                        <select style="width: 100px;" class="select">
-                                                            @foreach($possible_marks as $possible_mark => $value)
-                                                                <option value="{{ $possible_mark . '|' . $mark->id . '|' . $listener->id_listener }}"
-                                                                        @if($possible_mark == $mark->mark) selected @endif>{{ $value }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                @endif
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                    <td class="border-dashed border-t border-gray-200">
-                                        <label>
-                                            <input type="text" id="average-marks{{$listener->id_listener}}" value="" class="average-marks" readonly>
-                                        </label>
-                                    </td>
-                                </tr>
-                            @endforeach
-
-
+                                        @if($status_page == 'Total')
+                                            @foreach($headers_sections as $header_section)
+                                                @foreach($total_marks as $total_mark)
+                                                    @if($total_mark->section_id == $header_section->id_section && $total_mark->listener_id == $listener->id_listener)
+                                                        <td class="border-dashed border-t border-gray-200">
+                                                            <input type="text" class="partition-mark w-24 mt-3" value="{{ $total_mark->mark }}" readonly>
+                                                        </td>
+                                                    @endif
+                                                @endforeach
+                                            @endforeach
+                                        @else
+                                            @foreach($sections as $section)
+                                                @foreach($marks as $mark)
+                                                    @if ($section->id_section == $mark->id_section)
+                                                        @if($mark->id_listener == $listener->id_listener)
+                                                            @if($section->status == 'Total')
+                                                                <td class="border-dashed border-t border-gray-200 flex justify-center">
+                                                                    <input type="text" id="partition-mark{{ $listener->id_listener }}" class="partition-mark w-24 mt-3"
+                                                                           @if($mark->mark) value="{{ $mark->mark }} " @else data-check="false" @endif
+                                                                           data-id="{{ $listener->id_listener }}" data-section="{{ $section->id_section }}">
+                                                                </td>
+                                                            @else
+                                                                <td class="border-dashed border-t border-gray-200">
+                                                                    <select style="width: 100px;" class="select">
+                                                                        @foreach($possible_marks as $possible_mark => $value)
+                                                                            <option value="{{ $possible_mark . '|' . $mark->id . '|' . $listener->id_listener }}"
+                                                                                    @if($possible_mark == $mark->mark) selected @endif>{{ $value }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </td>
+                                                            @endif
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            @endforeach
+                                            <td class="border-dashed border-t border-gray-200">
+                                                <input type="text" id="average-marks{{ $listener->id_listener }}" value="" class="average-marks" readonly>
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
 
-                    @if($group_id == 0)
+                    @if($group_id == 0 && !$listeners)
                         @component('components.no_data_message') @endcomponent
                     @endif
 
@@ -122,7 +167,6 @@
                         <tr class="text-center">
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">#</span></th>
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Дата</span></th>
-                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Кол-во часов</span></th>
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Тема</span></th>
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Описание темы</span></th>
                             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100 text-center"><span class="text-gray-700 px-6 py-3 flex items-center">Изменение</span></th>
@@ -130,30 +174,31 @@
                         </thead>
 
                         <tbody>
-                        @foreach($sections as $section)
-                            <tr>
-                                <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->id_section }}</span></td>
-                                <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</span></td>
-                                <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->number_hours }}</span></td>
-                                <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->name_section }}</span></td>
-                                <td class="border-dashed border-t border-gray-200">
-                                        <span class="text-gray-700 px-6 py-3 flex items-center">
-                                            <textarea cols="40" rows="3" readonly>{{ $section->description_section }}</textarea>
-                                        </span>
-                                </td>
-                                <td class="border-dashed border-t border-gray-200">
-                                    <button type="button" class="border rounded-full py-2 px-4 text-sm font-semibold text-gray-700 hover:bg-gray-50 edit-modal" onclick="openModal();"
-                                            data-id="{{ $section->id_section }}" data-hours="{{ $section->number_hours }}"
-                                            data-name="{{ $section->name_section }}" data-description="{{ $section->description_section }}"
-                                            data-date="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}">Изменить</button>
-                                </td>
-                            </tr>
-                        @endforeach
+                        @if($sections)
+                            @foreach($sections as $section)
+                                <tr>
+                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->id_section }}</span></td>
+                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</span></td>
+                                    <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->name_section }}</span></td>
+                                    <td class="border-dashed border-t border-gray-200">
+                                            <span class="text-gray-700 px-6 py-3 flex items-center">
+                                                <textarea cols="40" rows="3" readonly>{{ $section->description_section }}</textarea>
+                                            </span>
+                                    </td>
+                                    <td class="border-dashed border-t border-gray-200">
+                                        <button type="button" class="border rounded-full py-2 px-4 text-sm font-semibold text-gray-700 hover:bg-gray-50 edit-modal" onclick="openModal();"
+                                                data-id="{{ $section->id_section }}"
+                                                data-name="{{ $section->name_section }}" data-description="{{ $section->description_section }}"
+                                                data-date="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}">Изменить</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
 
                     </table>
 
-                    @if($group_id == 0)
+                    @if($group_id == 0 && !$sections)
                         @component('components.no_data_message') @endcomponent
                     @endif
 
@@ -161,11 +206,20 @@
 
             </form>
 
+            <div class="third-part mt-14">
+                <h2 class="text-center text-3xl py-4 mb-10">Статистика</h2>
+            </div>
+
+            <div class="w-full h-99">
+                {!! $chart->container() !!}
+                {!! $chart->script() !!}
+            </div>
+
         </div>
     </div>
 
     @include('educator.include.modal')
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/datatable.js') }}"></script>
     <script src="{{ asset('js/editReportCard.js') }}"></script>

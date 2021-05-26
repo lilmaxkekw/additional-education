@@ -23,11 +23,6 @@
                         <span class="text-sm font-medium text-red-500" id="date_section_error"></span>
                     </div>
                     <div class="mt-2">
-                        <label for="number_hours" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Количество часов</label>
-                        <input value="" id="number_hours" type="text" name="number_hours" placeholder="Количество часов на данную тему" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-                        <span class="text-sm font-medium text-red-500" id="number_hours_error"></span>
-                    </div>
-                    <div class="mt-2">
                         <label for="name_section" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Название занятия</label>
                         <input value="" id="name_section" type="text" name="name_section" placeholder="Введите название занятия" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
                         <span class="text-sm font-medium text-red-500" id="name_section_error"></span>

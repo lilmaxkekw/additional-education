@@ -13,15 +13,17 @@ class CreateSectionsTable extends Migration
      */
     public function up()
     {
+        //Темы
         Schema::create('sections', function (Blueprint $table) {
             $table->bigIncrements('id_section');
-            $table->string('number_hours');
+            //$table->string('number_hours');
             $table->string('name_section');
             $table->string('description_section');
             $table->date('date_section');
-            $table->unsignedBigInteger('course_id');
+            $table->string('status')->default(NULL);
 
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->unsignedBigInteger('partition_id');
+            $table->foreign('partition_id')->references('id')->on('partitions');
 
             $table->timestamps();
             $table->softDeletes();

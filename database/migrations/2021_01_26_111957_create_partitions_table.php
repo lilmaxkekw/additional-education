@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePerformancesTable extends Migration
+class CreatePartitionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreatePerformancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('performances', function (Blueprint $table) {
+        //Разделы
+        Schema::create('partitions', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->string('mark')->nullable();
-
-            $table->unsignedBigInteger('listener_id');
-            $table->unsignedBigInteger('section_id');
+            $table->date('date_start');
+            $table->date('date_end');
+            $table->string('name');
+            $table->string('number_hours');
             $table->string('status')->default(NULL);
 
-            $table->foreign('listener_id')->references('id_listener')->on('listeners');
-            $table->foreign('section_id')->references('id_section')->on('sections');
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
 
             $table->timestamps();
             $table->softDeletes();
@@ -37,6 +37,6 @@ class CreatePerformancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('performances');
+        Schema::dropIfExists('partitions');
     }
 }

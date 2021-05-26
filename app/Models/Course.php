@@ -21,8 +21,8 @@ class Course extends Model
         return $this->hasMany('App\Models\Application');
     }
 
-    public function sections(){
-        return $this->hasMany('App\Models\Section');
+    public function partitions(){
+        return $this->hasMany('App\Models\Partition');
     }
 
     /**

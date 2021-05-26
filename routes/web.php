@@ -60,7 +60,9 @@ Route::group(['namespace' => 'Educator', 'prefix' => 'educator', 'middleware' =>
 
     Route::get('/account', 'EducatorController@show_account')->name('educator.account');
     Route::post('/account', 'EducatorController@edit_account')->name('educator.account');
-    Route::get('/report-card/{group?}', 'ReportCardController@groups')->name('report.card');
-    Route::post('/report-card/{group?}', 'ReportCardController@update_data')->name('report.card');
-    Route::patch('/report-card/{group?}', 'ReportCardController@edit_modal')->name('edit.report.card.modal');
+    Route::get('/report-card/{group?}', 'ReportCardController@groups')->name('report.card.first');
+    Route::get('/report-card/{group?}/partition/{partition?}', 'ReportCardController@groups')->name('report.card');
+    Route::post('/report-card/{group?}/partition/{partition?}', 'ReportCardController@update_data')->name('report.card');
+    Route::get('/report-card/{group?}/partition/{partition?}/', 'ReportCardController@groups')->name('report.card.partition');
+    Route::patch('/report-card/{group?}/partition/{partition?}', 'ReportCardController@edit_modal')->name('edit.report.card.modal');
 });

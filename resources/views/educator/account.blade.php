@@ -133,7 +133,7 @@
 
         <hr />
         <div class="w-full p-4 text-right text-gray-500">
-            <div class="md:w-3/12 text-center md:pl-6">
+            <div class="md:w-3/12 text-center mb-10 md:pl-6">
                 <button class="btnSaveAccount text-white w-full mx-auto max-w-sm rounded-md text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
                     <svg
                         fill="none"
