@@ -18,6 +18,7 @@
                         allowfullscreen></iframe>
             </div>
         </section>
+
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150">
             <path fill="#3b82f6" fill-opacity="1" d="M0,128L1440,64L1440,0L0,0Z"></path>
         </svg>
@@ -38,7 +39,7 @@
                          src="{{ asset('steps.svg') }}" alt="step">
 
                     <div class="lg:w-1/2 md:w-1/2 md:pr-6 md:p-10">
-                        @foreach($course->sections as $section)
+                        @foreach($course->partitions as $partition)
                             <div class="flex relative pb-12">
                                 <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
                                     <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
@@ -46,8 +47,8 @@
                                 <div
                                     class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10">{{ $loop->iteration }}</div>
                                 <div class="flex-grow pl-4">
-                                    <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">{{ $section->name_section }}</h2>
-                                    <p class="leading-relaxed">{{ $section->description_section }}</p>
+                                    <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">{{ $partition->name_section }}</h2>
+                                    <p class="leading-relaxed">{{ $partition->description_section }}</p>
                                 </div>
                             </div>
                         @endforeach
