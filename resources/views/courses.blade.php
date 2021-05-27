@@ -24,7 +24,7 @@
                                 <div class="h-44 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden"
                                      style="background-image: url(https://www.nesabamedia.com/wp-content/uploads/2018/07/cara-membuat-tabel-di-excel-1280x720.jpg); background-size: cover; background-position: center;">
                                     <div class="p-6">
-                                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $course->category->name_of_category }}</h2>
+{{--                                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $course->category->name_of_category }}</h2>--}}
                                         <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ $course->name_of_course }}</h1>
                                         <p class="leading-relaxed mb-3">{{ strlen($course->description_of_course) > 30 ? substr($course->description_of_course, 30) . '...' : $course->description_of_course }}</p>
                                     </div>

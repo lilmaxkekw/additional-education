@@ -7,7 +7,7 @@
     @component('components.tabs')
     @endcomponent
 
-    @if(empty($applications))
+    @if($applications->isEmpty())
         @component('components.no_data_message')
         @endcomponent
 

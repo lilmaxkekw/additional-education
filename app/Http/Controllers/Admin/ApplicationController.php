@@ -61,6 +61,7 @@ class ApplicationController extends Controller
                 Application::where('user_id', $user)->update([
                     'status_application' => 1
                 ]);
+
                 $success[] = $user;
             }else{
                 $error_data = ["пользователь ${user} уже записан на курс"];
