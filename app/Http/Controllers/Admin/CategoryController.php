@@ -20,7 +20,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::paginate(5);
-        // Кол-вл категорий
+        // Кол-во категорий
         $count = Category::count();
 
         return view('admin.categories.index', [

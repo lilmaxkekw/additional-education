@@ -61,11 +61,10 @@
             </div>
         </div>
 
-        <div class="w-100 h-100 mx-4">
+        <div class="w-full bg-white my-5 rounded-lg ml-4">
             {!! $chart->container() !!}
+            {!! $chart->script() !!}
         </div>
-
-        {!! $chart->script() !!}
 
         <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8 mx-4">
             <h2 class="text-xl text-blue-700 font-bold mb-4 lg:mb-6">Последние заявки</h2>
