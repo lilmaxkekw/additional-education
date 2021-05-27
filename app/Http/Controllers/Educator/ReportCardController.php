@@ -102,11 +102,11 @@ class ReportCardController extends BaseController
         }
 
         $chart->dataset('Количество присутствующих', 'bar', $number_attendees)->options([
-            'backgroundColor' => '#42d674'
+            'backgroundColor' => '#6EE7B7'
         ]);
 
         $chart->dataset('Количество отсутствующих', 'bar', $number_absentees)->options([
-            'backgroundColor' => '#d64265',
+            'backgroundColor' => '#FCA5A5',
         ]);
 
         return view('educator.report_card',
