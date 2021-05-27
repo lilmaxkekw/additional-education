@@ -60,6 +60,7 @@ Route::group(['namespace' => 'Educator', 'prefix' => 'educator', 'middleware' =>
 
     Route::get('/account', 'EducatorController@show_account')->name('educator.account');
     Route::post('/account', 'EducatorController@edit_account')->name('educator.account');
+    Route::post('/account/', 'EducatorController@upload_image')->name('educator.account.image');
     Route::get('/report-card/{group?}', 'ReportCardController@groups')->name('report.card.first'); //Дублирование для корректного оторбражения при выборе в сайдбаре
     Route::get('/report-card/{group?}/partition/{partition?}', 'ReportCardController@groups')->name('report.card');
     Route::post('/report-card/{group?}/partition/{partition?}', 'ReportCardController@update_data')->name('report.card');

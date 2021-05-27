@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email',
             'number_phone' => 'regex:/^\+7\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2}$/|min:16',
-            'photo' => 'file',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 

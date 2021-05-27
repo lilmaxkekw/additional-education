@@ -7,8 +7,8 @@
     <div class="antialiased sans-serif h-screen">
 
         <div class="container mx-auto py-6 px-4">
-            <h1 class="text-3xl py-4">Журнал успеваемости</h1>
-            <h1 class="text-2xl py-4" id="group-course">Курс группы: @if($course) {{ $course->name_of_course }} @else Выберите группу @endif</h1>
+            <h1 class="text-4xl font-normal text-blue-600 py-4">Журнал успеваемости</h1>
+            <h1 class="text-2xl py-4" id="group-course">Курс группы: @if($course) <text class="font-normal text-blue-600">{{ $course->name_of_course }} </text>  @else <text class="font-normal text-blue-600"> Выберите группу</text> @endif</h1>
 
             <div class="flex justify-between">
                 <div class="flex-1">
@@ -157,7 +157,7 @@
                 </div>
 
                 <div class="second-part mt-14">
-                    <h2 class="text-center text-3xl py-4 mb-10">Вторая часть журнала</h2>
+                    <h2 class="text-center py-4 mb-10 font-normal text-blue-600 text-4xl">Вторая часть журнала</h2>
                 </div>
 
                 <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative mt-14" style="height: 405px;">
@@ -207,10 +207,10 @@
             </form>
 
             <div class="third-part mt-14">
-                <h2 class="text-center text-3xl py-4 mb-10">Статистика</h2>
+                <h2 class="text-center py-4 mb-10 font-normal text-blue-600 text-4xl">Посещаемость раздела</h2>
             </div>
 
-            <div class="w-full h-99">
+            <div class="w-full h-99 bg-white">
                 {!! $chart->container() !!}
                 {!! $chart->script() !!}
             </div>

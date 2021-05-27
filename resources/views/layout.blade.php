@@ -192,7 +192,6 @@
     </nav>
 
     <div class="flex-1 sm:mx-12 sm:my-12">
-        @include('educator.include.message')
         @yield('content')
     </div>
 </div>
