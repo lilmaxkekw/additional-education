@@ -28,7 +28,6 @@
             <table class="min-w-full">
                 <thead>
                 <tr class="text-center">
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">фотка</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">ФИО</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Дата рождения</th>
                 </tr>
@@ -41,19 +40,14 @@
                                     <span>-</span>
 
                                     @else
-                                        <!-- TODO -->
-                                        <img class="inline-block h-12 w-12 rounded-full" @if(empty(auth()->user()->photo)) src="/user.svg" @else src="1" @endif alt="">
+                                        <img class="inline-block h-12 w-12 rounded-full" @if(empty($listener->user->photo)) src="{{ asset('user.jpg') }}" @else src="{{ Storage::url($listener->user->photo) }}" @endif alt="">
+                                        <div class="text-sm leading-5 text-blue-900">{{ $listener->user->name }}</div>
+
                                 @endif
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                <div class="text-sm leading-5 text-blue-900">{{ $listener->user->name }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                                 <div class="text-sm leading-5 text-blue-900">{{ $listener->user->email }}</div>
                             </td>
-{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">--}}
-{{--                                <div class="text-sm leading-5 text-blue-900">{{ $listener->user->app }}</div>--}}
-{{--                            </td>--}}
                         </tr>
                     @endforeach
                 </tbody>
@@ -93,8 +87,5 @@
             })
         })
     </script>
-
-
-
 
 @endsection

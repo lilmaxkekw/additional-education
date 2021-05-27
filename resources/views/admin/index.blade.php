@@ -54,14 +54,14 @@
                         </div>
                         <div class="flex flex-col flex-grow ml-4">
                             <div class="text-sm text-gray-500">Новых пользователей за сутки</div>
-                            <div class="font-bold text-lg">{{ $last_users }}</div>
+                            <div class="font-bold text-lg">{{ $new_users }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="w-full bg-white my-5 rounded-lg ml-4">
+        <div class="w-full bg-white my-5 rounded-lg">
             {!! $chart->container() !!}
             {!! $chart->script() !!}
         </div>
@@ -74,21 +74,29 @@
                         <thead class="text-left bg-blue-50">
                         <tr>
                             <th class="py-2 px-3 text-blue-700">ФИО</th>
-                            <th class="py-2 px-3 text-blue-700">Номер телефона</th>
+                            <th class="py-2 px-3 text-blue-700">Выбранный курс</th>
                             <th class="py-2 px-3 text-blue-700">Email</th>
-                            <th class="py-2 px-3 text-blue-700">Статус почты</th>
+                            <th class="py-2 px-3 text-blue-700">Номер телефона</th>
+                            <th class="py-2 px-3 text-blue-700">День рождения</th>
+                            <th class="py-2 px-3 text-blue-700">Место проживания</th>
+                            <th class="py-2 px-3 text-blue-700">Страховой номер</th>
+                            <th class="py-2 px-3 text-blue-700">Дата подачи заявки</th>
                             <th class="py-2 px-3 text-blue-700">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
-{{--                            @foreach($last_applications as $application)--}}
-{{--                                <tr>--}}
-{{--                                    <td class="py-3 px-3">{{ $application->id }}</td>--}}
-{{--                                  <span--}}
-{{--                                      class="bg-green-100 text-green-500 text-xs rounded-full px-3 py-1  w-16 inline-block text-center  uppercase">Done</span>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                            @endforeach--}}
+                            @foreach($last_applications as $application)
+                                <tr>
+                                    <td class="py-3 px-3">{{ $application->user->name }}</td>
+                                    <td class="py-3 px-3">{{ $application->course->name_of_course }}</td>
+                                    <td class="py-3 px-3">{{ $application->user->email }}</td>
+                                    <td class="py-3 px-3">{{ $application->user->number_phone }}</td>
+                                    <td class="py-3 px-3">{{ $application->birthday }}</td>
+                                    <td class="py-3 px-3">{{ $application->place_of_residence }}</td>
+                                    <td class="py-3 px-3">{{ $application->insurance_number }}</td>
+                                    <td class="py-3 px-3">{{ \Carbon\Carbon::parse($application->created_at)->format('d.m.Y') }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -97,7 +105,7 @@
                     @endcomponent
                 @endif
             </div>
-            <a href="{{ route('users.index') }}" class="font-bold text-blue-600 inline-block mt-5 hover:underline">View all orders</a>
+            <a href="{{ route('applications.index') }}" class="font-bold text-blue-600 inline-block mt-5 hover:underline">Все заявки</a>
         </div>
     </div>
 

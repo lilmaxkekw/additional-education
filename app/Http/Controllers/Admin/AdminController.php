@@ -13,16 +13,22 @@ class AdminController extends Controller
 {
     public function index()
     {
+        // количество новых заявок
         $new_applications = Application::where('status_application', '=', 0)->count();
+        // количество подтвержденных заявок
         $approved_applications = Application::where('status_application', '=', 1)->count();
+        // количество курсов
         $count_courses = Course::count();
+        // количество новых пользователей
+        $new_users = User::where('created_at', '>=', Carbon::now()->format('Y-m-d'))->count();
 
-        $last_users = User::where('created_at', '>=', Carbon::now()->format('Y-m-d'))->count();
-//        $last_applications = Application::where('created_at', '>=', Carbon::now()->format('Y-m-d'))->get();
+        // последние заявки
+//        $last_applications = Application::where('created_at', '>=', Carbon::now()->format('Y-m-d'))->sortByDesc('created_at');
+        $last_applications = Application::orderBy('created_at', 'desc')->where('created_at', '>=', Carbon::now()->format('Y-m-d'))->get();
 
-        // Chart
-        $courses = Course::all();
+        // диаграмма
         $chart = new PopularityOfCourses;
+        $courses = Course::all();
 
         $data = [];
         $applications = [];
@@ -44,7 +50,8 @@ class AdminController extends Controller
             'new_applications' => $new_applications,
             'approved_applications' => $approved_applications,
             'count_courses' => $count_courses,
-            'last_users' => $last_users,
+            'last_applications' => $last_applications,
+            'new_users' => $new_users,
             'chart' => $chart
         ]);
     }

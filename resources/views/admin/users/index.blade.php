@@ -106,8 +106,28 @@
                         <tr>
                             <td class="py-3 px-3">{{ $user->name }}</td>
                             <td class="py-3 px-3">{{ $user->email }}</td>
-                            <td class="py-3 px-3">{{ $user->email_verified_at }}</td>
-                            <td class="py-3 px-3">{{ $user->number_phone }}</td>
+                            <td class="py-3 px-3">
+                                @if(empty($user->email_verified_at))
+                                    <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                        <span class="relative text-xs align-middle">не подтвержден</span>
+
+                                        @else
+                                            <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative text-xs align-middle">подтвержден</span>
+                                @endif
+                            </td>
+                            <td class="py-3 px-3">{{ $user->role->name_role }}</td>
+                            <td class="py-3 px-3">
+                                @if(empty($user->number_phone))
+                                    <span>-</span>
+
+                                    @else
+                                        {{ $user->number_phone }}
+
+                                @endif
+                            </td>
                             <td class="py-3 px-3">
 {{--                                <a href="#editSectionModal" name="editSectionModal" data-name="{{ $section->name_section  }}" data-id="{{ $section->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>--}}
 {{--                                <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>--}}
