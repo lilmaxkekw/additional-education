@@ -29,11 +29,14 @@ class EducatorController extends BaseController
     {
 
         if ($request->has('image')){
+            //dd(auth()->user()->id.'.'.$request->image->extension());
             Storage::put(auth()->user()->id.'.'.$request->image->extension(), file_get_contents($request->image));
             User::find(auth()->user()->id)->update([
-                'photo' => auth()->user()->id.$request->image->extension(),
+                'photo' => auth()->user()->id.'.'.$request->image->extension(),
             ]);
         }
+
+        //dd(auth()->user());
 
 //        $imageName = time().'.'.$request->image->extension();
 //        $request->image->move(public_path('storage/app/images'), $imageName);

@@ -78,7 +78,8 @@ class ReportCardController extends BaseController
             }
         }
         //Все группы
-        $groups = Group::select('id', 'number_group')->orderBy('number_group')->get();
+        $groups = Group::with('course')->orderBy('number_group')->get();
+        //dd($groups);
 
         //Chart
         $tmp_marks = ['Пропуск'];

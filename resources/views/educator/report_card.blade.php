@@ -53,12 +53,16 @@
             @if($partitions)
                 <div class="bg-white overflow-x-scroll">
                     <nav class="flex flex-col sm:flex-row">
-                        @foreach($partitions as $partition)
-                            <a href="{{ route('report.card.partition', [$group->id, $partition->id]) }}">
-                                <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none btn-group @if($partition->id == $selected_partition && $selected_partition) text-blue-500 border-b-2 font-medium border-blue-500 @endif">
-                                    {{ $partition->name }}
-                                </button>
-                            </a>
+                        @foreach($groups as $group)
+                            @foreach($partitions as $partition)
+                                @if($group->course->id == $partition->course_id)
+                                    <a href="{{ route('report.card.partition', [$group->id, $partition->id]) }}">
+                                        <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none btn-group @if($partition->id == $selected_partition && $selected_partition) text-blue-500 border-b-2 font-medium border-blue-500 @endif">
+                                            {{ $partition->name }}
+                                        </button>
+                                    </a>
+                                @endif
+                            @endforeach
                         @endforeach
                     </nav>
                 </div>
