@@ -12,7 +12,8 @@ class Section extends Model
         'name_section',
         'description_section',
         'date_section',
-        'status'
+        'status',
+        'partition_id'
     ];
 
     public function performances(){

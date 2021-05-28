@@ -24,7 +24,6 @@ class SectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'number_hours' => 'required|numeric',
             'name_section' => 'required',
             'description_section' => 'required',
             'date_section' => 'required|date'
@@ -33,8 +32,6 @@ class SectionRequest extends FormRequest
 
     public function messages(){
         return [
-            'number_hours.required' => 'Кол-во часов обязательно для заполнения',
-            'number_hours.numeric' => 'Кол-во должно быть числом',
             'name_section.required' => 'Название раздела обязательно для заполнения',
             'description_section.required' => 'Описание раздела обязательно для заполнения',
             'date_section.required' => 'Дата проведения обязательно для заполнения'

@@ -79,7 +79,9 @@
                                 <button class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Войти</button>
                             </div>
                         </div>
-                        <a href="{{ route('register') }}" class="flex justify-end">Зарегистрироваться</a>
+                        <div class="flex justify-end">
+                        <a href="{{ route('register') }}">Зарегистрироваться</a>
+                        </div>
                     </div>
                 </div>
             </div>

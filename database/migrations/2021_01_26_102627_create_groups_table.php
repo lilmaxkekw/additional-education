@@ -18,6 +18,7 @@ class CreateGroupsTable extends Migration
             $table->string('number_group');
             $table->date('start_date');
             $table->date('end_date');
+            $table->boolean('status_group')->default(0);
 
             $table->unsignedBigInteger('course_id');
 

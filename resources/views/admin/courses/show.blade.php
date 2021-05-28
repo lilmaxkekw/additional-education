@@ -67,64 +67,14 @@
         </div>
     </div>
 
+    <!-- Partitions -->
     <h1 class="text-2xl font-normal text-grey-900 mt-5">Разделы</h1>
 
     <div class="container mb-2">
         <div class="flex justify-end">
-            <a href="#addSectionModal" name="addSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Добавить раздел</a>
+            <a href="#addPartitionModal" name="addPartitionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Добавить раздел</a>
         </div>
     </div>
-
-{{--    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">--}}
-{{--        <div class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">--}}
-{{--            <table class="min-w-full" id="datatable-example">   <!-- id="table" -->--}}
-{{--                <thead>--}}
-{{--                <tr>--}}
-{{--                    <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Название раздела</th>--}}
-{{--                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Описание раздела</th>--}}
-{{--                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Кол-во часов</th>--}}
-{{--                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Дата проведения</th>--}}
-{{--                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">Действие</th>--}}
-{{--                </tr>--}}
-{{--                </thead>--}}
-{{--                <tbody class="bg-white">--}}
-{{--                    @foreach($course->sections as $section)--}}
-{{--                        <tr>--}}
-{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">--}}
-{{--                                <div class="text-sm leading-5 text-blue-900">{{ $section->name_section }}</div>--}}
-{{--                            </td>--}}
-{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">--}}
-{{--                                <div class="text-sm leading-5 text-blue-900">{{ $section->description_section }}</div>--}}
-{{--                            </td>--}}
-{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">--}}
-{{--                                <div class="text-sm leading-5 text-blue-900">{{ $section->number_hours }}</div>--}}
-{{--                            </td>--}}
-{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">--}}
-{{--                                <div class="text-sm leading-5 text-blue-900">{{ Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</div>--}}
-{{--                            </td>--}}
-{{--                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-center">--}}
-{{--                                <a href="#editSectionModal" name="editSectionModal" data-name="{{ $section->name_section  }}" data-id="{{ $section->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>--}}
-{{--                                <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-{{--                    @endforeach--}}
-{{--                </tbody>--}}
-{{--            </table>--}}
-{{--            @if(! $course->sections->isEmpty())--}}
-{{--                <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">--}}
-{{--                    <div>--}}
-{{--                        <p class="text-sm leading-5 text-blue-500">--}}
-{{--                            Всего записей--}}
-{{--                            <span class="font-medium">{{ $count }}</span>--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--                @else--}}
-{{--                    @component('components.no_data_message') @endcomponent--}}
-{{--            @endif--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
     <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8">
         <div class="overflow-x-auto">
@@ -133,25 +83,39 @@
                     <thead class="text-left bg-blue-50">
                     <tr>
                         <th class="py-2 px-3 text-blue-700">Название раздела</th>
-                        <th class="py-2 px-3 text-blue-700">Описание раздела</th>
-                        <th class="py-2 px-3 text-blue-700">Кол-во часов</th>
-                        <th class="py-2 px-3 text-blue-700">Дата проведения</th>
-                        <th class="py-2 px-3 text-blue-700">Действие</th>
+                        <th class="py-2 px-3 text-blue-700">Дата начала</th>
+                        <th class="py-2 px-3 text-blue-700">Дата конца</th>
+                        <th class="py-2 px-3 text-blue-700">Количество часов</th>
+                        <th class="py-2 px-3 text-blue-700 text-center">Действие</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
-                    @foreach($course->partitions as $partition)
-                        <tr>
-                            <td class="py-3 px-3">{{ $partition->name_section }}</td>
-                            <td class="py-3 px-3">{{ $partition->description_section }}</td>
-                            <td class="py-3 px-3">{{ $partition->date_section }}</td>
-                            <td class="py-3 px-3">{{ $partition->number_hours }}</td>
-                            <td class="py-3 px-3">
-                                <a href="#editSectionModal" name="editSectionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
-                                <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
-                            </td>
-                        </tr>
-                        @endforeach
+                        @foreach($course->partitions as $partition)
+                            <tr>
+                                <td class="py-3 px-3">{{ $partition->name }}</td>
+                                <td class="py-3 px-3">
+                                    @if($partition->date_start === null)
+                                        <span>-</span>
+
+                                        @else
+                                            <span>{{ \Carbon\Carbon::parse($partition->date_start)->format('d.m.Y') }}</span>
+                                    @endif
+                                </td>
+                                <td class="py-3 px-3">
+                                    @if($partition->date_end === null)
+                                        <span>-</span>
+
+                                    @else
+                                        <span>{{ \Carbon\Carbon::parse($partition->date_end)->format('d.m.Y') }}</span>
+                                    @endif
+                                </td>
+                                <td class="py-3 px-3">{{ $partition->number_hours }}</td>
+                                <td class="py-3 px-3 text-center">
+                                    <a href="#editPartitionModal" name="editPartitionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
+                                    <a href="#deletePartitionModal" data-id="" name="deletePartitionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -162,7 +126,14 @@
             </div>
         </div>
 
+        <!-- Sections -->
         <h1 class="text-2xl font-normal text-grey-900 mt-5">Темы</h1>
+
+        <div class="container mb-2">
+            <div class="flex justify-end">
+                <a href="#addSectionModal" name="addSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Добавить тему</a>
+            </div>
+        </div>
 
         <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8">
             <div class="overflow-x-auto">
@@ -170,25 +141,28 @@
                     <table class="min-w-full">
                         <thead class="text-left bg-blue-50">
                         <tr>
-                            <th class="py-2 px-3 text-blue-700">Название раздела</th>
+                            <th class="py-2 px-3 text-blue-700">Название темы</th>
                             <th class="py-2 px-3 text-blue-700">Описание раздела</th>
-                            <th class="py-2 px-3 text-blue-700">Кол-во часов</th>
+                            <th class="py-2 px-3 text-blue-700">Раздел</th>
                             <th class="py-2 px-3 text-blue-700">Дата проведения</th>
-                            <th class="py-2 px-3 text-blue-700">Действие</th>
+                            <th class="py-2 px-3 text-blue-700 text-center">Действие</th>
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
-                        @foreach($course->partitions as $partition)
-                            <tr>
-                                <td class="py-3 px-3">{{ $partition->name_section }}</td>
-                                <td class="py-3 px-3">{{ $partition->description_section }}</td>
-                                <td class="py-3 px-3">{{ $partition->date_section }}</td>
-                                <td class="py-3 px-3">{{ $partition->number_hours }}</td>
-                                <td class="py-3 px-3">
-                                    <a href="#editSectionModal" name="editSectionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
-                                    <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
-                                </td>
-                            </tr>
+{{--                        TODO --}}
+                        @foreach($partitions as $partition)
+                            @foreach($partition->sections as $section)
+                                <tr>
+                                    <td class="py-3 px-3">{{ $section->name_section }}</td>
+                                    <td class="py-3 px-3">{{ $section->description_section }}</td>
+                                    <td class="py-3 px-3">{{ $section->partition->name }}</td>
+                                    <td class="py-3 px-3">{{ \Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</td>
+                                    <td class="py-3 px-3 text-center">
+                                        <a href="#editSectionModal" name="editSectionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
+                                        <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endforeach
                         </tbody>
                     </table>
@@ -201,7 +175,7 @@
         </div>
 
         <!-- Edit course modal -->
-        <div id="editCourseModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+        <div id="editCourseModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
             <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
             <!-- modal -->
             <div class="bg-white rounded shadow-lg w-1/3">
@@ -297,7 +271,7 @@
         </div>
 
         <!-- Delete course modal -->
-         <div id="deleteModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+         <div id="deleteModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
             <div class="md:w-1/3 sm:w-full rounded-lg shadow-lg bg-white my-3">
                 <div class="flex justify-between border-b border-gray-100 px-5 py-4">
                     <div>
@@ -328,10 +302,10 @@
          </div>
 
         <!-- Add partition modal -->
-        <div id="addPartition" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+        <div id="addPartitionModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
             <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
             <!-- modal -->
-            <div class="bg-white rounded shadow-lg w-1/3">
+            <div class="bg-white rounded-lg shadow-lg w-1/3">
                 <!-- modal header -->
                 <div class="px-4 py-2 flex justify-between items-center">
                     <h2 class="">Добавление раздела</h2>
@@ -348,8 +322,71 @@
                     <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                         <div class="grid grid-cols-3 gap-6">
                             <div class="col-span-3 sm:col-span-2">
-                                <label for="name_section" class="block text-sm font-medium text-gray-700">
+                                <label for="partition_name" class="block text-sm font-medium text-gray-700">
                                     Название раздела
+                                </label>
+                                <div class="mt-1 flex rounded-md shadow-sm">
+                                    <input type="text" name="partition_name" id="partition_name"
+                                           class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <span class="text-sm font-medium text-red-500" id="name_section_error"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="date_start" class="block text-sm font-medium text-gray-700">Дата начала</label>
+                            <div class="mt-1">
+                                <input type="date" name="date_start" id="date_start"
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
+                        </div>
+                        <div>
+                            <label for="date_end" class="block text-sm font-medium text-gray-700">Дата конца</label>
+                            <div class="mt-1">
+                                <input type="date" name="date_end" id="date_end"
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
+                        </div>
+                        <div>
+                            <label for="number_hours" class="block text-sm font-medium text-gray-700">Кол-во часов</label>
+                            <div class="mt-1">
+                                <input type="text" name="number_hours" id="number_hours"
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center w-100 p-3">
+                    <button type="submit" id="btnPartitionSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add section modal -->
+        <div id="addSectionModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
+            <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
+            <!-- modal -->
+            <div class="bg-white rounded-lg shadow-lg w-1/3">
+                <!-- modal header -->
+                <div class="px-4 py-2 flex justify-between items-center">
+                    <h2 class="">Добавление темы</h2>
+                    <button class="text-black close-modal">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path
+                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                            ></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- modal body -->
+                <div class="p-4">
+                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+                        <div class="grid grid-cols-3 gap-6">
+                            <div class="col-span-3 sm:col-span-2">
+                                <label for="name_section" class="block text-sm font-medium text-gray-700">
+                                    Название темы
                                 </label>
                                 <div class="mt-1 flex rounded-md shadow-sm">
                                     <input type="text" name="name_section" id="name_section"
@@ -360,7 +397,7 @@
                         </div>
                         <div>
                             <label for="description_section" class="block text-sm font-medium text-gray-700">
-                                Описание раздела
+                                Описание темы
                             </label>
                             <div class="mt-1">
                                         <textarea id="description_section" name="description_section" rows="3"
@@ -369,14 +406,6 @@
                             <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
                         </div>
                         <div>
-                            <label for="number_hours" class="block text-sm font-medium text-gray-700">Кол-во часов</label>
-                            <div class="mt-1">
-                                <input type="text" name="number_hours" id="number_hours"
-                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                            </div>
-                            <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
-                        </div>
-                        <div>
                             <label for="date_section" class="block text-sm font-medium text-gray-700">Дата проведения</label>
                             <div class="mt-1">
                                 <input type="date" name="date_section" id="date_section"
@@ -384,70 +413,13 @@
                             </div>
                             <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
                         </div>
-                    </div>
-                </div>
-                <div class="flex justify-center items-center w-100 p-3">
-                    <button type="submit" id="btnSectionSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add section modal -->
-        <div id="addSectionModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
-            <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-            <!-- modal -->
-            <div class="bg-white rounded shadow-lg w-1/3">
-                <!-- modal header -->
-                <div class="px-4 py-2 flex justify-between items-center">
-                    <h2 class="">Добавление раздела</h2>
-                    <button class="text-black close-modal">
-                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                            <path
-                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
-                            ></path>
-                        </svg>
-                    </button>
-                </div>
-                <!-- modal body -->
-                <div class="p-4">
-                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                        <div class="grid grid-cols-3 gap-6">
-                            <div class="col-span-3 sm:col-span-2">
-                                <label for="name_section" class="block text-sm font-medium text-gray-700">
-                                    Название раздела
-                                </label>
-                                <div class="mt-1 flex rounded-md shadow-sm">
-                                    <input type="text" name="name_section" id="name_section"
-                                           class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                                </div>
-                                <span class="text-sm font-medium text-red-500" id="name_section_error"></span>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="description_section" class="block text-sm font-medium text-gray-700">
-                                Описание раздела
-                            </label>
-                            <div class="mt-1">
-                                    <textarea id="description_section" name="description_section" rows="3"
-                                              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
-                            </div>
-                            <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
-                        </div>
-                        <div>
-                            <label for="number_hours" class="block text-sm font-medium text-gray-700">Кол-во часов</label>
-                            <div class="mt-1">
-                                <input type="text" name="number_hours" id="number_hours"
-                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                            </div>
-                            <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
-                        </div>
-                        <div>
-                            <label for="date_section" class="block text-sm font-medium text-gray-700">Дата проведения</label>
-                            <div class="mt-1">
-                                <input type="date" name="date_section" id="date_section"
-                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                            </div>
-                            <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
+                        <div class="col-span-4 sm:col-span-3">
+                            <label for="partitions" class="block text-sm font-medium text-gray-700">Категория курса</label>
+                            <select id="partitions" name="partitions" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                @foreach($partitions as $partition)
+                                    <option value="{{ $partition->id }}">{{ $partition->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -475,6 +447,10 @@
 
                 $('a[name=editModal]').click(function(){
                     $('#editCourseModal').removeClass('hidden')
+                })
+
+                $('a[name=addPartitionModal]').click(function(){
+                    $('#addPartitionModal').removeClass('hidden')
                 })
 
                 $('a[name=addSectionModal]').click(function(){
@@ -533,24 +509,22 @@
 
                     $('#btnSectionSave').click(function(){
 
-
                         $.ajax({
                             url: '{{ route('sections.store') }}',
                             type: 'POST',
                             data: {
                                 _token: $('#csrf').val(),
-                                number_hours: $('#number_hours').val(),
                                 name_section: $('#name_section').val(),
                                 description_section: $('#description_section').val(),
                                 date_section: $('#date_section').val(),
-                                course_id: '{{ $course->id }}'
+                                partition_id: $('#partitions :selected').val()
                             },
                             success: function(data){
                                 let res = JSON.stringify(data)
 
                                 if(res){
                                     $('#modal').removeClass('hidden')
-                                    $('.addText').text(`Раздел "${name}" успешно добавлена!`)
+                                    $('.addText').text(`Тема "${name}" успешно добавлена!`)
                                 }
                             },
                             error: function(){
@@ -559,6 +533,33 @@
                         })
                     })
 
+                    $('#btnPartitionSave').click(function(){
+
+                        $.ajax({
+                            url: '{{ route('partitions.store') }}',
+                            type: 'POST',
+                            data: {
+                                _token: $('#csrf').val(),
+                                name: $('#partition_name').val(),
+                                date_start: $('#date_start').val(),
+                                date_end: $('#date_end').val(),
+                                number_hours: $('#number_hours').val(),
+                                course_id: '{{ $course->id }}'
+                            },
+                            success: function(data){
+                                let res = JSON.stringify(data)
+                                console.log(data)
+                                if(res){
+                                    $('#modal').removeClass('hidden')
+                                    $('.addText').text(`Раздел "${$('#name').val()}" успешно добавлена!`)
+                                }
+                            },
+                            error: function(){
+
+                            }
+                        })
+
+                    })
 
             })
         </script>

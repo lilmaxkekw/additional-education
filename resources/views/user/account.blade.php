@@ -185,7 +185,7 @@
                         let tmp = JSON.stringify(response);
 
                         $('#modal').removeClass('hidden')
-                        $('.addText').text(`Аккаунт успешно сохранен!`)
+                        $('.addText').text(`Данные успешно сохранены!`)
                     }
                 })
             });

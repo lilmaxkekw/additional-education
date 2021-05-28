@@ -12,7 +12,7 @@
         @endcomponent
 
         @else
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-5 cursor-default">
                 @foreach($applications as $application)
                         <div class="flex flex-col items-center justify-center bg-white p-4 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-2">
                             <h2 class="mt-4 font-normal text-xl">{{ $application->course->name_of_course }}</h2>
@@ -20,12 +20,12 @@
                                 @if($application->status_application === 0)
                                     <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
                                     <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                    <span class="relative text-xs align-middle">в ожидании</span>
+                                    <span class="relative text-xs align-middle">На рассмотрении</span>
 
                                     @else
                                         <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                        <span class="relative text-xs align-middle">подтверждено</span>
+                                        <span class="relative text-xs align-middle">Одобрено</span>
                                 @endif
                         </div>
                 @endforeach

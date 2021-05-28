@@ -42,7 +42,7 @@ class AdminController extends Controller
 
         $chart->title('Количество слушателей по курсам', 24,  '#3B82F6');
         $chart->dataset('Количество слушателей', 'bar', $applications)->options([
-            'backgroundColor' => '#6EE7B7'
+            'backgroundColor' => '#3B82F6'
         ]);
         $chart->loaderColor('#3B82F6');
 

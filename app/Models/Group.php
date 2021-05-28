@@ -9,7 +9,13 @@ class Group extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['number_group', 'start_date', 'end_date', 'course_id'];
+    protected $fillable = [
+        'number_group',
+        'start_date',
+        'end_date',
+        'status_group',
+        'course_id'
+    ];
 
     public function course(){
         return $this->belongsTo('App\Models\Course');

@@ -22,7 +22,8 @@ class SectionController extends Controller
             'name_section' => $request->name_section,
             'description_section' => $request->description_section,
             'date_section' => $request->date_section,
-            'status' => 'Total'
+            'status' => 'Total',
+            'partition_id' => $request->partition_id
         ]);
 
         return response()->json($data);

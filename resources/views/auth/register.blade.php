@@ -114,7 +114,9 @@
                                 </button>
                             </div>
                         </div>
-                        <a href="{{ route('login') }}" class="flex justify-end">Войти</a>
+                        <div class="flex justify-end">
+                            <a href="{{ route('login') }}">Войти</a>
+                        </div>
                     </div>
                 </div>
             </div>

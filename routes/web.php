@@ -36,6 +36,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('/users', 'UserController')->except('create');
     Route::resource('/sendmail', 'SendMailController')->except('create');
     Route::resource('/sections', 'SectionController')->except(['create', 'edit']);
+    Route::post('/partitions', 'PartitionController@store')->name('partitions.store');
     Route::get('/news', 'NewsController@show_news')->name('news.index');
 
 });

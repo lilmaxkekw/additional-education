@@ -16,7 +16,6 @@ class CreateSectionsTable extends Migration
         //Темы
         Schema::create('sections', function (Blueprint $table) {
             $table->bigIncrements('id_section');
-            //$table->string('number_hours');
             $table->string('name_section');
             $table->string('description_section');
             $table->date('date_section');

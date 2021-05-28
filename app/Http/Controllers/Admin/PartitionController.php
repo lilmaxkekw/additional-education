@@ -3,16 +3,27 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\PartitionRequest;
 use App\Models\Partition;
+use App\Models\Section;
 
 class PartitionController extends Controller
 {
-    public function store(){
-        Partition::create([
-
+    public function store(PartitionRequest $request){
+        $data = Partition::create([
+            'date_start' => $request->date_start,
+            'date_end' => $request->date_end,
+            'name' => $request->name,
+            'number_hours' => $request->number_hours,
+            'course_id' => $request->course_id
         ]);
 
-        return response()->json();
+        Section::create([
+            'name_section' => 'Итого',
+            'status' => 'Total',
+            'partition_id' => $data->id
+        ]);
+
+        return response()->json($data);
     }
 }

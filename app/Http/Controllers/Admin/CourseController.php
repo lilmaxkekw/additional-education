@@ -40,6 +40,7 @@ class CourseController extends Controller
         $course = Course::all()->last();
 
         Partition::create([
+            'name' => 'Итого',
             'status' => 'Total',
             'course_id' => $course->id
         ]);
@@ -55,13 +56,14 @@ class CourseController extends Controller
     {
         $course = Course::where('id', $id)->first();
         $categories = Category::all();
+        $partitions = Partition::where('course_id', $id)->get();
         $count = Section::count();
 
         return view('admin.courses.show', [
             'course' => $course,
             'categories' => $categories,
-//            'sections' => $sections,
-            'count' => $count
+            'count' => $count,
+            'partitions' => $partitions
         ]);
     }
 
