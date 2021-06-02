@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Application;
 use App\Models\User;
 use App\Models\Performance;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -90,5 +91,18 @@ class UserController extends Controller
         $applications = Application::where('user_id', auth()->user()->id)->get();
 //        dd(\DB::getQueryLog());
         return view('user.applications', ['applications' => $applications]);
+    }
+
+    public function upload_image(Request $request)
+    {
+        if ($request->has('image')){
+            //dd(auth()->user()->id.'.'.$request->image->extension());
+            Storage::put(auth()->user()->id.'.'.$request->image->extension(), file_get_contents($request->image));
+            User::find(auth()->user()->id)->update([
+                'photo' => auth()->user()->id.'.'.$request->image->extension(),
+            ]);
+        }
+
+        return back();
     }
 }

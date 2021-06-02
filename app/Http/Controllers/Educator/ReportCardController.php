@@ -145,7 +145,7 @@ class ReportCardController extends BaseController
             $count_sections = Section::where('partition_id', $request->session()->get('partition_id'))->count();
             $array_sections = Section::select('id_section')->where('status', NULL)->where('partition_id', $request->session()->get('partition_id'))->get();
             $sum_marks = Performance::where('listener_id', $id_listener)->whereIn('section_id', $array_sections)->sum('mark');
-            //Минус 1 из-за того что есть тема ИТОГО для вывода среднего балла, который может менять преподаватель
+
             $average_marks = $sum_marks / ($count_sections - 1);
             $request->session()->put('average_marks', $average_marks);
 

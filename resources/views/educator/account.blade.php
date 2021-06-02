@@ -33,7 +33,7 @@
         <div class="bg-gray-300 p-4 border-t-2 border-blue-500 rounded-t">
             <div class="max-w-sm mx-auto md:w-full md:mx-0">
                 <div class="inline-flex items-center space-x-4">
-                    <img class="inline-block h-56 w-56 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.jpg') }}" @else src="{{ Storage::url(auth()->user()->photo) }} {{--{{ asset('storage/app/images/'.auth()->user()->photo) }}--}}" @endif alt="">
+                    <img class="inline-block h-52 w-52 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.jpg') }}" @else src="{{ Storage::url(auth()->user()->photo) }} {{--{{ asset('storage/app/images/'.auth()->user()->photo) }}--}}" @endif alt="">
                     <h1 class="text-gray-600 text-xl">{{ $item->name }}</h1>
                 </div>
             </div>
@@ -164,22 +164,24 @@
                             </div>
                         </div>
                     </div>
-                    <button class="text-white w-full mx-auto max-w-sm rounded-md text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
-                        <svg
-                            fill="none"
-                            class="w-4 text-white mr-2"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                            />
-                        </svg>
-                        Загрузить
-                    </button>
+                    <div>
+                        <button class="mt-5 text-white w-full mx-auto max-w-sm rounded-md text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
+                            <svg
+                                fill="none"
+                                class="w-4 text-white mr-2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                                />
+                            </svg>
+                            Загрузить
+                        </button>
+                    </div>
                 </div>
             </form>
 

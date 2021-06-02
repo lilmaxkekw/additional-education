@@ -129,7 +129,60 @@
                     </div>
                 </div>
             </div>
+            <hr>
 
+            <form action="{{ route('user.account.image') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="md:inline-flex  space-y-4 md:space-y-0  w-full p-4 text-gray-500 items-center">
+                    <h2 class="md:w-1/3 mx-auto max-w-xl text-xl">Аватар</h2>
+                    <div class="md:w-2/3 mx-auto max-w-xl space-y-5">
+                        <div>
+                            <label class="text-sm text-gray-400">Аватар</label>
+                            <div class="w-full inline-flex border">
+                                <div class="pt-2 w-1/12 bg-gray-100">
+                                    <svg
+                                        fill="none"
+                                        class="w-6 text-gray-400 mx-auto"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                                        />
+                                    </svg>
+                                </div>
+                                <input
+                                    id="image"
+                                    name="image"
+                                    type="file"
+                                    class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="mt-5 text-white w-full mx-auto max-w-sm rounded-md text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
+                            <svg
+                                fill="none"
+                                class="w-4 text-white mr-2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                                />
+                            </svg>
+                            Загрузить
+                        </button>
+                    </div>
+                </div>
+            </form>
             <hr />
             <div class="w-full p-4 text-right text-gray-500">
                 <div class="md:w-3/12 text-center md:pl-6 mb-10">
