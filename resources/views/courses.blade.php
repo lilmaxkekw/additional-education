@@ -7,24 +7,23 @@
     <main>
         <section class="text-gray-600 body-font">
             <div class="text-center mt-10">
-                <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">Raw Denim Heirloom Man Braid</h1>
-                <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">Blue bottle crucifix vinyl
-                    post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh mi pug.
-                </p>
+                <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">Список курсов</h1>
+                <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">
+                На этой страницы вы можете ознакомится со всем доступными на данный момент курсами</p>
                 <div class="flex mt-6 justify-center">
                     <div class="w-16 h-1 rounded-full bg-blue-500 inline-flex"></div>
                 </div>
             </div>
-            <div class="container px-5 pt-12 mx-auto">
+            <div class="container xl:px-40 px-5 pt-12 mx-auto">
                 <div class="flex flex-wrap -m-4">
 
                     @foreach($courses as $course)
-                        <div class="p-4 md:w-1/2">
+                        <div class="lg:w-1/2 w-full p-4">
                             <a href="{{ route('course.show', $course->id) }}">
-                                <div class="h-44 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden"
-                                     style="background-image: url(https://www.nesabamedia.com/wp-content/uploads/2018/07/cara-membuat-tabel-di-excel-1280x720.jpg); background-size: cover; background-position: center;">
-                                    <div class="p-6">
-{{--                                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $course->category->name_of_category }}</h2>--}}
+                                <div class="hover:text-white border border-gray-200 p-6 rounded-lg text-left hover:bg-blue-500 hover:text-white course-card transition-colors"
+                                style="background-image: url(https://synergy.ru/assets/upload/v5/faculties/emblem/grey/9168.svg);">
+                                    <div class="max-w-xss">
+                                        {{--<h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $course->category->name_of_category }}</h2>--}}
                                         <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ $course->name_of_course }}</h1>
                                         <p class="leading-relaxed mb-3">{{ strlen($course->description_of_course) > 30 ? substr($course->description_of_course, 30) . '...' : $course->description_of_course }}</p>
                                     </div>

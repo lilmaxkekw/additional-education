@@ -20,7 +20,7 @@
                 </div>
                 <div class="flex flex-wrap md:-m-2 -m-1">
                     @foreach($files as $file)
-{{--                        @dd($files)--}}
+                        {{-- @dd($files)--}}
                         @if($loop->count === 2)
                             <div class="md:p-2 p-1 w-full">
                                 <a data-fancybox="gallery" href="https://evilarthas.com/wp-content/uploads/2020/01/Vidosiki-ot-Papsnaza-8-aya-podborka.jpg">
@@ -30,7 +30,8 @@
                         @else
                             <div class="md:p-2 p-1 w-1/2">
                                 <a data-fancybox="gallery" href="https://evilarthas.com/wp-content/uploads/2020/01/Vidosiki-ot-Papsnaza-8-aya-podborka.jpg">
-                                    <img src="{{ $file->getPathname() }}">
+                                    {{--<img src="{{ $file->getPathname() }}">--}}
+                                    <img src="{{ asset("img/" . $file->getRelativePathname()) }}">
                                 </a>
                             </div>
                         @endif

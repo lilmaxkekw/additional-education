@@ -1,7 +1,31 @@
 .course-card {
     transition-duration: 500ms;
+    background-size: 8rem;
+    background-position: right;
+    background-position-x: 95%;
+    background-repeat: no-repeat;
 }
 
 .course-card:hover h2, .course-card:hover p {
     color: #FFF;
 }
+
+.max-w-xss {
+    max-width: 15rem;
+}
+
+@media (min-width: 441px) and (max-width: 490px) {
+    .max-w-xss {
+        max-width: 45vw;
+    }
+}
+@media (max-width: 440px) {
+    .max-w-xss {
+        max-width: 30vw;
+    }
+}
+
+/* overflow: hidden;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical; */
