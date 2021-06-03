@@ -142,7 +142,7 @@
                         <thead class="text-left bg-blue-50">
                         <tr>
                             <th class="py-2 px-3 text-blue-700">Название темы</th>
-                            <th class="py-2 px-3 text-blue-700">Описание раздела</th>
+                            <th class="py-2 px-3 text-blue-700">Описание темы</th>
                             <th class="py-2 px-3 text-blue-700">Раздел</th>
                             <th class="py-2 px-3 text-blue-700">Дата проведения</th>
                             <th class="py-2 px-3 text-blue-700 text-center">Действие</th>

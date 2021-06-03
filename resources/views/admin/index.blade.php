@@ -67,7 +67,7 @@
         </div>
 
         <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8 mx-4">
-            <h2 class="text-xl text-blue-700 font-bold mb-4 lg:mb-6">Последние заявки</h2>
+            <h2 class="text-xl text-blue-700 font-bold mb-4 lg:mb-6">Последние заявки за сутки</h2>
             <div class="overflow-x-auto">
                 <div class="align-middle inline-block min-w-full overflow-hidden">
                     <table class="min-w-full">

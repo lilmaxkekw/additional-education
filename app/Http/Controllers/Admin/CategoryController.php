@@ -49,7 +49,6 @@ class CategoryController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-//    public function update($id, CategoryRequest $request)
     public function update(CategoryRequest $request)
     {
         $data = Category::where('id', $request->id)->update([

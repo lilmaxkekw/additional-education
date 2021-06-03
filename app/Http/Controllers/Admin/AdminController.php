@@ -23,7 +23,6 @@ class AdminController extends Controller
         $new_users = User::where('created_at', '>=', Carbon::now()->format('Y-m-d'))->count();
 
         // последние заявки
-//        $last_applications = Application::where('created_at', '>=', Carbon::now()->format('Y-m-d'))->sortByDesc('created_at');
         $last_applications = Application::orderBy('created_at', 'desc')->where('created_at', '>=', Carbon::now()->format('Y-m-d'))->get();
 
         // диаграмма

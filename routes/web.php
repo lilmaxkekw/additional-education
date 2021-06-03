@@ -53,7 +53,7 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth'
     Route::get('/performance', 'UserController@show_performance')->name('user.performance');
     Route::get('/applications', 'UserController@show_applications')->name('user.applications');
 
-    Route::get('/dashboard', 'UserController@dashboard')->name('user.dashboard');
+//    Route::get('/dashboard', 'UserController@dashboard')->name('user.dashboard');
 
 });
 

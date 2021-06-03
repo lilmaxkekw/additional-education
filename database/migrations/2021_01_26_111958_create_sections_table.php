@@ -17,8 +17,8 @@ class CreateSectionsTable extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->bigIncrements('id_section');
             $table->string('name_section');
-            $table->string('description_section');
-            $table->date('date_section');
+            $table->string('description_section')->nullable();
+            $table->date('date_section')->nullable();
             $table->string('status')->default(NULL);
 
             $table->unsignedBigInteger('partition_id');

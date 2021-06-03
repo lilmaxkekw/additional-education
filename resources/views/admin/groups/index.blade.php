@@ -20,11 +20,12 @@
                     <thead class="text-left bg-blue-50">
                     <tr>
                         <th class="py-2 px-3 text-blue-700">Название группы</th>
-                        <th class="py-2 px-3 text-blue-700 text-right">Курс</th>
-                        <th class="py-2 px-3 text-blue-700 text-right">Дата начала обучения</th>
-                        <th class="py-2 px-3 text-blue-700 text-right">Дата окончания обучения</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Подробнее</th>
+                        <th class="py-2 px-3 text-blue-700 text-center">Курс</th>
+                        <th class="py-2 px-3 text-blue-700 text-center">Дата начала обучения</th>
+                        <th class="py-2 px-3 text-blue-700 text-center">Дата окончания обучения</th>
+                        <th class="py-2 px-3 text-blue-700 text-center">Количество слушателей</th>
                         <th class="py-2 px-3 text-blue-700 text-center">Статус группы</th>
+                        <th class="py-2 px-3 text-blue-700 text-center">Подробнее</th>
                         <th class="py-2 px-3 text-blue-700 text-center">Действие</th>
                     </tr>
                     </thead>
@@ -33,10 +34,11 @@
                             <tr>
                                 <td class="py-3 px-3">{{ $group->number_group }}</td>
                                 <td class="py-3 px-3 text-right">{{ $group->course->name_of_course }}</td>
-                                <td class="py-3 px-3 text-right">{{ \Carbon\Carbon::parse($group->start_date)->format('d.m.Y')  }}</td>
-                                <td class="py-3 px-3 text-right">{{ \Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}</td>
+                                <td class="py-3 px-3 text-center">{{ \Carbon\Carbon::parse($group->start_date)->format('d.m.Y')  }}</td>
+                                <td class="py-3 px-3 text-center">{{ \Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}</td>
+                                <td class="py-3 px-3 text-center">0</td>
                                 <td class="py-3 px-3 text-right">
-                                    @if($group->status_group === 0)
+                                    @if(\Carbon\Carbon::parse($group->end_date) > \Carbon\Carbon::now())
                                         <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
                                         <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
                                         <span class="relative text-xs align-middle">Обучение не завершено</span>

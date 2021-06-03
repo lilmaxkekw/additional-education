@@ -7,7 +7,6 @@ use App\Http\Requests\GroupRequest;
 use App\Models\Course;
 use App\Models\Group;
 use App\Models\Listener;
-use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
