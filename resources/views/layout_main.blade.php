@@ -18,6 +18,7 @@
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <a class="mr-5 hover:text-gray-900" href="{{ route('home') }}">Главная</a>
             <a class="mr-5 hover:text-gray-900" href="{{ route('courses') }}">Курсы</a>
+            <a class="mr-5 hover:text-gray-900" href="{{ route('news') }}">Новости</a>
             <a class="mr-5 hover:text-gray-900" href="{{ route('contacts') }}">Контакты</a>
             <a class="mr-5 hover:text-gray-900" href="{{ route('gallery') }}">Галерея</a>
         </nav>

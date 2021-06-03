@@ -18,6 +18,8 @@ Route::get('/enrollment', 'MainController@enrollmentCourse')->name('user.enrollm
 Route::get('/courses', 'MainController@courses')->name('courses');
 Route::get('/contacts', 'MainController@contacts')->name('contacts');
 Route::get('/gallery', 'MainController@gallery')->name('gallery');
+Route::get('/news', 'MainController@news')->name('news');
+Route::get('/news/{id}', 'MainController@show_news')->name('news_item.show');
 
 // Маршруты авторизации и регистрации
 Auth::routes([

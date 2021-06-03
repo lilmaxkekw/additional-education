@@ -88,14 +88,42 @@
     <section class="text-gray-600 body-font">
         <div class="container xl:px-40 px-5 py-6 mx-auto">
             <div class="flex flex-wrap w-full mb-3 flex-col items-center text-center">
-                <h2 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Список курсов</h2>
+                <h2 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Последние новости</h2>
             </div>
             <div class="flex mt-2 mb-8 justify-center">
                 <div class="w-16 h-1 rounded-full bg-blue-500 inline-flex"></div>
             </div>
             <div class="flex flex-wrap -m-4">
 
-                @foreach($courses as $course)
+                @foreach($news as $news_item)
+                    <div class="lg:w-1/2 w-full p-4">
+                        <a href="{{ route('news_item.show', $news_item->id) }}">
+                            <div
+                                class="hover:text-white border border-gray-200 p-6 rounded-lg text-left hover:bg-blue-500 hover:text-white course-card transition-colors">
+                                <div class="max-w-xss">
+                                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ $news_item->news_title }}</h1>
+                                    <p class="leading-relaxed mb-3">{{ $news_item->short_content }}</p>
+                                    <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ \Carbon\Carbon::parse($news_item->created_at)->format('d.m.Y') }}</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
+    </section>
+
+    <section class="text-gray-600 body-font mb-6">
+        <div class="container xl:px-40 px-5 py-6 mx-auto">
+            <div class="flex flex-wrap w-full mb-3 flex-col items-center text-center">
+                <h2 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Последние курсы</h2>
+            </div>
+            <div class="flex mt-2 mb-8 justify-center">
+                <div class="w-16 h-1 rounded-full bg-blue-500 inline-flex"></div>
+            </div>
+            <div class="flex flex-wrap -m-4">
+                @foreach($last_courses as $course)
                     <div class="lg:w-1/2 w-full p-4">
                         <a href="{{ route('course.show', $course->id) }}">
                             <div class="border border-gray-200 p-6 rounded-lg text-left hover:bg-blue-500 course-card transition-colors" style="background-image: url(https://synergy.ru/assets/upload/v5/faculties/emblem/grey/9168.svg);">
@@ -109,7 +137,6 @@
                 @endforeach
 
             </div>
-            <button class="flex mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-lg">Загрузить ещё</button>
         </div>
     </section>
 </main>
