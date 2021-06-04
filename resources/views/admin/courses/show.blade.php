@@ -217,16 +217,6 @@
                             <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
                         </div>
 
-                        <div>
-                            <label for="number_of_course" class="block text-sm font-medium text-gray-700">
-                                Номер курса
-                            </label>
-                            <div class="mt-1 flex rounded-md shadow-sm">
-                                <input type="text" name="number_of_course" id="number_of_course"
-                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" value="{{ $course->number_of_course }}">
-                            </div>
-                            <span class="text-sm font-medium text-red-500" id="number_of_course_error"></span>
-                        </div>
                         <div class="col-span-4 sm:col-span-3">
                             <label for="categories" class="block text-sm font-medium text-gray-700">Категория курса</label>
                             <select id="categories" name="categories" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
