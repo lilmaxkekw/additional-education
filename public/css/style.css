@@ -1,3 +1,8 @@
+html,
+body {
+    font-family: "Rubik", sans-serif;
+}
+
 .course-card {
     transition-duration: 500ms;
     background-size: 8rem;
@@ -14,7 +19,17 @@
     max-width: 15rem;
 }
 
+@media (min-width: 1536px) {
+    .max-w-xss {
+        max-width: 21vw;
+    }
+}
 @media (min-width: 441px) and (max-width: 490px) {
+    .max-w-xss {
+        max-width: 45vw;
+    }
+}
+@media (min-width: 591px) and (max-width: 1023px) {
     .max-w-xss {
         max-width: 45vw;
     }
@@ -24,6 +39,7 @@
         max-width: 30vw;
     }
 }
+
 
 /* overflow: hidden;
 display: -webkit-box;

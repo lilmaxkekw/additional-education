@@ -20,11 +20,10 @@
                     @foreach($courses as $course)
                         <div class="lg:w-1/2 w-full p-4">
                             <a href="{{ route('course.show', $course->id) }}">
-                                <div class="hover:text-white border border-gray-200 p-6 rounded-lg text-left hover:bg-blue-500 hover:text-white course-card transition-colors"
-                                style="background-image: url(https://synergy.ru/assets/upload/v5/faculties/emblem/grey/9168.svg);">
+                                <div class="border border-gray-200 p-6 rounded-lg text-left hover:bg-blue-500 course-card transition-colors" style="background-image: url(https://synergy.ru/assets/upload/v5/faculties/emblem/grey/9168.svg);">
                                     <div class="max-w-xss">
                                         {{--<h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $course->category->name_of_category }}</h2>--}}
-                                        <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ $course->name_of_course }}</h1>
+                                        <h2 class="text-lg text-gray-900 font-medium title-font font-bold mb-2 ">{{ $course->name_of_course }}</h2>
                                         <p class="leading-relaxed mb-3">{{ strlen($course->description_of_course) > 30 ? substr($course->description_of_course, 30) . '...' : $course->description_of_course }}</p>
                                     </div>
                                 </div>
