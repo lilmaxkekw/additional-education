@@ -39,7 +39,7 @@
             </div>
         </section>
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150">
             <path fill="#3b82f6" fill-opacity="1" d="M0,115L1440,74L1440,170L0,170Z"></path>
         </svg>
         <section class="text-gray-600 body-font bg-blue-500">
@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
     </main>
 
 @endsection

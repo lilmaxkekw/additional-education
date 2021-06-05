@@ -29,14 +29,17 @@ body {
         max-width: 45vw;
     }
 }
-@media (min-width: 591px) and (max-width: 1023px) {
+@media (min-width: 491px) and (max-width: 1023px) {
     .max-w-xss {
-        max-width: 45vw;
+        max-width: 55vw;
     }
 }
 @media (max-width: 440px) {
     .max-w-xss {
-        max-width: 30vw;
+        max-width: 15rem;
+    }
+    .course-card {
+        background-position-x: 140%;
     }
 }
 

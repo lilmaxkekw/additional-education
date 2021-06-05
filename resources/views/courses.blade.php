@@ -5,10 +5,10 @@
 @section('content')
 
     <main>
-        <section class="text-gray-600 body-font">
+        <section class="text-gray-600 body-font mb-20">
             <div class="text-center mt-10">
                 <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">Список курсов</h1>
-                <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">
+                <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s px-10">
                 На этой странице вы можете ознакомится со всеми доступными на данный момент курсами</p>
                 <div class="flex mt-6 justify-center">
                     <div class="w-16 h-1 rounded-full bg-blue-500 inline-flex"></div>
@@ -35,7 +35,7 @@
             </div>
         </section>
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150">
             <path fill="#3b82f6" fill-opacity="1" d="M0,115L1440,74L1440,170L0,170Z"></path>
         </svg>
         <section class="text-gray-600 body-font bg-blue-500">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
     </main>
 
 @endsection

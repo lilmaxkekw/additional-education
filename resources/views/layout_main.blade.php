@@ -45,7 +45,7 @@
                         <a href="{{ route('login') }}" class="mr-5 text-gray-600 hover:text-gray-900">Войти</a>
                     </li>
                     <li>
-                        <a href="{{ route('register') }}" class="text-gray-600 hover:text-gray-900">Регистрация</a>
+                        <a href="{{ route('register') }}" class="mr-5 text-gray-600 hover:text-gray-900">Регистрация</a>
                     </li>
             @endauth
         </ul>
@@ -60,7 +60,7 @@
             <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
                 <img src="{{ asset('logo-full.png') }}" class="inline-block">
             </a>
-            <p class="text-sm text-gray-500 sm:mt-0 mt-4 ml-auto">© 2021 snowo</p>
+            <p class="text-sm text-gray-500 sm:mt-0 mt-4 ml-auto">© 2021 ПТК НовГУ</p>
         </div>
     </div>
 </footer>
