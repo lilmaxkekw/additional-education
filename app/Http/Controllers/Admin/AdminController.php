@@ -39,11 +39,11 @@ class AdminController extends Controller
 
         $chart->labels($data);
 
-        $chart->title('Количество слушателей по курсам', 24,  '#3B82F6');
+        $chart->title('Количество слушателей по курсам', 24,  '#2563EB');
         $chart->dataset('Количество слушателей', 'bar', $applications)->options([
-            'backgroundColor' => '#3B82F6'
+            'backgroundColor' => '#2563EB'
         ]);
-        $chart->loaderColor('#3B82F6');
+        $chart->loaderColor('#2563EB');
 
         return view('admin.index', [
             'new_applications' => $new_applications,

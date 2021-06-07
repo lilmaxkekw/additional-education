@@ -82,11 +82,11 @@
                 <table class="min-w-full">
                     <thead class="text-left bg-blue-50">
                     <tr>
-                        <th class="py-2 px-3 text-blue-700">Название раздела</th>
-                        <th class="py-2 px-3 text-blue-700">Дата начала</th>
-                        <th class="py-2 px-3 text-blue-700">Дата конца</th>
-                        <th class="py-2 px-3 text-blue-700">Количество часов</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Действие</th>
+                        <th class="py-2 px-3 text-blue-600">Название раздела</th>
+                        <th class="py-2 px-3 text-blue-600">Дата начала</th>
+                        <th class="py-2 px-3 text-blue-600">Дата конца</th>
+                        <th class="py-2 px-3 text-blue-600">Количество часов</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Действие</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
@@ -141,11 +141,11 @@
                     <table class="min-w-full">
                         <thead class="text-left bg-blue-50">
                         <tr>
-                            <th class="py-2 px-3 text-blue-700">Название темы</th>
-                            <th class="py-2 px-3 text-blue-700">Описание темы</th>
-                            <th class="py-2 px-3 text-blue-700">Раздел</th>
-                            <th class="py-2 px-3 text-blue-700">Дата проведения</th>
-                            <th class="py-2 px-3 text-blue-700 text-center">Действие</th>
+                            <th class="py-2 px-3 text-blue-600">Название темы</th>
+                            <th class="py-2 px-3 text-blue-600">Описание темы</th>
+                            <th class="py-2 px-3 text-blue-600">Раздел</th>
+                            <th class="py-2 px-3 text-blue-600">Дата проведения</th>
+                            <th class="py-2 px-3 text-blue-600 text-center">Действие</th>
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">

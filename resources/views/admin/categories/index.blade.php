@@ -41,9 +41,9 @@
                 <table class="min-w-full">
                     <thead class="text-left bg-blue-50">
                     <tr>
-                        <th class="py-2 px-3 text-blue-700">Название категории</th>
-                        <th class="py-2 px-3 text-blue-700 text-right">Дата создания</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Действие</th>
+                        <th class="py-2 px-3 text-blue-600">Название категории</th>
+                        <th class="py-2 px-3 text-blue-600 text-right">Дата создания</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Действие</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">

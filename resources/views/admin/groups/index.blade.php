@@ -19,14 +19,14 @@
                 <table class="min-w-full">
                     <thead class="text-left bg-blue-50">
                     <tr>
-                        <th class="py-2 px-3 text-blue-700">Название группы</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Курс</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Дата начала обучения</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Дата окончания обучения</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Количество слушателей</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Статус группы</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Подробнее</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Действие</th>
+                        <th class="py-2 px-3 text-blue-600">Название группы</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Курс</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Дата начала обучения</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Дата окончания обучения</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Количество слушателей</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Статус группы</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Подробнее</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Действие</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
@@ -36,7 +36,8 @@
                                 <td class="py-3 px-3 text-right">{{ $group->course->name_of_course }}</td>
                                 <td class="py-3 px-3 text-center">{{ \Carbon\Carbon::parse($group->start_date)->format('d.m.Y')  }}</td>
                                 <td class="py-3 px-3 text-center">{{ \Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}</td>
-                                <td class="py-3 px-3 text-center">0</td>
+{{--                                TODO --}}
+                                <td class="py-3 px-3 text-center">{{ \App\Models\Listener::where('group_id', $group->id)->count() }}</td>
                                 <td class="py-3 px-3 text-right">
                                     @if(\Carbon\Carbon::parse($group->end_date) > \Carbon\Carbon::now())
                                         <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
@@ -122,18 +123,6 @@
             <div class="p-4">
 
                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                    <div class="grid grid-cols-3 gap-6">
-                        <div class="col-span-3 sm:col-span-2">
-                            <label for="number_group" class="block text-sm font-medium text-gray-700">
-                                Название группы
-                            </label>
-                            <div class="mt-1 flex rounded-md shadow-sm">
-                                <input type="text" name="number_group" id="number_group"
-                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" :value="name_of_course[0] + '-' + new Date(start_date).getFullYear().toString().substr(-2)">
-                            </div>
-                            <span class="text-sm font-medium text-red-500" id="number_group_error"></span>
-                        </div>
-                    </div>
 
                     <div>
                         <label for="start_date" class="block text-sm font-medium text-gray-700">Дата начала обучения</label>
@@ -157,10 +146,22 @@
                         <label for="courses" class="block text-sm font-medium text-gray-700">Курс</label>
                         <select id="courses" name="courses" x-model="name_of_course" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             @foreach($courses as $id => $name_of_course)
-{{--                                <option value="{{ $id }}">{{ $name_of_course }}</option>--}}
                                 <option value="{{ $name_of_course }}" data-id="{{ $id }}">{{ $name_of_course }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="col-span-3 sm:col-span-2">
+                            <label for="number_group" class="block text-sm font-medium text-gray-700">
+                                Название группы
+                            </label>
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <input type="text" name="number_group" id="number_group"
+                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" :value="name_of_course[0] + '-' + new Date(start_date).getFullYear().toString().substr(-2)">
+                            </div>
+                            <span class="text-sm font-medium text-red-500" id="number_group_error"></span>
+                        </div>
                     </div>
                 </div>
             </div>

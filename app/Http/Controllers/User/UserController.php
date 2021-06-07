@@ -17,12 +17,8 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function index(){
-        return view('user.index');
-    }
-
-//    public function dashboard(){
-//        return view('user.dashboard');
+//    public function index(){
+//        return view('user.index');
 //    }
 
     /**
@@ -32,15 +28,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function enrollment_course(Request $request){
+
         $data = Application::create([
-//            'phone_number' => $request->number_phone,
             'birthday' => $request->birthday,
             'place_of_residence' => $request->place_of_residence,
-            'platform_address' => $request->platform_address,
             'insurance_number' => $request->insurance_number,
-            'course_id' => 1,
-            'user_id' => auth()->user()->id,
-            'status_application' => 0
+            'course_id' => $request->course_id,
+            'user_id' => auth()->user()->id
         ]);
 
         return response()->json($data);

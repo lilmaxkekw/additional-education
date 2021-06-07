@@ -105,13 +105,13 @@
 
     @if(!empty(auth()->user()))
 
-        <div id="modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
+        <div id="write_modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
             <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
             <!-- modal -->
             <div class="bg-white rounded-lg shadow-lg w-1/3">
                 <!-- modal header -->
                 <div class="px-4 py-2 flex justify-between items-center">
-                    <h2 class="">Добавление курса</h2>
+                    <h2 class="">Запись на курс</h2>
                     <button class="text-black close-modal">
                         <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                             <path
@@ -160,13 +160,16 @@
                     </div>
                 </div>
                 <div class="flex justify-center items-center w-100 p-3">
-                    <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
+                    <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Отправить</button>
                 </div>
             </div>
         </div>
 
     @endif
-    
+
+    @component('components.modal', ['gif' => asset('gifs/success.json')])
+    @endcomponent
+
     <script src="{{ asset('js/jquery.min.js') }}"></script>
 
     <script>
@@ -175,14 +178,37 @@
             $('input[name="course_id"]').val(url.substring(url.lastIndexOf('/') + 1));
         });
         $('.close-modal').click(function() {
-            $('#modal').addClass('hidden');
+            $('#write_modal').addClass('hidden');
         });
         $('.course_write').click(function() {
             @if(auth()->user())
-                $('#modal').removeClass('hidden');
+                $('#write_modal').removeClass('hidden');
             @else
                 window.location = '/login'
             @endif
         });
+
+        $('#btnSave').click(function(){
+
+            $.ajax({
+                url: '{{ route('user.enrollment')  }}',
+                type: 'POST',
+                data: {
+                    _token: $('#csrf').val(),
+                    birthday: $('#birthday').val(),
+                    place_of_residence: $('#place').val(),
+                    insurance_number: $('#insurance').val(),
+                    course_id: '{{ $course->id }}'
+                },
+                success: function(){
+                    $('#write_modal').addClass('hidden')
+                    $('.modal').removeClass('hidden')
+
+                }
+            })
+
+        })
+
+
     </script>
 @endsection

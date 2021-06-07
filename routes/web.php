@@ -14,7 +14,7 @@
 // Маршруты незарегистрированного пользователя
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/course/{id}', 'MainController@showCourse')->name('course.show');
-Route::get('/enrollment', 'MainController@enrollmentCourse')->name('user.enrollment');
+//Route::get('/enrollment', 'MainController@enrollmentCourse')->name('user.enrollment');
 Route::get('/courses', 'MainController@courses')->name('courses');
 Route::get('/contacts', 'MainController@contacts')->name('contacts');
 Route::get('/gallery', 'MainController@gallery')->name('gallery');
@@ -48,7 +48,7 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth'
 
     Route::get('/', 'UserController@index')->name('user.index');
     Route::post('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
-    Route::get('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
+//    Route::get('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
     Route::get('/account', 'UserController@account')->name('user.account');
     Route::post('/account', 'UserController@edit_account')->name('user.account');
     Route::post('/account/', 'UserController@upload_image')->name('user.account.image');

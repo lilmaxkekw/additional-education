@@ -67,21 +67,21 @@
         </div>
 
         <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8 mx-4">
-            <h2 class="text-xl text-blue-500 font-bold mb-4 lg:mb-6">Последние заявки за сутки</h2>
+            <h2 class="text-xl text-blue-600 font-bold mb-4 lg:mb-6">Последние заявки за сутки</h2>
             <div class="overflow-x-auto">
                 <div class="align-middle inline-block min-w-full overflow-hidden">
                     <table class="min-w-full">
                         <thead class="text-left bg-blue-50">
                         <tr>
-                            <th class="py-2 px-3 text-blue-500">ФИО</th>
-                            <th class="py-2 px-3 text-blue-500">Выбранный курс</th>
-                            <th class="py-2 px-3 text-blue-500">Email</th>
-                            <th class="py-2 px-3 text-blue-500">Номер телефона</th>
-                            <th class="py-2 px-3 text-blue-500">День рождения</th>
-                            <th class="py-2 px-3 text-blue-500">Место проживания</th>
-                            <th class="py-2 px-3 text-blue-700">Страховой номер</th>
-                            <th class="py-2 px-3 text-blue-700">Дата подачи заявки</th>
-                            <th class="py-2 px-3 text-blue-700">&nbsp;</th>
+                            <th class="py-2 px-3 text-blue-600">ФИО</th>
+                            <th class="py-2 px-3 text-blue-600">Выбранный курс</th>
+                            <th class="py-2 px-3 text-blue-600">Email</th>
+                            <th class="py-2 px-3 text-blue-600">Номер телефона</th>
+                            <th class="py-2 px-3 text-blue-600">День рождения</th>
+                            <th class="py-2 px-3 text-blue-600">Место проживания</th>
+                            <th class="py-2 px-3 text-blue-600">Страховой номер</th>
+                            <th class="py-2 px-3 text-blue-600">Дата подачи заявки</th>
+                            <th class="py-2 px-3 text-blue-600">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">

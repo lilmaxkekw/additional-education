@@ -25,7 +25,7 @@ class GroupController extends Controller
         return view('admin.groups.index', [
             'groups' => $groups,
             'count' => $count,
-            'courses' => $courses
+            'courses' => $courses,
         ]);
     }
 

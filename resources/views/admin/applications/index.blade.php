@@ -19,15 +19,15 @@
                 <table class="min-w-full">
                     <thead class="text-left bg-blue-50">
                     <tr>
-                        <th class="py-2 px-3 text-blue-700"></th>
-                        <th class="py-2 px-3 text-blue-700">ФИО</th>
-                        <th class="py-2 px-3 text-blue-700">Выбранный курс</th>
-                        <th class="py-2 px-3 text-blue-700">Email</th>
-                        <th class="py-2 px-3 text-blue-700">Номер телефона</th>
-                        <th class="py-2 px-3 text-blue-700">День рождения</th>
-                        <th class="py-2 px-3 text-blue-700">Место проживания</th>
-                        <th class="py-2 px-3 text-blue-700">Страховой номер</th>
-                        <th class="py-2 px-3 text-blue-700">Статус заявки</th>
+                        <th class="py-2 px-3 text-blue-600"></th>
+                        <th class="py-2 px-3 text-blue-600">ФИО</th>
+                        <th class="py-2 px-3 text-blue-600">Выбранный курс</th>
+                        <th class="py-2 px-3 text-blue-600">Email</th>
+                        <th class="py-2 px-3 text-blue-600">Номер телефона</th>
+                        <th class="py-2 px-3 text-blue-600">День рождения</th>
+                        <th class="py-2 px-3 text-blue-600">Место проживания</th>
+                        <th class="py-2 px-3 text-blue-600">Страховой номер</th>
+                        <th class="py-2 px-3 text-blue-600">Статус заявки</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
