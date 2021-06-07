@@ -17,10 +17,10 @@ class CreateApplicationsTable extends Migration
             $table->bigIncrements('id');
             //
 //            $table->string('phone_number', 12);
-            $table->date('birthday');
-            $table->string('place_of_residence');
-            $table->string('platform_address')->default('Большая Санкт-Петербургская ул., 46, Великий Новгород');
-            $table->integer('insurance_number');
+//            $table->date('birthday');
+//            $table->string('place_of_residence');
+//            $table->string('platform_address')->default('Большая Санкт-Петербургская ул., 46, Великий Новгород');
+//            $table->integer('insurance_number');
 //           $table->string('name_of_competence');
 
             //

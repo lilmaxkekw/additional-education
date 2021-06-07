@@ -47,6 +47,16 @@
                 @if(auth()->user()->role_id === 3)
                     <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
                         <span>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                               <path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+                            </svg>
+                        </span>
+                        <a href="{{ route('home') }}">
+                            <span class="ml-2">Перейти на сайт</span>
+                        </a>
+                    </li>
+                    <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
+                        <span>
                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                                 <path fill="currentColor" d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22L12 3Z" />
                             </svg>
