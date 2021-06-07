@@ -179,6 +179,12 @@
             integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
+            alert($("#number_group").val());
+
+            if ( $("#number_group").val() == "undefined-aN"){
+                $("#number_group").val("");
+            }
+
             $('.alert').delay(5000).fadeOut(200)
 
             $('a[name=modal]').click(function(){
