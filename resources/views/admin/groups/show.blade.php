@@ -4,7 +4,8 @@
 
 @section('content')
 
-    <h1 class="text-4xl font-normal text-grey-900 mb-5">Слушатели группы {{ $group->number_group }}</h1>
+{{--    <h1 class="text-4xl font-normal text-grey-900 mb-5">Слушатели группы {{ $group->number_group }}</h1>--}}
+    <h1 class="text-4xl font-normal text-blue-600">Слушатели группы {{ $group->number_group }}</h1>
 
 {{--    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">--}}
 {{--        <div class="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white shadow-lg px-12">--}}
@@ -73,10 +74,10 @@
                 <table class="min-w-full">
                     <thead class="text-left bg-blue-50">
                     <tr>
-                        <th class="py-2 px-3 text-blue-700 text-center">ФИО</th>
-                        <th class="py-2 px-3 text-blue-700">Email</th>
-                        <th class="py-2 px-3 text-blue-700">Email</th>
-                        <th class="py-2 px-3 text-blue-700">&nbsp;</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">ФИО</th>
+                        <th class="py-2 px-3 text-blue-600">Email</th>
+                        <th class="py-2 px-3 text-blue-600">Email</th>
+                        <th class="py-2 px-3 text-blue-600">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">

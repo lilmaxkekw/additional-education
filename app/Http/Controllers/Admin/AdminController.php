@@ -23,7 +23,6 @@ class AdminController extends Controller
         $new_users = User::where('created_at', '>=', Carbon::now()->format('Y-m-d'))->count();
 
         // последние заявки
-//        $last_applications = Application::where('created_at', '>=', Carbon::now()->format('Y-m-d'))->sortByDesc('created_at');
         $last_applications = Application::orderBy('created_at', 'desc')->where('created_at', '>=', Carbon::now()->format('Y-m-d'))->get();
 
         // диаграмма
@@ -40,11 +39,11 @@ class AdminController extends Controller
 
         $chart->labels($data);
 
-        $chart->title('Количество слушателей по курсам', 24,  '#3B82F6');
+        $chart->title('Количество слушателей по курсам', 24,  '#2563EB');
         $chart->dataset('Количество слушателей', 'bar', $applications)->options([
-            'backgroundColor' => '#3B82F6'
+            'backgroundColor' => '#2563EB'
         ]);
-        $chart->loaderColor('#3B82F6');
+        $chart->loaderColor('#2563EB');
 
         return view('admin.index', [
             'new_applications' => $new_applications,

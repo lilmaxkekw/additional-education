@@ -2,14 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Course;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
     public function index(){
-        $courses = Course::all();
-        return view('index', ['courses' => $courses]);
+        // все курсы
+        $last_courses = Course::orderBy('created_at', 'DESC')->paginate(6);
+
+//        $applications = [];
+//        foreach($courses as $course){
+//
+//            $applications[] = Application::with('courses')->where('status_application', 1)->where('course_id', $course->id)->count();
+//        }
+//        dd($applications);
+        // 4 последних новости
+        $news = News::orderBy('created_at', 'DESC')->paginate(4);
+        return view('index', [
+//            'courses' => $courses,
+            'news' => $news,
+            'last_courses' => $last_courses
+        ]);
     }
 
     public function showCourse($id){
@@ -36,6 +52,21 @@ class MainController extends Controller
 
     public function gallery() {
         return view('gallery');
+    }
+
+    public function news(){
+        $news = News::all();
+
+        return view('news', [
+            'news' => $news
+        ]);
+    }
+
+    public function show_news($id){
+        $news_item = News::find($id);
+        return view('show_news_item', [
+            'news_item' => $news_item
+        ]);
     }
 
 }

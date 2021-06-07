@@ -14,10 +14,12 @@
 // Маршруты незарегистрированного пользователя
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/course/{id}', 'MainController@showCourse')->name('course.show');
-Route::get('/enrollment', 'MainController@enrollmentCourse')->name('user.enrollment');
+//Route::get('/enrollment', 'MainController@enrollmentCourse')->name('user.enrollment');
 Route::get('/courses', 'MainController@courses')->name('courses');
 Route::get('/contacts', 'MainController@contacts')->name('contacts');
 Route::get('/gallery', 'MainController@gallery')->name('gallery');
+Route::get('/news', 'MainController@news')->name('news');
+Route::get('/news/{id}', 'MainController@show_news')->name('news_item.show');
 
 // Маршруты авторизации и регистрации
 Auth::routes([
@@ -46,14 +48,14 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth'
 
     Route::get('/', 'UserController@index')->name('user.index');
     Route::post('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
-    Route::get('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
+//    Route::get('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
     Route::get('/account', 'UserController@account')->name('user.account');
     Route::post('/account', 'UserController@edit_account')->name('user.account');
     Route::post('/account/', 'UserController@upload_image')->name('user.account.image');
     Route::get('/performance', 'UserController@show_performance')->name('user.performance');
     Route::get('/applications', 'UserController@show_applications')->name('user.applications');
 
-    Route::get('/dashboard', 'UserController@dashboard')->name('user.dashboard');
+//    Route::get('/dashboard', 'UserController@dashboard')->name('user.dashboard');
 
 });
 

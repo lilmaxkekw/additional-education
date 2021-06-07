@@ -10,7 +10,7 @@
                 <li>
                     <a href="{{ $paginator->previousPageUrl() }}"
                        rel="prev"
-                       class="px-4 py-3 block text-blue-500 rounded-l hover:text-white hover:bg-blue-500 focus:outline-none focus:shadow-outline"
+                       class="px-4 py-3 block text-blue-600 rounded-l hover:text-white hover:bg-blue-600 focus:outline-none focus:shadow-outline"
                        aria-label="@lang('pagination.previous')"
                     >
                         &larr;
@@ -32,12 +32,12 @@
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
                             <li aria-current="page">
-                                <span class="px-4 py-3 block text-white bg-blue-500">{{ $page }}</span>
+                                <span class="px-4 py-3 block text-white bg-blue-600">{{ $page }}</span>
                             </li>
                         @else
                             <li>
                                 <a href="{{ $url }}"
-                                   class="px-4 py-3 block text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none focus:shadow-outline"
+                                   class="px-4 py-3 block text-blue-600 hover:text-white hover:bg-blue-600 focus:outline-none focus:shadow-outline"
                                    aria-label="@lang('pagination.goto_page', ['page' => $page])"
                                 >
                                     {{ $page }}
@@ -53,7 +53,7 @@
                 <li>
                     <a href="{{ $paginator->nextPageUrl() }}"
                        rel="next"
-                       class="px-4 py-3 block text-blue-500 rounded-r hover:text-white hover:bg-blue-500 focus:outline-none focus:shadow-outline"
+                       class="px-4 py-3 block text-blue-600 rounded-r hover:text-white hover:bg-blue-600 focus:outline-none focus:shadow-outline"
                        aria-label="@lang('pagination.next')"
                     >
                         &rarr;

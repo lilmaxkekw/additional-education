@@ -41,16 +41,16 @@
                 <table class="min-w-full">
                     <thead class="text-left bg-blue-50">
                     <tr>
-                        <th class="py-2 px-3 text-blue-700">Название категории</th>
-                        <th class="py-2 px-3 text-blue-700 text-right">Дата создания</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Действие</th>
+                        <th class="py-2 px-3 text-blue-600">Название категории</th>
+                        <th class="py-2 px-3 text-blue-600 text-right">Дата создания</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Действие</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
                         @foreach($categories as $category)
                             <tr>
                                 <td class="py-3 px-3">{{ $category->name_of_category }}</td>
-                                <td class="py-3 px-3 text-right">{{ $category->created_at }}</td>
+                                <td class="py-3 px-3 text-right">{{ \Carbon\Carbon::parse($category->created_at)->format('d.m.Y') }}</td>
                                 <td class="py-3 px-3 text-center">
                                     <a href="#editModal" name="editModal" data-name="{{ $category->name_of_category }}" data-id="{{ $category->id }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
                                     <a href="#deleteModal" data-id="{{ $category->id }}" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none ml-3">Удалить</a>

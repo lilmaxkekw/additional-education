@@ -13,7 +13,7 @@
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                             </div>
                             <div class="flex flex-col flex-grow ml-4">
-                                <div class="text-sm text-gray-500">Новые заявки</div>
+                                <div class="text-sm text-gray-500">Заявок в ожидании</div>
                                 <div class="font-bold text-lg">{{ $new_applications }}</div>
                             </div>
                         </div>
@@ -67,21 +67,21 @@
         </div>
 
         <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8 mx-4">
-            <h2 class="text-xl text-blue-700 font-bold mb-4 lg:mb-6">Последние заявки</h2>
+            <h2 class="text-xl text-blue-600 font-bold mb-4 lg:mb-6">Последние заявки за сутки</h2>
             <div class="overflow-x-auto">
                 <div class="align-middle inline-block min-w-full overflow-hidden">
                     <table class="min-w-full">
                         <thead class="text-left bg-blue-50">
                         <tr>
-                            <th class="py-2 px-3 text-blue-700">ФИО</th>
-                            <th class="py-2 px-3 text-blue-700">Выбранный курс</th>
-                            <th class="py-2 px-3 text-blue-700">Email</th>
-                            <th class="py-2 px-3 text-blue-700">Номер телефона</th>
-                            <th class="py-2 px-3 text-blue-700">День рождения</th>
-                            <th class="py-2 px-3 text-blue-700">Место проживания</th>
-                            <th class="py-2 px-3 text-blue-700">Страховой номер</th>
-                            <th class="py-2 px-3 text-blue-700">Дата подачи заявки</th>
-                            <th class="py-2 px-3 text-blue-700">&nbsp;</th>
+                            <th class="py-2 px-3 text-blue-600">ФИО</th>
+                            <th class="py-2 px-3 text-blue-600">Выбранный курс</th>
+                            <th class="py-2 px-3 text-blue-600">Email</th>
+                            <th class="py-2 px-3 text-blue-600">Номер телефона</th>
+                            <th class="py-2 px-3 text-blue-600">День рождения</th>
+                            <th class="py-2 px-3 text-blue-600">Место проживания</th>
+                            <th class="py-2 px-3 text-blue-600">Страховой номер</th>
+                            <th class="py-2 px-3 text-blue-600">Дата подачи заявки</th>
+                            <th class="py-2 px-3 text-blue-600">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">

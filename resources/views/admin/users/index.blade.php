@@ -94,11 +94,11 @@
                 <table class="min-w-full">
                     <thead class="text-left bg-blue-50">
                     <tr>
-                        <th class="py-2 px-3 text-blue-700">ФИО</th>
-                        <th class="py-2 px-3 text-blue-700">Email</th>
-                        <th class="py-2 px-3 text-blue-700">Статус email</th>
-                        <th class="py-2 px-3 text-blue-700">Роль пользователя</th>
-                        <th class="py-2 px-3 text-blue-700">Номер телефона</th>
+                        <th class="py-2 px-3 text-blue-600">ФИО</th>
+                        <th class="py-2 px-3 text-blue-600">Email</th>
+                        <th class="py-2 px-3 text-blue-600">Статус email</th>
+                        <th class="py-2 px-3 text-blue-600">Роль пользователя</th>
+                        <th class="py-2 px-3 text-blue-600">Номер телефона</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">

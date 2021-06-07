@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="text-gray-600 body-font">
@@ -18,6 +19,7 @@
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <a class="mr-5 hover:text-gray-900" href="{{ route('home') }}">Главная</a>
             <a class="mr-5 hover:text-gray-900" href="{{ route('courses') }}">Курсы</a>
+            <a class="mr-5 hover:text-gray-900" href="{{ route('news') }}">Новости</a>
             <a class="mr-5 hover:text-gray-900" href="{{ route('contacts') }}">Контакты</a>
             <a class="mr-5 hover:text-gray-900" href="{{ route('gallery') }}">Галерея</a>
         </nav>
@@ -43,7 +45,7 @@
                         <a href="{{ route('login') }}" class="mr-5 text-gray-600 hover:text-gray-900">Войти</a>
                     </li>
                     <li>
-                        <a href="{{ route('register') }}" class="text-gray-600 hover:text-gray-900">Регистрация</a>
+                        <a href="{{ route('register') }}" class="mr-5 text-gray-600 hover:text-gray-900">Регистрация</a>
                     </li>
             @endauth
         </ul>
@@ -58,7 +60,7 @@
             <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
                 <img src="{{ asset('logo-full.png') }}" class="inline-block">
             </a>
-            <p class="text-sm text-gray-500 sm:mt-0 mt-4 ml-auto">© 2021 snowo</p>
+            <p class="text-sm text-gray-500 sm:mt-0 mt-4 ml-auto">© 2021 ПТК НовГУ</p>
         </div>
     </div>
 </footer>

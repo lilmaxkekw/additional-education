@@ -21,7 +21,11 @@ class Group extends Model
         return $this->belongsTo('App\Models\Course');
     }
 
-    public function listener(){
+//    public function listener(){
+//        return $this->belongsTo('App\Models\Listener');
+//    }
+
+    public function listeners(){
         return $this->belongsTo('App\Models\Listener');
     }
 

@@ -40,7 +40,6 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-//        TODO
         $users = $request->insert;
         $group = $request->group_id;
 

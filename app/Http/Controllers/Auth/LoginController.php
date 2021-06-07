@@ -58,9 +58,8 @@ class LoginController extends Controller
         }
 
         return redirect()->route('login')->withErrors([
-            'approval' => 'Неправильный email и/или пароль'
+            'approval' => 'Неверный email и/или пароль'
         ]);
-//        return redirect()->route('login')->with('error', $input);
     }
 
     public function logout(){

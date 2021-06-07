@@ -13,10 +13,10 @@
                 <table class="min-w-full">
                     <thead class="text-left bg-blue-50">
                     <tr>
-                        <th class="py-2 px-3 text-blue-700">Заголовок новости</th>
-                        <th class="py-2 px-3 text-blue-700">Контент</th>
-                        <th class="py-2 px-3 text-blue-700">Статус</th>
-                        <th class="py-2 px-3 text-blue-700">&nbsp;</th>
+                        <th class="py-2 px-3 text-blue-600">Заголовок новости</th>
+                        <th class="py-2 px-3 text-blue-600">Контент</th>
+                        <th class="py-2 px-3 text-blue-600">Статус</th>
+                        <th class="py-2 px-3 text-blue-600">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class News extends Model
 {
@@ -11,4 +12,8 @@ class News extends Model
         'content',
         'news_status'
     ];
+
+    protected function getShortContentAttribute(){
+        return Str::words((string) $this['content'], 20);
+    }
 }

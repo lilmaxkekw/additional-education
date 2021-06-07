@@ -82,11 +82,11 @@
                 <table class="min-w-full">
                     <thead class="text-left bg-blue-50">
                     <tr>
-                        <th class="py-2 px-3 text-blue-700">Название раздела</th>
-                        <th class="py-2 px-3 text-blue-700">Дата начала</th>
-                        <th class="py-2 px-3 text-blue-700">Дата конца</th>
-                        <th class="py-2 px-3 text-blue-700">Количество часов</th>
-                        <th class="py-2 px-3 text-blue-700 text-center">Действие</th>
+                        <th class="py-2 px-3 text-blue-600">Название раздела</th>
+                        <th class="py-2 px-3 text-blue-600">Дата начала</th>
+                        <th class="py-2 px-3 text-blue-600">Дата конца</th>
+                        <th class="py-2 px-3 text-blue-600">Количество часов</th>
+                        <th class="py-2 px-3 text-blue-600 text-center">Действие</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
@@ -141,11 +141,11 @@
                     <table class="min-w-full">
                         <thead class="text-left bg-blue-50">
                         <tr>
-                            <th class="py-2 px-3 text-blue-700">Название темы</th>
-                            <th class="py-2 px-3 text-blue-700">Описание раздела</th>
-                            <th class="py-2 px-3 text-blue-700">Раздел</th>
-                            <th class="py-2 px-3 text-blue-700">Дата проведения</th>
-                            <th class="py-2 px-3 text-blue-700 text-center">Действие</th>
+                            <th class="py-2 px-3 text-blue-600">Название темы</th>
+                            <th class="py-2 px-3 text-blue-600">Описание темы</th>
+                            <th class="py-2 px-3 text-blue-600">Раздел</th>
+                            <th class="py-2 px-3 text-blue-600">Дата проведения</th>
+                            <th class="py-2 px-3 text-blue-600 text-center">Действие</th>
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
@@ -217,16 +217,6 @@
                             <span class="text-sm font-medium text-red-500" id="description_of_course_error"></span>
                         </div>
 
-                        <div>
-                            <label for="number_of_course" class="block text-sm font-medium text-gray-700">
-                                Номер курса
-                            </label>
-                            <div class="mt-1 flex rounded-md shadow-sm">
-                                <input type="text" name="number_of_course" id="number_of_course"
-                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" value="{{ $course->number_of_course }}">
-                            </div>
-                            <span class="text-sm font-medium text-red-500" id="number_of_course_error"></span>
-                        </div>
                         <div class="col-span-4 sm:col-span-3">
                             <label for="categories" class="block text-sm font-medium text-gray-700">Категория курса</label>
                             <select id="categories" name="categories" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
