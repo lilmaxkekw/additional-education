@@ -122,6 +122,7 @@
                         </div>
                         <input
                             id="number_phone"
+                            value="{{ $item->number_phone }}"
                             type="text"
                             class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                             placeholder="+7(999) 999-99-99"
@@ -134,6 +135,7 @@
 
             <form action="{{ route('educator.account.image') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PATCH')
                 <div class="md:inline-flex  space-y-4 md:space-y-0  w-full p-4 text-gray-500 items-center">
                     <h2 class="md:w-1/3 mx-auto max-w-xl text-xl">Аватар</h2>
                     <div class="md:w-2/3 mx-auto max-w-xl space-y-5">
@@ -188,7 +190,7 @@
         <hr />
         <div class="w-full p-4 text-right text-gray-500">
             <div class="md:w-3/12 text-center mb-10 md:pl-6">
-                <button class="btnSaveAccount text-white w-full mx-auto max-w-sm rounded-md text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
+                <button class="btnSaveAccountEducator text-white w-full mx-auto max-w-sm rounded-md text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
                     <svg
                         fill="none"
                         class="w-4 text-white mr-2"
@@ -223,4 +225,70 @@
 {{--            </button>--}}
         </div>
     </div>
+
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="https://unpkg.com/imask"></script>
+
+        <script>
+            $(document).ready( function () {
+
+                var element = $('#number_phone').get(0)
+                var maskOptions = {
+                    mask: '+{7}(000)000-00-00'
+                }
+                var mask = IMask(element, maskOptions)
+
+            });
+
+            $(document).ready( function () {
+                $('.btnSaveAccountEducator').click(function (e) {
+                    e.preventDefault();
+
+                    $.ajax({
+                        url: "{{ route('educator.account') }}",
+                        dataType: 'JSON',
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('#csrf').val(),
+                        },
+                        data: {
+                            'name': $('#name').val(),
+                            'number_phone': $('#number_phone').val(),
+                            'email': $('#email').val(),
+                        },
+                        success: function (response) {
+                            let tmp = JSON.stringify(response);
+
+                            $('#modalSuccess').removeClass('hidden')
+                            $('.addText').text(`Аккаунт успешно сохранен!`)
+                            location.reload();
+                        },
+                        error: function (response) {
+                            let errors = response.responseJSON;
+
+                            $('#email').removeClass('border border-red-400');
+                            $('#name').removeClass('border border-red-400');
+                            $('#number_phone').removeClass('border border-red-400');
+
+                            $('#email_error').addClass('hidden');
+                            $('#name_error').addClass('hidden');
+                            $('#number_phone_error').addClass('hidden');
+
+                            if($.isEmptyObject(errors) === false) {
+                                $.each(errors.errors, function(key, value){
+                                    let mainInput = '#' + key,
+                                        errorInput = '#' + key + '_error';
+
+                                    $(mainInput).addClass('border border-red-400');
+                                    $(errorInput).removeClass('hidden');
+                                    $(errorInput).text(value);
+                                });
+                            }
+                        },
+                    })
+                });
+            });
+
+        </script>
+
 @endsection
