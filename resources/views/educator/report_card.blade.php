@@ -53,9 +53,10 @@
             @if($partitions)
                 <div class="bg-white overflow-x-scroll">
                     <nav class="flex flex-col sm:flex-row">
+
                         @foreach($groups as $group)
                             @foreach($partitions as $partition)
-                                @if($group->course->id == $partition->course_id)
+                                @if($group->course->id == $partition->course_id && $partition->status != 'Total')
                                     <a href="{{ route('report.card.partition', [$group->id, $partition->id]) }}">
                                         <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none btn-group @if($partition->id == $selected_partition && $selected_partition) text-blue-500 border-b-2 font-medium border-blue-500 @endif">
                                             {{ $partition->name }}
@@ -64,27 +65,56 @@
                                 @endif
                             @endforeach
                         @endforeach
+
+                        {{-- Перемещение раздела ИТОГО в самый конец списка --}}
+                        @foreach($groups as $group)
+                            @foreach($partitions as $partition)
+                                @if($group->course->id == $partition->course_id && $partition->status == 'Total')
+                                    <a href="{{ route('report.card.partition', [$group->id, $partition->id]) }}">
+                                        <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none btn-group @if($partition->id == $selected_partition && $selected_partition) text-blue-500 border-b-2 font-medium border-blue-500 @endif">
+                                            {{ $partition->name }}
+                                        </button>
+                                    </a>
+                                @endif
+                            @endforeach
+                        @endforeach
+
                     </nav>
                 </div>
             @endif
             <form>
                 <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
 
-                <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative" style="height: 405px;">
+                <div class="overflow-x-scroll bg-white rounded-lg shadow overflow-y-auto relative" style="height: 405px;">
 
-                    <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative overflow-x-auto" id="datatable-example">
+                    <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative overflow-x-scroll" id="datatable-example">
                         <thead class="text-center">
                         <tr>
-                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">#</span></th>
-                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">ФИО</span></th>
+                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center w-12">#</span></th>
+                            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center  w-12">ФИО</span></th>
 
                             @if($status_page != 'Total' && $total_marks)
+
+
                                 @foreach($sections as $section)
-                                    <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100 w-80 break-all">
-                                        <span class="text-gray-700 px-6 flex justify-center">{{ $section->name_section }}</span>
-                                        <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 170px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}" data-section="{{ $section->id_section }}">
-                                    </th>
+                                    @if($section->status != 'Total')
+                                        <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100 w-80 break-all">
+                                            <span class="text-gray-700 px-6 flex justify-center">{{ $section->name_section }}</span>
+                                            <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 170px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}" data-section="{{ $section->id_section }}">
+                                        </th>
+                                    @endif
                                 @endforeach
+
+                                {{-- Перемещение темы ИТОГО в самый конец списка --}}
+                                @foreach($sections as $section)
+                                    @if($section->status == 'Total')
+                                        <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100 w-80 break-all">
+                                            <span class="text-gray-700 px-6 flex justify-center">{{ $section->name_section }}</span>
+                                            <input type="date" class="edit-date shadow appearance-none border rounded py-1 px-3 text-grey-darker text-center" style="width: 170px;" value="{{ Carbon\Carbon::parse($section->date_section)->format('Y-m-d') }}" data-section="{{ $section->id_section }}">
+                                        </th>
+                                    @endif
+                                @endforeach
+
                                 <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100"><span class="text-gray-700 px-6 py-3 flex items-center">Средний балл</span></th>
                             @endif
 
@@ -92,7 +122,7 @@
                                 @foreach($partitions as $partition)
                                     @if($partition->status != 'Total')
                                         <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100 w-80 break-all">
-                                            <span class="text-gray-700 px-6 flex justify-center">{{ $partition->name }}</span>
+                                            <span class="text-gray-700 px-6 flex justify-center w-44">{{ $partition->name }}</span>
                                         </th>
                                     @endif
                                 @endforeach

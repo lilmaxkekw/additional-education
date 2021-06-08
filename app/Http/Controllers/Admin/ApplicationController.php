@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Listener;
+use App\Models\Partition;
 use App\Models\Performance;
 use App\Models\Section;
 use Carbon\Carbon;
@@ -71,9 +72,12 @@ class ApplicationController extends Controller
 
 
         $selected_course = Group::where('id', $group)->value('course_id');
-        $sections = Section::where('course_id', $selected_course)->get();
+        $partitions = Partition::select('id')->where('course_id', $selected_course)->where('status', NULL)->get();
+        $sections = Section::whereIn('partition_id', $partitions)->get();
+        $total_sections = Section::select('id_section')->whereIn('partition_id', $partitions)->where('status', 'Total')->get();
 
         $l = DB::table('listeners')->whereIn('user_id', $success)->get();
+       //dd($total_sections);
         foreach ($l as $item){
             foreach ($sections as $section){
                 Performance::create([
@@ -82,6 +86,21 @@ class ApplicationController extends Controller
                 ]);
             }
         }
+
+        Performance::whereIn('section_id', $total_sections)->update([
+            'status' => 'Total',
+        ]);
+
+
+//        foreach ($l as $item){
+//            foreach ($total_sections as $total_section){
+//                Performance::create([
+//                    'listener_id' => $item->id_listener,
+//                    'section_id' => $total_section->id_section,
+//                    'status' => 'Total',
+//                ]);
+//            }
+//        }
 
 
         // Проверка на ошибки
