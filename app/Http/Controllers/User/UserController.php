@@ -17,9 +17,6 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-//    public function index(){
-//        return view('user.index');
-//    }
 
     /**
      * Подача заявки на курс
@@ -28,11 +25,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function enrollment_course(Request $request){
-
         $data = Application::create([
-            'birthday' => $request->birthday,
-            'place_of_residence' => $request->place_of_residence,
-            'insurance_number' => $request->insurance_number,
             'course_id' => $request->course_id,
             'user_id' => auth()->user()->id
         ]);
@@ -57,16 +50,13 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function edit_account(UserRequest $request){
+    public function edit_account(Request $request){
+        //dd($request->all());
         $id = auth()->user()->id;
-        $data = $request->input();
-        $result = User::find($id)->update($data);
 
-        $response = [
-            'result' => $result,
-        ];
-
-        return response()->json($response);
+        $result = User::find($id)->update($request->all());
+        //dd($result, $id);
+        return response()->json($result);
     }
 
     /**

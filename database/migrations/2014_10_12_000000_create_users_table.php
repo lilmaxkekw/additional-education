@@ -22,6 +22,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('photo')->nullable();
 
+            //
+            $table->date('birthday')->nullable();
+            $table->string('place_of_residence')->nullable();
+//            $table->string('platform_address')->default('Большая Санкт-Петербургская ул., 46, Великий Новгород');
+            $table->integer('insurance_number')->nullable();
+
             $table->unsignedBigInteger('role_id')->default(1)->nullable();
             $table->foreign('role_id')->references('id')->on('roles');
 

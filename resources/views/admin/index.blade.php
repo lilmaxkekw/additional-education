@@ -91,9 +91,9 @@
                                     <td class="py-3 px-3">{{ $application->course->name_of_course }}</td>
                                     <td class="py-3 px-3">{{ $application->user->email }}</td>
                                     <td class="py-3 px-3">{{ $application->user->number_phone }}</td>
-                                    <td class="py-3 px-3">{{ $application->birthday }}</td>
-                                    <td class="py-3 px-3">{{ $application->place_of_residence }}</td>
-                                    <td class="py-3 px-3">{{ $application->insurance_number }}</td>
+                                    <td class="py-3 px-3">{{ \Carbon\Carbon::parse($application->user->birthday)->format('d.m.Y') }}</td>
+                                    <td class="py-3 px-3">{{ $application->user->place_of_residence }}</td>
+                                    <td class="py-3 px-3">{{ $application->user->insurance_number }}</td>
                                     <td class="py-3 px-3">{{ \Carbon\Carbon::parse($application->created_at)->format('d.m.Y') }}</td>
                                 </tr>
                             @endforeach

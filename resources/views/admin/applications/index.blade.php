@@ -39,8 +39,8 @@
                                 <td class="py-3 px-3">{{ $application->user->email }}</td>
                                 <td class="py-3 px-3">{{ $application->user->number_phone }}</td>
                                 <td class="py-3 px-3">{{ \Carbon\Carbon::parse($application->birthday)->format('d.m.Y') }}</td>
-                                <td class="py-3 px-3">{{ $application->place_of_residence }}</td>
-                                <td class="py-3 px-3">{{ $application->insurance_number }}</td>
+                                <td class="py-3 px-3">{{ $application->user->place_of_residence }}</td>
+                                <td class="py-3 px-3">{{ $application->user->insurance_number }}</td>
                                 <td class="py-3 px-3">
                                     @if($application->status_application === 0)
                                         <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">

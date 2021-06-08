@@ -5,13 +5,15 @@
 @section('content')
     <main>
         <section class="text-gray-600 body-font bg-blue-500">
+            <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
+
             <div class="container mx-auto flex px-5 pt-12 md:flex-row flex-col items-center">
                 <div class="flex flex-col text-center w-full text-white">
                     <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2">{{ $course->name_of_course }}</h1>
                     <h2 class="text-xs tracking-widest font-medium title-font mb-2 text-gray-300">{{ $course->category->name_of_category }}</h2>
                     <p class="lg:w-2/3 mx-auto leading-relaxed">{{ $course->description_of_course }}</p>
                     <div class="flex justify-center mt-10">
-                        <button class="inline-flex text-gray-700 bg-white border-0 py-2 px-6 focus:outline-none rounded text-lg course_write">Записаться</button>
+                        <button id="writeCourse" class="inline-flex text-gray-700 bg-white border-0 py-2 px-6 focus:outline-none rounded text-lg course_write">Записаться</button>
                     </div>
                 </div>
 
@@ -105,65 +107,65 @@
 
     @if(!empty(auth()->user()))
 
-        <div id="write_modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
-            <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
-            <!-- modal -->
-            <div class="bg-white rounded-lg shadow-lg w-1/3">
-                <!-- modal header -->
-                <div class="px-4 py-2 flex justify-between items-center">
-                    <h2 class="">Запись на курс</h2>
-                    <button class="text-black close-modal">
-                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                            <path
-                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
-                            ></path>
-                        </svg>
-                    </button>
-                </div>
-                <!-- modal body -->
-                <div class="p-4">
-                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                        <div class="grid grid-cols-3 gap-6">
-                            <div class="col-span-3 sm:col-span-2">
-                                <label for="birthday" class="block text-sm font-medium text-gray-700">
-                                    Дата рождения
-                                </label>
-                                <div class="mt-1 flex rounded-md shadow-sm">
-                                    <input type="date" name="birthday" id="birthday"
-                                        class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                                </div>
-                                <span class="text-sm font-medium text-red-500" id="birthday_error"></span>
-                            </div>
-                            <div class="col-span-3 sm:col-span-2">
-                                <label for="place" class="block text-sm font-medium text-gray-700">
-                                    Место жительства
-                                </label>
-                                <div class="mt-1 flex rounded-md shadow-sm">
-                                    <input type="text" name="place" id="place"
-                                        class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                                </div>
-                                <span class="text-sm font-medium text-red-500" id="place_error"></span>
-                            </div>
-                            <div class="col-span-3 sm:col-span-2">
-                                <label for="insurance" class="block text-sm font-medium text-gray-700">
-                                    ИНН
-                                </label>
-                                <div class="mt-1 flex rounded-md shadow-sm">
-                                    <input type="text" name="insurance" id="insurance"
-                                        class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                                </div>
-                                <span class="text-sm font-medium text-red-500" id="insurance_error"></span>
-                            </div>
-                            <input type="hidden" name="course_id">
-                            <input type="hidden" value="{{ auth()->user()->id }}" name="user_id">
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-center items-center w-100 p-3">
-                    <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Отправить</button>
-                </div>
-            </div>
-        </div>
+{{--        <div id="write_modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">--}}
+{{--            <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">--}}
+{{--            <!-- modal -->--}}
+{{--            <div class="bg-white rounded-lg shadow-lg w-1/3">--}}
+{{--                <!-- modal header -->--}}
+{{--                <div class="px-4 py-2 flex justify-between items-center">--}}
+{{--                    <h2 class="">Запись на курс</h2>--}}
+{{--                    <button class="text-black close-modal">--}}
+{{--                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">--}}
+{{--                            <path--}}
+{{--                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"--}}
+{{--                            ></path>--}}
+{{--                        </svg>--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--                <!-- modal body -->--}}
+{{--                <div class="p-4">--}}
+{{--                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">--}}
+{{--                        <div class="grid grid-cols-3 gap-6">--}}
+{{--                            <div class="col-span-3 sm:col-span-2">--}}
+{{--                                <label for="birthday" class="block text-sm font-medium text-gray-700">--}}
+{{--                                    Дата рождения--}}
+{{--                                </label>--}}
+{{--                                <div class="mt-1 flex rounded-md shadow-sm">--}}
+{{--                                    <input type="date" name="birthday" id="birthday"--}}
+{{--                                        class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">--}}
+{{--                                </div>--}}
+{{--                                <span class="text-sm font-medium text-red-500" id="birthday_error"></span>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-span-3 sm:col-span-2">--}}
+{{--                                <label for="place" class="block text-sm font-medium text-gray-700">--}}
+{{--                                    Место жительства--}}
+{{--                                </label>--}}
+{{--                                <div class="mt-1 flex rounded-md shadow-sm">--}}
+{{--                                    <input type="text" name="place" id="place"--}}
+{{--                                        class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">--}}
+{{--                                </div>--}}
+{{--                                <span class="text-sm font-medium text-red-500" id="place_error"></span>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-span-3 sm:col-span-2">--}}
+{{--                                <label for="insurance" class="block text-sm font-medium text-gray-700">--}}
+{{--                                    ИНН--}}
+{{--                                </label>--}}
+{{--                                <div class="mt-1 flex rounded-md shadow-sm">--}}
+{{--                                    <input type="text" name="insurance" id="insurance"--}}
+{{--                                        class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">--}}
+{{--                                </div>--}}
+{{--                                <span class="text-sm font-medium text-red-500" id="insurance_error"></span>--}}
+{{--                            </div>--}}
+{{--                            <input type="hidden" name="course_id">--}}
+{{--                            <input type="hidden" value="{{ auth()->user()->id }}" name="user_id">--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="flex justify-center items-center w-100 p-3">--}}
+{{--                    <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Отправить</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
     @endif
 
@@ -188,17 +190,39 @@
             @endif
         });
 
-        $('#btnSave').click(function(){
+        {{--$('#btnSave').click(function(){--}}
+
+        {{--    $.ajax({--}}
+        {{--        url: '{{ route('user.enrollment')  }}',--}}
+        {{--        type: 'POST',--}}
+        {{--        data: {--}}
+        {{--            _token: $('#csrf').val(),--}}
+        {{--            birthday: $('#birthday').val(),--}}
+        {{--            place_of_residence: $('#place').val(),--}}
+        {{--            insurance_number: $('#insurance').val(),--}}
+        {{--            course_id: '{{ $course->id }}'--}}
+        {{--        },--}}
+        {{--        success: function(){--}}
+        {{--            $('#write_modal').addClass('hidden')--}}
+        {{--            $('.modal').removeClass('hidden')--}}
+
+        {{--        }--}}
+        {{--    })--}}
+
+        {{--})--}}
+
+
+        $('#writeCourse').click(function(){
 
             $.ajax({
                 url: '{{ route('user.enrollment')  }}',
                 type: 'POST',
                 data: {
                     _token: $('#csrf').val(),
-                    birthday: $('#birthday').val(),
-                    place_of_residence: $('#place').val(),
-                    insurance_number: $('#insurance').val(),
-                    course_id: '{{ $course->id }}'
+                    // birthday: $('#birthday').val(),
+                    // place_of_residence: $('#place').val(),
+                    // insurance_number: $('#insurance').val(),
+                    course_id: 1
                 },
                 success: function(){
                     $('#write_modal').addClass('hidden')
@@ -208,7 +232,6 @@
             })
 
         })
-
 
     </script>
 @endsection
