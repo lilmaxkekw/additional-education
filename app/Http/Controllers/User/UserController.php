@@ -25,6 +25,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function enrollment_course(Request $request){
+        if(Application::where('course_id', '=', $request->course_id)->where('user_id', '=', auth()->user()->id)->exists()){
+            return response()->json(['error' => 'error']);
+        }
+
         $data = Application::create([
             'course_id' => $request->course_id,
             'user_id' => auth()->user()->id
