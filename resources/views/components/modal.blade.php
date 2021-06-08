@@ -1,7 +1,6 @@
 <div id="modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
     <!-- modal -->
     <div class="bg-white rounded-lg shadow-lg w-1/3">
-{{--    <div class="bg-white rounded shadow-lg sm:w-screen sm:h-screen">--}}
         <!-- modal header -->
         <div class="px-4 py-2 flex justify-center items-center">
             <lottie-player
@@ -14,7 +13,7 @@
         <!-- modal body -->
         <div class="p-4">
             <div class="px-4 py-5 bg-white space-y-6 sm:p-6 flex justify-center">
-                <label class="block text-lg font-medium text-gray-700 addText">
+                <label class="block text-lg font-medium text-gray-700 addText text-center">
                 </label>
             </div>
         </div>

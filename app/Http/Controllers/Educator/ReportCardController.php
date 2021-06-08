@@ -54,6 +54,10 @@ class ReportCardController extends BaseController
                 $fields = ['id_section', 'name_section', 'description_section', 'date_section', 'status'];
                 //Темы выбранного раздела
                 $sections = Section::select($fields)->where('partition_id', $partition_id)->get();
+                $sections = $sections->sortBy('status');
+                //Итоговая тема выбранного раздела
+                $total_sections = Section::select($fields)->where('partition_id', $partition_id)->where('status', 'Total')->get();
+
                 //Слушатели выбранной группы
                 $listeners = Listener::with('user')->where('group_id', $group_id)->get();
 

@@ -38,9 +38,30 @@
                                 <td class="py-3 px-3">{{ $application->course->name_of_course }}</td>
                                 <td class="py-3 px-3">{{ $application->user->email }}</td>
                                 <td class="py-3 px-3">{{ $application->user->number_phone }}</td>
-                                <td class="py-3 px-3">{{ \Carbon\Carbon::parse($application->birthday)->format('d.m.Y') }}</td>
-                                <td class="py-3 px-3">{{ $application->user->place_of_residence }}</td>
-                                <td class="py-3 px-3">{{ $application->user->insurance_number }}</td>
+                                <td class="py-3 px-3">
+                                    @if(! empty($application->user->birthday))
+                                        {{ \Carbon\Carbon::parse($application->user->birthday)->format('d.m.Y') }}
+
+                                        @else
+                                            <span>-</span>
+                                    @endif
+                                </td>
+                                <td class="py-3 px-3">
+                                    @if(! empty($application->user->place_of_residence))
+                                        {{ $application->user->place_of_residence }}
+
+                                    @else
+                                        <span>-</span>
+                                    @endif
+                                </td>
+                                <td class="py-3 px-3">
+                                    @if(! empty($application->user->insurance_number))
+                                        {{ $application->user->insurance_number }}
+
+                                    @else
+                                        <span>-</span>
+                                    @endif
+                                </td>
                                 <td class="py-3 px-3">
                                     @if($application->status_application === 0)
                                         <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
@@ -83,7 +104,7 @@
                 <!-- modal body -->
                 <div class="p-4">
                     <div class="col-span-4 sm:col-span-3">
-                        <label for="groups" class="block text-sm font-medium text-gray-700">Категория курса</label>
+                        <label for="groups" class="block text-sm font-medium text-gray-700">Группа (курс)</label>
                         <select id="groups" name="groups" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             @foreach($groups as $group)
                                 <option value="{{ $group->id }}">{{ $group->number_group }} ({{ $group->course->name_of_course }})</option>
