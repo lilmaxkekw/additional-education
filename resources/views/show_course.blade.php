@@ -190,28 +190,6 @@
             @endif
         });
 
-        {{--$('#btnSave').click(function(){--}}
-
-        {{--    $.ajax({--}}
-        {{--        url: '{{ route('user.enrollment')  }}',--}}
-        {{--        type: 'POST',--}}
-        {{--        data: {--}}
-        {{--            _token: $('#csrf').val(),--}}
-        {{--            birthday: $('#birthday').val(),--}}
-        {{--            place_of_residence: $('#place').val(),--}}
-        {{--            insurance_number: $('#insurance').val(),--}}
-        {{--            course_id: '{{ $course->id }}'--}}
-        {{--        },--}}
-        {{--        success: function(){--}}
-        {{--            $('#write_modal').addClass('hidden')--}}
-        {{--            $('.modal').removeClass('hidden')--}}
-
-        {{--        }--}}
-        {{--    })--}}
-
-        {{--})--}}
-
-
         $('#writeCourse').click(function(){
 
             $.ajax({
@@ -219,10 +197,7 @@
                 type: 'POST',
                 data: {
                     _token: $('#csrf').val(),
-                    // birthday: $('#birthday').val(),
-                    // place_of_residence: $('#place').val(),
-                    // insurance_number: $('#insurance').val(),
-                    course_id: 1
+                    course_id: '{{ $course->id }}'
                 },
                 success: function(){
                     $('#write_modal').addClass('hidden')

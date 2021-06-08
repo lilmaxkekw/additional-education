@@ -263,7 +263,7 @@
             <hr />
             <div class="w-full p-4 text-right text-gray-500">
                 <div class="md:w-3/12 text-center md:pl-6 mb-10">
-                    <button class="btnSaveAccount text-white w-full mx-auto max-w-sm rounded-lg text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
+                    <button class="btnSaveAccountUser text-white w-full mx-auto max-w-sm rounded-lg text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
                         <svg
                             fill="none"
                             class="w-4 text-white mr-2"
@@ -287,7 +287,6 @@
     @endcomponent
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/educatorAccount.js') }}"></script>
     <script src="https://unpkg.com/imask"></script>
 
     <script>
@@ -299,15 +298,20 @@
             }
             var mask = IMask(element, maskOptions)
 
-            $('.btnSaveAccount').click(function (e) {
-                e.preventDefault();
+        });
+
+        $(document).ready( function () {
+            $('.btnSaveAccountUser').click(function (e) {
+                e.preventDefault()
 
                 $.ajax({
-                    url: '{{ route('user.account') }}',
-                    dataType: 'json',
+                    url: "{{ route('user.account') }}",
+                    dataType: 'JSON',
                     method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('#csrf').val(),
+                    },
                     data: {
-                        _token: $('#csrf').val(),
                         name: $('#name').val(),
                         number_phone: $('#number_phone').val(),
                         email: $('#email').val(),
@@ -316,19 +320,35 @@
                         insurance_number: $('#insurance_number').val()
                     },
                     success: function (response) {
-                        let tmp = JSON.stringify(response);
+                        let tmp = JSON.stringify(response)
 
-                        $('#modal').removeClass('hidden')
-                        $('.addText').text(`Данные успешно сохранены!`)
-                    }
+                        $('#modalSuccess').removeClass('hidden')
+                        $('.addText').text(`Аккаунт успешно сохранен!`)
+                    },
+                    error: function (response) {
+                        let errors = response.responseJSON;
+
+                        $('#email').removeClass('border border-red-400')
+                        $('#name').removeClass('border border-red-400')
+                        $('#number_phone').removeClass('border border-red-400')
+
+                        $('#email_error').addClass('hidden')
+                        $('#name_error').addClass('hidden')
+                        $('#number_phone_error').addClass('hidden')
+
+                        if($.isEmptyObject(errors) === false) {
+                            $.each(errors.errors, function(key, value){
+                                let mainInput = '#' + key,
+                                    errorInput = '#' + key + '_error'
+
+                                $(mainInput).addClass('border border-red-400')
+                                $(errorInput).removeClass('hidden')
+                                $(errorInput).text(value)
+                            })
+                        }
+                    },
                 })
-            });
-
-            $('button[name=ok]').click(function () {
-                $('#modal').fadeOut(300)
-                location.reload();
-            });
-
-        });
+            })
+        })
     </script>
 @endsection

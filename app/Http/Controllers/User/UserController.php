@@ -51,11 +51,17 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function edit_account(Request $request){
-        //dd($request->all());
         $id = auth()->user()->id;
 
-        $result = User::find($id)->update($request->all());
-        //dd($result, $id);
+        $result = User::find($id)->update([
+            'name' => $request->name,
+            'number_phone' => $request->number_phone,
+            'email' => $request->email,
+            'birthday' => $request->birthday,
+            'place_of_residence' => $request->place_of_residence,
+            'insurance_number' => $request->insurance_number
+        ]);
+
         return response()->json($result);
     }
 
