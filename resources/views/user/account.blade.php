@@ -287,6 +287,7 @@
     @endcomponent
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/educatorAccount.js') }}"></script>
     <script src="https://unpkg.com/imask"></script>
 
     <script>

@@ -19,9 +19,11 @@ class EducatorController extends BaseController
 
     public function edit_account(UserRequest $request)
     {
+        //dd($request->all());
         $id = auth()->user()->id;
-        $result = \DB::table('users')->where('id', $id)->update($request->except('_token'));
-        //dd($result);
+
+        $result = User::find($id)->update($request->all());
+        //dd($result, $id);
         return response()->json($result);
     }
 

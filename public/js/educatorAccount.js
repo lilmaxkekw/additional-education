@@ -1,9 +1,14 @@
 $(document).ready( function () {
-    $('.btnSaveAccount').click(function (e) {
+    $('.btnSaveAccountEducator').click(function (e) {
         e.preventDefault();
 
+        console.log($('#name').val());
+        console.log($('#number_phone').val());
+        console.log($('#email').val());
+
+
         $.ajax({
-            url: "/educator/account",
+            url: "{{ route('educator.account') }}",
             dataType: 'JSON',
             method: 'POST',
             headers: {
@@ -47,7 +52,7 @@ $(document).ready( function () {
 
     $('button[name=ok]').click(function () {
         $('.modalSuccess').fadeOut(300)
-        location.reload();
+        //location.reload();
     });
 
 });
