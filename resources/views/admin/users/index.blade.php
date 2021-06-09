@@ -70,7 +70,7 @@
     </div>
 
     <!-- Add user modal -->
-    <div id="addUserModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(231,238,239, .9);">
+    <div id="addUserModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
         <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
         <!-- modal -->
         <div class="bg-white rounded shadow-lg w-1/3 rounded-lg">
@@ -93,9 +93,9 @@
                             <label for="name" class="block text-sm font-medium text-gray-700">
                                 ФИО
                             </label>
-                            <div class="mt-1 border-2 border-black flex rounded-md shadow-sm">
+                            <div class="mt-1">
                                 <input type="text" name="name" id="name"
-                                       class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                       class="focus:ring-blue-500 border focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                             </div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                         </label>
                         <div class="mt-1">
                             <input type="email" name="email" id="email"
-                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                   class="focus:ring-blue-500 border focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                         </div>
                     </div>
 
@@ -116,7 +116,7 @@
                         </label>
                         <div class="mt-1">
                             <input type="password" name="password" id="password"
-                                   class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                   class="focus:ring-blue-500 border focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                         </div>
                     </div>
 
@@ -141,8 +141,7 @@
     @component('components.modal', ['gif' => asset('gifs/success.json')])
     @endcomponent
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 
     <script>
         $(document).ready(function(){
@@ -172,14 +171,12 @@
                         password: password,
                         role_id: role
                     },
-                    cache: false,
                     success: function(data){
-                        var response = data.responseJSON
+                        let response = JSON.parse(data)
 
                         if(response){
                             $('#addUserModal').addClass('hidden')
-                            $('#modal').removeClass('hidden')
-                            // location.reload()
+                            $('.modal').removeClass('hidden')
                         }
                     }
                 })

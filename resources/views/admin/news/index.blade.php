@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="text-4xl font-normal text-blue-600">Новости</h1>
+    <h1 class="text-4xl font-normal text-blue-600">Новости (на данный момент в разработке)</h1>
     <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все новости.</h3>
 
     <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8">

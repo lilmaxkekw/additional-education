@@ -18,7 +18,11 @@ class UserController extends Controller
         $roles = Role::all();
         $count = User::count();
 
-        return view('admin.users.index', ['users' => $users, 'roles' => $roles, 'count' => $count]);
+        return view('admin.users.index', [
+            'users' => $users,
+            'roles' => $roles,
+            'count' => $count
+        ]);
     }
 
     /**

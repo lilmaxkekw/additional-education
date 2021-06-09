@@ -19,7 +19,7 @@ class CreateSectionsTable extends Migration
             $table->string('name_section');
             $table->string('description_section')->nullable();
             $table->date('date_section')->nullable();
-            $table->string('status')->default(NULL);
+            $table->string('status')->nullable()->default(NULL);
 
             $table->unsignedBigInteger('partition_id');
             $table->foreign('partition_id')->references('id')->on('partitions');

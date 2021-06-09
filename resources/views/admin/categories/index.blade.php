@@ -228,12 +228,10 @@
             })
 
 
-            // TODO
-            $('a[name=editModal]').click(function(){
+            $('a[name="editModal"]').click(function(){
 
                 $('#editCategoryModal').removeClass('hidden')
 
-                // var id = $('#id').val($(this).data('id'));
                  let id = $(this).data('id')
 
 
@@ -265,9 +263,7 @@
                             if($.isEmptyObject(errors) === false){
                                 $.each(errors.errors, function(key, value){
                                     var error_id = '#' + key + '_error'
-                                    // var error_id2 = '#' + key
                                     $(error_id).removeClass('hidden')
-                                    // $(error_id2).addClass('border border-red-400')
                                     $(error_id).text(value)
                                 })
                             }
