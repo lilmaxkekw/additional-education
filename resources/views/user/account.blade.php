@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <hr />
+            <hr>
             <div class="md:inline-flex  space-y-4 md:space-y-0  w-full p-4 text-gray-500 items-center">
                 <h2 class="md:w-1/3 mx-auto max-w-xl text-xl">Персональная информация</h2>
                 <div class="md:w-2/3 mx-auto max-w-xl space-y-5">
@@ -260,7 +260,7 @@
                     </div>
                 </div>
             </form>
-            <hr />
+            <hr>
             <div class="w-full p-4 text-right text-gray-500">
                 <div class="md:w-3/12 text-center md:pl-6 mb-10">
                     <button class="btnSaveAccountUser text-white w-full mx-auto max-w-sm rounded-lg text-center bg-blue-500 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">

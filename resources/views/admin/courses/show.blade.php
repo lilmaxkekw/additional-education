@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="bg-white overflow-hidden sm:rounded-lg"> {{--   shadow --}}
+    <div class="bg-white overflow-hidden sm:rounded-lg">
         <div class="px-4 py-5 sm:px-6 flex items-center">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
                 Курс {{ $course->name_of_course }}
@@ -47,7 +47,6 @@
                     <dt class="text-sm font-medium text-gray-500">
                         Изображение
                     </dt>
-                    <!-- TODO -->
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         <img src="{{ Storage::url('1ZjGhg6kVPsNOYpjrcgpRlrJJUFB9bfUfiGl4i2G.jpg') }}" alt="Фотография">
                     </dd>
@@ -149,21 +148,20 @@
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
-{{--                        TODO --}}
-                        @foreach($partitions as $partition)
-                            @foreach($partition->sections as $section)
-                                <tr>
-                                    <td class="py-3 px-3">{{ $section->name_section }}</td>
-                                    <td class="py-3 px-3">{{ $section->description_section }}</td>
-                                    <td class="py-3 px-3">{{ $section->partition->name }}</td>
-                                    <td class="py-3 px-3">{{ \Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</td>
-                                    <td class="py-3 px-3 text-center">
-                                        <a href="#editSectionModal" name="editSectionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
-                                        <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
-                                    </td>
-                                </tr>
+                            @foreach($partitions as $partition)
+                                @foreach($partition->sections as $section)
+                                    <tr>
+                                        <td class="py-3 px-3">{{ $section->name_section }}</td>
+                                        <td class="py-3 px-3">{{ $section->description_section }}</td>
+                                        <td class="py-3 px-3">{{ $section->partition->name }}</td>
+                                        <td class="py-3 px-3">{{ \Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</td>
+                                        <td class="py-3 px-3 text-center">
+                                            <a href="#editSectionModal" name="editSectionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
+                                            <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @endforeach
-                        @endforeach
                         </tbody>
                     </table>
                 </div>

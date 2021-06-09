@@ -11,7 +11,6 @@
                 <div class="w-1/4 md:w-auto md:flex text-right">
                     <a href="#dropdown" name="dropdown" class="hidden md:flex items-center cursor-pointer hover:bg-blue-50 p-2 rounded-lg">
                         <div>
-                            <!-- TODO -->
                             <img class="inline-block h-12 w-12 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.jpg') }}" @else src="{{ Storage::url(auth()->user()->photo) }}{{--{{ asset('storage/app/images/'.auth()->user()->photo) }}--}}" @endif alt="">
                         </div>
                         <div class="hidden md:block md:flex md:items-center ml-2">

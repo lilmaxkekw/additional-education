@@ -36,7 +36,6 @@
                                 <td class="py-3 px-3 text-right">{{ $group->course->name_of_course }}</td>
                                 <td class="py-3 px-3 text-center">{{ \Carbon\Carbon::parse($group->start_date)->format('d.m.Y')  }}</td>
                                 <td class="py-3 px-3 text-center">{{ \Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}</td>
-{{--                                TODO --}}
                                 <td class="py-3 px-3 text-center">{{ \App\Models\Listener::where('group_id', $group->id)->count() }}</td>
                                 <td class="py-3 px-3 text-right">
                                     @if(\Carbon\Carbon::parse($group->end_date) > \Carbon\Carbon::now())
@@ -57,7 +56,6 @@
                                     </a>
                                 </td>
                                 <td class="py-3 px-3 text-center">
-    {{--                                <a href="#editGroupModal" name="editModal" data-id="{{ $group->id }}" data-num="{{ $group->number_group }}" data-start-date="{{ Carbon\Carbon::parse($group->start_date)->format('d.m.Y') }}" data-end-date="{{ Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>--}}
                                     <a href="#deleteModal" data-id="{{ $group->id }}" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none ml-4">Удалить</a>
                                 </td>
                             </tr>

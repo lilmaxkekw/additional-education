@@ -23,10 +23,6 @@
             font-family: "Rubik", sans-serif;
         }
 
-        /* navigation
-         - show navigation always on the large screen devices with (min-width:1024)
-        */
-
         @media (min-width: 1024px) {
             .top-navbar {
                 display: inline-flex !important;
@@ -212,23 +208,20 @@
 
 <script>
     $(document).ready(function () {
-
-
-
         $(".nav-toggler").each(function (_, navToggler) {
-            let target = $(navToggler).data("target");
+            let target = $(navToggler).data("target")
             $(navToggler).on("click", function () {
                 $(target).animate({
                     height: "toggle"
-                });
-            });
+                })
+            })
 
             $('a[name=dropdown]').click(function (e) {
                 e.preventDefault()
                 $('#dropdown').toggleClass('hidden')
             })
-        });
-    });
+        })
+    })
 </script>
 </body>
 </html>
