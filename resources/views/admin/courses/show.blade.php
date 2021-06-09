@@ -404,7 +404,7 @@
                             <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
                         </div>
                         <div class="col-span-4 sm:col-span-3">
-                            <label for="partitions" class="block text-sm font-medium text-gray-700">Категория курса</label>
+                            <label for="partitions" class="block text-sm font-medium text-gray-700">Раздел</label>
                             <select id="partitions" name="partitions" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                 @foreach($partitions as $partition)
                                     <option value="{{ $partition->id }}">{{ $partition->name }}</option>
