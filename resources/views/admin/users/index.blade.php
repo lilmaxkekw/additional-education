@@ -145,6 +145,12 @@
 
     <script>
         $(document).ready(function(){
+            $('button[name="ok"]').click(function(){
+                $('.modal').addClass('hidden')
+                // TODO
+                location.reload()
+            })
+
             $('a[name=addUserModal]').click(function(e){
                 e.preventDefault()
 
@@ -177,6 +183,7 @@
                         if(response){
                             $('#addUserModal').addClass('hidden')
                             $('.modal').removeClass('hidden')
+                            $('.addText').text(`Пользователь успешно добавлен!`);
                         }
                     }
                 })

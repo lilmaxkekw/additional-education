@@ -33,7 +33,7 @@
                         @foreach($groups as $group)
                             <tr>
                                 <td class="py-3 px-3">{{ $group->number_group }}</td>
-                                <td class="py-3 px-3 text-right">{{ $group->course->name_of_course }}</td>
+                                <td class="py-3 px-3 text-center">{{ $group->course->name_of_course }}</td>
                                 <td class="py-3 px-3 text-center">{{ \Carbon\Carbon::parse($group->start_date)->format('d.m.Y')  }}</td>
                                 <td class="py-3 px-3 text-center">{{ \Carbon\Carbon::parse($group->end_date)->format('d.m.Y') }}</td>
                                 <td class="py-3 px-3 text-center">{{ \App\Models\Listener::where('group_id', $group->id)->count() }}</td>

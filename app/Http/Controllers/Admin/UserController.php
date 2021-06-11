@@ -30,7 +30,7 @@ class UserController extends Controller
      * @return false|string
      */
     public function store(Request $request){
-        $user = User::create([
+        $user = \DB::table('users')->insert([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),

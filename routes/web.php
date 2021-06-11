@@ -39,7 +39,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('/sections', 'SectionController')->except(['create', 'edit']);
     Route::post('/partitions', 'PartitionController@store')->name('partitions.store');
     Route::delete('/partitions/{id}', 'PartitionController@destroy')->name('partitions.destroy');
-    Route::get('/news', 'NewsController@show_news')->name('news.index');
+    Route::resource('/news', 'NewsController');
 
 });
 
@@ -50,7 +50,7 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth'
     Route::post('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
     Route::get('/account', 'UserController@account')->name('user.account');
     Route::post('/account', 'UserController@edit_account')->name('user.account');
-    Route::post('/account/', 'UserController@upload_image')->name('user.account.image');
+    Route::patch('/account/', 'UserController@upload_image')->name('user.account.image');
     Route::get('/performance', 'UserController@show_performance')->name('user.performance');
     Route::get('/applications', 'UserController@show_applications')->name('user.applications');
 

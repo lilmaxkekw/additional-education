@@ -60,8 +60,7 @@
                                     <div
                                         class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10">{{ $loop->iteration }}</div>
                                     <div class="flex-grow pl-4">
-                                        <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">{{ $partition->name_section }}</h2>
-                                        <p class="leading-relaxed">{{ $partition->description_section }}</p>
+                                        <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">{{ $partition->name }}</h2>
                                     </div>
                                 </div>
                             @endforeach
@@ -84,14 +83,14 @@
     @component('components.modal', ['gif' => asset('gifs/send.json')])
     @endcomponent
 
-    <div id="modal_error" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
+    <div id="modal_error" class="z-50 h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
         <!-- modal -->
         <div class="bg-white rounded-lg shadow-lg w-1/3">
             <!-- modal header -->
             <div class="px-4 py-2 flex justify-center items-center">
                 <lottie-player
-                    src="{{ asset('gifs/success.json') }}"
-                    style="width: 400px;"
+                    src="{{ asset('gifs/error.json') }}"
+                    style="width: 300px;"
                     autoplay
                     loop
                 ></lottie-player>
@@ -125,6 +124,7 @@
 
         $('button[name=ok]').click(function(){
             $('.modal').addClass('hidden')
+            $('#modal_error').addClass('hidden')
         })
 
         $('#writeCourse').click(function(){
@@ -137,16 +137,13 @@
                     course_id: '{{ $course->id }}'
                 },
                 success: function(data){
-                    var res = data.responseJSON
-
-                    if(res === 'error'){
+                    if(data.error){
                         $('#modal_error').removeClass('hidden')
+                        $('#modal_error .addText').text(`Вы уже подавали заявку на этот курс!`)
                     }else{
-
                         $('.modal').removeClass('hidden')
                         $('.addText').text('Ваша заявка отправлена! Для просмотра статуса заявки перейдите в личный кабинет')
                     }
-
                 }
             })
 

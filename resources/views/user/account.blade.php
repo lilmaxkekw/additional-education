@@ -30,7 +30,7 @@
 
     <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
         <div class="bg-gray-100 p-4 border-t-2 border-blue-500 rounded-t-lg">
-            <div class="max-w-lg mx-auto md:w-screen md:mx-0">
+            <div class="max-w-screen-lg mx-auto md:w-screen md:mx-0">
                 <div class="inline-flex items-center space-x-4">
                     <img class="inline-block h-56 w-56 rounded-full" @if(empty(auth()->user()->photo)) src="{{ asset('user.jpg') }}" @else src="{{ Storage::url(auth()->user()->photo) }}" @endif alt="">
                     <h1 class="text-gray-600 text-2xl">{{ $user->name }}</h1>
@@ -176,6 +176,7 @@
                                 type="text"
                                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                                 value="{{ $user->place_of_residence }}"
+                                placeholder="ул.Нехинская, д.23, кв.44"
                             />
                         </div>
                     </div>
@@ -209,6 +210,7 @@
             <hr>
 
             <form action="{{ route('user.account.image') }}" method="POST" enctype="multipart/form-data">
+                @method('PATCH')
                 @csrf
                 <div class="md:inline-flex  space-y-4 md:space-y-0  w-full p-4 text-gray-500 items-center">
                     <h2 class="md:w-1/3 mx-auto max-w-xl text-xl">Аватар</h2>

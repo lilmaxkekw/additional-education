@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
 use App\Models\Course;
 use App\Models\Group;
 use App\Models\Listener;
@@ -25,7 +24,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function enrollment_course(Request $request){
-        if(Application::where('course_id', '=', $request->course_id)->where('user_id', '=', auth()->user()->id)->exists()){
+        $exists_applications = Application::where('course_id', '=', $request->course_id)->where('user_id', '=', auth()->user()->id)->count();
+
+        if($exists_applications > 0){
             return response()->json(['error' => 'error']);
         }
 
