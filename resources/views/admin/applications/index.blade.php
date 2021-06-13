@@ -9,14 +9,19 @@
 
     <div class="container mb-2">
         <div class="flex justify-end">
-            <a href="#formGroupModal" name="formGroupModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сформировать группу</a>
+            <div>
+                <a href="#formGroupModal" name="formGroupModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сформировать группу</a>
+            </div>
+            <div class="ml-5">
+                <a href="{{ route('application.export') }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Экспорт</a>
+            </div>
         </div>
     </div>
 
     <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8">
         <div class="overflow-x-auto">
             <div class="align-middle inline-block min-w-full overflow-hidden">
-                <table class="min-w-full">
+                <table class="min-w-full" id="datatable-example">
                     <thead class="text-left bg-blue-50">
                     <tr>
                         <th class="py-2 px-3 text-blue-600"></th>
@@ -122,9 +127,8 @@
         @component('components.modal', ['gif' => asset('gifs/success.json')])
         @endcomponent
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-                integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/excel.js') }}"></script>
         <script src="public/js/search.js"></script>
 
         <script>

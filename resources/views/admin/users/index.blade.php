@@ -16,7 +16,7 @@
     <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8">
         <div class="overflow-x-auto">
             <div class="align-middle inline-block min-w-full overflow-hidden">
-                <table class="min-w-full">
+                <table class="min-w-full" id="table">
                     <thead class="text-left bg-blue-50">
                     <tr>
                         <th class="py-2 px-3 text-blue-600">ФИО</th>
@@ -147,7 +147,6 @@
         $(document).ready(function(){
             $('button[name="ok"]').click(function(){
                 $('.modal').addClass('hidden')
-                // TODO
                 location.reload()
             })
 
@@ -179,12 +178,15 @@
                     },
                     success: function(data){
                         let response = JSON.parse(data)
-
+                        console.log(response)
                         if(response){
                             $('#addUserModal').addClass('hidden')
                             $('.modal').removeClass('hidden')
-                            $('.addText').text(`Пользователь успешно добавлен!`);
+                            $('.addText').text(`Пользователь успешно добавлен!`)
                         }
+                    },
+                    error: function(data){
+
                     }
                 })
             })

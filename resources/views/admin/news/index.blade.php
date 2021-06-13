@@ -5,10 +5,10 @@
 @section('content')
 
     <h1 class="text-4xl font-normal text-blue-600">Новости (на данный момент в разработке)</h1>
-    <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все новости.</h3>
+    <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все новости. Для того чтобы опубликовать новость необходимо нажать на кнопку в поле "Статус"</h3>
 
     <div class="container">
-        <a href="#modal" name="modal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Добавить новость</a>
+        <a href="#addNewsItemModal" name="addNewsItemModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Добавить новость</a>
     </div>
 
     <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8">
@@ -20,7 +20,7 @@
                         <th class="py-2 px-3 text-blue-600">Заголовок новости</th>
                         <th class="py-2 px-3 text-blue-600">Контент</th>
                         <th class="py-2 px-3 text-blue-600">Статус</th>
-                        <th class="py-2 px-3 text-blue-600">&nbsp;</th>
+{{--                        <th class="py-2 px-3 text-blue-600">&nbsp;</th>--}}
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
@@ -29,31 +29,20 @@
                                 <td class="py-3 px-3">{{ $news_item->news_title }}</td>
                                 <td class="py-3 px-3">{{ $news_item->short_content }}</td>
                                 <td class="py-3 px-3">
-                                    <div class="flex items-center justify-center w-full mb-12">
-                                        <label
-                                            for="toogleA"
-                                            class="flex items-center cursor-pointer"
-                                        >
-                                            <div class="relative">
-                                                <input id="toogleA" type="checkbox" class="sr-only" />
-                                                <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-                                                <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </td>
-                                <td class="py-3 px-3">
-                                    @if($news_item->news_status === 0)
-                                        <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                        <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                        <span class="relative text-xs align-middle">не опубликовано</span>
 
-                                        @else
-                                            <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                            <span class="relative text-xs align-middle">опубликовано</span>
-                                    @endif
                                 </td>
+{{--                                <td class="py-3 px-3">--}}
+{{--                                    @if($news_item->news_status === 0)--}}
+{{--                                        <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">--}}
+{{--                                        <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>--}}
+{{--                                        <span class="relative text-xs align-middle">не опубликовано</span>--}}
+
+{{--                                        @else--}}
+{{--                                            <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">--}}
+{{--                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>--}}
+{{--                                            <span class="relative text-xs align-middle">опубликовано</span>--}}
+{{--                                    @endif--}}
+{{--                                </td>--}}
                             </tr>
                         @endforeach
                     </tbody>
@@ -115,11 +104,62 @@
         </div>
     </div>
 
+    @component('components.modal', ['gif' => asset('gifs/success.json')])
+    @endcomponent
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
 
     <script>
+        $(function() {
+            $('.toggle-class').change(function() {
+                let status = $(this).prop('checked') === true ? 1 : 0;
+                let id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '/change-status',
+                    data: {'news_status': status, 'id': id},
+                    success: function(data){
+                        console.log(data.success)
+                    }
+                });
+            })
+        })
+
         $(document).ready(function(){
+            $('a[name="addNewsItemModal"]').click(function(){
+                $('#addNewsItemModal').removeClass('hidden')
+            })
+
+            $('.close-modal').click(function(){
+                $('#addNewsItemModal').addClass('hidden')
+            })
+
+            $('button[name="ok"]').click(function(){
+                $('.modal').addClass('hidden')
+            })
+
+            $('#btnSave').click(function(){
+                let news_title = $('#news_title').val(),
+                    content = $('#content').val()
+
+                $.ajax({
+                    url: '{{ route('news.store') }}',
+                    type: 'POST',
+                    data: {
+                        _token: $('#csrf').val(),
+                        news_title: news_title,
+                        content: content
+                    },
+                    success: function(){
+                        $('#addNewsItemModal').addClass('hidden')
+                        $('.modal').removeClass('hidden')
+                        $('.addText').text('Новость успешно добавлена!')
+                    }
+                })
+            })
+
 
         })
     </script>

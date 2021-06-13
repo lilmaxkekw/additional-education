@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\Course;
 use App\Models\Group;
 use App\Models\Listener;
@@ -52,10 +53,10 @@ class UserController extends Controller
     /**
      * Редактирование данных
      *
-     * @param Request $request
+     * @param UserRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function edit_account(Request $request){
+    public function edit_account(UserRequest $request){
         $id = auth()->user()->id;
 
         $result = User::find($id)->update([

@@ -24,14 +24,16 @@ class NewsRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'news_title' => 'required',
+            'content' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            ''
+            'news_title.required' => 'Заголовок новости обязателен для запонения',
+            'content.required' => 'Текст новости обязателен для заполнения'
         ];
     }
 }

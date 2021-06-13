@@ -184,49 +184,73 @@
                 location.reload()
             })
 
+            // TODO
             $('#btnSave').click(function(){
-                let name_of_course = $('#name_of_course').val(),
-                    description_of_course = $('#description_of_course').val(),
-                    category = $('#categories option:selected').val()
-
+                var formData = new FormData($('#addCourseModal')[0]);
+                console.log(formData)
+                $.ajaxSetup({
+                    headers:
+                        { 'X-CSRF-TOKEN': $('#csrf').val() }
+                })
                 $.ajax({
-                    url: '{{ route('courses.index') }}',
-                    type: 'POST',
-                    data: {
-                        _token: $('#csrf').val(),
-                        name_of_course: name_of_course,
-                        description_of_course: description_of_course,
-                        category_id: category
+                    type: 'post',
+                    url: '{{ route('courses.store') }}',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(data) {
+
+
                     },
                     cache: false,
-                    success: function(course){
-                        var data = JSON.stringify(course)
-                        if(data){
-                            $('#addCourseModal').addClass('hidden')
-                            $('#modal').removeClass('hidden')
-                            $('.addText').text(`Курс "${name_of_course}" успешно добавлен!`)
-                        }
-                    },
-                    error: function(data){
-                        $('#name_of_course_error').addClass('hidden')
-                        $('#description_of_course_error').addClass('hidden')
-                        $('#name_of_course').removeClass('border border-red-400')
-                        $('#description_of_course').removeClass('border border-red-400')
-
-                        var errors = data.responseJSON
-
-                        if($.isEmptyObject(errors) === false){
-                            $.each(errors.errors, function(key, value){
-                                var error_id = '#' + key + '_error'
-                                var error_id2 = '#' + key
-                                $(error_id).removeClass('hidden')
-                                $(error_id2).addClass('border border-red-400')
-                                $(error_id).text(value)
-                            })
-                        }
-                    }
-                })
+                    processData: false
+                });
             })
+
+
+            {{--$('#btnSave').click(function(){--}}
+            {{--    let name_of_course = $('#name_of_course').val(),--}}
+            {{--        description_of_course = $('#description_of_course').val(),--}}
+            {{--        category = $('#categories option:selected').val()--}}
+
+            {{--    $.ajax({--}}
+            {{--        url: '{{ route('courses.index') }}',--}}
+            {{--        type: 'POST',--}}
+            {{--        data: {--}}
+            {{--            _token: $('#csrf').val(),--}}
+            {{--            name_of_course: name_of_course,--}}
+            {{--            description_of_course: description_of_course,--}}
+            {{--            category_id: category,--}}
+            {{--            image_of_course: $('#file-upload').val()--}}
+            {{--        },--}}
+            {{--        cache: false,--}}
+            {{--        success: function(course){--}}
+            {{--            var data = JSON.stringify(course)--}}
+            {{--            if(data){--}}
+            {{--                $('#addCourseModal').addClass('hidden')--}}
+            {{--                $('#modal').removeClass('hidden')--}}
+            {{--                $('.addText').text(`Курс "${name_of_course}" успешно добавлен!`)--}}
+            {{--            }--}}
+            {{--        },--}}
+            {{--        error: function(data){--}}
+            {{--            $('#name_of_course_error').addClass('hidden')--}}
+            {{--            $('#description_of_course_error').addClass('hidden')--}}
+            {{--            $('#name_of_course').removeClass('border border-red-400')--}}
+            {{--            $('#description_of_course').removeClass('border border-red-400')--}}
+
+            {{--            var errors = data.responseJSON--}}
+
+            {{--            if($.isEmptyObject(errors) === false){--}}
+            {{--                $.each(errors.errors, function(key, value){--}}
+            {{--                    var error_id = '#' + key + '_error'--}}
+            {{--                    var error_id2 = '#' + key--}}
+            {{--                    $(error_id).removeClass('hidden')--}}
+            {{--                    $(error_id2).addClass('border border-red-400')--}}
+            {{--                    $(error_id).text(value)--}}
+            {{--                })--}}
+            {{--            }--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--})--}}
         })
 
 

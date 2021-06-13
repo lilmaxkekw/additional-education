@@ -39,7 +39,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('/sections', 'SectionController')->except(['create', 'edit']);
     Route::post('/partitions', 'PartitionController@store')->name('partitions.store');
     Route::delete('/partitions/{id}', 'PartitionController@destroy')->name('partitions.destroy');
-    Route::resource('/news', 'NewsController');
+    Route::resource('/news', 'NewsController')->except(['create', 'edit', 'show']);
+    Route::get('/export', 'ApplicationController@export')->name('application.export');
 
 });
 

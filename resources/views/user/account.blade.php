@@ -300,7 +300,11 @@
             }
             var mask = IMask(element, maskOptions)
 
-        });
+        })
+
+        $('button[name="ok"]').click(function(){
+            $('.modal').addClass('hidden')
+        })
 
         $(document).ready( function () {
             $('.btnSaveAccountUser').click(function (e) {
@@ -324,8 +328,8 @@
                     success: function (response) {
                         let tmp = JSON.stringify(response)
 
-                        $('#modalSuccess').removeClass('hidden')
-                        $('.addText').text(`Аккаунт успешно сохранен!`)
+                        $('.modal').removeClass('hidden')
+                        $('.addText').text('Данные сохранены!')
                     },
                     error: function (response) {
                         let errors = response.responseJSON;

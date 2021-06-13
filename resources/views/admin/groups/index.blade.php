@@ -16,7 +16,7 @@
     <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8 mr-4">
         <div class="overflow-x-auto">
             <div class="align-middle inline-block min-w-full overflow-hidden">
-                <table class="min-w-full">
+                <table class="min-w-full" id="table">
                     <thead class="text-left bg-blue-50">
                     <tr>
                         <th class="py-2 px-3 text-blue-600">Название группы</th>
@@ -122,6 +122,15 @@
 
                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
 
+                    <div class="col-span-4 sm:col-span-3">
+                        <label for="courses" class="block text-sm font-medium text-gray-700">Курс</label>
+                        <select id="courses" name="courses" x-model="name_of_course" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            @foreach($courses as $id => $name_of_course)
+                                <option value="{{ $name_of_course }}" data-id="{{ $id }}">{{ $name_of_course }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div>
                         <label for="start_date" class="block text-sm font-medium text-gray-700">Дата начала обучения</label>
                         <div class="mt-1">
@@ -140,15 +149,6 @@
                         <span class="text-sm font-medium text-red-500" id="end_date_error"></span>
                     </div>
 
-                    <div class="col-span-4 sm:col-span-3">
-                        <label for="courses" class="block text-sm font-medium text-gray-700">Курс</label>
-                        <select id="courses" name="courses" x-model="name_of_course" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                            @foreach($courses as $id => $name_of_course)
-                                <option value="{{ $name_of_course }}" data-id="{{ $id }}">{{ $name_of_course }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
                     <div class="grid grid-cols-3 gap-6">
                         <div class="col-span-3 sm:col-span-2">
                             <label for="number_group" class="block text-sm font-medium text-gray-700">
@@ -163,6 +163,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="flex justify-center items-center w-100 p-3">
                 <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
             </div>
@@ -173,10 +174,18 @@
     @component('components.modal', ['gif' => asset('gifs/success.json')])
     @endcomponent
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script>
         $(document).ready(function(){
+
+            let name_of_course = $('#name_of_course').val(),
+                date_start = $('#date_start').val()
+
+            if(name_of_course === "undefined"){
+                $('#number_group').val('')
+            }else if(name_of_course !== "undefined"){
+                $('#number_group').val(name_of_course + '-')
+            }
 
             $('.alert').delay(5000).fadeOut(200)
 
@@ -220,12 +229,14 @@
                     success: function(res){
                         let data = JSON.stringify(res)
 
-                        console.log(course)
-
                         if(data){
                             $('#addGroupModal').addClass('hidden')
                             $('#modal').removeClass('hidden')
                             $('.addText').text(`Группа "${number_group}" успешно добавлена!`)
+                            $('#table').append(`<tr>
+                                                    <td class="py-3 px-3">${ res.number_group }</td>
+                                                </tr>`
+                            )
                         }
                     },
                     // TODO
@@ -277,6 +288,7 @@
 
             })
         })
+
     </script>
 
 @endsection

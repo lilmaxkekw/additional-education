@@ -23,8 +23,9 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+//        regex:/^[А-ЯЁ][а-яё]{2,}([-][А-ЯЁ][а-яё]{2,})?\s[А-ЯЁ][а-яё]{2,}\s[А-ЯЁ][а-яё]{2,}$/
         return [
-            'name' => 'required',
+            'name' => "required",
             'email' => 'required|email',
             'number_phone' => 'regex:/^\+7\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2}$/|min:16',
             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -34,7 +35,8 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Поле имя обязательно для заполнения.',
+            'name.required' => 'Поле ФИО обязательно для заполнения.',
+            'name.regex' => 'Некорректный формат ФИО',
             'email.required' => 'Поле эл. почты обязательно для заполнения.',
             'email.email' => 'Введите корректную почту.',
             'number_phone.min' => 'Недостаточно символов в поле номера телефона.',

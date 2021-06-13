@@ -40,7 +40,12 @@
                         Категория
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ $course->category->name_of_category }}
+                        @if(empty($course->category->name_of_category))
+                            <span>-</span>
+
+                            @else
+                                <span>{{ $course->category->name_of_category }}</span>
+                        @endif
                     </dd>
                 </div>
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -172,7 +177,7 @@
                         </tbody>
                     </table>
                 </div>
-                @if($course->partitions->isEmpty())
+                @if($partitions)
                     @component('components.no_data_message')
                     @endcomponent
                 @endif
@@ -606,7 +611,6 @@
                             },
                             success: function(data){
                                 let res = JSON.stringify(data)
-                                console.log(data)
                                 if(res){
                                     $('#modal').removeClass('hidden')
                                     $('.addText').text(`Раздел "${name}" успешно добавлена!`)
@@ -664,4 +668,4 @@
             })
         </script>
 
-    @endsection
+@endsection

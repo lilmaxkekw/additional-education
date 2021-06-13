@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\NewsRequest;
 use App\Models\News;
+use Illuminate\Http\Request;
 
+/**
+ * Class NewsController
+ * @package App\Http\Controllers\Admin
+ */
 class NewsController extends Controller
 {
     /**
@@ -23,23 +28,14 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param NewsRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(NewsRequest $request)
     {
-        //
-    }
+        $news_title = News::create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return response()->json($news_title);
     }
 
     /**
@@ -62,6 +58,20 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function change_status(Request $request){
+        dd($request->all());
+        $news = News::find($request->id);
+        $news->news_status = $request->news_status;
+        $news->save();
+
+        return response()->json(['success' => 'status change']);
     }
 }
