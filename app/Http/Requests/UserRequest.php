@@ -35,12 +35,12 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Поле ФИО обязательно для заполнения.',
+            'name.required' => 'Поле ФИО обязательно для заполнения',
             'name.regex' => 'Некорректный формат ФИО',
-            'email.required' => 'Поле эл. почты обязательно для заполнения.',
-            'email.email' => 'Введите корректную почту.',
-            'number_phone.min' => 'Недостаточно символов в поле номера телефона.',
-            'number_phone.regex' => 'Неправильный формат телефона.',
+            'email.required' => 'Поле эл. почты обязательно для заполнения',
+            'email.email' => 'Некорректный формат почты',
+            'number_phone.min' => 'Недостаточно символов в поле номера телефона',
+            'number_phone.regex' => 'Неправильный формат телефона',
         ];
     }
 }

@@ -98,6 +98,7 @@
                                        class="focus:ring-blue-500 border focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                             </div>
                         </div>
+                        <span class="text-sm font-medium text-red-500" id="name_error"></span>
                     </div>
 
                     <div>
@@ -108,6 +109,7 @@
                             <input type="email" name="email" id="email"
                                    class="focus:ring-blue-500 border focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                         </div>
+                        <span class="text-sm font-medium text-red-500" id="email_error"></span>
                     </div>
 
                     <div>
@@ -118,6 +120,7 @@
                             <input type="password" name="password" id="password"
                                    class="focus:ring-blue-500 border focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                         </div>
+                        <span class="text-sm font-medium text-red-500" id="password_error"></span>
                     </div>
 
                     <div class="col-span-4 sm:col-span-3">
@@ -186,7 +189,24 @@
                         }
                     },
                     error: function(data){
+                        $('#name_error').addClass('hidden')
+                        $('#email_error').addClass('hidden')
+                        $('#password_error').addClass('hidden')
+                        $('#name').removeClass('border border-red-400')
+                        $('#email').removeClass('border border-red-400')
+                        $('#password').removeClass('border border-red-400')
 
+                        var errors = data.responseJSON
+
+                        if($.isEmptyObject(errors) === false){
+                            $.each(errors.errors, function(key, value){
+                                var error_id = '#' + key + '_error'
+                                var error_id2 = '#' + key
+                                $(error_id).removeClass('hidden')
+                                $(error_id2).addClass('border border-red-400')
+                                $(error_id).text(value)
+                            })
+                        }
                     }
                 })
             })
