@@ -26,4 +26,20 @@ class PartitionController extends Controller
 
         return response()->json($data);
     }
+
+    public function update(){
+
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        $partition = Partition::find($id);
+        Partition::destroy($id);
+
+        return redirect()->route('course.index');
+    }
 }

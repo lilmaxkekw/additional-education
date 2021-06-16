@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ApplicationExport;
 use App\Http\Controllers\Controller;
 use App\Models\Listener;
 use App\Models\Partition;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\Application;
 use App\Models\Group;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ApplicationController extends Controller
 {
@@ -119,6 +121,13 @@ class ApplicationController extends Controller
     public function show($id)
     {
         //
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function export(){
+        return Excel::download(new ApplicationExport, 'Одобренные заявки.xlsx');
     }
 
 }

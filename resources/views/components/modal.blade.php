@@ -1,6 +1,6 @@
 <div id="modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
     <!-- modal -->
-    <div class="bg-white rounded-lg shadow-lg w-1/3">
+    <div class="bg-white rounded-lg shadow-lg md:w-1/3">
         <!-- modal header -->
         <div class="px-4 py-2 flex justify-center items-center">
             <lottie-player

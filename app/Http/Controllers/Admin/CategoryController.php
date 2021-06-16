@@ -19,7 +19,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::all();
         // Кол-во категорий
         $count = Category::count();
 

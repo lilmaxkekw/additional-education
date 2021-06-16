@@ -4,8 +4,6 @@
 
 @section('content')
 
-{{--    style="background-color: rgba(231,238,239, .9); h-screen--}}
-{{--    <div id="addCourseModal" class="modal  w-full fixed left-0 top-0 flex justify-center items-center">--}}
         <input type="hidden" name="_token" id="csrf" value="{{ session()->token() }}">
         <!-- modal -->
         <div class="bg-white rounded shadow-lg w-1/3">
@@ -89,8 +87,7 @@
     @component('components.modal', ['gif' => asset('gifs/send.json')])
     @endcomponent
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 
     <script>
 

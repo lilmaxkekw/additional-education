@@ -26,6 +26,7 @@ class CourseRequest extends FormRequest
         return [
             'name_of_course' => 'required',
             'description_of_course' => 'required',
+            'image_of_course' => 'image|mimes:jpeg,png,jpg,svg|max:2048'
         ];
     }
 
@@ -33,6 +34,7 @@ class CourseRequest extends FormRequest
         return [
             'name_of_course.required' => 'Название курса обязательно для заполнения',
             'description_of_course.required' => 'Описание курса обязательно для заполнения',
+            'image_of_course.mimes' => 'Некорректный формат изображения'
         ];
     }
 }

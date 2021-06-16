@@ -127,7 +127,7 @@
 <div id="personalData" class="modal md:w-full fixed left-0 top-0 flex justify-center items-center hidden"
      style="background-color: rgba(240,248,255, 0.9);">
     <!-- modal -->
-    <div class="bg-white rounded shadow-lg w-1/3">
+    <div class="bg-white rounded shadow-lg lg:w-1/3 md:w-2/3">
         <!-- modal header -->
         <div class="px-4 py-2 flex justify-end items-center">
             <button class="text-black close-modal">
@@ -165,10 +165,8 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+
 <script>
     $(document).ready(function () {
         $('.alert').delay(10000).fadeOut(200)

@@ -25,6 +25,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function enrollment_course(Request $request){
+        $exists_applications = Application::where('course_id', '=', $request->course_id)->where('user_id', '=', auth()->user()->id)->count();
+
+        if($exists_applications > 0){
+            return response()->json(['error' => 'error']);
+        }
+
         $data = Application::create([
             'course_id' => $request->course_id,
             'user_id' => auth()->user()->id
@@ -47,10 +53,10 @@ class UserController extends Controller
     /**
      * Редактирование данных
      *
-     * @param Request $request
+     * @param UserRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function edit_account(Request $request){
+    public function edit_account(UserRequest $request){
         $id = auth()->user()->id;
 
         $result = User::find($id)->update([

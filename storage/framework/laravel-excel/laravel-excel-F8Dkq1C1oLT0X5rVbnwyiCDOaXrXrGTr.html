@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Заявки</title>
+    <link rel="stylesheet" href="http://127.0.0.1:8000/css/app.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/css/account.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css"
+          integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@0.3.0/dist/lottie-player.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+
+    <script src="http://127.0.0.1:8000/js/search.js"></script>
+    <style>
+        html,
+        body {
+            font-family: "Rubik", sans-serif;
+        }
+
+        @media (min-width: 1024px) {
+            .top-navbar {
+                display: inline-flex !important;
+            }
+        }
+    </style>
+
+<body class="bg-blue-50">
+
+<nav class="flex-3 bg-white w-64 h-screen px-4 text-gray-900 hidden lg:block fixed z-50">
+    <div class="w-1/2 md:w-auto text-center text-blue-500 text-2xl font-medium">
+        <img src="http://127.0.0.1:8000/logo.jpg" alt="" class="inline-block w-16 h-16 my-2 ml-5">
+    </div>
+    <div class="mt-10 mb-4">
+        <ul class="ml-4">
+                            <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
+                        <span>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                               <path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+                            </svg>
+                        </span>
+                    <a href="http://127.0.0.1:8000">
+                        <span class="ml-2">Перейти на сайт</span>
+                    </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
+                        <span>
+                           <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22L12 3Z" />
+                            </svg>
+                        </span>
+                    <a href="http://127.0.0.1:8000/admin">
+                        <span class="ml-2">Главная</span>
+                    </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
+                        <span>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3M18.82 9L12 12.72L5.18 9L12 5.28L18.82 9M17 16L12 18.72L7 16V12.27L12 15L17 12.27V16Z"/>
+                            </svg>
+                        </span>
+                    <a href="http://127.0.0.1:8000/admin/courses">
+                        <span class="ml-2">Курсы</span>
+                    </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
+                        <span>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M3 11H11V3H3M5 5H9V9H5M13 21H21V13H13M15 15H19V19H15M3 21H11V13H3M5 15H9V19H5M13 3V11H21V3M19 9H15V5H19Z"/>
+                            </svg>
+                        </span>
+                    <a href="http://127.0.0.1:8000/admin/categories">
+                        <span class="ml-2">Категории</span>
+                    </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row  border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
+                        <span>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M12,5A3.5,3.5 0 0,0 8.5,8.5A3.5,3.5 0 0,0 12,12A3.5,3.5 0 0,0 15.5,8.5A3.5,3.5 0 0,0 12,5M12,7A1.5,1.5 0 0,1 13.5,8.5A1.5,1.5 0 0,1 12,10A1.5,1.5 0 0,1 10.5,8.5A1.5,1.5 0 0,1 12,7M5.5,8A2.5,2.5 0 0,0 3,10.5C3,11.44 3.53,12.25 4.29,12.68C4.65,12.88 5.06,13 5.5,13C5.94,13 6.35,12.88 6.71,12.68C7.08,12.47 7.39,12.17 7.62,11.81C6.89,10.86 6.5,9.7 6.5,8.5C6.5,8.41 6.5,8.31 6.5,8.22C6.2,8.08 5.86,8 5.5,8M18.5,8C18.14,8 17.8,8.08 17.5,8.22C17.5,8.31 17.5,8.41 17.5,8.5C17.5,9.7 17.11,10.86 16.38,11.81C16.5,12 16.63,12.15 16.78,12.3C16.94,12.45 17.1,12.58 17.29,12.68C17.65,12.88 18.06,13 18.5,13C18.94,13 19.35,12.88 19.71,12.68C20.47,12.25 21,11.44 21,10.5A2.5,2.5 0 0,0 18.5,8M12,14C9.66,14 5,15.17 5,17.5V19H19V17.5C19,15.17 14.34,14 12,14M4.71,14.55C2.78,14.78 0,15.76 0,17.5V19H3V17.07C3,16.06 3.69,15.22 4.71,14.55M19.29,14.55C20.31,15.22 21,16.06 21,17.07V19H24V17.5C24,15.76 21.22,14.78 19.29,14.55M12,16C13.53,16 15.24,16.5 16.23,17H7.77C8.76,16.5 10.47,16 12,16Z"/>
+                            </svg>
+                        </span>
+                    <a href="http://127.0.0.1:8000/admin/groups">
+                        <span class="ml-2">Группы</span>
+                    </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
+                        <span>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M1,12H10.76L8.26,9.5L9.67,8.08L14.59,13L9.67,17.92L8.26,16.5L10.76,14H1V12M19,3C20.11,3 21,3.9 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V16H5V19H19V7H5V10H3V5A2,2 0 0,1 5,3H19Z"/>
+                            </svg>
+                        </span>
+                    <a href="http://127.0.0.1:8000/admin/applications">
+                        <span class="ml-2">Заявки</span>
+                    </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
+                        <span>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                            </svg>
+                        </span>
+                    <a href="http://127.0.0.1:8000/admin/users">
+                        <span class="ml-2">Пользователи</span>
+                    </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
+                        <span>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3M18.82 9L12 12.72L5.18 9L12 5.28L18.82 9M17 16L12 18.72L7 16V12.27L12 15L17 12.27V16Z"/>
+                            </svg>
+                        </span>
+                    <a href="http://127.0.0.1:8000/educator/report-card">
+                        <span class="ml-2">Журнал успеваемости</span>
+                    </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-900 flex flex-row border-blue-100 hover:text-black hover:bg-blue-50 hover:font-bold rounded rounded-lg">
+                        <span>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M4 7V19H19V21H4C2 21 2 19 2 19V7H4M21 5V15H8V5H21M21.3 3H7.7C6.76 3 6 3.7 6 4.55V15.45C6 16.31 6.76 17 7.7 17H21.3C22.24 17 23 16.31 23 15.45V4.55C23 3.7 22.24 3 21.3 3M9 6H12V11H9V6M20 14H9V12H20V14M20 8H14V6H20V8M20 11H14V9H20V11Z" />
+                            </svg>
+                        </span>
+                    <a href="http://127.0.0.1:8000/admin/news">
+                        <span class="ml-2">Новости</span>
+                    </a>
+                </li>
+
+                    </ul>
+    </div>
+</nav>
+
+<nav class="nav-toggler">
+    <div class="bg-white">
+        <div class="container-xl mx-10 px-4"> <!-- mx-auto -->
+            <div class="flex items-center md:justify-between"> <!-- py-4 -->
+                <div class="w-1/4 md:hidden">
+                    <svg class="fill-current text-white h-10 w-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"/></svg>
+                </div>
+                <div class="w-1/2 md:w-auto text-center text-blue-500 text-2xl font-medium">
+                    <img src="http://127.0.0.1:8000/logo.jpg" alt="" class="inline-block w-16 h-16 my-2 ml-5">
+                </div>
+                <div class="w-1/4 md:w-auto md:flex text-right">
+                    <a href="#dropdown" name="dropdown" class="hidden md:flex items-center cursor-pointer hover:bg-blue-50 p-2 rounded-lg">
+                        <div>
+                            <img class="inline-block h-12 w-12 rounded-full"  src="http://127.0.0.1:8000/user.jpg"  alt="">
+                        </div>
+                        <div class="hidden md:block md:flex md:items-center ml-2">
+                            <span class="text-grey-900 text-sm mr-1"> Mrs. Destiny Haag IV </span>
+                            <div>
+                                <svg class="fill-current text-grey-900 h-4 w-4 block opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0 .436.445.408 1.197 0 1.615-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615z"/></svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dropdown" class="absolute hidden right-14 w-44 py-2 bg-white shadow-xl mt-2 rounded-lg">
+        <form action="http://127.0.0.1:8000/logout" method="POST">
+            <input type="hidden" name="_token" value="nS0nKZe1qdHjzO4BjLtiKHt2tEhQvNMLxCtr4OiC">            <button
+                class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-blue-50 hover:text-grey-900">
+                Выйти
+            </button>
+        </form>
+    </div>
+</nav>
+
+<div class="flex lg:ml-64">
+    <div class="flex-1 sm:mx-12 sm:my-12">
+        
+    <h1 class="text-4xl font-normal text-blue-600">Заявки</h1>
+    <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть всех пользователей, подавших заявку на участие в курсах. С помощью чекбоксов Вы можете выбрать заявки и добавить в группу.</h3>
+
+    <div class="container mb-2">
+        <div class="flex justify-end">
+            <div>
+                <a href="#formGroupModal" name="formGroupModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сформировать группу</a>
+            </div>
+            <div class="ml-5">
+                <a href="http://127.0.0.1:8000/admin/export">Экспорт</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8">
+        <div class="overflow-x-auto">
+            <div class="align-middle inline-block min-w-full overflow-hidden">
+                <table class="min-w-full" id="datatable-example">
+                    <thead class="text-left bg-blue-50">
+                    <tr>
+                        <th class="py-2 px-3 text-blue-600"></th>
+                        <th class="py-2 px-3 text-blue-600">ФИО</th>
+                        <th class="py-2 px-3 text-blue-600">Выбранный курс</th>
+                        <th class="py-2 px-3 text-blue-600">Email</th>
+                        <th class="py-2 px-3 text-blue-600">Номер телефона</th>
+                        <th class="py-2 px-3 text-blue-600">День рождения</th>
+                        <th class="py-2 px-3 text-blue-600">Место проживания</th>
+                        <th class="py-2 px-3 text-blue-600">Страховой номер</th>
+                        <th class="py-2 px-3 text-blue-600">Статус заявки</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
+                                                    <tr>
+                                <td class="py-3 px-3"><input type="checkbox" name="" data-id="4" class="form-checkbox h-5 w-5 text-red-600"  disabled  ></td>
+                                <td class="py-3 px-3">2323232323</td>
+                                <td class="py-3 px-3">Dormouse denied nothing.</td>
+                                <td class="py-3 px-3">orn.orlo@example.org</td>
+                                <td class="py-3 px-3">+7(232)323-23-23</td>
+                                <td class="py-3 px-3">
+                                                                                <span>-</span>
+                                                                    </td>
+                                <td class="py-3 px-3">
+                                                                            <span>-</span>
+                                                                    </td>
+                                <td class="py-3 px-3">
+                                                                            <span>-</span>
+                                                                    </td>
+                                <td class="py-3 px-3">
+                                                                                <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative text-xs align-middle">одобрено</span>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <td class="py-3 px-3"><input type="checkbox" name="" data-id="4" class="form-checkbox h-5 w-5 text-red-600"  disabled  ></td>
+                                <td class="py-3 px-3">2323232323</td>
+                                <td class="py-3 px-3">Fish-Footman was gone, and.</td>
+                                <td class="py-3 px-3">orn.orlo@example.org</td>
+                                <td class="py-3 px-3">+7(232)323-23-23</td>
+                                <td class="py-3 px-3">
+                                                                                <span>-</span>
+                                                                    </td>
+                                <td class="py-3 px-3">
+                                                                            <span>-</span>
+                                                                    </td>
+                                <td class="py-3 px-3">
+                                                                            <span>-</span>
+                                                                    </td>
+                                <td class="py-3 px-3">
+                                                                                <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative text-xs align-middle">одобрено</span>
+                                                                    </td>
+                            </tr>
+                                            </tbody>
+                </table>
+                </div>
+                            </div>
+        </div>
+
+        <div id="formGroupModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
+            <input type="hidden" name="_token" id="csrf" value="nS0nKZe1qdHjzO4BjLtiKHt2tEhQvNMLxCtr4OiC">
+            <!-- modal -->
+            <div class="bg-white rounded-lg shadow-lg w-1/3">
+                <!-- modal header -->
+                <div class="px-4 py-2 flex justify-between items-center">
+                    <h2 class="">Добавление слушателей в группу</h2>
+                    <button class="text-black close-modal">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path
+                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                            ></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- modal body -->
+                <div class="p-4">
+                    <div class="col-span-4 sm:col-span-3">
+                        <label for="groups" class="block text-sm font-medium text-gray-700">Группа (курс)</label>
+                        <select id="groups" name="groups" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                            <option value="1">T-21 (The Mouse did not appear.)</option>
+                                                            <option value="2">T-21 (The Mouse did not appear.)</option>
+                                                            <option value="3">D-21 (Dormouse; &#039;VERY ill.&#039; Alice.)</option>
+                                                            <option value="4">D-21 (Dormouse; &#039;VERY ill.&#039; Alice.)</option>
+                                                            <option value="5">D-21 (Dormouse; &#039;VERY ill.&#039; Alice.)</option>
+                                                            <option value="6">S-21 (She felt that she was always.)</option>
+                                                            <option value="7">I-21 (I suppose it were white, but.)</option>
+                                                            <option value="8">I-21 (I suppose it were white, but.)</option>
+                                                            <option value="9">I-21 (I suppose it were white, but.)</option>
+                                                            <option value="10">I-21 (I suppose it were white, but.)</option>
+                                                            <option value="11">W-21 (Which shall sing?&#039; &#039;Oh, YOU.)</option>
+                                                            <option value="12">D-21 (Dormouse denied nothing.)</option>
+                                                            <option value="13">A-21 (Alice very politely; but she.)</option>
+                                                    </select>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center w-100 p-3">
+                    <button type="submit" id="btnSave" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal success -->
+        <div id="modal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
+    <!-- modal -->
+    <div class="bg-white rounded-lg shadow-lg w-1/3">
+        <!-- modal header -->
+        <div class="px-4 py-2 flex justify-center items-center">
+            <lottie-player
+                src="http://127.0.0.1:8000/gifs/success.json"
+                style="width: 400px;"
+                autoplay
+                loop
+            ></lottie-player>
+        </div>
+        <!-- modal body -->
+        <div class="p-4">
+            <div class="px-4 py-5 bg-white space-y-6 sm:p-6 flex justify-center">
+                <label class="block text-lg font-medium text-gray-700 addText text-center">
+                </label>
+            </div>
+        </div>
+        <div class="flex justify-center items-center w-100 p-3">
+            <button name="ok" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-500 uppercase transition bg-transparent border-2 border-blue-500 rounded-lg ripple hover:bg-blue-100 focus:outline-none">ОК</button>
+        </div>
+    </div>
+</div>
+
+        <script src="http://127.0.0.1:8000/js/jquery.min.js"></script>
+        <script src="http://127.0.0.1:8000/js/excel.js"></script>
+        <script src="public/js/search.js"></script>
+
+        <script>
+
+            $(document).ready(function() {
+                $('.alert').delay(5000).fadeOut(200)
+
+                $('a[name=formGroupModal]').click(function () {
+                    $('#formGroupModal').removeClass('hidden')
+                })
+
+                $('.close-modal').click(function () {
+                    $('.modal').addClass('hidden')
+                })
+
+                $('button[name=ok]').click(function (e) {
+                    e.preventDefault()
+                    $('#modalSuccess').addClass('hidden')
+                    location.reload()
+                })
+
+                $('#btnSave').on("click", function () {
+                    var group = $('#groups option:selected').val()
+                    var insert = []
+                    $('.form-checkbox').each(function () {
+                        if ($(this).is(":checked")) {
+                            insert.push($(this).attr('data-id'))
+                        }
+                    })
+
+                    $.ajax({
+                        url: 'http://127.0.0.1:8000/admin/applications',
+                        type: 'POST',
+                        data: {
+                            _token: $('#csrf').val(),
+                            group_id: group,
+                            insert: insert
+                        },
+                        success: function(res){
+                            let data = JSON.stringify(res)
+
+                            if(data){
+                                $('#addGroupModal').addClass('hidden')
+                                $('#modal').removeClass('hidden')
+                                $('.addText').text(`успешно добавлена!`)
+                            }
+                        },
+                        error: function(){
+
+                        }
+                    })
+                })
+            })
+
+        </script>
+        </div>
+</div>
+
+<script src="http://127.0.0.1:8000/js/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".nav-toggler").each(function (_, navToggler) {
+            let target = $(navToggler).data("target")
+            $(navToggler).on("click", function () {
+                $(target).animate({
+                    height: "toggle"
+                })
+            })
+
+            $('a[name=dropdown]').click(function (e) {
+                e.preventDefault()
+                $('#dropdown').toggleClass('hidden')
+            })
+        })
+    })
+</script>
+</body>
+</html>

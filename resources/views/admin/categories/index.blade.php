@@ -3,28 +3,6 @@
 @section('title', 'Категории')
 
 @section('content')
-        <!-- TODO -->
-{{--    @if(session('success'))--}}
-        <div class="alert flex flex-row items-center bg-green-200 p-5 rounded border-b-2 border-green-300 mb-5 hidden">
-            <div class="alert-icon flex items-center bg-green-100 border-2 border-green-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
-				<span class="text-green-500">
-					<svg fill="currentColor"
-                         viewBox="0 0 20 20"
-                         class="h-6 w-6">
-						<path fill-rule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clip-rule="evenodd"></path>
-					</svg>
-				</span>
-            </div>
-            <div class="alert-content ml-4">
-                <div class="alert-description text-sm text-green-600">
-{{--                    {{ session('success') }}--}}
-                </div>
-            </div>
-        </div>
-{{--    @endif--}}
-
 
     <h1 class="text-4xl font-normal text-blue-600">Виды курсов</h1>
     <h3 class="text font-normal text-grey-900 my-5">В данном разделе Вы можете видеть все виды курсов.</h3>
@@ -38,7 +16,7 @@
     <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8 mr-4">
         <div class="overflow-x-auto">
             <div class="align-middle inline-block min-w-full overflow-hidden">
-                <table class="min-w-full">
+                <table class="min-w-full" id="table">
                     <thead class="text-left bg-blue-50">
                     <tr>
                         <th class="py-2 px-3 text-blue-600">Название категории</th>
@@ -65,10 +43,6 @@
                 @endcomponent
             @endif
         </div>
-    </div>
-
-    <div class="flex flex-row mt-4">
-        {{ $categories->links('vendor.pagination.custom') }}
     </div>
 
     <!-- Delete course modal -->
@@ -189,11 +163,8 @@
     <script>
         $(document).ready(function() {
 
-
             $('.close-modal').click(function () {
                 $('.modal').addClass('hidden')
-                // TODO
-                location.reload()
             })
 
             $('a[name=addCategory]').click(function () {
@@ -207,7 +178,6 @@
             $('button[name=ok]').click(function (e) {
                 e.preventDefault()
                 $('#modal').addClass('hidden')
-                location.reload()
             })
 
             // ajax
@@ -225,12 +195,20 @@
                     cache: false,
                     success: function(category){
                         let data = JSON.stringify(category)
-                        console.log(data)
 
                         if(data){
                             $('#addCategoryModal').addClass('hidden')
                             $('#modal').removeClass('hidden')
                             $('.addText').text(`Категория "${name_of_category}" успешно добавлена!`)
+                            $('#table').append(`<tr>
+                                                    <td class="py-3 px-3">${ category.name_of_category }</td>
+                                                    <td class="py-3 px-3 text-right">{{ \Carbon\Carbon::parse($category->created_at)->format('d.m.Y') }}</td>
+                                                    <td class="py-3 px-3 text-center">
+                                                        <a href="#editModal" name="editModal" data-name="${ category.name_of_category }" data-id="${ category.id }" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
+                                                        <a href="#deleteModal" data-id="${ category.id }" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none ml-3">Удалить</a>
+                                                    </td>
+                                                </tr>`
+                            )
                         }
                     },
                     error: function(data){
@@ -250,12 +228,10 @@
             })
 
 
-            // TODO
-            $('a[name=editModal]').click(function(){
+            $('a[name="editModal"]').click(function(){
 
                 $('#editCategoryModal').removeClass('hidden')
 
-                // var id = $('#id').val($(this).data('id'));
                  let id = $(this).data('id')
 
 
@@ -278,18 +254,16 @@
                             if(data){
                                 $('#editCategoryModal').addClass('hidden')
                                 $('#modal').removeClass('hidden')
-                                $('.addText').text(`Категория "${name}" успешно добавлена!`)
+                                $('.addText').text(`Категория "${name}" успешно обновлена!`)
+                                // $('#table').append(res.name_of_category)
                             }
                         },
                         error: function(data){
-                            // $('#name_of_category_error').addClass('hidden')
                             var errors = data.responseJSON
                             if($.isEmptyObject(errors) === false){
                                 $.each(errors.errors, function(key, value){
                                     var error_id = '#' + key + '_error'
-                                    // var error_id2 = '#' + key
                                     $(error_id).removeClass('hidden')
-                                    // $(error_id2).addClass('border border-red-400')
                                     $(error_id).text(value)
                                 })
                             }

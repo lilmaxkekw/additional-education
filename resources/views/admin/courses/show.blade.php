@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="bg-white overflow-hidden sm:rounded-lg"> {{--   shadow --}}
+    <div class="bg-white overflow-hidden sm:rounded-lg">
         <div class="px-4 py-5 sm:px-6 flex items-center">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
                 Курс {{ $course->name_of_course }}
@@ -40,14 +40,18 @@
                         Категория
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ $course->category->name_of_category }}
+                        @if(empty($course->category->name_of_category))
+                            <span>-</span>
+
+                            @else
+                                <span>{{ $course->category->name_of_category }}</span>
+                        @endif
                     </dd>
                 </div>
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Изображение
                     </dt>
-                    <!-- TODO -->
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         <img src="{{ Storage::url('1ZjGhg6kVPsNOYpjrcgpRlrJJUFB9bfUfiGl4i2G.jpg') }}" alt="Фотография">
                     </dd>
@@ -109,10 +113,17 @@
                                         <span>{{ \Carbon\Carbon::parse($partition->date_end)->format('d.m.Y') }}</span>
                                     @endif
                                 </td>
-                                <td class="py-3 px-3">{{ $partition->number_hours }}</td>
+                                <td class="py-3 px-3">
+                                    @if($partition->number_hours === NULL)
+                                        <span>-</span>
+
+                                        @else
+                                            <span>{{ $partition->number_hours }}</span>
+                                    @endif
+                                </td>
                                 <td class="py-3 px-3 text-center">
-                                    <a href="#editPartitionModal" name="editPartitionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
-                                    <a href="#deletePartitionModal" data-id="" name="deletePartitionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
+{{--                                    <a href="#editPartitionModal" name="editPartitionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>--}}
+                                    <a href="#deletePartitionModalModal" data-id="{{ $partition->id }}" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none ml-3">Удалить</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -138,7 +149,7 @@
         <div class="bg-white rounded-lg px-4 lg:px-8 py-4 lg:py-6 mt-8">
             <div class="overflow-x-auto">
                 <div class="align-middle inline-block min-w-full overflow-hidden">
-                    <table class="min-w-full">
+                    <table class="min-w-full whitespace-no-wrap">
                         <thead class="text-left bg-blue-50">
                         <tr>
                             <th class="py-2 px-3 text-blue-600">Название темы</th>
@@ -149,25 +160,24 @@
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
-{{--                        TODO --}}
-                        @foreach($partitions as $partition)
-                            @foreach($partition->sections as $section)
-                                <tr>
-                                    <td class="py-3 px-3">{{ $section->name_section }}</td>
-                                    <td class="py-3 px-3">{{ $section->description_section }}</td>
-                                    <td class="py-3 px-3">{{ $section->partition->name }}</td>
-                                    <td class="py-3 px-3">{{ \Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</td>
-                                    <td class="py-3 px-3 text-center">
-                                        <a href="#editSectionModal" name="editSectionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>
-                                        <a href="#deleteSectionModal" data-id="" name="deleteSectionModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</a>
-                                    </td>
-                                </tr>
+                            @foreach($partitions as $partition)
+                                @foreach($partition->sections as $section)
+                                    <tr>
+                                        <td class="py-3 px-3">{{ $section->name_section }}</td>
+                                        <td class="py-3 px-3">{{ $section->description_section }}</td>
+                                        <td class="py-3 px-3">{{ $section->partition->name }}</td>
+                                        <td class="py-3 px-3">{{ \Carbon\Carbon::parse($section->date_section)->format('d.m.Y') }}</td>
+                                        <td class="py-3 px-3 text-center">
+{{--                                            <a href="#editSectionModal" name="editSectionModal" data-name="{{ $partition->name_section  }}" data-id="{{ $partition->id_section }}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-yellow-500 uppercase transition bg-transparent border-2 border-yellow-500 rounded-lg ripple hover:bg-yellow-100 focus:outline-none">Редактировать</a>--}}
+                                            <a href="#deletePartitionModalModal" data-id="{{ $section->id }}" name="deleteModal" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none ml-3">Удалить</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @endforeach
-                        @endforeach
                         </tbody>
                     </table>
                 </div>
-                @if($course->partitions->isEmpty())
+                @if($partitions)
                     @component('components.no_data_message')
                     @endcomponent
                 @endif
@@ -404,7 +414,7 @@
                             <span class="text-sm font-medium text-red-500" id="start_date_error"></span>
                         </div>
                         <div class="col-span-4 sm:col-span-3">
-                            <label for="partitions" class="block text-sm font-medium text-gray-700">Категория курса</label>
+                            <label for="partitions" class="block text-sm font-medium text-gray-700">Раздел</label>
                             <select id="partitions" name="partitions" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                 @foreach($partitions as $partition)
                                     <option value="{{ $partition->id }}">{{ $partition->name }}</option>
@@ -419,11 +429,64 @@
             </div>
         </div>
 
+        <!-- Delete partition modal -->
+        <div id="deletePartitionModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
+            <div class="md:w-1/3 sm:w-full rounded-lg shadow-lg bg-white my-3">
+                <div class="flex justify-between border-b border-gray-100 px-5 py-4">
+                    <div>
+                        <i class="fa fa-exclamation-triangle text-red-500"></i>
+                        <span class="font-bold text-gray-700 text-lg">Подтверждение удаления</span>
+                    </div>
+                    <div>
+                        <button class="text-black close-modal">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                <path
+                                    d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                                ></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="px-10 py-5 text-gray-600">
+                    Вы действительно хотите удалить?
+                </div>
+                <div class="px-5 py-4 flex justify-center">
+                    <button class="del inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete section modal -->
+        <div id="deleteSectionModal" class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center hidden" style="background-color: rgba(240,248,255, 0.9);">
+            <div class="md:w-1/3 sm:w-full rounded-lg shadow-lg bg-white my-3">
+                <div class="flex justify-between border-b border-gray-100 px-5 py-4">
+                    <div>
+                        <i class="fa fa-exclamation-triangle text-red-500"></i>
+                        <span class="font-bold text-gray-700 text-lg">Подтверждение удаления</span>
+                    </div>
+                    <div>
+                        <button class="text-black close-modal">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                <path
+                                    d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                                ></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="px-10 py-5 text-gray-600">
+                    Вы действительно хотите удалить?
+                </div>
+                <div class="px-5 py-4 flex justify-center">
+                    <button class="del inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-500 uppercase transition bg-transparent border-2 border-red-500 rounded-lg ripple hover:bg-red-100 focus:outline-none">Удалить</button>
+                </div>
+            </div>
+        </div>
+
         @component('components.modal', ['gif' => asset('gifs/success.json')])
         @endcomponent
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-                integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
 
         <script>
             $(document).ready(function(){
@@ -499,22 +562,27 @@
 
                     $('#btnSectionSave').click(function(){
 
+                        let name_section = $('#name_section').val(),
+                            description_section = $('#description_section').val(),
+                            date_section = $('#date_section').val(),
+                            partition_id = $('#partitions :selected').val()
+
                         $.ajax({
                             url: '{{ route('sections.store') }}',
                             type: 'POST',
                             data: {
                                 _token: $('#csrf').val(),
-                                name_section: $('#name_section').val(),
-                                description_section: $('#description_section').val(),
-                                date_section: $('#date_section').val(),
-                                partition_id: $('#partitions :selected').val()
+                                name_section: name_section,
+                                description_section: description_section,
+                                date_section: date_section,
+                                partition_id: partition_id
                             },
                             success: function(data){
                                 let res = JSON.stringify(data)
 
                                 if(res){
                                     $('#modal').removeClass('hidden')
-                                    $('.addText').text(`Тема "${name}" успешно добавлена!`)
+                                    $('.addText').text(`Тема "${name_section}" успешно добавлена!`)
                                 }
                             },
                             error: function(){
@@ -525,33 +593,79 @@
 
                     $('#btnPartitionSave').click(function(){
 
+                        let name = $('#partition_name').val(),
+                            date_start = $('#date_start').val(),
+                            date_end = $('#date_end').val(),
+                            number_hours = $('#number_hours').val()
+
                         $.ajax({
                             url: '{{ route('partitions.store') }}',
                             type: 'POST',
                             data: {
                                 _token: $('#csrf').val(),
-                                name: $('#partition_name').val(),
-                                date_start: $('#date_start').val(),
-                                date_end: $('#date_end').val(),
-                                number_hours: $('#number_hours').val(),
+                                name: name,
+                                date_start: date_start,
+                                date_end: date_end,
+                                number_hours: number_hours,
                                 course_id: '{{ $course->id }}'
                             },
                             success: function(data){
                                 let res = JSON.stringify(data)
-                                console.log(data)
                                 if(res){
                                     $('#modal').removeClass('hidden')
-                                    $('.addText').text(`Раздел "${$('#name').val()}" успешно добавлена!`)
+                                    $('.addText').text(`Раздел "${name}" успешно добавлена!`)
                                 }
-                            },
-                            error: function(){
-
                             }
                         })
 
+                    $('a[name="deletePartitionModal"]').click(function () {
+                        let id = $(this).data('id')
+
+                        $('#deletePartitionModal').removeClass('hidden')
+                        $('.del').click(function(){
+                            $.ajax({
+                                url:  '/admin/partitions/' + id,
+                                type: 'DELETE',
+                                data: {
+                                    _token: $('#csrf').val()
+                                },
+                                success: function (res) {
+                                    let data = JSON.stringify(res)
+                                    if(data){
+                                        $('#deleteModal').addClass('hidden')
+                                        $(this).closest("tr").remove();
+                                        location.reload()
+                                    }
+                                }
+                            })
+                        })
                     })
+
+                    $('a[name="deleteSectionModal"]').click(function () {
+                        let id = $(this).data('id')
+
+                        $('#deleteSectionModal').removeClass('hidden')
+                        $('.del').click(function(){
+                            $.ajax({
+                                url: '/admin/sections/' + id,
+                                type: 'DELETE',
+                                data: {
+                                    _token: $('#csrf').val()
+                                },
+                                success: function (res) {
+                                    let data = JSON.stringify(res)
+                                    if(data){
+                                        $('#deleteModal').addClass('hidden')
+                                        $(this).closest("tr").remove();
+                                        location.reload()
+                                    }
+                                }
+                            })
+                        })
+                    })
+                })
 
             })
         </script>
 
-    @endsection
+@endsection

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -18,15 +18,19 @@ class UserController extends Controller
         $roles = Role::all();
         $count = User::count();
 
-        return view('admin.users.index', ['users' => $users, 'roles' => $roles, 'count' => $count]);
+        return view('admin.users.index', [
+            'users' => $users,
+            'roles' => $roles,
+            'count' => $count
+        ]);
     }
 
     /**
-     * @param Request $request
+     * @param UserRequest $request
      * @return false|string
      */
-    public function store(Request $request){
-        $user = User::create([
+    public function store(UserRequest $request){
+        $user = \DB::table('users')->insert([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),

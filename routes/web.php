@@ -14,7 +14,6 @@
 // Маршруты незарегистрированного пользователя
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/course/{id}', 'MainController@showCourse')->name('course.show');
-//Route::get('/enrollment', 'MainController@enrollmentCourse')->name('user.enrollment');
 Route::get('/courses', 'MainController@courses')->name('courses');
 Route::get('/contacts', 'MainController@contacts')->name('contacts');
 Route::get('/gallery', 'MainController@gallery')->name('gallery');
@@ -39,7 +38,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('/sendmail', 'SendMailController')->except('create');
     Route::resource('/sections', 'SectionController')->except(['create', 'edit']);
     Route::post('/partitions', 'PartitionController@store')->name('partitions.store');
-    Route::get('/news', 'NewsController@show_news')->name('news.index');
+    Route::delete('/partitions/{id}', 'PartitionController@destroy')->name('partitions.destroy');
+    Route::resource('/news', 'NewsController')->except(['create', 'edit', 'show']);
+    Route::get('/export', 'ApplicationController@export')->name('application.export');
 
 });
 
@@ -48,14 +49,11 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => ['auth'
 
     Route::get('/', 'UserController@index')->name('user.index');
     Route::post('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
-//    Route::get('/enrollment', 'UserController@enrollment_course')->name('user.enrollment');
     Route::get('/account', 'UserController@account')->name('user.account');
     Route::post('/account', 'UserController@edit_account')->name('user.account');
-    Route::post('/account/', 'UserController@upload_image')->name('user.account.image');
+    Route::patch('/account/', 'UserController@upload_image')->name('user.account.image');
     Route::get('/performance', 'UserController@show_performance')->name('user.performance');
     Route::get('/applications', 'UserController@show_applications')->name('user.applications');
-
-//    Route::get('/dashboard', 'UserController@dashboard')->name('user.dashboard');
 
 });
 

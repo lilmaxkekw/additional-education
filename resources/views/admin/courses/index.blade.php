@@ -56,15 +56,15 @@
     <!-- component -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-5">
         @foreach($courses as $course)
-            <a href="{{ route('courses.show', $course->id) }}">
-                <div class="flex flex-col items-center justify-center bg-white p-4 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-2">
-                    <img src="{{ asset('test.png') }}" alt="" class="inline-block w-24">
-                    <h2 class="mt-4 font-normal text-xl">{{ $course->name_of_course }}</h2>
-                    <p class="text-xs text-gray-500 text-center mt-3 text-justify">
+            <div class="flex flex-col bg-white p-4 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-2 align-middle">
+                <a href="{{ route('courses.show', $course->id) }}" class="mx-auto">
+                    <img src="{{ asset('test.png') }}" alt="Иконка курса" class="inline-block w-24 flex m-auto">
+                    <h2 class="mt-4 font-normal text-xl text-center">{{ $course->name_of_course }}</h2>
+                    <p class="text-xs text-gray-500 text-center mt-3 text-center">
                         {{ $course->short_content }}
                     </p>
-                </div>
-            </a>
+                </a>
+            </div>
         @endforeach
     </div>
 
@@ -151,6 +151,11 @@
         </div>
     </div>
 
+    @if($courses->isEmpty())
+        @component('components.no_data_message')
+        @endcomponent
+    @endif
+
     <!-- Modal success -->
     @component('components.modal', ['gif' => asset('gifs/success.json')])
     @endcomponent
@@ -159,8 +164,7 @@
         {{ $courses->links('vendor.pagination.custom') }}
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 
     <script>
         $(document).ready(function(){
