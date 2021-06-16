@@ -29,7 +29,7 @@
                     </div>
                     <div class="mt-2">
                         <label for="description_section" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Описание занятия</label>
-                        <input value="" id="description_section" type="text" name="description_section" placeholder="Введите описание занятия" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+                        <textarea value="" name="description_section" id="description_section" placeholder="Введите описание занятия" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" cols="30" rows="10"></textarea>
                         <span class="text-sm font-medium text-red-500" id="description_section_error"></span>
                     </div>
                     <div class="flex justify-end pt-5">

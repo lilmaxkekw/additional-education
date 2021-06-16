@@ -7,7 +7,7 @@ $(document).ready(function() {
         let idSection = $(this).attr('data-id');
 
         $('#name_section').attr('value', $(this).attr('data-name'));
-        $('#description_section').attr('value', $(this).attr('data-description'));
+        $('#description_section').val($(this).attr('data-description'));
         $('#date_section').attr('value', $(this).attr('data-date'));
 
         $('#btnSave').click(function (e) {

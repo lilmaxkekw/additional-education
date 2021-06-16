@@ -53,8 +53,10 @@ class ReportCardController extends BaseController
 
                 $fields = ['id_section', 'name_section', 'description_section', 'date_section', 'status'];
                 //Темы выбранного раздела
-                $sections = Section::select($fields)->where('partition_id', $partition_id)->get();
-                $sections = $sections->sortBy('status');
+                $sections = Section::select($fields)->where('partition_id', $partition_id)->where('status', NULL)->get();
+                $sections[] = Section::select($fields)->where('partition_id', $partition_id)->where('status', 'Total')->first();
+                //$sections = $sections->sortBy('status');
+                //dd($sections);
                 //Итоговая тема выбранного раздела
                 $total_sections = Section::select($fields)->where('partition_id', $partition_id)->where('status', 'Total')->get();
 
@@ -88,7 +90,10 @@ class ReportCardController extends BaseController
         //Chart
         $tmp_marks = ['Пропуск'];
 
-        $dates = Section::where('partition_id', $selected_partition)->where('status', NULL)->get();
+        $dates = Section::
+            where('partition_id', $selected_partition)
+            ->where('status', NULL)
+            ->get();
         $result_dates = [];
         $id_sections = [];
         $number_attendees = [];
@@ -106,13 +111,23 @@ class ReportCardController extends BaseController
             $number_absentees[] = Performance::where('status', NULL)->where('section_id', $id_section)->whereIn('mark', $tmp_marks)->get()->count('id');
         }
 
-        $chart->dataset('Количество присутствующих', 'bar', $number_attendees)->options([
-            'backgroundColor' => '#6EE7B7'
-        ]);
+        $chart->dataset(
+            'Количество присутствующих',
+            'bar',
+            $number_attendees)
+            ->options([
+                'backgroundColor' => '#6EE7B7'
+                ]
+            );
 
-        $chart->dataset('Количество отсутствующих', 'bar', $number_absentees)->options([
-            'backgroundColor' => '#FCA5A5',
-        ]);
+        $chart->dataset(
+            'Количество отсутствующих',
+            'bar',
+            $number_absentees)
+            ->options([
+                'backgroundColor' => '#FCA5A5',
+                ]
+            );
 
         return view('educator.report_card',
             compact('groups', 'group_id', 'listeners', 'sections', 'marks', 'possible_marks', 'course', 'partitions', 'selected_partition', 'status_page', 'headers_sections', 'total_marks', 'chart'));

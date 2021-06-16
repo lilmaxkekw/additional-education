@@ -10,7 +10,7 @@ function fnExcelReport() {
 
     tab_text = tab_text + "</table>";
     tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
-    tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+    //tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
 
     var ua = window.navigator.userAgent;
     var msie = ua.indexOf("MSIE ");
@@ -21,7 +21,7 @@ function fnExcelReport() {
         txtArea1.document.write(tab_text);
         txtArea1.document.close();
         txtArea1.focus();
-        sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+        sa = txtArea1.document.execCommand("SaveAs", true, "Успеваемость слушателей.xls");
     }
     else                 //other browser not tested on IE 11
         sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));

@@ -208,7 +208,7 @@
                         </thead>
 
                         <tbody>
-                        @if($sections)
+                        @if($status_page != 'Total')
                             @foreach($sections as $section)
                                 <tr>
                                     <td class="border-dashed border-t border-gray-200"><span class="text-gray-700 px-6 py-3 flex items-center">{{ $section->id_section }}</span></td>

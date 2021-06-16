@@ -20,7 +20,7 @@ class CreatePerformancesTable extends Migration
 
             $table->unsignedBigInteger('listener_id');
             $table->unsignedBigInteger('section_id');
-            $table->string('status')->default(NULL);
+            $table->string('status')->nullable();
 
             $table->foreign('listener_id')->references('id_listener')->on('listeners');
             $table->foreign('section_id')->references('id_section')->on('sections');

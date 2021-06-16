@@ -16,7 +16,8 @@ $(document).ready( function () {
                 'status': 'marks',
             },
             success: function (response) {
-                $('#average-marks' + response.id_listener).attr('value', response.average_marks.toPrecision(3));
+                $('#average-marks' + response.id_listener)
+                    .attr('value', response.average_marks.toPrecision(3));
                 if ($('#partition-mark' +  response.id_listener).attr('data-check') === 'false') {
                     $('#partition-mark' + response.id_listener).attr('value', response.average_marks.toPrecision(3));
                 }
