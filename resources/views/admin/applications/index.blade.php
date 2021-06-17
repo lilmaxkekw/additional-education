@@ -31,7 +31,7 @@
                         <th class="py-2 px-3 text-blue-600">Номер телефона</th>
                         <th class="py-2 px-3 text-blue-600">День рождения</th>
                         <th class="py-2 px-3 text-blue-600">Место проживания</th>
-                        <th class="py-2 px-3 text-blue-600">Страховой номер</th>
+                        <th class="py-2 px-3 text-blue-600">СНИЛС</th>
                         <th class="py-2 px-3 text-blue-600">Статус заявки</th>
                     </tr>
                     </thead>

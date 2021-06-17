@@ -35,7 +35,7 @@ class ApplicationExport implements FromCollection, WithHeadings, ShouldAutoSize,
             'Номер телефона',
             'Дата рождения',
             'Место жительства',
-            'ИНН'
+            'СНИЛС'
         ];
     }
 
