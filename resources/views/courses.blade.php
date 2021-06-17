@@ -23,7 +23,7 @@
                                 <div class="border border-gray-200 p-6 rounded-lg text-left hover:bg-blue-500 course-card transition-colors" style="background-image: url(https://synergy.ru/assets/upload/v5/faculties/emblem/grey/9168.svg);">
                                     <div class="max-w-xss">
                                         <h2 class="text-lg text-gray-900 font-medium title-font font-bold mb-2 ">{{ $course->name_of_course }}</h2>
-                                        <p class="leading-relaxed mb-3">{{ strlen($course->description_of_course) > 30 ? substr($course->description_of_course, 30) . '...' : $course->description_of_course }}</p>
+                                        <p class="leading-relaxed mb-3">{{ $course->short_content }}</p>
                                     </div>
                                 </div>
                             </a>
