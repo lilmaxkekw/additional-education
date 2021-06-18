@@ -4,11 +4,8 @@
 
 @section('content')
 
-    <h1 class="text-4xl font-normal text-blue-600">Список курсов</h1>
-    <h3 class="text font-normal text-grey-900 mt-5">В данном разделе Вы можете видеть все курсы, а также при нажатии на курс посмотреть более подробную информацию как о курсе, так и о его разделах.</h3>
-
     @if(session('success'))
-        <div class="alert flex flex-row items-center bg-green-200 p-5 rounded border-b-2 border-green-300 mb-5 ml-4">
+        <div class="alert flex flex-row items-center bg-green-200 p-5 rounded border-b-2 border-green-300 mb-5">
             <div class="alert-icon flex items-center bg-green-100 border-2 border-green-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
 				<span class="text-green-500">
 					<svg fill="currentColor"
@@ -27,6 +24,9 @@
             </div>
         </div>
     @endif
+
+    <h1 class="text-4xl font-normal text-blue-600">Список курсов</h1>
+    <h3 class="text font-normal text-grey-900 mt-5">В данном разделе Вы можете видеть все курсы, а также при нажатии на курс посмотреть более подробную информацию как о курсе, так и о его разделах.</h3>
 
     <div class="flex justify-between py-5">
         <div class="flex-1">

@@ -29,7 +29,6 @@ class CourseController extends Controller
             'categories' => $categories
         ]);
     }
-
     /**
      * @param CourseRequest $request
      * @return \Illuminate\Http\JsonResponse
@@ -47,6 +46,7 @@ class CourseController extends Controller
 
         return response()->json(['success' => 'Курс успешно добавлен']);
     }
+
 
     /**
      * @param $id

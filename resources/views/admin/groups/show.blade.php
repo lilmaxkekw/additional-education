@@ -17,7 +17,7 @@
                         <th class="py-2 px-3 text-blue-600">Email</th>
                         <th class="py-2 px-3 text-blue-600">Номер телефона</th>
                         <th class="py-2 px-3 text-blue-600">Место проживания</th>
-                        <th class="py-2 px-3 text-blue-600">Страховой номер</th>
+                        <th class="py-2 px-3 text-blue-600">СНИЛС</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-blue-100 text-blue-900 text-opacity-80 whitespace-nowrap">
